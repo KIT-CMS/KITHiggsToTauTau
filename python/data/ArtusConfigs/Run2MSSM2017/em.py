@@ -24,9 +24,9 @@ def build_config(nickname):
   isEmbedded = datasetsHelper.isEmbedded(nickname)
   isData = datasetsHelper.isData(nickname) and (not isEmbedded)
   isTTbar = re.search("TT(To|_|Jets)", nickname)
-  isDY = re.search("DY.?JetsToLLM(50|150)", nickname)
+  isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
-  
+  isSignal = re.search("HToTauTau",nickname)
   
   ## fill config:
   # includes
@@ -39,7 +39,7 @@ def build_config(nickname):
     "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJEC",
     "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJetID",
     "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsBTaggedJetID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2Analysis.Includes.settingsMinimalPlotlevelFilter_em"
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMinimalPlotlevelFilter_em"
   ]
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
@@ -53,65 +53,129 @@ def build_config(nickname):
   config["MaxNLooseMuons"] = 1
   # HltPaths_comment: The first path must be one with the higher pt cut on the electron. The second and last path must be one with the higher pt cut on the muon. Corresponding Pt cuts are implemented in the Run2DecayChannelProducer..
   if re.search("(Run201|Embedding201|Summer1|Fall1)", nickname): config["HltPaths"] = [
-          "HLT_IsoMu24",
-          "HLT_IsoMu27",
-          "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1",
-          "HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1",
-          "HLT_Ele32_WPTight_Gsf",
-          "HLT_Ele35_WPTight_Gsf",
-          "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1",
-          "HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg",
-          "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg",
-          "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg",
-          "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg",
-          "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1",
+          "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
-          "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ"
+          "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ",
     ]
 
   config["ElectronLowerPtCuts"] = ["13.0"]
   config["ElectronUpperAbsEtaCuts"] = ["2.5"]
-  config["MuonLowerPtCuts"] = ["13.0"]
+  config["MuonLowerPtCuts"] = ["9.0"]
   config["MuonUpperAbsEtaCuts"] = ["2.4"]
   config["DiTauPairMinDeltaRCut"] = 0.3
   config["DeltaRTriggerMatchingMuons"] = 0.3
   config["DeltaRTriggerMatchingElectrons"] = 0.3
   config["DiTauPairIsTauIsoMVA"] = True
   config["DiTauPairLepton1LowerPtCuts"] = [
-          "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0"]
+          "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0",
+          "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:13.0"]
   config["DiTauPairLepton2LowerPtCuts"] = [
+          "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0"]
-  config["DiTauPairNoHLT"] = False
-  config["DiTauPairHLTLast"] = True
+  config["CheckLepton1TriggerMatch"] = [
+      "trg_singlemuon_24",
+      "trg_singlemuon_27",
+      "trg_singletau_leading",
+      "trg_singleelectron_27",
+      "trg_singleelectron_32",
+      "trg_singleelectron_32_fallback",
+      "trg_singleelectron_35",
+
+      "trg_crossmuon_mu20tau27",
+      "trg_crossele_ele24tau30",
+      "trg_doubletau_35_tightiso_tightid",
+      "trg_doubletau_40_mediso_tightid",
+      "trg_doubletau_40_tightiso",
+      "trg_muonelectron_mu12ele23",
+      "trg_muonelectron_mu23ele12",
+      "trg_muonelectron_mu8ele23",
+  ]
+  config["CheckLepton2TriggerMatch"] = [
+      "trg_singletau_trailing",
+
+      "trg_crossmuon_mu20tau27",
+      "trg_crossele_ele24tau30",
+      "trg_doubletau_35_tightiso_tightid",
+      "trg_doubletau_40_mediso_tightid",
+      "trg_doubletau_40_tightiso",
+      "trg_muonelectron_mu12ele23",
+      "trg_muonelectron_mu23ele12",
+      "trg_muonelectron_mu8ele23",
+  ]
   config["HLTBranchNames"] = [
-      "trg_singlemuon_lowpt:HLT_IsoMu24_v",
-      "trg_singlemuon:HLT_IsoMu27_v",
-      "trg_muontau_lowptmu:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
-      "trg_muontau_lowpttau:HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1_v",
-      "trg_singleelectron_lowpt:HLT_Ele32_WPTight_Gsf_v",
-      "trg_singleelectron:HLT_Ele35_WPTight_Gsf_v",
-      "trg_electrontau:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
-      "trg_doubletau_lowpt_mediso:HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg_v",
-      "trg_doubletau_lowpt:HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v",
-      "trg_doubletau_mediso:HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v",
-      "trg_doubletau:HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v",
+      "trg_singlemuon_24:HLT_IsoMu24_v",
+      "trg_singlemuon_27:HLT_IsoMu27_v",
+      "trg_crossmuon_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
+      "trg_singleelectron_27:HLT_Ele27_WPTight_Gsf_v",
+      "trg_singleelectron_32:HLT_Ele32_WPTight_Gsf_v",
+      "trg_singleelectron_32_fallback:HLT_Ele32_WPTight_Gsf_DoubleL1EG_v",
+      "trg_singleelectron_35:HLT_Ele35_WPTight_Gsf_v",
+      "trg_crossele_ele24tau30:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
+      "trg_doubletau_35_tightiso_tightid:HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v",
+      "trg_doubletau_40_mediso_tightid:HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v",
+      "trg_doubletau_40_tightiso:HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v",
       "trg_singletau_leading:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
       "trg_singletau_trailing:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
-      "trg_muonelectron_lowptmu:HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
-      "trg_muonelectron_lowpte:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v"
+      "trg_muonelectron_mu12ele23:HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
+      "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v",
+      "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
   ]
-  config["DiTauPairHltPathsWithoutCommonMatchRequired"] = [
-      "HLT_IsoMu24_v",
-      "HLT_IsoMu27_v",
-      "HLT_Ele32_WPTight_Gsf_v",
-      "HLT_Ele35_WPTight_Gsf_v",
-      "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v"
-  ]
-  config["UsingOnlyFirstLeptonPerHLTBranchNames"] = [
-      "trg_singletau_leading:1",
-      "trg_singletau_trailing:0",
-  ]
-  
+  if isEmbedded:
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_3_embedded.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_3_embedded.root"
+    config["EmbeddedWeightWorkspaceWeightNames"]=[
+          "0:muonEffTrgWeight",
+          "1:isoWeight",
+          "1:idWeight",
+          "1:triggerWeight",
+          "0:isoWeight",
+          "0:idWeight",
+          "0:triggerWeight"
+          ] 
+    config["EmbeddedWeightWorkspaceObjectNames"]=[
+          "0:m_sel_trg_ratio",
+          "1:m_looseiso_ratio",
+          "1:m_id_ratio",
+          "1:m_trg_ratio",
+          "0:e_looseiso_ratio",
+          "0:e_id_ratio",
+          "0:e_trg_ratio"
+          ]
+    config["EmbeddedWeightWorkspaceObjectArguments"] = [
+          "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta"
+          ]
+  else:
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_1.root"
+    config["RooWorkspaceWeightNames"] = [
+        "0:idWeight",
+        "0:isoWeight",
+        "0:trackWeight",
+        "1:isoWeight",
+        "1:idWeight",
+        "1:trackWeight",
+    ]
+    config["RooWorkspaceObjectNames"] = [
+        "0:e_iso_ratio",
+        "0:e_id_ratio",
+        "0:e_reco_ratio",
+        "1:m_iso_ratio",
+        "1:m_id_ratio",
+        "1:m_trk_ratio",
+    ]
+    config["RooWorkspaceObjectArguments"] = [
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_eta",
+    ]
   if re.search("Summer1", nickname):
     config["TriggerEfficiencyData"] = [
       "0:$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/triggerWeights/triggerEfficiency_Run2016_Electron_Ele12leg_eff.root",
@@ -144,15 +208,21 @@ def build_config(nickname):
   config["TriggerEfficiencyMode"] = "correlate_triggers"
   config["IdentificationEfficiencyMode"] = "multiply_weights"
   config["EventWeight"] = "eventWeight"
+
+
   config["TauTauRestFrameReco"] = "collinear_approximation"
   
   config["ElectronTriggerFilterNames"] = [
+        "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
+        "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
         "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZFilter"
       ]
   config["MuonTriggerFilterNames"] = [
+        "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMuon8Ele23RelTrkIsoFiltered0p4MuonLeg,hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered8",
+        "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered12",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered23",
@@ -160,8 +230,8 @@ def build_config(nickname):
       ]
   
   config["BTagWPs"] = ["medium"]
-  config["InvalidateNonMatchingElectrons"] = True
-  config["InvalidateNonMatchingMuons"] = True
+  config["InvalidateNonMatchingElectrons"] = False
+  config["InvalidateNonMatchingMuons"] = False
   config["InvalidateNonMatchingTaus"] = False
   config["InvalidateNonMatchingJets"] = False
   config["DirectIso"] = True
@@ -174,6 +244,10 @@ def build_config(nickname):
       "had_gen_match_pT_1",
       "had_gen_match_pT_2"
   ])
+  if isEmbedded:
+    config["Quantities"].extend([
+          "muonEffTrgWeight"
+          ])
   
   config["OSChargeLeptons"] = True
   config["TopPtReweightingStrategy"] = "Run2"
@@ -191,12 +265,15 @@ def build_config(nickname):
                                                               "producer:MuonTriggerMatchingProducer",
                                                               "filter:MinMuonsCountFilter",
                                                               "producer:ValidTausProducer",
-                                                              "producer:ValidEMPairCandidatesProducer",
+                                                              #"producer:ValidEMPairCandidatesProducer",
+                                                              "producer:NewValidEMPairCandidatesProducer",
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer",
   #                                                            "producer:TaggedJetCorrectionsProducer",
                                                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"]
+  if not isData:               config["Processors"].append(   "producer:HttValidGenTausProducer")                                                          
+
   #if not (isData or isEmbedded): config["Processors"].append( "producer:MetCorrector")
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
@@ -206,7 +283,8 @@ def build_config(nickname):
   #config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   #if not (isData or isEmbedded): config["Processors"].extend(("producer:TriggerWeightProducer",
   #                                                            "producer:IdentificationWeightProducer"))
-  #if not isData:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
+  if not isData:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   #config["Processors"].extend((                               "producer:EmuQcdWeightProducer",
   config["Processors"].append(
                                                               "producer:EventWeightProducer")#)

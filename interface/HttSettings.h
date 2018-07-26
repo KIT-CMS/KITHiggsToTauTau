@@ -42,6 +42,7 @@ public:
 
 	IMPL_SETTING_DEFAULT(bool, ChooseMvaMet, true);
 	IMPL_SETTING_DEFAULT(bool, UpdateMetWithCorrectedLeptons, false);
+	IMPL_SETTING_DEFAULT(bool, UpdateMetWithCorrectedLeptonsFromSignalOnly, false);
 	IMPL_SETTING_DEFAULT(int, MetSysType, 0);
 	IMPL_SETTING_DEFAULT(int, MetSysShift, 0);
 
@@ -73,6 +74,9 @@ public:
 	IMPL_SETTING_DEFAULT(float, ElectronMvaIDCutEB1, -1.0);
 	IMPL_SETTING_DEFAULT(float, ElectronMvaIDCutEB2, -1.0);
 	IMPL_SETTING_DEFAULT(float, ElectronMvaIDCutEE, -1.0);
+
+	IMPL_SETTING_FLOATLIST_DEFAULT(ElectronEtaBinnedEAValues, {});
+	IMPL_SETTING_FLOATLIST_DEFAULT(ElectronEtaBinsForEA, {});
 
 	IMPL_SETTING_DEFAULT(float, ElectronChargedIsoVetoConeSizeEB, 0.0);
 	IMPL_SETTING_DEFAULT(float, ElectronChargedIsoVetoConeSizeEE, 0.0);
@@ -247,8 +251,14 @@ public:
 	IMPL_SETTING_DEFAULT(float, DiTauPairMinDeltaRCut, -1.0);
 	IMPL_SETTING_STRINGLIST_DEFAULT(DiTauPairLepton1LowerPtCuts, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(DiTauPairLepton2LowerPtCuts, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(DiTauPairLepton1UpperEtaCuts, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(DiTauPairLepton2UpperEtaCuts, {});
+	IMPL_SETTING_DEFAULT(bool, CheckL1MatchForDiTauPairLepton1, false);
+	IMPL_SETTING_DEFAULT(bool, CheckL1MatchForDiTauPairLepton2, false);
 	IMPL_SETTING_SORTED_STRINGLIST_DEFAULT(DiTauPairHltPathsWithoutCommonMatchRequired, {});
 	IMPL_SETTING_DEFAULT(bool, DiTauPairIsTauIsoMVA, false);
+	IMPL_SETTING_STRINGLIST_DEFAULT(CheckLepton1TriggerMatch, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(CheckLepton2TriggerMatch, {});
 	IMPL_SETTING_DEFAULT(bool, DiTauPairNoHLT, false);
 	IMPL_SETTING_DEFAULT(bool, RequireFirstTriggering, false);
 	IMPL_SETTING_STRINGLIST_DEFAULT(HLTBranchNames, {});
@@ -319,6 +329,13 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(RooWorkspaceObjectNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(RooWorkspaceObjectArguments, {});
 
+	// settings for EmbeddedWeightProducer
+	IMPL_SETTING_DEFAULT(bool, SaveEmbeddedWeightAsOptionalOnly, false);
+	IMPL_SETTING_DEFAULT(std::string, EmbeddedWeightWorkspace, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(EmbeddedWeightWorkspaceWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(EmbeddedWeightWorkspaceObjectNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(EmbeddedWeightWorkspaceObjectArguments, {});
+
 	// settings for EETriggerWeightProducer
 	IMPL_SETTING_DEFAULT(bool, SaveEETriggerWeightAsOptionalOnly, false);
 	IMPL_SETTING_DEFAULT(std::string, EETriggerWeightWorkspace, "");
@@ -349,7 +366,7 @@ public:
 
 	// settings for TauTrigger2017EfficiencyProducer
 	IMPL_SETTING_DEFAULT(std::string, TauTrigger2017Input, "");
-	IMPL_SETTING_DEFAULT(std::string, TauTrigger2017WorkingPoint, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017WorkingPoints, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017EfficiencyWeightNames, {});
 
 	// settings for the EmbeddingConsumer

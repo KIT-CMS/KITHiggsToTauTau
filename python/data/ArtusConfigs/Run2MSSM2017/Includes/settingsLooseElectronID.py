@@ -32,8 +32,8 @@ def build_config(nickname):
   config["LooseElectronID"] = "user"
   config["LooseElectronIDType"] = "cutbased2015andlater" # still MVA, using boolean functionality of IsCutBased()
   # extra lepton veto electron ID
-  config["LooseElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90"
-  #config["LooseElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90" # worse fake rejection compared to the 'iso' version
+  config["LooseElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90" # better S/sqrt(B)
+  #config["LooseElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90" # already has something like a iso cut ---> not good for side-band regions
 
   config["LooseElectronIsoType"] = "user"
   config["LooseElectronIso"] = "none"
@@ -44,6 +44,11 @@ def build_config(nickname):
   config["LooseElectronTrackDxyCut"] = 0.045
   config["LooseElectronTrackDzCut"] = 0.2
   config["DirectIso"] = True
+
+  config["ElectronIDList"] = [
+  ]
+  config["ElectronEtaBinnedEAValues"] = []
+  config["ElectronEtaBinsForEA"] = []
 
 
   return config

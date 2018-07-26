@@ -44,7 +44,7 @@ void BTagEffConsumer::ProcessFilteredEvent(event_type const& event, product_type
       KJet* tjet = static_cast<KJet*>(*jet);
       float combinedSecondaryVertex = tjet->getTag(settings.GetBTaggedJetCombinedSecondaryVertexName(), event.m_jetMetadata);
       
-	      int jetflavor = tjet->flavour;
+	      int jetflavor = tjet->hadronFlavour;
 	      if(jetflavor==5){
 		m_BTaggingEff_Denom_b->Fill(tjet->p4.pt(), std::fabs(tjet->p4.eta()));
 		if(combinedSecondaryVertex>bTaggingWorkingPoint){

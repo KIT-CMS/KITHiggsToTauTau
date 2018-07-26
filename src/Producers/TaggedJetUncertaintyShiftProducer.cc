@@ -228,7 +228,7 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 						//https://twiki.cern.ch/twiki/bin/view/CMS/BTagSFMethods#2a_Jet_by_jet_updating_of_the_b
 						if (m_bTagSFMethod == KappaEnumTypes::BTagScaleFactorMethod::PROMOTIONDEMOTION) {
 						
-							int jetflavor = tjet->flavour;
+							int jetflavor = tjet->hadronFlavour;
 							unsigned int btagSys = BTagSF::kNo;
 							unsigned int bmistagSys = BTagSF::kNo;
 

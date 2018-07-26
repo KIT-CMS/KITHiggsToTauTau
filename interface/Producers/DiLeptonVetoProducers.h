@@ -54,6 +54,9 @@ public:
 					if ((*lepton1)->charge() * (*lepton2)->charge() < 0.0)
 					{
 						(product.*m_nDiLeptonVetoPairsOS) += 1;
+                                                LOG(DEBUG) << "Found OS di-lepton veto pair";
+                                                LOG(DEBUG) << "\tLepton 1 candidate p4: " << (*lepton1)->p4;
+                                                LOG(DEBUG) << "\tLepton 2 candidate p4: " << (*lepton2)->p4;
 					}
 					else
 					{

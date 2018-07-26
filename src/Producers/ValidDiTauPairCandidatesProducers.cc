@@ -84,4 +84,3 @@ std::string ValidEEPairCandidatesProducer::GetProducerId() const
 {
 	return "ValidEEPairCandidatesProducer";
 }
-

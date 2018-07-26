@@ -26,17 +26,18 @@ public:
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);
-                //TauSFs = new TauTriggerSFs2017("$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017.root","tight");
-                TauSFs = new TauTriggerSFs2017(settings.GetTauTrigger2017Input(),settings.GetTauTrigger2017WorkingPoint());
+                std::string input = settings.GetTauTrigger2017Input();
+                for(auto wp: settings.GetTauTrigger2017WorkingPoints())
+                {
+                        TauSFs[wp] = new TauTriggerSFs2017(input,wp);
+                }
                 m_weightNames = Utility::ParseMapTypes<int,std::string>(Utility::ParseVectorToMap(settings.GetTauTrigger2017EfficiencyWeightNames()));
-                //std::cout << "MC: " << TauSFs->getETauEfficiencyMC(47.267974,-2.26896,-2.073097) << std::endl;
                 for(auto weightNames: m_weightNames)
                 {
                         for(size_t index = 0; index < weightNames.second.size(); index++)
                         {
                                 MCWeight[weightNames.first].resize(weightNames.second.size());
                                 MCWeight[weightNames.first].at(index) = (weightNames.second.at(index).find("MC") != std::string::npos);
-                                //std::cout << weightNames.second.at(index) << " is this MC weight? " << MCWeight[weightNames.first].at(index) << std::endl;
                         }
                 }
 	}
@@ -44,7 +45,7 @@ public:
 	virtual void Produce(event_type const& event, product_type & product, 
 	                     setting_type const& settings) const override;
 private:
-        TauTriggerSFs2017* TauSFs;
+        std::map<std::string,TauTriggerSFs2017*> TauSFs;
         std::map<int,std::vector<std::string>> m_weightNames;
         std::map<int,std::vector<bool>> MCWeight;
 };

@@ -45,5 +45,9 @@ def build_config(nickname):
   config["DiVetoElectronVetoMode"] = "veto_os_keep_ss"
   config["DirectIso"] = True
   
+  config["ElectronIDList"] = [
+  ]
+  config["ElectronEtaBinnedEAValues"] = []
+  config["ElectronEtaBinsForEA"] = []
   
   return config

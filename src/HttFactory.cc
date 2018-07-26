@@ -28,6 +28,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/HttTriggerSettingsProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/DiLeptonVetoProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/ValidDiTauPairCandidatesProducers.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NewValidDiTauPairCandidatesProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/GenDiTauPairCandidatesProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/GenDiTauPairAcceptanceProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TriggerTagAndProbeProducers.h"
@@ -186,6 +187,18 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new ValidMMPairCandidatesProducer();
 	else if(id == ValidEEPairCandidatesProducer().GetProducerId())
 		return new ValidEEPairCandidatesProducer();
+	else if(id == NewValidTTPairCandidatesProducer().GetProducerId())
+		return new NewValidTTPairCandidatesProducer();
+	else if(id == NewValidMTPairCandidatesProducer().GetProducerId())
+		return new NewValidMTPairCandidatesProducer();
+	else if(id == NewValidETPairCandidatesProducer().GetProducerId())
+		return new NewValidETPairCandidatesProducer();
+	else if(id == NewValidEMPairCandidatesProducer().GetProducerId())
+		return new NewValidEMPairCandidatesProducer();
+	else if(id == NewValidMMPairCandidatesProducer().GetProducerId())
+		return new NewValidMMPairCandidatesProducer();
+	else if(id == NewValidEEPairCandidatesProducer().GetProducerId())
+		return new NewValidEEPairCandidatesProducer();
 	else if(id == GenTTPairCandidatesProducer().GetProducerId())
 		return new GenTTPairCandidatesProducer();
 	else if(id == GenMTPairCandidatesProducer().GetProducerId())
@@ -238,6 +251,8 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new TauTauTriggerScaleFactorProducer();
 	else if(id == MuMuTriggerScaleFactorProducer().GetProducerId())
 		return new MuMuTriggerScaleFactorProducer();
+	else if(id == EmbeddedWeightProducer().GetProducerId())
+		return new EmbeddedWeightProducer();
 	else if(id == EETriggerWeightProducer().GetProducerId())
 		return new EETriggerWeightProducer();
 	else if(id == MuMuTriggerWeightProducer().GetProducerId())

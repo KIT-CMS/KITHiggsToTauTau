@@ -10,7 +10,8 @@ MetCorrector::MetCorrector() :
 			 &HttTypes::product_type::m_pfmetCorrections,
 			 &HttTypes::setting_type::GetMetRecoilCorrectorFile,
 			 &HttTypes::setting_type::GetMetShiftCorrectorFile,
-			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons,
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly
 	)
 {
 }
@@ -53,7 +54,8 @@ MvaMetCorrector::MvaMetCorrector() :
 			 &HttTypes::product_type::m_mvametCorrections,
 			 &HttTypes::setting_type::GetMvaMetRecoilCorrectorFile,
 			 &HttTypes::setting_type::GetMvaMetShiftCorrectorFile,
-			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons,
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly
 	)
 {
 }

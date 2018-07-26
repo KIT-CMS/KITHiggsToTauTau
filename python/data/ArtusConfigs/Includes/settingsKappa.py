@@ -38,6 +38,7 @@ def build_config(nickname):
   config["ElectronMetadata"] = "electronMetadata"
   config["Muons"] = "muons"
   config["Taus"] = "taus"
+  config["L1Taus"] = "l1taus"
   config["TauMetadata"] = "taus"
   
   if re.search("MINIAOD|USER", nickname): config["TaggedJets"] = "ak4PF"

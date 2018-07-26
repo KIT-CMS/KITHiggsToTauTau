@@ -585,13 +585,22 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	tauDiscriminators.push_back("byTightIsolationMVArun2v1DBoldDMwLT");
 	tauDiscriminators.push_back("byVTightIsolationMVArun2v1DBoldDMwLT");
 	tauDiscriminators.push_back("byVVTightIsolationMVArun2v1DBoldDMwLT");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1raw");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1VLoose");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1Loose");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1Medium");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1Tight");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1VTight");
-	tauDiscriminators.push_back("rerunDiscriminationByIsolationMVAOldDMrun2v1VVTight");
+        tauDiscriminators.push_back("byIsolationMVArun2017v2DBoldDMwLTraw2017");
+        tauDiscriminators.push_back("byVVLooseIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVLooseIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byLooseIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byMediumIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byTightIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVTightIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVVTightIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byIsolationMVArun2017v1DBoldDMwLTraw2017");
+        tauDiscriminators.push_back("byVVLooseIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVLooseIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byLooseIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byMediumIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVVTightIsolationMVArun2017v1DBoldDMwLT2017");
 	tauDiscriminators.push_back("chargedIsoPtSum");
 	tauDiscriminators.push_back("decayModeFinding");
 	tauDiscriminators.push_back("decayModeFindingNewDMs");
@@ -969,7 +978,7 @@ void Run2DecayChannelProducer::Produce(event_type const& event, product_type& pr
 		product.m_flavourOrderedLeptons.push_back(lepton2);
 		product.m_flavourOrderedLeptons.push_back(lepton1);
 	}
-	else if (m_decayChannel == HttEnumTypes::DecayChannel::TT || m_decayChannel == HttEnumTypes::DecayChannel::MM)
+	else if (m_decayChannel == HttEnumTypes::DecayChannel::TT || m_decayChannel == HttEnumTypes::DecayChannel::MM || m_decayChannel == HttEnumTypes::DecayChannel::EE)
 	{
 		if (lepton1->p4.Pt() >= lepton2->p4.Pt())
 		{

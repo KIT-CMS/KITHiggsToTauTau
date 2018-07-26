@@ -7,10 +7,13 @@
 #include "Artus/Utility/interface/Utility.h"
 
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/HttTypes.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/HttEnumTypes.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Utility/RecoilCorrector.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Utility/MEtSys.h"
 
 #include <boost/regex.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 
 /**
@@ -36,7 +39,8 @@ public:
 			 std::vector<float> product_type::*metCorrections,
 			 std::string (setting_type::*GetRecoilCorrectorFile)(void) const,
 			 std::string (setting_type::*GetMetShiftCorrectorFile)(void) const,
-			 bool (setting_type::*GetUpdateMetWithCorrectedLeptons)(void) const
+			 bool (setting_type::*GetUpdateMetWithCorrectedLeptons)(void) const,
+			 bool (setting_type::*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)(void) const
 	) :
 		ProducerBase<HttTypes>(),
 		m_metMemberUncorrected(metMemberUncorrected),
@@ -44,7 +48,8 @@ public:
 		m_metCorrections(metCorrections),
 		GetRecoilCorrectorFile(GetRecoilCorrectorFile),
 		GetMetShiftCorrectorFile(GetMetShiftCorrectorFile),
-		GetUpdateMetWithCorrectedLeptons(GetUpdateMetWithCorrectedLeptons)
+		GetUpdateMetWithCorrectedLeptons(GetUpdateMetWithCorrectedLeptons),
+		GetUpdateMetWithCorrectedLeptonsFromSignalOnly(GetUpdateMetWithCorrectedLeptonsFromSignalOnly)
 	{
 	}
 
@@ -103,16 +108,50 @@ public:
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::QUANTILE_MAPPING;
 		else if(settings.GetMetCorrectionMethod() == "meanResolution")
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::MEAN_RESOLUTION;
-		else
+		else if(settings.GetMetCorrectionMethod() == "none")
 		{
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::NONE;
-			LOG(FATAL) << "Invalid MetCorrectionMethod option. Available are 'quantileMapping' and 'meanResolution'";
+			LOG(WARNING) << "MetCorrectionMethod is 'none'. No recoil corrections will be applied";
 		}
+                else
+			LOG(FATAL) << "Invalid MetCorrectionMethod option. Available are 'quantileMapping' and 'meanResolution' and 'none'";
 
 		if (settings.GetMetUncertaintyShift())
 		{
 			m_metUncertaintyType = HttEnumTypes::ToMETUncertaintyType(settings.GetMetUncertaintyType());
 		}
+
+                m_decayChannel = HttEnumTypes::ToDecayChannel(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy(settings.GetChannel())));
+                if (m_decayChannel == HttEnumTypes::DecayChannel::ET)
+                {
+                        checkFirstElectron = true;
+                        checkSecondTau = true;
+                }
+                else if (m_decayChannel == HttEnumTypes::DecayChannel::MT)
+                {
+                        checkFirstMuon = true;
+                        checkSecondTau = true;
+                }
+                else if (m_decayChannel == HttEnumTypes::DecayChannel::TT)
+                {
+                        checkFirstTau = true;
+                        checkSecondTau = true;
+                }
+                else if (m_decayChannel == HttEnumTypes::DecayChannel::EM)
+                {
+                        checkFirstMuon = true;
+                        checkSecondElectron = true;
+                }
+                else if (m_decayChannel == HttEnumTypes::DecayChannel::MM)
+                {
+                        checkFirstMuon = true;
+                        checkSecondMuon = true;
+                }
+                else if (m_decayChannel == HttEnumTypes::DecayChannel::EE)
+                {
+                        checkFirstElectron = true;
+                        checkSecondElectron = true;
+                }
 	}
 
 	virtual void Produce(event_type const& event, product_type & product, 
@@ -135,16 +174,22 @@ public:
 		// MET' = sqrt(MetX' * MetX' + MetY' * MetY')
 		if ((settings.*GetUpdateMetWithCorrectedLeptons)())
 		{
+                        KLV* lep1 = product.m_validDiTauPairCandidates[0].first;
+                        KLV* lep2 = product.m_validDiTauPairCandidates[0].second;
 			// Electrons
 			for (std::vector<std::shared_ptr<KElectron> >::iterator electron = product.m_correctedElectrons.begin();
 				 electron != product.m_correctedElectrons.end(); ++electron)
 			{
+                                // Check, whether electron corresponds to a pair consituent in the considered decay channel. If not, skip it
+                                if ((settings.*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)() && ((checkFirstElectron && electron->get()->p4 != lep1->p4) || (checkSecondElectron && electron->get()->p4 != lep2->p4)))
+                                        continue;
 				// Only update MET if there actually was a correction applied
 				if (Utility::ApproxEqual(electron->get()->p4, const_cast<KLepton*>(product.m_originalLeptons[electron->get()])->p4))
 					continue;
 
 				float eX = electron->get()->p4.Px() - const_cast<KLepton*>(product.m_originalLeptons[electron->get()])->p4.Px();
 				float eY = electron->get()->p4.Py() - const_cast<KLepton*>(product.m_originalLeptons[electron->get()])->p4.Py();
+                                LOG(DEBUG) << "Correcting met with " << eX << "," << eY << " for electron: " << electron->get()->p4;
 
 				metX -= eX;
 				metY -= eY;
@@ -154,12 +199,16 @@ public:
 			for (std::vector<std::shared_ptr<KMuon> >::iterator muon = product.m_correctedMuons.begin();
 				 muon != product.m_correctedMuons.end(); ++muon)
 			{
+                                // Check, whether muon corresponds to a pair consituent in the considered decay channel. If not, skip it
+                                if ((settings.*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)() && ((checkFirstMuon && muon->get()->p4 != lep1->p4) || (checkSecondMuon && muon->get()->p4 != lep2->p4)))
+                                        continue;
 				// Only update MET if there actually was a correction applied
 				if (Utility::ApproxEqual(muon->get()->p4, const_cast<KLepton*>(product.m_originalLeptons[muon->get()])->p4))
 					continue;
 
 				float eX = muon->get()->p4.Px() - const_cast<KLepton*>(product.m_originalLeptons[muon->get()])->p4.Px();
 				float eY = muon->get()->p4.Py() - const_cast<KLepton*>(product.m_originalLeptons[muon->get()])->p4.Py();
+                                LOG(DEBUG) << "Correcting met with " << eX << "," << eY << " for muon: " << muon->get()->p4;
 
 				metX -= eX;
 				metY -= eY;
@@ -169,12 +218,16 @@ public:
 			for (std::vector<std::shared_ptr<KTau> >::iterator tau = product.m_correctedTaus.begin();
 				 tau != product.m_correctedTaus.end(); ++tau)
 			{
+                                // Check, whether tau corresponds to a pair consituent in the considered decay channel. If not, skip it
+                                if ((settings.*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)() && ((checkFirstTau && tau->get()->p4 != lep1->p4) || (checkSecondTau && tau->get()->p4 != lep2->p4)))
+                                        continue;
 				// Only update MET if there actually was a correction applied
 				if (Utility::ApproxEqual(tau->get()->p4, const_cast<KLepton*>(product.m_originalLeptons[tau->get()])->p4))
 					continue;
 
 				float eX = tau->get()->p4.Px() - const_cast<KLepton*>(product.m_originalLeptons[tau->get()])->p4.Px();
 				float eY = tau->get()->p4.Py() - const_cast<KLepton*>(product.m_originalLeptons[tau->get()])->p4.Py();
+                                LOG(DEBUG) << "Correcting met with " << eX << "," << eY << " for tau: " << tau->get()->p4;
 
 				metX -= eX;
 				metY -= eY;
@@ -249,8 +302,9 @@ public:
 		(product.*m_metMemberCorrected) = *(product.*m_metMemberUncorrected);
 		
 		// Apply the recoil correction to the MET object (only for DY, W and Higgs samples)
-		if (m_processType == MEtSys::ProcessType::BOSON)
+		if (m_processType == MEtSys::ProcessType::BOSON && !(m_correctionMethod == MetCorrectorBase::CorrectionMethod::NONE))
 		{
+                        LOG(DEBUG) << "Applying recoil & lepton corrections";
 			(product.*m_metMemberCorrected).p4.SetPxPyPzE(
 				correctedMetX,
 				correctedMetY,
@@ -263,6 +317,7 @@ public:
 		}
 		else if ((settings.*GetUpdateMetWithCorrectedLeptons)()) // Apply at least corrections from lepton adjustments
 		{
+                        LOG(DEBUG) << "Applying lepton corrections";
 			(product.*m_metMemberCorrected).p4.SetPxPyPzE(
 				metX,
 				metY,
@@ -285,6 +340,7 @@ public:
 				product.m_met = product.*m_metMemberCorrected;
 			}
 		}
+                LOG(DEBUG) << "Original MET: " << (product.*m_metMemberUncorrected)->p4 << " corrected MET: " << (product.*m_metMemberCorrected).p4;
 		
 		// Apply the correction to the MET object, if required (done for all the samples)
 		if (m_doMetSys)
@@ -331,7 +387,15 @@ protected:
 	CorrectionMethod m_correctionMethod;
 	bool m_correctGlobalMet;
 	bool (setting_type::*GetUpdateMetWithCorrectedLeptons)(void) const;
+	bool (setting_type::*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)(void) const;
 	KMETUncertainty::Type m_metUncertaintyType;
+        bool checkFirstElectron = false;
+        bool checkSecondElectron = false;
+        bool checkFirstMuon = false;
+        bool checkSecondMuon = false;
+        bool checkFirstTau = false;
+        bool checkSecondTau = false;
+	HttEnumTypes::DecayChannel m_decayChannel;
 };
 
 

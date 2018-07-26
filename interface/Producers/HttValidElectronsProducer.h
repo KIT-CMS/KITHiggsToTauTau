@@ -92,6 +92,8 @@ public:
 			std::string (setting_type::*GetElectronIDName)(void) const=&setting_type::GetElectronIDName,
 			float (setting_type::*GetElectronMvaIDCutEB1)(void) const=&setting_type::GetElectronMvaIDCutEB1,
 			float (setting_type::*GetElectronMvaIDCutEB2)(void) const=&setting_type::GetElectronMvaIDCutEB2,
+			std::vector<float>& (setting_type::*GetElectronEtaBinnedEAValues)(void) const=&setting_type::GetElectronEtaBinnedEAValues,
+			std::vector<float>& (setting_type::*GetElectronEtaBinsForEA)(void) const=&setting_type::GetElectronEtaBinsForEA,
 			float (setting_type::*GetElectronMvaIDCutEE)(void) const=&setting_type::GetElectronMvaIDCutEE,
 			std::string (setting_type::*GetElectronIsoType)(void) const=&setting_type::GetElectronIsoType,
 			std::string (setting_type::*GetElectronIso)(void) const=&setting_type::GetElectronIso,
@@ -134,6 +136,8 @@ private:
 	std::string (setting_type::*GetElectronIDName)(void) const;
 	float (setting_type::*GetElectronMvaIDCutEB1)(void) const;
 	float (setting_type::*GetElectronMvaIDCutEB2)(void) const;
+	std::vector<float>& (setting_type::*GetElectronEtaBinnedEAValues)(void) const;
+	std::vector<float>& (setting_type::*GetElectronEtaBinsForEA)(void) const;
 	float (setting_type::*GetElectronMvaIDCutEE)(void) const;
 	float (setting_type::*GetElectronChargedIsoVetoConeSizeEB)(void) const;
 	float (setting_type::*GetElectronChargedIsoVetoConeSizeEE)(void) const;
@@ -179,6 +183,9 @@ private:
 	bool IsMVABased(KElectron* electron, event_type const& event, const std::string &idName) const;
 	bool CheckElectronMetadata(const KElectronMetadata *meta, std::string idName, bool &checkedAlready) const;
 	bool CheckElectronMetadata(const KElectronMetadata *meta, std::vector<std::string> idNames, bool &checkedAlready) const;
+
+        std::vector<float> eaValues = {};
+        std::vector<float> etaBins = {};
 };
 
 
@@ -215,6 +222,8 @@ public:
 			std::string (setting_type::*GetElectronIDName)(void) const=&setting_type::GetLooseElectronIDName,
 			float (setting_type::*GetElectronMvaIDCutEB1)(void) const=&setting_type::GetLooseElectronMvaIDCutEB1,
 			float (setting_type::*GetElectronMvaIDCutEB2)(void) const=&setting_type::GetLooseElectronMvaIDCutEB2,
+			std::vector<float>& (setting_type::*GetElectronEtaBinnedEAValues)(void) const=&setting_type::GetElectronEtaBinnedEAValues,
+			std::vector<float>& (setting_type::*GetElectronEtaBinsForEA)(void) const=&setting_type::GetElectronEtaBinsForEA,
 			float (setting_type::*GetElectronMvaIDCutEE)(void) const=&setting_type::GetLooseElectronMvaIDCutEE,
 			std::string (setting_type::*GetElectronIsoType)(void) const=&setting_type::GetLooseElectronIsoType,
 			std::string (setting_type::*GetElectronIso)(void) const=&setting_type::GetLooseElectronIso,
@@ -277,6 +286,8 @@ public:
 			std::string (setting_type::*GetElectronIDName)(void) const=&setting_type::GetVetoElectronIDName,
 			float (setting_type::*GetElectronMvaIDCutEB1)(void) const=&setting_type::GetVetoElectronMvaIDCutEB1,
 			float (setting_type::*GetElectronMvaIDCutEB2)(void) const=&setting_type::GetVetoElectronMvaIDCutEB2,
+			std::vector<float>& (setting_type::*GetElectronEtaBinnedEAValues)(void) const=&setting_type::GetElectronEtaBinnedEAValues,
+			std::vector<float>& (setting_type::*GetElectronEtaBinsForEA)(void) const=&setting_type::GetElectronEtaBinsForEA,
 			float (setting_type::*GetElectronMvaIDCutEE)(void) const=&setting_type::GetVetoElectronMvaIDCutEE,
 			std::string (setting_type::*GetElectronIsoType)(void) const=&setting_type::GetVetoElectronIsoType,
 			std::string (setting_type::*GetElectronIso)(void) const=&setting_type::GetVetoElectronIso,
