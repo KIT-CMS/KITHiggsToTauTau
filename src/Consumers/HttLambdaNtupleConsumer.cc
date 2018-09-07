@@ -304,6 +304,10 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
         {
                 return ((LambdaNtupleConsumer<KappaTypes>::GetBoolQuantities().count(std::string("trg_singlemuon_raw")) > 0) ? (SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetBoolQuantities(), std::string("trg_singlemuon_raw")))(event, product) : false) && LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["lep1Pt"](event, product) > 23.0;
         });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
+        });
 
 	// need to be called at last
 	KappaLambdaNtupleConsumer::Init(settings);

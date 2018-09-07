@@ -157,10 +157,18 @@ def build_config(nickname, **kwargs):
     config["SimpleEleTauFakeRateWeightVLoose"] = [1.02, 1.11]
     config["SimpleEleTauFakeRateWeightTight"] = [1.80, 1.30]
   else:
-    config["SimpleMuTauFakeRateWeightLoose"] = [1.01, 1.007, 0.87, 1.154, 2.281]
-    config["SimpleMuTauFakeRateWeightTight"] = [1.263, 1.364, 0.854, 1.712, 2.324]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [1.213, 1.375]
-    config["SimpleEleTauFakeRateWeightTight"] = [1.402, 1.90]
+    config["SimpleMuTauFakeRateWeightLoose"] = [1.22, 1.12, 1.26, 1.22, 2.39]
+    config["SimpleMuTauFakeRateWeightTight"] = [1.47, 1.55, 1.33, 1.72, 2.50]
+    config["SimpleEleTauFakeRateWeightVLoose"] = [1.21, 1.38]
+    config["SimpleEleTauFakeRateWeightTight"] = [1.40, 1.90]
+
+  
+  if re.search("GluGluHToTauTauM125", nickname):
+    config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root"
+    if "powheg" in nickname:
+      config["Generator"] = "powheg"
+    elif "amcatnlo" in nickname:
+      config["Generator"] = "amcatnlo"
 
 
   # pipelines - channels including systematic shifts

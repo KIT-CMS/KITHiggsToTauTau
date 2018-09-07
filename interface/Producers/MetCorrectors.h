@@ -345,7 +345,11 @@ public:
 				product.m_met = product.*m_metMemberCorrected;
 			}
 		}
-                LOG(DEBUG) << "Original MET (px,py): " << (product.*m_metMemberUncorrected)->p4.Px() << "," << (product.*m_metMemberUncorrected)->p4.Py() << " corrected MET (px,py): " << (product.*m_metMemberCorrected).p4.Px() << "," << (product.*m_metMemberCorrected).p4.Py();
+		else if (settings.GetUseGroupedJetEnergyCorrectionUncertainty())
+                {
+                        product.m_met.p4 += product.m_MET_shift.p4;
+                }
+            	LOG(DEBUG) << "Original MET (px,py): " << (product.*m_metMemberUncorrected)->p4.Px() << "," << (product.*m_metMemberUncorrected)->p4.Py() << " corrected MET (px,py): " << (product.*m_metMemberCorrected).p4.Px() << "," << (product.*m_metMemberCorrected).p4.Py();
 		
 		// Apply the correction to the MET object, if required (done for all the samples)
 		if (m_doMetSys)

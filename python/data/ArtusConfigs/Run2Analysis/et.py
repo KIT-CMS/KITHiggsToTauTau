@@ -26,6 +26,7 @@ def build_config(nickname):
   isTTbar = re.search("TT(To|_|Jets)", nickname)
   isDY = re.search("(DY.?JetsToLL|EWKZ2Jets)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
+  isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
   
   
   ## fill config:
@@ -139,13 +140,17 @@ def build_config(nickname):
       "idisoweight_1",
       #"htxs_stage0cat",
       #"htxs_stage1cat",
-      "flagMETFilter"
+      "flagMETFilter",
+      "pt_ttjj"
   ])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
       "htxs_stage1cat"
     ])
+  if isGluonFusion:
+    config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2Analysis.Includes.ggHNNLOQuantities").build_list())
+
   
   config["OSChargeLeptons"] = True
   
@@ -171,7 +176,8 @@ def build_config(nickname):
                                                               "producer:DiVetoElectronVetoProducer",
                                                               "producer:TaggedJetCorrectionsProducer",
                                                               "producer:ValidTaggedJetsProducer",
-                                                              "producer:ValidBTaggedJetsProducer"))
+                                                              "producer:ValidBTaggedJetsProducer",
+                                                              "producer:GroupedJetUncertaintyShiftProducer"))
                                                               #"producer:TaggedJetUncertaintyShiftProducer"))
   if not isData:                 config["Processors"].append( "producer:MetCorrector") #"producer:MvaMetCorrector"
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
@@ -186,6 +192,7 @@ def build_config(nickname):
                                                               "producer:ImpactParameterCorrectionsProducer")) #"producer:MVATestMethodsProducer"
   if not isData:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
+  if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   
   
   config["AddGenMatchedParticles"] = True

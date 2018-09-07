@@ -468,5 +468,11 @@ public:
         IMPL_SETTING_DEFAULT(std::string, Nonprompt_m_drelZ_target, "none")
         IMPL_SETTING_DEFAULT(std::string, Tauh_drel0_target, "none")
         IMPL_SETTING_DEFAULT(std::string, Tauh_drelZ_target, "none")
+        
+        // settings for SMggHNNLOProducer
+        IMPL_SETTING(std::string, Generator)
+        IMPL_SETTING(std::string, ggHNNLOweightsRootfile)
 	
+        // settings for GroupedJetEnergyUncertaintyShiftProducer
+        IMPL_SETTING_DEFAULT(bool, UseGroupedJetEnergyCorrectionUncertainty, false)
 };

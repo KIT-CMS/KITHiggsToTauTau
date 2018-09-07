@@ -35,6 +35,9 @@ def build_config(nickname):
     
   config["JetEnergyCorrectionUncertaintySource"] = ""
   #config["JetEnergyCorrectionUncertaintyShift"] = 0.0
+  
+  config["JetEnergyCorrectionSplitUncertaintyParameters"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_23Sep2016V4_DATA_UncertaintySources_AK4PFchs.txt" if re.search("Run2016|Summer16|Spring16", nickname) else ""
+
 
 
   return config

@@ -42,6 +42,124 @@ def build_config(nickname):
       "JetEnergyCorrectionUncertaintyShift" : -1.0,
       "SvfitCacheFileFolder" : "nominal"
     }
-  
+    # grouped JEC uncs documented in https://indico.cern.ch/event/740094/contributions/3055870/attachments/1680587/2699877/RegionalJES.pdf
+    config["jecUncEta0to5Up"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "SinglePionECAL",
+            "SinglePionHCAL",
+            "AbsoluteFlavMap",
+            "AbsoluteMPFBias",
+            "AbsoluteScale",
+            "AbsoluteStat",
+            "Fragmentation",
+            "FlavorQCD",
+            "TimePtEta",
+            "PileUpDataMC",
+            "RelativeFSR",
+            "RelativeStatFSR",
+            "PileUpPtRef"
+        ]
+    }
+    config["jecUncEta0to5Down"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "SinglePionECAL",
+            "SinglePionHCAL",
+            "AbsoluteFlavMap",
+            "AbsoluteMPFBias",
+            "AbsoluteScale",
+            "AbsoluteStat",
+            "Fragmentation",
+            "FlavorQCD",
+            "TimePtEta",
+            "PileUpDataMC",
+            "RelativeFSR",
+            "RelativeStatFSR",
+            "PileUpPtRef"
+        ]
+    }
+    config["jecUncEta0to3Up"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "PileUpPtEC1",
+            "PileUpPtEC2",
+            "PileUpPtBB",
+            "RelativeJEREC1",
+            "RelativeJEREC2",
+            "RelativePtEC1",
+            "RelativePtEC2",
+            "RelativeStatEC",
+            "RelativePtBB"
+        ]
+    }
+    config["jecUncEta0to3Down"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "PileUpPtEC1",
+            "PileUpPtEC2",
+            "PileUpPtBB",
+            "RelativeJEREC1",
+            "RelativeJEREC2",
+            "RelativePtEC1",
+            "RelativePtEC2",
+            "RelativeStatEC",
+            "RelativePtBB"
+        ]
+    }
+    config["jecUncEta3to5Up"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeStatHF",
+            "RelativePtHF",
+            "PileUpPtHF",
+            "RelativeJERHF"
+        ]
+    }
+    config["jecUncEta3to5Down"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeStatHF",
+            "RelativePtHF",
+            "PileUpPtHF",
+            "RelativeJERHF"
+        ]
+    }
+    config["jecUncRelativeBalUp"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeBal"
+        ]
+    }
+    config["jecUncRelativeBalDown"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeBal"
+        ]
+    }
   
   return config
