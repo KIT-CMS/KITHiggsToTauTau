@@ -12,7 +12,10 @@ import Kappa.Skimming.datasetsHelperTwopz as datasetsHelperTwopz
 import importlib
 import os
 
-def build_config(nickname):
+def build_config(nickname, **kwargs):
+  analysis_channels = ['all'] if "analysis_channels" not in kwargs else kwargs["analysis_channels"]
+  btag_eff = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "btag-eff" else False
+  no_svfit = True if "no_svfit" in kwargs and kwargs["no_svfit"] else False
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
 
@@ -40,6 +43,7 @@ def build_config(nickname):
   # explicit configuration
   config["SkipEvents"] = 0
   config["EventCount"] = -1
+  config["Year"] = 2017
   config["InputIsData"] = isData
 
   if isSUSYggH:
@@ -151,6 +155,7 @@ def build_config(nickname):
   # pipelines - channels including systematic shifts
   config["Pipelines"] = jsonTools.JsonDict()
   #config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.inclusive").build_config(nickname)
-  config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.inclusiveZee").build_config(nickname)
+  #config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.inclusiveZee").build_config(nickname)
+  config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.mumu_test").build_config(nickname)
 
   return config

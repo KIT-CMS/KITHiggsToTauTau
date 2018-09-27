@@ -30,6 +30,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/DiLeptonVetoProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/ValidDiTauPairCandidatesProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NewValidDiTauPairCandidatesProducers.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NewTagAndProbePairCandidatesProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/GenDiTauPairCandidatesProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/GenDiTauPairAcceptanceProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TriggerTagAndProbeProducers.h"
@@ -204,6 +205,8 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new NewValidEMPairCandidatesProducer();
 	else if(id == NewValidMMPairCandidatesProducer().GetProducerId())
 		return new NewValidMMPairCandidatesProducer();
+	else if(id == NewMMTagAndProbePairCandidatesProducer().GetProducerId())
+		return new NewMMTagAndProbePairCandidatesProducer();	
 	else if(id == NewValidEEPairCandidatesProducer().GetProducerId())
 		return new NewValidEEPairCandidatesProducer();
 	else if(id == GenTTPairCandidatesProducer().GetProducerId())
