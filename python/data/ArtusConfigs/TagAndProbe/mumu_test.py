@@ -60,6 +60,7 @@ def build_config(nickname, **kwargs):
 
   # Muon Requirements
   config["MuonIsoType"] = "none"
+  #config["ValidMuonsInput"] = "corrected"
   config["MuonID"] = "none"
   config["MuonIso"] = "none"
   config["MuonDeltaBetaCorrectionFactor"] = 0.5
@@ -92,8 +93,19 @@ def build_config(nickname, **kwargs):
   ]
 
   
-  config["TagAdditionalCriteria"] = ["23.0","0.045","0.2","0.15"]
+  config["TagAdditionalCriteria"] = [
+    "pt:23.0",
+    "id:Medium",
+    "dxy:0.045",
+    "dz:0.2",
+    "iso_sum:0.15"]
   config["ProbeAdditionalCriteria"] = ["probecutstring"]
+
+  config["InvalidateNonMatchingElectrons"] = False
+  config["InvalidateNonMatchingMuons"] = True
+  config["InvalidateNonMatchingTaus"] = False
+  config["InvalidateNonMatchingJets"] = False
+  config["DirectIso"] = True
   config["EventWeight"] = "eventWeight"
 
   config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantities").build_list()
@@ -102,7 +114,7 @@ def build_config(nickname, **kwargs):
 #  if not (isEmbedded):           config["Processors"].append( "producer:ElectronCorrectionsProducer")
   config["Processors"].extend((                              # "producer:HttValidLooseElectronsProducer",
                                                              # "producer:HttValidLooseMuonsProducer",
-                                                              "producer:HltProducer",
+                                                             # "producer:HltProducer",
                                                               "producer:MetSelector",
                                                               "producer:ValidMuonsProducer",
                                                               "filter:ValidMuonsFilter",

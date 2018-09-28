@@ -28,6 +28,7 @@ def build_list():
     "id_muon_tight_1",
     "id_muon_medium_2",
     "id_muon_tight_2",
+    "m_ll"
     ]
 
   return quantities_list

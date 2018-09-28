@@ -391,8 +391,8 @@ public:
 	IMPL_SETTING_DEFAULT(bool, RandomMuon, false);
 
 	//  Settings for ValidTagAndProbePairs
-	IMPL_SETTING_FLOATLIST_DEFAULT(TagAdditionalCriteria,{});
-	IMPL_SETTING_FLOATLIST_DEFAULT(ProbeAdditionalCriteria, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TagAdditionalCriteria,{});
+	IMPL_SETTING_STRINGLIST_DEFAULT(ProbeAdditionalCriteria,{});
 
 	// setting for mass smearing applied in DiLeptonQuantitiesProducer
 	IMPL_SETTING_DEFAULT(float, MassSmearing, 0.10);
