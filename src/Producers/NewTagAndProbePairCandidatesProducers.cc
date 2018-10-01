@@ -21,8 +21,8 @@ bool NewMMTagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 	double isolationPtSum = (chargedIsolationPtSum + std::max(0.0, neutralIsolationPtSum + photonIsolationPtSum - 0.5 * deltaBetaIsolationPtSum)) / muon->p4.Pt();
 
 	bool validDiTauPair = false;
-
-	if (muon->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) && isolationPtSum < m_tagSelectionCuts.find("iso_sum")->second.at(0) && muon->dxy < m_tagSelectionCuts.find("dxy")->second.at(0) && muon->dz < m_tagSelectionCuts.find("dz")->second.at(0))
+	
+	if (muon->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) && muon->idMedium() == true && isolationPtSum < m_tagSelectionCuts.find("iso_sum")->second.at(0) && muon->dxy < m_tagSelectionCuts.find("dxy")->second.at(0) && muon->dz < m_tagSelectionCuts.find("dz")->second.at(0))
 	{
 		validDiTauPair = true;
 	}

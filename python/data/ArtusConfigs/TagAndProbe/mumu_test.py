@@ -77,19 +77,19 @@ def build_config(nickname, **kwargs):
 
     ]
   config["HLTBranchNames"] = [
-      "trg_1_IsoMu27:HLT_IsoMu27_v",
-      "trg_2_IsoMu27:HLT_IsoMu27_v",
-      "trg_1_IsoMu24:HLT_IsoMu24_v",
-      "trg_2_IsoMu24:HLT_IsoMu24_v"
+      "trg_t_IsoMu27:HLT_IsoMu27_v",
+      "trg_p_IsoMu27:HLT_IsoMu27_v",
+      "trg_t_IsoMu24:HLT_IsoMu24_v",
+      "trg_p_IsoMu24:HLT_IsoMu24_v"
   ]
 
   config["CheckLepton1TriggerMatch"] = [
-      "trg_1_IsoMu27",
-      "trg_1_IsoMu24"
+      "trg_t_IsoMu27",
+      "trg_t_IsoMu24"
   ]
   config["CheckLepton2TriggerMatch"] = [
-      "trg_2_IsoMu27",
-      "trg_2_IsoMu24"
+      "trg_p_IsoMu27",
+      "trg_p_IsoMu24"
   ]
 
   
@@ -99,7 +99,8 @@ def build_config(nickname, **kwargs):
     "dxy:0.045",
     "dz:0.2",
     "iso_sum:0.15"]
-  config["ProbeAdditionalCriteria"] = ["probecutstring"]
+  config["ProbeAdditionalCriteria"] = [
+    "pt:10"]
 
   config["InvalidateNonMatchingElectrons"] = False
   config["InvalidateNonMatchingMuons"] = True
@@ -130,14 +131,14 @@ def build_config(nickname, **kwargs):
   #                                                            "filter:MinTausCountFilter",
                                                               #"producer:ValidMTPairCandidatesProducer",
                                                               "producer:NewMMTagAndProbePairCandidatesProducer",
-                                                              "filter:ValidDiTauPairCandidatesFilter",
-                                                              "producer:Run2DecayChannelProducer",
+                                                              "filter:ValidDiTauPairCandidatesFilter",))
+                                                              #"producer:Run2DecayChannelProducer",
   #                                                            "producer:DiVetoMuonVetoProducer",
   #                                                           "producer:TaggedJetCorrectionsProducer",
   #                                                           "producer:ValidTaggedJetsProducer",
   #                                                           "producer:ValidBTaggedJetsProducer",
-                                                              "producer:DiLeptonQuantitiesProducer",
-                                                              "producer:EventWeightProducer"))
+                                                              #"producer:DiLeptonQuantitiesProducer",
+                                                              #"producer:EventWeightProducer"))
 
 
 
