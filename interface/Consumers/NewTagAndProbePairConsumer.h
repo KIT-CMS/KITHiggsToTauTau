@@ -59,11 +59,6 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["iso_p"] = 0.0;
 
 		FloatQuantities["m_ll"] = 0.0;
-
-		// IntQuantities["trg_t_IsoMu24"]=false;
-		// IntQuantities["trg_t_IsoMu27"]=false;
-		// IntQuantities["trg_p_IsoMu24"]=false;
-		// IntQuantities["trg_p_IsoMu27"]=false;
 		// Create Map entries for selected trigger quantities
 		m_hltFiredBranchNames = Utility::ParseVectorToMap(settings.GetHLTBranchNames());
 		for (auto hltNames : m_hltFiredBranchNames)
@@ -137,7 +132,8 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 					// double photonIsolationPtSum = TagAndProbePair->first->sumPhotonEtR04;
 					// double deltaBetaIsolationPtSum = TagAndProbePair->first->sumPUPtR04;
 					// FloatQuantities["iso_t"] = (chargedIsolationPtSum + std::max(0.0, neutralIsolationPtSum + photonIsolationPtSum - 0.5 * deltaBetaIsolationPtSum)) / TagAndProbePair->first->p4.Pt();
-					FloatQuantities["iso_t"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->pfIso();
+					// FloatQuantities["iso_t"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->isolationPtSum();
+					FloatQuantities["iso_t"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).first), DefaultValues::UndefinedDouble);
 				}
 				else if (*quantity == "pt_p")
 				{
@@ -158,7 +154,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 					// 	double photonIsolationPtSum = TagAndProbePair->second->sumPhotonEtR04;
 					// 	double deltaBetaIsolationPtSum = TagAndProbePair->second->sumPUPtR04;
 					// 	FloatQuantities["iso_p"] = (chargedIsolationPtSum + std::max(0.0, neutralIsolationPtSum + photonIsolationPtSum - 0.5 * deltaBetaIsolationPtSum)) / TagAndProbePair->second->p4.Pt();
-					FloatQuantities["iso_p"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->pfIso();
+					FloatQuantities["iso_t"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).second), DefaultValues::UndefinedDouble);
 				}
 				else if (*quantity == "m_ll")
 				{
