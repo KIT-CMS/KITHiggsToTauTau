@@ -24,10 +24,8 @@ def build_list():
     "eta_t", "eta_p",
     "phi_t", "phi_p",
     "iso_t", "iso_p",
-    "id_muon_medium_t",
-    #"id_muon_tight_1",
-    "id_muon_medium_p",
-    #"id_muon_tight_2",
+    "id_t",
+    "id_p",
     "m_ll"
     ]
 

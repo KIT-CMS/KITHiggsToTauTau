@@ -74,8 +74,8 @@ def build_config(nickname, **kwargs):
   config["MuonTriggerFilterNames"] = [
           "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",
           "HLT_IsoMu27_v:hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07",
-
     ]
+
   config["HLTBranchNames"] = [
       "trg_t_IsoMu27:HLT_IsoMu27_v",
       "trg_p_IsoMu27:HLT_IsoMu27_v",
@@ -99,6 +99,7 @@ def build_config(nickname, **kwargs):
     "dxy:0.045",
     "dz:0.2",
     "iso_sum:0.15"]
+
   config["ProbeAdditionalCriteria"] = [
     "pt:10"]
 
@@ -116,7 +117,7 @@ def build_config(nickname, **kwargs):
   config["Processors"].extend((                              # "producer:HttValidLooseElectronsProducer",
                                                              # "producer:HttValidLooseMuonsProducer",
                                                              # "producer:HltProducer",
-                                                              "producer:MetSelector",
+                                                             # "producer:MetSelector",
                                                               "producer:ValidMuonsProducer",
                                                               "filter:ValidMuonsFilter",
                                                               "producer:MuonTriggerMatchingProducer",
