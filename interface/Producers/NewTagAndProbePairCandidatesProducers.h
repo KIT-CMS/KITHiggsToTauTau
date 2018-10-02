@@ -48,7 +48,7 @@ class NewTagAndProbePairCandidatesProducerBase : public ProducerBase<HttTypes>
             std::vector <float> pt_1;
             for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
             {
-                pt_1.push_back(product.m_validDiTauPairCandidates.at(i).first->p4.Pt());
+                pt_1.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->p4.Pt());
             }
             return pt_1;
         });
@@ -56,7 +56,7 @@ class NewTagAndProbePairCandidatesProducerBase : public ProducerBase<HttTypes>
             std::vector <float> pt_2;
             for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
             {
-                pt_2.push_back(product.m_validDiTauPairCandidates.at(i).second->p4.Pt());
+                pt_2.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->p4.Pt());
             }
             return pt_2;
         });
@@ -75,6 +75,38 @@ class NewTagAndProbePairCandidatesProducerBase : public ProducerBase<HttTypes>
                 iso_2.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->pfIso());
             }
             return iso_2;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("eta_t", [](event_type const &event, product_type const &product) {
+            std::vector <float> eta_1;
+            for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
+            {
+                eta_1.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->p4.Eta());
+            }
+            return eta_1;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("eta_p", [](event_type const &event, product_type const &product) {
+            std::vector <float> eta_2;
+            for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
+            {
+                eta_2.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->p4.Eta());
+            }
+            return eta_2;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("phi_t", [](event_type const &event, product_type const &product) {
+            std::vector <float> phi_1;
+            for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
+            {
+                phi_1.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->p4.Phi());
+            }
+            return phi_1;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("phi_p", [](event_type const &event, product_type const &product) {
+            std::vector <float> phi_2;
+            for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
+            {
+                phi_2.push_back(static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->p4.Phi());
+            }
+            return phi_2;
         });
         LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("id_muon_medium_p", [](event_type const &event, product_type const &product) {
             std::vector <int> id_muon;

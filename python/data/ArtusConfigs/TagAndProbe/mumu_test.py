@@ -147,7 +147,8 @@ def build_config(nickname, **kwargs):
 #   config["AddGenMatchedTauJets"] = True
 #   config["BranchGenMatchedMuons"] = True
 #   config["BranchGenMatchedTaus"] = True
-  config["Consumers"] = ["KappaLambdaNtupleConsumer",
+  config["Consumers"] = [#"KappaLambdaNtupleConsumer",
+                         "NewMMTagAndProbePairConsumer",
                          "cutflow_histogram"]
 
   # pipelines - systematic shifts
