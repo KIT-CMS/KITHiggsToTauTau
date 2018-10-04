@@ -1,5 +1,6 @@
 
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NewTagAndProbePairCandidatesProducers.h"
+#include "Math/VectorUtil.h"
 
 NewMMTagAndProbePairCandidatesProducer::NewMMTagAndProbePairCandidatesProducer() : NewTagAndProbePairCandidatesProducerBase<KMuon, KMuon>(
 																					   &HttTypes::product_type::m_validMuons,
@@ -37,4 +38,52 @@ bool NewMMTagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 std::string NewMMTagAndProbePairCandidatesProducer::GetProducerId() const
 {
 	return "NewMMTagAndProbePairCandidatesProducer";
+}
+
+
+NewMTTagAndProbePairCandidatesProducer::NewMTTagAndProbePairCandidatesProducer() : NewTagAndProbePairCandidatesProducerBase<KMuon, KTau>(
+																					   &HttTypes::product_type::m_validMuons,
+																					   &HttTypes::product_type::m_validTaus)
+{
+}
+
+std::string NewMTTagAndProbePairCandidatesProducer::GetProducerId() const
+{
+	return "NewMTTagAndProbePairCandidatesProducer";
+}
+
+bool NewMTTagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                                                   product_type &product, setting_type const &settings,
+                                                                   std::map<std::string, std::vector<float>> m_tagSelectionCuts) const
+{
+    // Check for overlap of tag muon with a b-tagged jet and veto events where overlap is present.
+    KLepton* muon = static_cast<KLepton*>(diTauPair.first);
+    bool validDiTauPair = true;
+    for (auto bJet : product.m_bTaggedJets)
+    {
+        if (ROOT::Math::VectorUtil::DeltaR(muon->p4, bJet->p4) < 0.5)
+        {
+            validDiTauPair = false;
+            break;
+        }
+    }
+    return validDiTauPair;
+}
+
+bool NewMTTagAndProbePairCandidatesProducer::AdditionalProbeCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                                                   product_type &product, setting_type const &settings,
+                                                                   std::map<std::string, std::vector<float>> m_tagSelectionCuts) const
+{
+    // Check for overlap of tag muon with a b-tagged jet and veto events where overlap is present.
+    KLepton* tau = static_cast<KLepton*>(diTauPair.second);
+    bool validDiTauPair = true;
+    for (auto bJet : product.m_bTaggedJets)
+    {
+        if (ROOT::Math::VectorUtil::DeltaR(tau->p4, bJet->p4) < 0.5)
+        {
+            validDiTauPair = false;
+            break;
+        }
+    }
+    return validDiTauPair;
 }
