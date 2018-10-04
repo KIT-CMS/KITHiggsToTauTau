@@ -83,11 +83,11 @@ def build_config(nickname, **kwargs):
       "trg_p_IsoMu24:HLT_IsoMu24_v"
   ]
 
-  config["CheckLepton1TriggerMatch"] = [
+  config["CheckTagTriggerMatch"] = [
       "trg_t_IsoMu27",
       "trg_t_IsoMu24"
   ]
-  config["CheckLepton2TriggerMatch"] = [
+  config["CheckProbeTriggerMatch"] = [
       "trg_p_IsoMu27",
       "trg_p_IsoMu24"
   ]
