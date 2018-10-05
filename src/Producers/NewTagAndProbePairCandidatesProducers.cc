@@ -20,7 +20,7 @@ bool NewMMTagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 
 	if (muon->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) // pt Cut
 	&& muon->idMedium() == true // ID Cut
-	&& SafeMap::GetWithDefault(product.m_leptonIsolation,muon,DefaultValues::UndefinedDouble) < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
+	&& SafeMap::GetWithDefault(product.m_leptonIsolation,muon,DefaultValues::UndefinedDouble)/(muon)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
 	&& std::abs(muon->dxy) < m_tagSelectionCuts.find("dxy")->second.at(0) // Dxy Cut
 	&& std::abs(muon->dz) < m_tagSelectionCuts.find("dz")->second.at(0) // Dz Cut
 	&& diTauPair.IsOppositelyCharged()) // Opposite Charge of the pair
