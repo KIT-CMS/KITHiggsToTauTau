@@ -73,9 +73,6 @@ def build_config(nickname, **kwargs):
 
   config["Year"] = 2017
     
-  
-
-
   config["MuonTriggerFilterNames"] = [
           "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",
           "HLT_IsoMu27_v:hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07",
