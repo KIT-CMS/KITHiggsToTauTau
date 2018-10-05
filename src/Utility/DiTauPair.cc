@@ -13,7 +13,7 @@ DiTauPair::DiTauPair(KLepton* lepton1, KLepton* lepton2) :
 { 
 }
 
-bool DiTauPair::IsOppositelyCharged()
+bool DiTauPair::IsOppositelyCharged() const
 {
 	return (static_cast<KLepton*>(first)->charge() * static_cast<KLepton*>(second)->charge() < 0);
 }

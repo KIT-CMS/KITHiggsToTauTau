@@ -11,7 +11,7 @@ class DiTauPair : public DiGenTauPair
 public:
 	DiTauPair(KLepton* lepton1, KLepton* lepton2);
 	
-	bool IsOppositelyCharged();
+	bool IsOppositelyCharged() const;
 	std::vector<std::string> GetCommonHltPaths(
 			std::map<KLepton*, std::map<std::string, std::map<std::string, std::vector<KLV*> > >* > const& detailedTriggerMatchedLeptons,
 			std::vector<std::string> const& hltPathsWithoutCommonMatchRequired
