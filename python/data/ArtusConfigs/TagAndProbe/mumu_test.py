@@ -32,18 +32,18 @@ def build_config(nickname, **kwargs):
   ## fill config:
   # includes
   includes = [
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsLooseElectronID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsLooseMuonID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsElectronID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsVetoMuonID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMuonID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsTauID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJEC",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsSvfit",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJetID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsBTaggedJetID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsTauES",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMinimalPlotlevelFilter_mt"
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsLooseElectronID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsLooseMuonID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsElectronID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsVetoMuonID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMuonID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsTauID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJEC",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsSvfit",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJetID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsBTaggedJetID",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsTauES",
+   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMinimalPlotlevelFilter_mt"
   ]
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
@@ -59,8 +59,9 @@ def build_config(nickname, **kwargs):
   ]
 
   # Muon Requirements
-  config["MuonIsoType"] = "none"
-  #config["ValidMuonsInput"] = "corrected"
+  config["MuonIsoTypeUserMode"] = "fromcmsswr04"
+  config["MuonIsoType"] = "user"
+  config["MuonIsoSignalConeSize"] = 0.4
   config["MuonID"] = "none"
   config["MuonIso"] = "none"
   config["MuonDeltaBetaCorrectionFactor"] = 0.5
@@ -69,6 +70,10 @@ def build_config(nickname, **kwargs):
   config["MuonLowerPtCuts"] = ["10.0"]
   config["MuonUpperAbsEtaCuts"] = ["2.4"]
   config["DiTauPairMinDeltaRCut"] = 0.5
+
+  config["Year"] = 2017
+    
+  
 
 
   config["MuonTriggerFilterNames"] = [
@@ -112,42 +117,13 @@ def build_config(nickname, **kwargs):
 
   config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantities").build_list()
 
-  config["Processors"] =   []#                                  ["producer:MuonCorrectionsProducer"] if isEmbedded else []
-#  if not (isEmbedded):           config["Processors"].append( "producer:ElectronCorrectionsProducer")
-  config["Processors"].extend((                              # "producer:HttValidLooseElectronsProducer",
-                                                             # "producer:HttValidLooseMuonsProducer",
-                                                             # "producer:HltProducer",
-                                                             # "producer:MetSelector",
-                                                              "producer:ValidMuonsProducer",
-                                                              "filter:ValidMuonsFilter",
-                                                              "producer:MuonTriggerMatchingProducer",
-                                                              "filter:MinMuonsCountFilter",))
-                                                             # "producer:HttValidVetoMuonsProducer",))
-  #                                                            "producer:ValidElectronsProducer"))
- # if not isData:                 config["Processors"].append( "producer:HttValidGenTausProducer")
- # if not (isData or isEmbedded): config["Processors"].append( "producer:TauCorrectionsProducer")
-  config["Processors"].extend((                              # "producer:ValidTausProducer",
-  #                                                            "filter:ValidTausFilter",
-  #                                                            "producer:TauTriggerMatchingProducer",
-  #                                                            "filter:MinTausCountFilter",
-                                                              #"producer:ValidMTPairCandidatesProducer",
-                                                              "producer:NewMMTagAndProbePairCandidatesProducer",
-                                                              "filter:ValidDiTauPairCandidatesFilter",))
-                                                              #"producer:Run2DecayChannelProducer",
-  #                                                            "producer:DiVetoMuonVetoProducer",
-  #                                                           "producer:TaggedJetCorrectionsProducer",
-  #                                                           "producer:ValidTaggedJetsProducer",
-  #                                                           "producer:ValidBTaggedJetsProducer",
-                                                              #"producer:DiLeptonQuantitiesProducer",
-                                                              #"producer:EventWeightProducer"))
+  config["Processors"] =   ["producer:ValidMuonsProducer",
+                            "filter:ValidMuonsFilter",
+                            "producer:MuonTriggerMatchingProducer",
+                            "filter:MinMuonsCountFilter",
+                            "producer:NewMMTagAndProbePairCandidatesProducer",
+                            "filter:ValidDiTauPairCandidatesFilter"]
 
-
-
-#   config["AddGenMatchedParticles"] = True
-#   config["AddGenMatchedTaus"] = True
-#   config["AddGenMatchedTauJets"] = True
-#   config["BranchGenMatchedMuons"] = True
-#   config["BranchGenMatchedTaus"] = True
   config["Consumers"] = [#"KappaLambdaNtupleConsumer",
                          "NewMMTagAndProbePairConsumer",
                          "cutflow_histogram"]
