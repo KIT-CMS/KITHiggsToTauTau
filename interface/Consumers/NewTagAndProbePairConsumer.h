@@ -62,28 +62,28 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["iso_p"] = DefaultValues::UndefinedFloat;
 
 		FloatQuantities["m_ll"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["Met"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["MT"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["Met"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["MT"] = DefaultValues::UndefinedFloat;
 
-                FloatQuantities["againstMuonLoose3_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["againstMuonTight3_p"] = DefaultValues::UndefinedFloat;
-                
-                FloatQuantities["againstElectronVLooseMVA6_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["againstElectronLooseMVA6_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["againstElectronMediumMVA6_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["againstElectronTightMVA6_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["againstElectronVTightMVA6_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["againstMuonLoose3_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["againstMuonTight3_p"] = DefaultValues::UndefinedFloat;
+		
+		FloatQuantities["againstElectronVLooseMVA6_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["againstElectronLooseMVA6_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["againstElectronMediumMVA6_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["againstElectronTightMVA6_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["againstElectronVTightMVA6_p"] = DefaultValues::UndefinedFloat;
 
-                FloatQuantities["byVVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["byLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["byTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["byVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                FloatQuantities["byVVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-                BoolQuantities["isOS"] = false;
+		FloatQuantities["byVVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		BoolQuantities["isOS"] = false;
 
-                IntQuantities["decayModeFinding_p"] = DefaultValues::UndefinedInt;
+		IntQuantities["decayModeFinding_p"] = DefaultValues::UndefinedInt;
 
 		// IntQuantities["trg_t_IsoMu24"]=false;
 		// IntQuantities["trg_t_IsoMu27"]=false;
@@ -258,7 +258,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 					}
 				}
 				//std::map<std::string, bool>* AdditionalBoolQuantities;
-				AdditionalQuantities(i, *quantity, product, event, BoolQuantities, IntQuantities, FloatQuantities);
+				AdditionalQuantities(i, *quantity, product, event, settings, BoolQuantities, IntQuantities, FloatQuantities);
 			}
 
 			// fill tree
@@ -272,7 +272,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		m_tree->Write(m_tree->GetName());
 	}
   protected:
-	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event,
+	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
                                               std::map<std::string, bool>& BoolQuantities,
                                               std::map<std::string, int>& IntQuantities,
                                               std::map<std::string, float>& FloatQuantities)
@@ -294,7 +294,20 @@ class NewMMTagAndProbePairConsumer : public NewTagAndProbePairConsumerBase
 	virtual std::string GetConsumerId() const override;
 
   protected:
-	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event,
+	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
+					  std::map<std::string, bool>& BoolQuantities,
+                                          std::map<std::string, int>& IntQuantities,
+                                          std::map<std::string, float>& FloatQuantities) override;
+};
+
+class NewEETagAndProbePairConsumer : public NewTagAndProbePairConsumerBase
+{
+  public:
+	NewEETagAndProbePairConsumer();
+	virtual std::string GetConsumerId() const override;
+
+  protected:
+	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
 					  std::map<std::string, bool>& BoolQuantities,
                                           std::map<std::string, int>& IntQuantities,
                                           std::map<std::string, float>& FloatQuantities) override;
@@ -307,7 +320,7 @@ class NewMTTagAndProbePairConsumer : public NewTagAndProbePairConsumerBase
 	virtual std::string GetConsumerId() const override;
 
   protected:
-	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event,
+	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
                                               std::map<std::string, bool>& BoolQuantities,
                                               std::map<std::string, int>& IntQuantities,
                                               std::map<std::string, float>& FloatQuantities) override;

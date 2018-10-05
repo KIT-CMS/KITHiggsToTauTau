@@ -263,8 +263,9 @@ public:
 	IMPL_SETTING_DEFAULT(bool, DiTauPairIsTauIsoMVA, false);
 	IMPL_SETTING_STRINGLIST_DEFAULT(CheckLepton1TriggerMatch, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(CheckLepton2TriggerMatch, {});
-        IMPL_SETTING_STRINGLIST_DEFAULT(CheckTagTriggerMatch, {});
-        IMPL_SETTING_STRINGLIST_DEFAULT(CheckProbeTriggerMatch, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(CheckTagTriggerMatch, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(CheckProbeTriggerMatch, {});
+	IMPL_SETTING_DEFAULT(std::string, TagElectronIDName, "");
 	IMPL_SETTING_DEFAULT(bool, DiTauPairNoHLT, false);
 	IMPL_SETTING_DEFAULT(bool, RequireFirstTriggering, false);
 	IMPL_SETTING_STRINGLIST_DEFAULT(HLTBranchNames, {});

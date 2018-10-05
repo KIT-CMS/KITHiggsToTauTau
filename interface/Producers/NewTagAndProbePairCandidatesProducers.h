@@ -133,6 +133,18 @@ class NewMMTagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidat
                                        std::map<std::string, std::vector<float>> m_tagSelectionCuts) const override;
 };
 
+class NewEETagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidatesProducerBase<KElectron, KElectron>
+{
+  public:
+    NewEETagAndProbePairCandidatesProducer();
+    virtual std::string GetProducerId() const override;
+
+  protected:
+    virtual bool AdditionalTagCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                       product_type &product, setting_type const &settings,
+                                       std::map<std::string, std::vector<float>> m_tagSelectionCuts) const override;
+};
+
 class NewMTTagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidatesProducerBase<KMuon, KTau>
 {
   public:

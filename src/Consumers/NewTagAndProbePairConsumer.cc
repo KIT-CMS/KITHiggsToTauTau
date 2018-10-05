@@ -3,7 +3,7 @@
 NewMMTagAndProbePairConsumer::NewMMTagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
 {
 }
-void NewMMTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event,
+void NewMMTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
 				 					 std::map<std::string, bool>& BoolQuantities,
                                                                          std::map<std::string, int>& IntQuantities,
                                                                          std::map<std::string, float>& FloatQuantities)
@@ -16,8 +16,6 @@ void NewMMTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 	{
 		BoolQuantities["id_p"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->idMedium();
 	}
-
-
 }
 
 std::string NewMMTagAndProbePairConsumer::GetConsumerId() const
@@ -25,12 +23,48 @@ std::string NewMMTagAndProbePairConsumer::GetConsumerId() const
 	return "NewMMTagAndProbePairConsumer";
 }
 
+NewEETagAndProbePairConsumer::NewEETagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
+{
+}
+void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
+				 					 std::map<std::string, bool>& BoolQuantities,
+                                                                         std::map<std::string, int>& IntQuantities,
+                                                                         std::map<std::string, float>& FloatQuantities)
+{
+	if (quantity == "id_t")
+	{
+		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
+		bool validElectron = (
+			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB1())
+			||
+			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB2())
+			||
+			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEE()));
+		BoolQuantities["id_t"] = validElectron;
+	}
+	else if (quantity == "id_p")
+	{
+		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
+		bool validElectron = (
+			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB1())
+			||
+			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB2())
+			||
+			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEE()));
+		BoolQuantities["id_p"] = validElectron;
+	}
+}
+
+std::string NewEETagAndProbePairConsumer::GetConsumerId() const
+{
+	return "NewEETagAndProbePairConsumer";
+}
 
 NewMTTagAndProbePairConsumer::NewMTTagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
 {
 }
 
-void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event,
+void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
 				 					 std::map<std::string, bool>& BoolQuantities,
                                                                          std::map<std::string, int>& IntQuantities,
                                                                          std::map<std::string, float>& FloatQuantities)
