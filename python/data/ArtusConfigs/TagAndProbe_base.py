@@ -99,8 +99,9 @@ def build_config(nickname, **kwargs):
   #if isDY or isTTbar:                  config["Processors"].append( "producer:ScaleVariationProducer")
   config["Processors"].append(                                      "producer:NicknameProducer")
   if not isData:
-    config["Processors"].extend((                                   "producer:CrossSectionWeightProducer",
-                                                                    "producer:NumberGeneratedEventsWeightProducer"))
+    if not isEmbedded:
+      config["Processors"].extend((                                   "producer:CrossSectionWeightProducer",
+                                                                      "producer:NumberGeneratedEventsWeightProducer"))
     if not isEmbedded:                 config["Processors"].append( "producer:PUWeightProducer")
     #if isWjets or isDY or isSUSYggH:   config["Processors"].append( "producer:GenBosonFromGenParticlesProducer")
     if isDY or isEmbedded:             config["Processors"].append( "producer:GenDiLeptonDecayModeProducer")
@@ -158,5 +159,6 @@ def build_config(nickname, **kwargs):
   #config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.inclusiveZee").build_config(nickname)
   config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.mumu_test").build_config(nickname)
   config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.mutau_test").build_config(nickname)
+  config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.ee_singleelectron").build_config(nickname)
 
   return config
