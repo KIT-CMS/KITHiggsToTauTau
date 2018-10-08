@@ -53,7 +53,6 @@ def build_config(nickname, **kwargs):
 
   config["ElectronLowerPtCuts"] = ["10.0"]
   config["ElectronUpperAbsEtaCuts"] = ["2.5"]
-  config["TagElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp80"
   config["DiTauPairMinDeltaRCut"] = 0.5
     
   config["ElectronTriggerFilterNames"] = [
@@ -86,11 +85,11 @@ def build_config(nickname, **kwargs):
   config["TagAdditionalCriteria"] = [
     "pt:26.0",
     "eta:2.1",
-    "id:MVABased",
     "dxy:0.045",
     "dz:0.2",
     "iso_sum:0.1"]
-
+  config["TagElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp80"
+  config["TagElectronSecondIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90"
   # config["ProbeAdditionalCriteria"] = [
   #   "pt:10"]
 

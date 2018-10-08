@@ -25,8 +25,8 @@ def build_list():
     "eta_t", "eta_p",
     "phi_t", "phi_p",
     "iso_t", "iso_p",
-    "id_t",
-    "id_p",
+    "id_t", "id_p",
+    "id_90_t", "id_90_p",
     "m_ll"
     ]
 

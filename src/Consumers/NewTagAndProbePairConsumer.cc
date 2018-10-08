@@ -34,24 +34,22 @@ void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 	if (quantity == "id_t")
 	{
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
-		bool validElectron = (
-			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB1())
-			||
-			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB2())
-			||
-			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEE()));
-		BoolQuantities["id_t"] = validElectron;
+		BoolQuantities["id_t"] = electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata);
 	}
 	else if (quantity == "id_p")
 	{
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
-		bool validElectron = (
-			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB1())
-			||
-			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB2())
-			||
-			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEE()));
-		BoolQuantities["id_p"] = validElectron;
+		BoolQuantities["id_p"] = electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata);
+	}
+    if (quantity == "id_90_t")
+	{
+		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
+		BoolQuantities["id_90_t"] = electron->getId(settings.GetTagElectronSecondIDName(), event.m_electronMetadata);
+	}
+	else if (quantity == "id_90_p")
+	{
+		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
+		BoolQuantities["id_90_p"] = electron->getId(settings.GetTagElectronSecondIDName(), event.m_electronMetadata);
 	}
 }
 

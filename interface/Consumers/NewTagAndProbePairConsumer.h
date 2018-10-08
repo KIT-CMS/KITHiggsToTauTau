@@ -83,6 +83,9 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["byVVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
 		BoolQuantities["isOS"] = false;
 
+		BoolQuantities["id_90_t"] = false;
+		BoolQuantities["id_90_p"] = false;
+
 		IntQuantities["decayModeFinding_p"] = DefaultValues::UndefinedInt;
 
 		// IntQuantities["trg_t_IsoMu24"]=false;

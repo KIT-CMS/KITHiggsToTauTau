@@ -47,13 +47,8 @@ bool NewEETagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 	// Reading the additional criteria for Tag and Probe Leptons
 	KElectron *electron = static_cast<KElectron *>(diTauPair.first);
 	bool validDiTauPair = false;
-	bool validElectron = (
-			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB1())
-			||
-			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEB2())
-			||
-			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) > settings.GetElectronMvaIDCutEE()));
-	if (validElectron // ID Check
+	if (
+	electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) // ID Check
 	&& electron->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) // pt Cut
 	&& std::abs((electron)->p4.Eta()) < m_tagSelectionCuts.find("eta")->second.at(0)
 	&& electron->pfIso(settings.GetElectronDeltaBetaCorrectionFactor())/(electron)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
