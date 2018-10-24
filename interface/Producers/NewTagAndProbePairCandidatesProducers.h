@@ -131,6 +131,9 @@ class NewMMTagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidat
     virtual bool AdditionalTagCriteria(DiTauPair const &diTauPair, event_type const &event,
                                        product_type &product, setting_type const &settings,
                                        std::map<std::string, std::vector<float>> m_tagSelectionCuts) const override;
+virtual bool AdditionalProbeCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                       product_type &product, setting_type const &settings,
+                                       std::map<std::string, std::vector<float>> m_tagSelectionCuts) const override;
 };
 
 class NewEETagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidatesProducerBase<KElectron, KElectron>

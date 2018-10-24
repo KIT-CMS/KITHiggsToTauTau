@@ -85,6 +85,83 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 
 		BoolQuantities["id_90_t"] = false;
 		BoolQuantities["id_90_p"] = false;
+		BoolQuantities["id_80_t"] = false;
+		BoolQuantities["id_80_p"] = false;
+		BoolQuantities["id_old_t"] = false;
+		BoolQuantities["id_old_p"] = false;
+		BoolQuantities["id_cutbased_t"] = false;
+		BoolQuantities["id_cutbased_p"] = false;
+		// BoolQuantities["id_oldcutbased_t"] = false;
+		// BoolQuantities["id_oldcutbased_p"] = false;
+		// BoolQuantities["idiso_cutbased_t"] = false;
+		// BoolQuantities["idiso_cutbased_p"] = false;
+		// BoolQuantities["idiso_80_t"] = false;
+		// BoolQuantities["idiso_80_p"] = false;
+		BoolQuantities["id_cutbased_sanity_t"] = false;
+		BoolQuantities["id_cutbased_sanity_p"] = false;
+		BoolQuantities["id_cutbased_t_step_0"] = false;
+		BoolQuantities["id_cutbased_t_step_1"] = false;
+		BoolQuantities["id_cutbased_t_step_2"] = false;
+		BoolQuantities["id_cutbased_t_step_3"] = false;
+		BoolQuantities["id_cutbased_t_step_4"] = false;
+		BoolQuantities["id_cutbased_t_step_5"] = false;
+		BoolQuantities["id_cutbased_t_step_6"] = false;
+		BoolQuantities["id_cutbased_t_step_7"] = false;
+
+		BoolQuantities["id_cutbased_p_step_0"] = false;
+		BoolQuantities["id_cutbased_p_step_1"] = false;
+		BoolQuantities["id_cutbased_p_step_2"] = false;
+		BoolQuantities["id_cutbased_p_step_3"] = false;
+		BoolQuantities["id_cutbased_p_step_4"] = false;
+		BoolQuantities["id_cutbased_p_step_5"] = false;
+		BoolQuantities["id_cutbased_p_step_6"] = false;
+		BoolQuantities["id_cutbased_p_step_7"] = false;
+
+		// Temporary for Electron ID Variables Check
+		FloatQuantities["sigmaIetaIeta_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["sigmaIetaIeta_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["hadronicOverEm_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["hadronicOverEm_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["fbrem_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["fbrem_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["r9_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["r9_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["circularity_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["circularity_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["hoe_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["hoe_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["kfhits_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["kfhits_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["kfchi2_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["kfchi2_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["gsfchi2_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["gsfchi2_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["gsfhits_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["gsfhits_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["expectedMissingInnerHits_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["expectedMissingInnerHits_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["eop_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["eop_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["eleeopout_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["eleeopout_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["oneOverEminusOneOverP_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["oneOverEminusOneOverP_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["deta_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["deta_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["dphi_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["dphi_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["detacalo_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["detacalo_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["preShowerOverRaw_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["preShowerOverRaw_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["convVtxFitProbability_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["convVtxFitProbability_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["rho_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["rho_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["dEtaInSeed_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["dEtaInSeed_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["scetaseed_t"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["scetaseed_p"] = DefaultValues::UndefinedFloat;
 
 		IntQuantities["decayModeFinding_p"] = DefaultValues::UndefinedInt;
 
@@ -160,16 +237,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 				}
 				else if (*quantity == "iso_t")
 				{
-<<<<<<< HEAD
-					// double chargedIsolationPtSum = TagAndProbePair->first->sumChargedHadronPtR04;
-					// double neutralIsolationPtSum = TagAndProbePair->first->sumNeutralHadronEtR04;
-					// double photonIsolationPtSum = TagAndProbePair->first->sumPhotonEtR04;
-					// double deltaBetaIsolationPtSum = TagAndProbePair->first->sumPUPtR04;
-					// FloatQuantities["iso_t"] = (chargedIsolationPtSum + std::max(0.0, neutralIsolationPtSum + photonIsolationPtSum - 0.5 * deltaBetaIsolationPtSum)) / TagAndProbePair->first->p4.Pt();
-					// FloatQuantities["iso_t"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->isolationPtSum();
-=======
->>>>>>> Add producer and consumer for tau leg measurements in the mt channel
-					FloatQuantities["iso_t"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).first), DefaultValues::UndefinedDouble);
+					FloatQuantities["iso_t"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).first), DefaultValues::UndefinedDouble)/static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->p4.Pt();
 				}
 				else if (*quantity == "pt_p")
 				{
@@ -185,16 +253,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 				}
 				else if (*quantity == "iso_p")
 				{
-<<<<<<< HEAD
-					// 	double chargedIsolationPtSum = TagAndProbePair->second->sumChargedHadronPtR04;
-					// 	double neutralIsolationPtSum = TagAndProbePair->second->sumNeutralHadronEtR04;
-					// 	double photonIsolationPtSum = TagAndProbePair->second->sumPhotonEtR04;
-					// 	double deltaBetaIsolationPtSum = TagAndProbePair->second->sumPUPtR04;
-					// 	FloatQuantities["iso_p"] = (chargedIsolationPtSum + std::max(0.0, neutralIsolationPtSum + photonIsolationPtSum - 0.5 * deltaBetaIsolationPtSum)) / TagAndProbePair->second->p4.Pt();
-					FloatQuantities["iso_t"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).second), DefaultValues::UndefinedDouble);
-=======
-					FloatQuantities["iso_p"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).second), DefaultValues::UndefinedDouble);
->>>>>>> Add producer and consumer for tau leg measurements in the mt channel
+					FloatQuantities["iso_p"] = SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (product.m_validDiTauPairCandidates.at(i).second), DefaultValues::UndefinedDouble)/static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->p4.Pt();
 				}
 				else if (*quantity == "m_ll")
 				{
@@ -263,8 +322,13 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 				//std::map<std::string, bool>* AdditionalBoolQuantities;
 				AdditionalQuantities(i, *quantity, product, event, settings, BoolQuantities, IntQuantities, FloatQuantities);
 			}
-
-			// fill tree
+			// Debug: Print Maps
+			// LOG(WARNING) << "Entries in BOOLMAP:";
+			// for(auto elem : BoolQuantities)
+			// {
+			// 	LOG(WARNING) << elem.first << " : " << elem.second;
+			// }
+			// // fill tree
 			this->m_tree->Fill();
 		}
 	}

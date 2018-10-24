@@ -13,17 +13,27 @@ bool NewMMTagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 																   product_type &product, setting_type const &settings, std::map<std::string, std::vector<float>> m_tagSelectionCuts) const
 {
 	// Reading the additional criteria for Tag and Probe Leptons
-	//std::vector<float> tagSelection = settings.GetTagAdditionalCriteria();
-
 	KLepton *muon = static_cast<KLepton *>(diTauPair.first);
 	bool validDiTauPair = false;
-
 	if (muon->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) // pt Cut
 	&& muon->idMedium() == true // ID Cut
 	&& SafeMap::GetWithDefault(product.m_leptonIsolation,muon,DefaultValues::UndefinedDouble)/(muon)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
 	&& std::abs(muon->dxy) < m_tagSelectionCuts.find("dxy")->second.at(0) // Dxy Cut
 	&& std::abs(muon->dz) < m_tagSelectionCuts.find("dz")->second.at(0) // Dz Cut
 	&& diTauPair.IsOppositelyCharged()) // Opposite Charge of the pair
+	{
+		validDiTauPair = true;
+	}
+	return validDiTauPair;
+}
+
+bool NewMMTagAndProbePairCandidatesProducer::AdditionalProbeCriteria(DiTauPair const &diTauPair, event_type const &event,
+																   product_type &product, setting_type const &settings, std::map<std::string, std::vector<float>> m_tagSelectionCuts) const
+{
+	// Reading the additional criteria for Tag and Probe Leptons
+	KMuon *muon = static_cast<KMuon *>(diTauPair.second);
+	bool validDiTauPair = false;
+	if (muon->isTrackerMuon())
 	{
 		validDiTauPair = true;
 	}
@@ -46,10 +56,14 @@ bool NewEETagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 {
 	// Reading the additional criteria for Tag and Probe Leptons
 	KElectron *electron = static_cast<KElectron *>(diTauPair.first);
+	// if (std::abs(std::abs( 1.0 - electron->eop)*(1.0/electron->ecalEnergy) - std::abs(electron->oneOverEminusOneOverP)) > 0.0001)
+	// {
+	// 	LOG(WARNING) << "oneOverEminusOneOverP Kappa: " <<  std::abs(electron->oneOverEminusOneOverP) << " / new: " << std::abs( 1.0 - electron->eop)*(1.0/electron->ecalEnergy);
+	// } 
 	bool validDiTauPair = false;
 	if (
-	electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) // ID Check
-	&& electron->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) // pt Cut
+	//electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) // ID Check
+	electron->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) // pt Cut
 	&& std::abs((electron)->p4.Eta()) < m_tagSelectionCuts.find("eta")->second.at(0)
 	&& electron->pfIso(settings.GetElectronDeltaBetaCorrectionFactor())/(electron)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
 	&& std::abs(electron->dxy) < m_tagSelectionCuts.find("dxy")->second.at(0) // Dxy Cut
@@ -112,3 +126,4 @@ bool NewMTTagAndProbePairCandidatesProducer::AdditionalProbeCriteria(DiTauPair c
 	}
 	return validDiTauPair;
 }
+
