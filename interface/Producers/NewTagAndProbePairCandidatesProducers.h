@@ -23,9 +23,10 @@ class NewTagAndProbePairCandidatesProducerBase : public ProducerBase<HttTypes>
     typedef typename HttTypes::setting_type setting_type;
 
     NewTagAndProbePairCandidatesProducerBase(std::vector<TLepton1 *> product_type::*validLeptonsMember1,
-                                             std::vector<TLepton2 *> product_type::*validLeptonsMember2) : ProducerBase<HttTypes>(),
-                                                                                                           m_validLeptonsMember1(validLeptonsMember1),
-                                                                                                           m_validLeptonsMember2(validLeptonsMember2)
+                                             std::vector<TLepton2 *> product_type::*validLeptonsMember2):
+                ProducerBase<HttTypes>(),
+                m_validLeptonsMember1(validLeptonsMember1),
+                m_validLeptonsMember2(validLeptonsMember2)
     {
     }
 
@@ -62,7 +63,9 @@ class NewTagAndProbePairCandidatesProducerBase : public ProducerBase<HttTypes>
                 // Lepton 2 is the Probe Lepton
                 DiTauPair diTauPair(*tag, *probe);
                 bool validDiTauPair = false;
-                if (AdditionalTagCriteria(diTauPair, event, product, settings, m_tagSelectionCuts) && AdditionalProbeCriteria(diTauPair, event, product, settings, m_probeSelectionCuts))
+                if (AdditionalTagCriteria(diTauPair, event, product, settings, m_tagSelectionCuts) 
+                        && AdditionalProbeCriteria(diTauPair, event, product, settings, m_probeSelectionCuts)
+                        && AdditionalCriteria(diTauPair, event, product, settings))
                 {
                     LOG(DEBUG) << "Pair passed Selection Criteria.";
                     // pair selections
@@ -113,6 +116,12 @@ class NewTagAndProbePairCandidatesProducerBase : public ProducerBase<HttTypes>
         bool validDiTauPair = true;
         return validDiTauPair;
     }
+    virtual bool AdditionalCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                    product_type &product, setting_type const &settings) const
+    {
+        bool validDiTauPair = true;
+        return validDiTauPair;
+    }
 
   private:
     std::vector<TLepton1 *> product_type::*m_validLeptonsMember1;
@@ -153,12 +162,10 @@ class NewMTTagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidat
   public:
     NewMTTagAndProbePairCandidatesProducer();
     virtual std::string GetProducerId() const override;
+    virtual void Produce(event_type const &event, product_type &product,
+                                                         setting_type const &settings) const override;
 
   protected:
-    virtual bool AdditionalTagCriteria(DiTauPair const &diTauPair, event_type const &event,
-                                       product_type &product, setting_type const &settings,
-                                       std::map<std::string, std::vector<float>> m_tagSelectionCuts) const override;
-    virtual bool AdditionalProbeCriteria(DiTauPair const &diTauPair, event_type const &event,
-                                       product_type &product, setting_type const &settings,
-                                       std::map<std::string, std::vector<float>> m_probeSelectionCuts) const override;
+    virtual bool AdditionalCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                    product_type &product, setting_type const &settings) const override;
 };

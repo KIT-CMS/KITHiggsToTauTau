@@ -91,39 +91,55 @@ std::string NewMTTagAndProbePairCandidatesProducer::GetProducerId() const
 	return "NewMTTagAndProbePairCandidatesProducer";
 }
 
-bool NewMTTagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair const &diTauPair, event_type const &event,
-																   product_type &product, setting_type const &settings,
-																   std::map<std::string, std::vector<float>> m_tagSelectionCuts) const
+
+bool NewMTTagAndProbePairCandidatesProducer::AdditionalCriteria(DiTauPair const &diTauPair, event_type const &event,
+																	 product_type &product, setting_type const &settings) const
 {
 	// Check for overlap of tag muon with a b-tagged jet and veto events where overlap is present.
-	KLepton *muon = static_cast<KLepton *>(diTauPair.first);
+        KLepton *muon = static_cast<KLepton*>(diTauPair.first);
+	KLepton *tau = static_cast<KLepton*>(diTauPair.second);
 	bool validDiTauPair = true;
 	for (auto bJet : product.m_bTaggedJets)
 	{
-		if (ROOT::Math::VectorUtil::DeltaR(muon->p4, bJet->p4) < 0.5)
+		if (ROOT::Math::VectorUtil::DeltaR(tau->p4, bJet->p4) > 0.5 && ROOT::Math::VectorUtil::DeltaR(muon->p4, bJet->p4) > 0.5)
 		{
 			validDiTauPair = false;
-			break;
+                        break;
 		}
 	}
 	return validDiTauPair;
 }
 
-bool NewMTTagAndProbePairCandidatesProducer::AdditionalProbeCriteria(DiTauPair const &diTauPair, event_type const &event,
-																	 product_type &product, setting_type const &settings,
-																	 std::map<std::string, std::vector<float>> m_tagSelectionCuts) const
+void NewMTTagAndProbePairCandidatesProducer::Produce(event_type const &event, product_type &product,
+                                                     setting_type const &settings) const
 {
-	// Check for overlap of tag muon with a b-tagged jet and veto events where overlap is present.
-	KLepton *tau = static_cast<KLepton *>(diTauPair.second);
-	bool validDiTauPair = true;
-	for (auto bJet : product.m_bTaggedJets)
-	{
-		if (ROOT::Math::VectorUtil::DeltaR(tau->p4, bJet->p4) < 0.5)
-		{
-			validDiTauPair = false;
-			break;
-		}
-	}
-	return validDiTauPair;
+    NewTagAndProbePairCandidatesProducerBase::Produce(event, product, settings); 
+    LOG(DEBUG) << this->GetProducerId() << " -----CONTINUE-----";
+    LOG(DEBUG) << "Tau isolation of in unordered pairs:";
+    for (std::vector<DiTauPair>::const_iterator pair = product.m_validDiTauPairCandidates.begin(); pair != product.m_validDiTauPairCandidates.end(); pair++)
+    {
+        LOG(DEBUG) << static_cast<KTau*>(pair->second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata);
+    }
+
+    sort(product.m_validDiTauPairCandidates.begin(), product.m_validDiTauPairCandidates.end(),
+            [event](const DiTauPair& pair1, const DiTauPair& pair2) -> bool
+            {
+               return static_cast<KTau*>(pair1.second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata) > static_cast<KTau*>(pair2.second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata); 
+            });
+
+    LOG(DEBUG) << "Tau isolation of ordered pairs:";
+    for (std::vector<DiTauPair>::const_iterator pair = product.m_validDiTauPairCandidates.begin(); pair != product.m_validDiTauPairCandidates.end(); pair++)
+    {
+        LOG(DEBUG) << static_cast<KTau*>(pair->second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata);
+    }
+
+    // Invalidate all pairs except the one with the most isolated tau.
+    if (product.m_validDiTauPairCandidates.size() > 1)
+    {
+        LOG(DEBUG) << "Invalidate " << product.m_validDiTauPairCandidates.end() - (product.m_validDiTauPairCandidates.begin()+1) << " tau pair(s).";
+        std::move(product.m_validDiTauPairCandidates.begin()+1, product.m_validDiTauPairCandidates.end(), std::back_inserter(product.m_invalidDiTauPairCandidates));
+        product.m_validDiTauPairCandidates.erase(product.m_validDiTauPairCandidates.begin()+1, product.m_validDiTauPairCandidates.end());
+    }
+    LOG(DEBUG) << this->GetProducerId() << "-----END-----";
 }
 
