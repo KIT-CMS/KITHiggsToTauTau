@@ -418,4 +418,16 @@ public:
         //filled by SMggHNNLOProducer
         double m_ggh_NNLO_weight = 1.0;
         std::vector<double> m_THU_ggH;
+
+        //filled by L1TauTriggerMatchingProducers
+        std::map<KLepton*, std::map<std::string, bool>* > m_additionalL1TauMatchedLeptons;
+        std::map<KTau*, std::map<std::string, bool> > m_additionalL1TauMatchedTaus;
+        std::map<KMuon*, std::map<std::string, bool> > m_additionalL1TauMatchedMuons;
+        std::map<KElectron*, std::map<std::string, bool> > m_additionalL1TauMatchedElectrons;
+        std::map<std::string, std::vector<float> > m_settingsTauTriggerCheckAdditionalL1TauMatchLowerPtCutByHltNick;
+        std::map<std::string, std::vector<float> > m_settingsTauTriggerCheckAdditionalL1TauMatchUpperEtaCutByHltNick;
+        std::map<std::string, std::vector<float> > m_settingsMuonTriggerCheckAdditionalL1TauMatchLowerPtCutByHltNick;
+        std::map<std::string, std::vector<float> > m_settingsMuonTriggerCheckAdditionalL1TauMatchUpperEtaCutByHltNick;
+        std::map<std::string, std::vector<float> > m_settingsElectronTriggerCheckAdditionalL1TauMatchLowerPtCutByHltNick;
+        std::map<std::string, std::vector<float> > m_settingsElectronTriggerCheckAdditionalL1TauMatchUpperEtaCutByHltNick;
 };

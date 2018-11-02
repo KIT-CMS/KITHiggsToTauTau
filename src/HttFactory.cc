@@ -62,6 +62,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/MetFilterFlagProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauDecayModeWeightProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SMggHNNLOProducer.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/L1TauTriggerMatchingProducers.h"
 
 // filters
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Filters/LooseObjectsCountFilters.h"
@@ -312,6 +313,16 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
                 return new TauDecayModeWeightProducer();
         else if(id == SMggHNNLOProducer().GetProducerId())
                 return new SMggHNNLOProducer();
+        else if(id == MetFilterFlagProducer().GetProducerId())
+                return new MetFilterFlagProducer();
+        else if(id == TauDecayModeWeightProducer().GetProducerId())
+                return new TauDecayModeWeightProducer();
+        else if(id == TauL1TauTriggerMatchingProducer().GetProducerId())
+                return new TauL1TauTriggerMatchingProducer();
+        else if(id == MuonL1TauTriggerMatchingProducer().GetProducerId())
+                return new MuonL1TauTriggerMatchingProducer();
+        else if(id == ElectronL1TauTriggerMatchingProducer().GetProducerId())
+                return new ElectronL1TauTriggerMatchingProducer();
 	else
 		return KappaFactory::createProducer( id );
 }
