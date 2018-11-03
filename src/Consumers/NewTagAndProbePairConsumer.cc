@@ -3,6 +3,7 @@
 NewMMTagAndProbePairConsumer::NewMMTagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
 {
 }
+
 void NewMMTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
 				 					 std::map<std::string, bool>& BoolQuantities,
                                                                          std::map<std::string, int>& IntQuantities,
@@ -16,6 +17,23 @@ void NewMMTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 	{
 		BoolQuantities["id_p"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->idMedium();
 	}
+        else
+        {
+                for (auto hltNames : m_hltFiredBranchNames)
+                {
+                        if (quantity == "isAntiL1TauMatched_"+hltNames.first)
+                        {
+                                if (product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->find(hltNames.first) != product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->end())
+                                {
+                                        FloatQuantities["isAntiL1TauMatched_"+hltNames.first] = product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->at(hltNames.first);
+                                }
+                                else
+                                {
+                                        FloatQuantities["isAntiL1TauMatched_"+hltNames.first] = DefaultValues::UndefinedFloat;
+                                } 
+                        }
+                }
+        }
 }
 
 std::string NewMMTagAndProbePairConsumer::GetConsumerId() const
@@ -26,6 +44,7 @@ std::string NewMMTagAndProbePairConsumer::GetConsumerId() const
 NewEETagAndProbePairConsumer::NewEETagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
 {
 }
+
 void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
 				 					 std::map<std::string, bool>& BoolQuantities,
                                                                          std::map<std::string, int>& IntQuantities,
@@ -41,7 +60,7 @@ void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
 		BoolQuantities["id_90_p"] = electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata);
 	}
-    else if (quantity == "id_80_t")
+	else if (quantity == "id_80_t")
 	{
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
 		BoolQuantities["id_80_t"] = electron->getId(settings.GetTagElectronSecondIDName(), event.m_electronMetadata);
@@ -524,6 +543,23 @@ void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
 		FloatQuantities["dEtaInSeed_p"] = std::abs(electron->dEtaInSeed);
 	}
+        else
+        {
+                for (auto hltNames : m_hltFiredBranchNames)
+                {
+                        if (quantity == "isAntiL1TauMatched_"+hltNames.first)
+                        {
+                                if (product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->find(hltNames.first) != product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->end())
+                                {
+                                        FloatQuantities["isAntiL1TauMatched_"+hltNames.first] = product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->at(hltNames.first);
+                                }
+                                else
+                                {
+                                        FloatQuantities["isAntiL1TauMatched_"+hltNames.first] = DefaultValues::UndefinedFloat;
+                                } 
+                        }
+                }
+        }
 }
 
 std::string NewEETagAndProbePairConsumer::GetConsumerId() const
@@ -542,13 +578,12 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 {
 	if (quantity == "id_t")
 	{
-		BoolQuantities["id_t"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).first)->idMedium();
+		BoolQuantities["id_t"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(0).first)->idMedium();
 	}
-        // else if (quantity == "isOS")
-        // {
-        //         BoolQuantities["isOS"] = product.m_validDiTauPairCandidates.at(0).IsOppositelyCharged(); 
-        // }
-        // TODO: resolve issues with const product and non const method IsOppositelyCharged
+        else if (quantity == "isOS")
+        {
+                BoolQuantities["isOS"] = product.m_validDiTauPairCandidates.at(0).IsOppositelyCharged(); 
+        }
 
         std::vector<std::string> tauDiscriminators;
         tauDiscriminators.push_back("againstElectronVLooseMVA6");
@@ -590,13 +625,13 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
                 FloatQuantities[tauDiscriminator+"_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator(tauDiscriminator, event.m_tauMetadata);
             }
         }
-        if (quantity == "Met")
+        if (quantity == "metPt")
         {
-                FloatQuantities["Met"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
+                FloatQuantities["metPt"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
         }
-        else if (quantity == "MT")
+        else if (quantity == "mt")
         {
-                FloatQuantities["MT"] = Quantities::CalculateMt(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).first)->p4,product.m_met.p4);
+                FloatQuantities["mt"] = Quantities::CalculateMt(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).first)->p4,product.m_met.p4);
         }
 
         if (quantity == "decayMode_p")

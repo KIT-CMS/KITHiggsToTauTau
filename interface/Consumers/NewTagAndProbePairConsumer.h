@@ -62,8 +62,8 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["iso_p"] = DefaultValues::UndefinedFloat;
 
 		FloatQuantities["m_ll"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["Met"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["MT"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["metPt"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["mt"] = DefaultValues::UndefinedFloat;
 
 		FloatQuantities["againstMuonLoose3_p"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["againstMuonTight3_p"] = DefaultValues::UndefinedFloat;
@@ -74,13 +74,13 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["againstElectronTightMVA6_p"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["againstElectronVTightMVA6_p"] = DefaultValues::UndefinedFloat;
 
-		FloatQuantities["byVVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVVLooseIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVLooseIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byLooseIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byMediumIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVVTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
 		BoolQuantities["isOS"] = false;
 
 		BoolQuantities["id_90_t"] = false;
@@ -163,7 +163,8 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["scetaseed_t"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["scetaseed_p"] = DefaultValues::UndefinedFloat;
 
-		IntQuantities["decayModeFinding_p"] = DefaultValues::UndefinedInt;
+		FloatQuantities["decayModeFinding_p"] = DefaultValues::UndefinedFloat;
+                IntQuantities["decayMode_p"] = DefaultValues::UndefinedInt;
 
 		// IntQuantities["trg_t_IsoMu24"]=false;
 		// IntQuantities["trg_t_IsoMu27"]=false;
@@ -174,6 +175,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		for (auto hltNames : m_hltFiredBranchNames)
 		{
 			BoolQuantities[hltNames.first] = false;
+                        FloatQuantities["isAntiL1TauMatched_"+hltNames.first] = DefaultValues::UndefinedFloat;
 		}
 		// create tree
 		RootFileHelper::SafeCd(settings.GetRootOutFile(), settings.GetRootFileFolder());
@@ -198,6 +200,11 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		}
 	}
 
+        NewTagAndProbePairConsumerBase():
+                            ConsumerBase<HttTypes>()
+        {
+        }
+
 	void ProcessFilteredEvent(event_type const &event, product_type const &product, setting_type const &settings) override
 	{
 		ConsumerBase<HttTypes>::ProcessFilteredEvent(event, product, settings);
@@ -205,6 +212,8 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		// calculate values
 		std::vector<std::string> tagCheckTriggerMatchByHltName = settings.GetCheckTagTriggerMatch();
 		std::vector<std::string> probeCheckTriggerMatchByHltName = settings.GetCheckProbeTriggerMatch();
+                std::map<std::string, std::vector<float> > checkLowerPtCutsByHltNick;
+                Utility::ParseMapTypes<size_t, float>(Utility::ParseVectorToMap(settings.GetCheckTriggerLowerPtCutsByHltNick()), checkLowerPtCutsByHltNick);
 		//bool IsData = settings.GetInputIsData();
 		for (size_t i = 0; i < product.m_validDiTauPairCandidates.size(); i++)
 		{
@@ -271,6 +280,9 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 							LOG(DEBUG) << "Beginning of lambda function for " << hltNames.first;
 							bool checkTag = std::find(tagCheckTriggerMatchByHltName.begin(), tagCheckTriggerMatchByHltName.end(), hltNames.first) != tagCheckTriggerMatchByHltName.end();
 							bool checkProbe = std::find(probeCheckTriggerMatchByHltName.begin(), probeCheckTriggerMatchByHltName.end(), hltNames.first) != probeCheckTriggerMatchByHltName.end();
+                                                        std::map<std::string, std::vector<float> > additionalL1LowerPtCutsByHltNick;
+                                                        Utility::ParseMapTypes<size_t, float>(Utility::ParseVectorToMap((settings.GetTauTriggerCheckAdditionalL1TauMatchLowerPtCut)()),additionalL1LowerPtCutsByHltNick);
+                                                        bool checkL1Probe = additionalL1LowerPtCutsByHltNick.find(hltNames.first) != additionalL1LowerPtCutsByHltNick.end();
 							for (auto hltName : hltNames.second)
 							{
 								bool hltFiredTag = false;
@@ -304,6 +316,19 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 											if (boost::regex_search(hlts.first, boost::regex(hltName, boost::regex::icase | boost::regex::extended)))
 											{
 												hltFiredProbe = hlts.second;
+                                                                                                if (checkLowerPtCutsByHltNick.find(hltNames.first) != checkLowerPtCutsByHltNick.end())
+                                                                                                {
+                                                                                                    LOG(DEBUG) << "Checking pT of trigger: " << hltNames.first;
+                                                                                                    LOG(DEBUG) << "pT of trigger object: " << product.m_triggerMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second)).p4.Pt() << "\t threshold: " << *std::max_element(checkLowerPtCutsByHltNick.at(hltNames.first).begin(), checkLowerPtCutsByHltNick.at(hltNames.first).end());
+                                                                                                    hltFiredProbe = hltFiredProbe && product.m_triggerMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second)).p4.Pt() > *std::max_element(checkLowerPtCutsByHltNick.at(hltNames.first).begin(), checkLowerPtCutsByHltNick.at(hltNames.first).end());
+                                                                                                    LOG(DEBUG) << "Trigger object passed additional pT cut? " << hltFiredProbe;
+                                                                                                }
+                                                                                                if (checkL1Probe)
+                                                                                                {
+                                                                                                    LOG(DEBUG) << "Checking for L1 matched pT of trigger: " << hltNames.first;
+                                                                                                    hltFiredProbe = hltFiredProbe && product.m_additionalL1TauMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->at(hltNames.first);
+                                                                                                    LOG(DEBUG) << "Trigger object passes additional L1 matching? " << hltFiredProbe;
+                                                                                                }
 											}
 										}
 										LOG(DEBUG) << "Found trigger for the probe lepton? " << hltFiredProbe;
@@ -345,13 +370,13 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
                                               std::map<std::string, float>& FloatQuantities)
         {
         }
+	std::map<std::string, std::vector<std::string>> m_hltFiredBranchNames;
 
   private:
 	TTree *m_tree = nullptr;
 	std::map<std::string, bool> BoolQuantities;
 	std::map<std::string, int> IntQuantities;
 	std::map<std::string, float> FloatQuantities;
-	std::map<std::string, std::vector<std::string>> m_hltFiredBranchNames;
 };
 
 class NewMMTagAndProbePairConsumer : public NewTagAndProbePairConsumerBase
