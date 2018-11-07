@@ -81,6 +81,16 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["byTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["byVTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["byVVTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
+                
+                FloatQuantities["byIsolationMVArun2v1DBoldDMwLTraw_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byMediumIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["byVVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+
 		BoolQuantities["isOS"] = false;
 
 		BoolQuantities["id_90_t"] = false;
