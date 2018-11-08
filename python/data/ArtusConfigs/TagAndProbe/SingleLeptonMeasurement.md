@@ -1,13 +1,15 @@
-# Measurement Recpie for Single Lepton Scalefactors
+# Measurement Recipe for Single Lepton Scalefactors
 
 Disclamer:
+
 *The is the Status of the v17_4 Measurement, newer measurements may not be covered by this documentation*
 **!! In all these steps, it is crutial to pay attention to the correct naming of files and scale factors to not cause any wrong measurements !!**
 
-
+---
 
 The SingleLepton Scalefactors are measured using the TagAndProbe Method. Therefore, events with two Leptons are selected, one lepton must pass loose probe requirements, while the other lepton must pass tighter tag requirements. Depending on the quantity that is going to be measured, passing and failing probes are counted individually. Then, two seperate selections, the first one beeing tag + passing probe (pass) and tag + failing probe (fail) are fitted to an signal + background model. In this case, the selections are fitted to the Z-Mass peak. For more information check the Twiki (https://twiki.cern.ch/twiki/bin/view/CMSPublic/TagAndProbe). The efficiency is calculated by dividing the yield of the passed and the failed signal regions. 
 
+---
 
 Measuring Singlelepton Scalefactors requires multiple frameworks:
 
@@ -69,18 +71,18 @@ The basic setup is
 
 * General Selection:
     * Two Muons, opposite charge
-    * DeltaR > 0.5
+    * `DeltaR > 0.5`
 * Probe Selection:
-    * Pt > 10 GeV
-    * Eta < 2.4
-    * isTrackerMuon
+    * `Pt > 10 GeV`
+    * `Eta < 2.4`
+    * `isTrackerMuon`
 * Tag Selection:
     * Probe Selection plus:
-    * Pt > 23.0
-    * id >= Medium
-    * dxy < 0.045
-    * dz < 0.2
-    * iso_sum < 0.15
+        * `Pt > 23.0`
+        * `id >= Medium`
+        * `dxy < 0.045`
+        * `dz < 0.2`
+        * `iso_sum < 0.15`
 
 ### Muon Quantities
 | Quantity                        | Explanation |
@@ -96,17 +98,17 @@ The basic setup is
 
 * General Selection:
     * Two Electrons, opposite charge
-    * DeltaR > 0.5
-* Probe Selection:
-    * Pt > 10 GeV
-    * Eta < 2.4
+    * `DeltaR > 0.5`
+* Probe Selection:`
+    * `Pt > 10 GeV`
+    * `Eta < 2.4`
 * Tag Selection:
     * Probe Selection plus:
-    * Pt > 26.0
-    * idWP90
-    * dxy < 0.045
-    * dz < 0.2
-    * iso_sum < 0.1
+        * `Pt > 26.0`
+        * `idWP90`
+        * `dxy < 0.045`
+        * `dz < 0.2`
+        * `iso_sum < 0.1`
 
 ### Electron Quantities
 
