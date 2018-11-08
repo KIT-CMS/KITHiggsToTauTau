@@ -31,12 +31,12 @@ def build_config(nickname, **kwargs):
   ## fill config:
   # includes
   includes = [
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mutau_settingsLooseElectronID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mutau_settingsLooseMuonID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mutau_settingsMuonID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mutau_settingsTauID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mutau_settingsJetID",
-    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mutau_settingsBTaggedJetID",
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mt_settingsLooseElectronID",
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mt_settingsLooseMuonID",
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mt_settingsMuonID",
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mt_settingsTauID",
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mt_settingsJetID",
+    "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe2016.Includes.mt_settingsBTaggedJetID",
   ]
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
@@ -97,20 +97,6 @@ def build_config(nickname, **kwargs):
   else:
       config["HLTBranchNames"].append("trg_monitor_mu19tau32_Iso:HLT_IsoMu19_eta2p1_MediumIsoPFTau32_Trk1_eta2p1_Reg_v")
       config["HLTBranchNames"].append("trg_monitor_mu19tau32_combinedIso:HLT_IsoMu19_eta2p1_MediumCombinedIsoPFTau32_Trk1_eta2p1_Reg_v")
-  #config["TauTrigger2017InputOld"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017.root"
-  #config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017_New.root"
-  #config["TauTrigger2017WorkingPoints"] = [
-  #     "vvloose",
-  #     "vloose",
-  #     "loose",
-  #     "medium",
-  #     "tight",
-  #     "vtight",
-  #     "vvtight",
-  #]
-  #config["TauTrigger2017IDTypes"] = [
-  #     "MVA",
-  #]
 
   config["EventWeight"] = "eventWeight"
   #TriggerMatchingProducers,HttTriggerSettingsProducer 
