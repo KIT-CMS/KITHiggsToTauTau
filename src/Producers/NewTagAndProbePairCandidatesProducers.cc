@@ -65,7 +65,8 @@ bool NewEETagAndProbePairCandidatesProducer::AdditionalTagCriteria(DiTauPair con
 	//electron->getId(settings.GetTagElectronIDName(), event.m_electronMetadata) // ID Check
 	electron->p4.Pt() > m_tagSelectionCuts.find("pt")->second.at(0) // pt Cut
 	&& std::abs((electron)->p4.Eta()) < m_tagSelectionCuts.find("eta")->second.at(0)
-	&& electron->pfIso(settings.GetElectronDeltaBetaCorrectionFactor())/(electron)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
+	&& SafeMap::GetWithDefault(product.m_leptonIsolation,static_cast<KLepton *> (diTauPair.first), DefaultValues::UndefinedDouble)/static_cast<KLepton *>(diTauPair.first)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0)
+	//&& electron->pfIso(settings.GetElectronDeltaBetaCorrectionFactor())/(electron)->p4.Pt() < m_tagSelectionCuts.find("iso_sum")->second.at(0) // Isolation Cut
 	&& std::abs(electron->dxy) < m_tagSelectionCuts.find("dxy")->second.at(0) // Dxy Cut
 	&& std::abs(electron->dz) < m_tagSelectionCuts.find("dz")->second.at(0) // Dz Cut
 	&& diTauPair.IsOppositelyCharged()) // Opposite Charge of the pair

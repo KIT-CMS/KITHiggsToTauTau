@@ -37,14 +37,14 @@ def build_config(nickname, **kwargs):
   #config["ElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90" # already has something like a iso cut ---> not good for side-band regions
 
   config["ElectronIDList"] = [
-    "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp80",
-    "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90",
-    "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp80",
-    "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90",
-    "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-veto",
-    "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-loose",
-    "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-medium",
-    "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-tight",
+    # "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp80",
+    # "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wp90",
+    # "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp80",
+    # "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90",
+    # "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-veto",
+    # "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-loose",
+    # "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-medium",
+    # "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V1-tight",
     "egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp80",
     "egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp90",
     "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80",

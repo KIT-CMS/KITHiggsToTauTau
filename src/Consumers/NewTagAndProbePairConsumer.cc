@@ -81,46 +81,46 @@ void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
 		BoolQuantities["id_cutbased_sanity_p"] = electron->getId(settings.GetTagElectronCutIDSanity(), event.m_electronMetadata);
 	}
-    else if (quantity == "id_old_t")
-    {
-        std::string electronIDName = settings.GetOldElectronIDName();
-		double electronMvaIDCutEB1 = settings.GetElectronMvaIDCutEB1();
-		double electronMvaIDCutEB2 = settings.GetElectronMvaIDCutEB2();
-		double electronMvaIDCutEE = settings.GetElectronMvaIDCutEE();
-        KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
-        bool validElectron = true;
-		validElectron = validElectron && (electron->track.nInnerHits <= 1);
-		validElectron = validElectron && (! (electron->electronType & (1 << KElectronType::hasConversionMatch)));
-		validElectron = validElectron &&
-			(
-				(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB1)
-				||
-				(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB2)
-				||
-				(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEE)
-			);
-        BoolQuantities["id_old_t"] = validElectron;
-    }
-    else if (quantity == "id_old_p")
-    {
-        std::string electronIDName = settings.GetOldElectronIDName();
-		double electronMvaIDCutEB1 = settings.GetElectronMvaIDCutEB1();
-		double electronMvaIDCutEB2 = settings.GetElectronMvaIDCutEB2();
-		double electronMvaIDCutEE = settings.GetElectronMvaIDCutEE();
-        KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
-        bool validElectron = true;
-		validElectron = validElectron && (electron->track.nInnerHits <= 1);
-		validElectron = validElectron && (! (electron->electronType & (1 << KElectronType::hasConversionMatch)));
-		validElectron = validElectron &&
-			(
-				(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB1)
-				||
-				(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB2)
-				||
-				(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEE)
-			);
-        BoolQuantities["id_old_p"] = validElectron;
-    }
+    // else if (quantity == "id_old_t")
+    // {
+    //     std::string electronIDName = settings.GetOldElectronIDName();
+	// 	double electronMvaIDCutEB1 = settings.GetElectronMvaIDCutEB1();
+	// 	double electronMvaIDCutEB2 = settings.GetElectronMvaIDCutEB2();
+	// 	double electronMvaIDCutEE = settings.GetElectronMvaIDCutEE();
+    //     KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
+    //     bool validElectron = true;
+	// 	validElectron = validElectron && (electron->track.nInnerHits <= 1);
+	// 	validElectron = validElectron && (! (electron->electronType & (1 << KElectronType::hasConversionMatch)));
+	// 	validElectron = validElectron &&
+	// 		(
+	// 			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB1)
+	// 			||
+	// 			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB2)
+	// 			||
+	// 			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEE)
+	// 		);
+    //     BoolQuantities["id_old_t"] = validElectron;
+    // }
+    // else if (quantity == "id_old_p")
+    // {
+    //     std::string electronIDName = settings.GetOldElectronIDName();
+	// 	double electronMvaIDCutEB1 = settings.GetElectronMvaIDCutEB1();
+	// 	double electronMvaIDCutEB2 = settings.GetElectronMvaIDCutEB2();
+	// 	double electronMvaIDCutEE = settings.GetElectronMvaIDCutEE();
+    //     KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).second);
+    //     bool validElectron = true;
+	// 	validElectron = validElectron && (electron->track.nInnerHits <= 1);
+	// 	validElectron = validElectron && (! (electron->electronType & (1 << KElectronType::hasConversionMatch)));
+	// 	validElectron = validElectron &&
+	// 		(
+	// 			(std::abs(electron->superclusterPosition.Eta()) < 0.8 && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB1)
+	// 			||
+	// 			(std::abs(electron->superclusterPosition.Eta()) > 0.8 && std::abs(electron->superclusterPosition.Eta()) < DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEB2)
+	// 			||
+	// 			(std::abs(electron->superclusterPosition.Eta()) > DefaultValues::EtaBorderEB && electron->getId(electronIDName, event.m_electronMetadata) > electronMvaIDCutEE)
+	// 		);
+    //     BoolQuantities["id_old_p"] = validElectron;
+    // }
         
     else if (quantity.find("cutbased_t") != std::string::npos)
     {
@@ -281,8 +281,6 @@ void NewEETagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         }
         BoolQuantities["id_cutbased_p"] = BoolQuantities["id_cutbased_p_step_7"];
     }
-
-
     else if (quantity == "sigmaIetaIeta_t")
 	{
 		KElectron *electron = static_cast<KElectron *>(product.m_validDiTauPairCandidates.at(i).first);
