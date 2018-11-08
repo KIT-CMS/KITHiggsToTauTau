@@ -60,7 +60,7 @@ def build_config(nickname, **kwargs):
 
   # Muon Requirements
   config["MuonIsoTypeUserMode"] = "fromcmsswr04"
-  config["MuonIsoType"] = "user"
+  config["MuonIsoType"] = "none"
   config["MuonIsoSignalConeSize"] = 0.4
   config["MuonID"] = "none"
   config["MuonIso"] = "none"
@@ -103,7 +103,7 @@ def build_config(nickname, **kwargs):
     "iso_sum:0.15"]
 
   config["ProbeAdditionalCriteria"] = [
-    "pt:10"]
+    "id:isTrackerMuon"]
 
   config["InvalidateNonMatchingElectrons"] = False
   config["InvalidateNonMatchingMuons"] = True
