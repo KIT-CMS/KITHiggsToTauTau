@@ -2,7 +2,10 @@
 
 Disclamer:
 
-*The is the Status of the v17_4 Measurement, newer measurements may not be covered by this documentation*
+---
+
+*The is the Status of the v17_4 Measurement, newer measurements may not be covered by this documentation.*
+
 **!! In all these steps, it is crutial to pay attention to the correct naming of files and scale factors to not cause any wrong measurements !!**
 
 ---
