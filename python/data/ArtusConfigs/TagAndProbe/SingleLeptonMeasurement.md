@@ -29,22 +29,22 @@ In the case of SingleLeptons, there are two piplines, one for electron scalefact
 ```
 ### Samples 
 
-Muon Scalefactors
-|Samples | Filelist | 
-| -----  | -----    |
-| MC | DY* in `KITHiggsToTauTau/data/Samples/Fall17v2` |
-| Data | SingleMuon_Run2017* in `KITHiggsToTauTau/data/Samples/Run2017/ReReco_31Mar2018/` |
-| Embedded | Embedding2017_*MuonEmbedding* in `KITHiggsToTauTau/data/Samples/Embedding2017/`|
+#### Muon Scalefactors
 
-Electron Scalefactors
-|Samples | Filelist | 
-| -----  | -----    |
-| MC | DY* in `KITHiggsToTauTau/data/Samples/Fall17v2` |
-| Data | SingleElectron_Run2017* in `KITHiggsToTauTau/data/Samples/Run2017/ReReco_31Mar2018/` |
+|Samples   | Filelist                                                                         | 
+| -------- | ------------------------------------------------                                 |
+| MC       | DY* in `KITHiggsToTauTau/data/Samples/Fall17v2`                                  |
+| Data     | SingleMuon_Run2017* in `KITHiggsToTauTau/data/Samples/Run2017/ReReco_31Mar2018/` |
+| Embedded | Embedding2017_*MuonEmbedding* in `KITHiggsToTauTau/data/Samples/Embedding2017/`  |
+
+##### Electron Scalefactors
+|Samples   | Filelist                                                                           | 
+| -------- | ------------------------------------------------                                   |
+| MC       | DY* in `KITHiggsToTauTau/data/Samples/Fall17v2`                                    |
+| Data | SingleElectron_Run2017* in `KITHiggsToTauTau/data/Samples/Run2017/ReReco_31Mar2018/`   |
 | Embedded | Embedding2017_*ElectronEmbedding* in `KITHiggsToTauTau/data/Samples/Embedding2017/`|
 
 ### Selection Criteria
-
 The Selection Citerias are defined in the two pipeline scripts
 
 * Muons: `KITHiggsToTauTau/python/data/ArtusConfigs/TagAndProbe/mumu_test.py`
@@ -112,9 +112,9 @@ The basic setup is
 |"trg_t_Ele35",   "trg_p_Ele35"    | HLT_Ele35_WPTight_Gsf_v:hltEle35noerWPTightGsfTrackIsoFilter |
 |"trg_t_Ele32_fb","trg_p_Ele32_fb" | HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:hltEle32L1DoubleEGWPTightGsfTrackIsoFilter |
 |"pt_t", "pt_p",                   | Pt of Tag and Probe Muon |
-|"iso_t","iso_p",                  | Isolation of Tag and Probe Muon |
-|"id_90_t",	"id_90_p",            | ID of Tag and Probe Muon |
-|"id_80_t",	"id_80_p",            | ID of Tag and Probe Muon |
+|"iso_t","iso_p",                  | Rho Corrected Isolation of Tag and Probe Muon |
+|"id_90_t",	"id_90_p",            | egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90 Electron ID |
+|"id_80_t",	"id_80_p",            | egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80 Electron ID |
 |"m_ll"                          | DiLeptonMass | 
 
 ## Histrogam selection
