@@ -58,8 +58,9 @@ def build_config(nickname, **kwargs):
     
   config["ElectronTriggerFilterNames"] = [
   "HLT_Ele27_WPTight_Gsf_v:hltEle27WPTightGsfTrackIsoFilter",
+  "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:hltEle32L1DoubleEGWPTightGsfTrackIsoFilter",
   "HLT_Ele32_WPTight_Gsf_v:hltEle32WPTightGsfTrackIsoFilter",
-  "HLT_Ele35_WPTight_Gsf_v:hltEle35noerWPTightGsfTrackIsoFilter"
+  "HLT_Ele35_WPTight_Gsf_v:hltEle35noerWPTightGsfTrackIsoFilter",
     ]
 
   config["HLTBranchNames"] = [
@@ -67,19 +68,23 @@ def build_config(nickname, **kwargs):
       "trg_p_Ele27:HLT_Ele27_WPTight_Gsf_v",
       "trg_t_Ele32:HLT_Ele32_WPTight_Gsf_v",
       "trg_p_Ele32:HLT_Ele32_WPTight_Gsf_v",
+      "trg_t_Ele32_fb:HLT_Ele32_WPTight_Gsf_DoubleL1EG_v",
+      "trg_p_Ele32_fb:HLT_Ele32_WPTight_Gsf_DoubleL1EG_v",
       "trg_t_Ele35:HLT_Ele35_WPTight_Gsf_v",
-      "trg_p_Ele35:HLT_Ele35_WPTight_Gsf_v"
+      "trg_p_Ele35:HLT_Ele35_WPTight_Gsf_v",
   ]
 
   config["CheckTagTriggerMatch"] = [
       "trg_t_Ele27",
       "trg_t_Ele32",
-      "trg_t_Ele35"
+      "trg_t_Ele35",
+      "trg_t_Ele32_fb",
   ]
   config["CheckProbeTriggerMatch"] = [
       "trg_p_Ele27",
       "trg_p_Ele32",
-      "trg_p_Ele35"
+      "trg_p_Ele35",
+      "trg_p_Ele32_fb",
   ]
 
   
@@ -89,15 +94,15 @@ def build_config(nickname, **kwargs):
     "dxy:0.045",
     "dz:0.2",
     "iso_sum:0.1"]
-    
+
   config["TagElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90"
   config["TagElectronSecondIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80"
   config["TagElectronSecondIDIsoName"] = "egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp80"
   config["TagElectronCutIDSanity"] = "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium"
-  config["OldElectronIDName"] = "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring15NonTrig25nsV1Values" if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring16GeneralPurposeV1Values"
-  config["ElectronMvaIDCutEB1"] = 0.967083 if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else 0.940962684155
-  config["ElectronMvaIDCutEB2"] = 0.929117 if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else 0.899208843708
-  config["ElectronMvaIDCutEE"] = 0.726311 if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else 0.758484721184
+  #config["OldElectronIDName"] = "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring15NonTrig25nsV1Values" if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring16GeneralPurposeV1Values"
+  # config["ElectronMvaIDCutEB1"] = 0.967083 if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else 0.940962684155
+  # config["ElectronMvaIDCutEB2"] = 0.929117 if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else 0.899208843708
+  # config["ElectronMvaIDCutEE"] = 0.726311 if re.search("(Run2015|Fall15MiniAODv2|Spring16)", nickname) else 0.758484721184
   # config["ProbeAdditionalCriteria"] = [
   #   "pt:10"]
 
