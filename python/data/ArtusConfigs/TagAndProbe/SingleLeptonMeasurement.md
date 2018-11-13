@@ -4,7 +4,7 @@ Disclamer:
 
 ---
 
-*The is the Status of the v17_4 Measurement, newer measurements may not be covered by this documentation.*
+*The is the Status of the v17_5 Measurement, newer measurements may not be covered by this documentation.*
 
 **!! In all these steps, it is crutial to pay attention to the correct naming of files and scale factors to not cause any wrong measurements !!**
 
@@ -134,18 +134,42 @@ In the next step, the ntuples are filled into different histograms, creating the
 Example
 
 ```py
+
 {
-    'name': 'Trg35_Iso_pt_eta_bins',
+    'name': 'ID90_pt_eta_bins',
     'var': 'm_ll(50,65,115)',
-    'tag': 'trg_t_Ele35 &&  id_90_t && iso_p < 0.15',
-    'probe': '(trg_p_Ele35)',
+    'tag': 'trg_t_Ele35 && pt_t >= 36 && id_90_t',
+    #'tag': 'id_90_t',
+    'probe': 'id_90_p ',
     'binvar_x': 'pt_p',
-    'bins_x': [10., 20., 25., 26., 27., 28., 29., 30., 31, 32., 33., 34., 35., 36., 37., 38., 39., 40., 42., 44., 46., 48., 50., 100., 200., 1000.],
+    'bins_x': [10., 15., 20., 24., 26., 28., 30., 32., 34., 36., 38., 40., 45., 50., 100., 200., 1000.],
+    #'bins_x': [10., 20., 25., 26., 27., 28., 29., 30., 31, 32., 33., 34., 35., 36., 37., 38., 39., 40., 42., 44., 46., 48., 50., 100., 200., 1000.],
     'binvar_y': 'abs(eta_p)',
     'bins_y': [0, 1.0, 1.479, 1.653, 2.1, 2.4]
 },
+
 ```
-This defines the measurement of the Ele35 Trigger. As a tagtrigger, the Ele35 is used, the tag Electron needs an IDWp90 and the probe Electron Isolation must be higher then 0.15. The Scalefactors are binned in probe pt, as well as probe eta. This binning is defined with `bins_x` and `bins_y`.
+This defines the measurement of the Electron WP90 ID. As a tagtrigger, the Ele35 is used, the tag Electron needs an IDWp90 and a pt bigger than 36 (1 GeV bigger than the tagtrigger). The Scalefactors are binned in probe pt, as well as probe eta. This binning is defined with `bins_x` and `bins_y`.
+
+---
+**IMPORTANT**
+
+The final analysis is designed in a way, that first, the ID + ID Scalefacors are applied, then the Isolation + Isolation Scalefactor and lastly the Trigger + Trigger Scalefactor. This must be taken into account when measuring these scalefactors. When measuring the Isolation, that Probe ID must be added as an additional tag criteria, so that Pairs with a failing ID are not taken into account when calculating the isolation scale factor. For the Trigger Scalefactor, the probe isolation must also be added to the tag criteria. 
+
+```py
+Isolation:
+[...]
+'tag': 'trg_t_Ele35 && pt_t >= 36 && id_90_t && id_90_p',
+'probe': 'iso_p < 0.15',
+[...]
+
+Trigger:
+[...]
+'tag': 'trg_t_Ele35 && pt_t >= 36 &&  id_90_t && iso_p < 0.15 && id_90_p',
+'probe': '(trg_p_Ele35)',
+[...]
+```
+---
 
 The Input Files from Artus are defined in the end of the script
 
@@ -158,7 +182,7 @@ trees = {
 ```
 ## Histogram Fitting
 
-After the histograms are filled, each bin will be fitted with an signal+background model. This is done using the `ICHiggsTauTau/Analysis/HiggsTauTau/scripts/runTagAndProbeFits_v17_4.py` script. Here, the model of Signal and Background are specified
+After the histograms are filled, each bin will be fitted with an signal+background model. This is done using the `ICHiggsTauTau/Analysis/HiggsTauTau/scripts/runTagAndProbeFits_v17_5.py` script. Here, the model of Signal and Background are specified
 
 example:
 
@@ -174,14 +198,14 @@ example:
 In this case, the background is defined as an Exponential Background and the signal is an Z peak. The definition of this models can be found in the corresonding fitting script (`ICHiggsTauTau/Analysis/HiggsTauTau/scripts/fitTagAndProbe_script.py`) The script is run by 
 
 ```
-python scripts/runTagAndProbeFits_v17_4.py --channel e --fit
+python scripts/runTagAndProbeFits_v17_5.py --channel e --fit
 ```
 
 After running these two steps, a small fit result file for every quantity will be produced. 
 
 ## Creating the Workspace
 
-The Workspace can be produced using the `CorrectionsWorkspace/makeCorrectionsWorkspace_17_4.py` script. In this script, the fit results are loaded and turned into scalefactors. Since the results are binned in pt and eta, the resulting scalefactors are binned in the same way.
+The Workspace can be produced using the `CorrectionsWorkspace/makeCorrectionsWorkspace_17_5.py` script. In this script, the fit results are loaded and turned into scalefactors. Since the results are binned in pt and eta, the resulting scalefactors are binned in the same way.
 
 Loading the files:
 ```py
@@ -213,6 +237,6 @@ for t in ['trg35']:
 By running the script with 
 
 ```
-python makeCorrectionsWorkspace_17_4.py  
+python makeCorrectionsWorkspace_17_5.py  
 ```
-and RooWorkspace called `htt_scalefactors_v17_4.root` is produced. 
+and RooWorkspace called `htt_scalefactors_v17_5.root` is produced. 
