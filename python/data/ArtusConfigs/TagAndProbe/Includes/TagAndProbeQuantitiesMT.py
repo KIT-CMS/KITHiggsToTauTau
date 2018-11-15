@@ -19,6 +19,7 @@ def build_list():
     "pt_t", "pt_p",
     "eta_t", "eta_p",
     "phi_t", "phi_p",
+    "iso_t",
     "id_p",
     "m_ll",
     "trg_singlemuon_24",
