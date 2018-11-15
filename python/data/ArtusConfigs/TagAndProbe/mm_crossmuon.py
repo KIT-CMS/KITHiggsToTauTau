@@ -126,4 +126,4 @@ def build_config(nickname, **kwargs):
                          "cutflow_histogram"]
 
   # pipelines - systematic shifts
-  return {"mumu_crossmuon": config}
+  return {"mm_crossmuon": config}
