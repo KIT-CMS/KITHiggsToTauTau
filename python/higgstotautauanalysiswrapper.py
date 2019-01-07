@@ -177,9 +177,15 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("-x", "--executable", help="Artus executable. [Default: %(default)s]", default=os.path.basename(sys.argv[0]))
 		self._parser.add_argument("-a", "--analysis", required=True, help="Analysis nick [SM, MSSM] or import path ('HiggsAnalysis.KITHiggsToTauTau. ...' or 'HiggsAnalysis/KITHiggsToTauTau/python/ ... .py') of the config module.")
 
-		self._parser.add_argument("--sub-analysis", default='', action='store', choices=['btag-eff'], help="Keys to run a sub-analysis on top of base analyseis. Example: btag-egg Option to simplify the configs in order to estimate the efficiencies faster. [Default: %(default)s]")
+		self._parser.add_argument("--sub-analysis", default='', type=str, action='store', choices=['btag-eff', 'etau-fake-es', 'tau-es'],
+			help="Keys to run a sub-analysis on top of base analyseis. Only one sub-analysis can be run at a time! Example: btag-egg Option to simplify the configs in order to estimate the efficiencies faster. [Default: %(default)s]")
+		self._parser.add_argument("--etau-fake-es-group", default=None, type=int, help="Dew to many open files all ES can't be processed at ones, therefore they were subdivided on 4 groups. [Default: %(default)s]")
+		self._parser.add_argument("--tau-es-group", default=None, type=int, help="Dew to many open files all ES can't be processed at ones, therefore they were subdivided on groups. [Default: %(default)s]")
 		self._parser.add_argument("-c", "--analysis-channels", default=['all'], nargs='+', type=str, choices=['all', 'mt', 'tt', 'et', 'ee', 'em', 'mm'], help="List of channels processed from the analysis. [Default: %(default)s]")
 		self._parser.add_argument("--no-svfit", default=False, action="store_true", help="Disable SVfit. Default: %(default)s]")
+		self._parser.add_argument("--pipelines", default=None, type=str, nargs='*', action='store',
+			choices=['nominal', 'tauESperDM_shifts', 'et_eleFakeTauES_subanalysis', 'regionalJECunc_shifts', 'tauEleFakeESperDM_shifts', 'METunc_shifts', 'METrecoil_shifts', 'eleES_shifts', 'btagging_shifts',],
+			help="Pipelines to activate. Default: %(default)s]")
 
 		fileOptionsGroup = self._parser.add_argument_group("File options")
 		fileOptionsGroup.add_argument("-i", "--input-files", nargs="+", required=True,
@@ -261,8 +267,18 @@ class HiggsToTauTauAnalysisWrapper():
 		                                 help="Custom SE path, if it should different from the work directory.")
 		runningOptionsGroup.add_argument("--log-to-se", default=False, action="store_true",
 		                                 help="Write logfile in batch mode directly to SE. Does not work with remote batch system")
-		runningOptionsGroup.add_argument("--partition-lfn-modifier", default = None,
+		runningOptionsGroup.add_argument("--partition-lfn-modifier", default=None,
 		                                 help="Forces a certain access to input files. See base conf for corresponding dictionary")
+
+		runningOptionsGroup.add_argument("--hashed-rootfiles-info", action='store_true', default=False,
+		                                 help="Use the hashed root-files info. "
+		                                 "Hashes have to be DELETED FIRST in case an update is needed and the path of the inputs is unchanged "
+		                                 "[Default: %(default)s]")
+		runningOptionsGroup.add_argument("--hashed-rootfiles-info-path", type=str,
+		                                 default="srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/ohlushch/higgs-kit/hashed_samples/SMFall17v2_18_10_2017/hashed_samples",
+		                                 help="Path to root files info hashes [Default: %(default)s]")
+		runningOptionsGroup.add_argument("--hashed-rootfiles-info-force", action='store_true', default=False,
+		                                 help="Force to update the file that is set by hashed-rootfiles-info-path [Default: %(default)s]")
 
 
 	def import_analysis_configs(self):
@@ -293,10 +309,40 @@ class HiggsToTauTauAnalysisWrapper():
 			sub_analysis=self._args.sub_analysis,
 			analysis_channels=self._args.analysis_channels,
 			no_svfit=self._args.no_svfit,
+			pipelines=self._args.pipelines,
+			etau_fake_es_group=self._args.etau_fake_es_group,
+			tau_es_group=self._args.tau_es_group,
 		)
 
-	def setInputFilenames(self, filelist, alreadyInGridControl = False): ###could be inherited from artusWrapper!
-		#if (not (isinstance(self._config["InputFiles"], list)) and not isinstance(self._config["InputFiles"], basestring)):
+	def gfal_copy(self, from_path="", where_path="", force=False):
+		import subprocess
+		bashCommand = "gfal-copy " + force * " -f " + from_path + " " + where_path
+		if self._args.no_run:
+			log.debug("\tWould call with subprocess: " + bashCommand)
+		else:
+			process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+			output, error = process.communicate()
+			log.debug(output)
+			if error is not None:
+				print "\tsubprocess copy call error:", error
+				exit(1)
+
+	def setInputFilenames(self, filelist, alreadyInGridControl=False):  # could be inherited from artusWrapper!
+		log.debug("setInputFilenames:: start")
+		if self._args.hashed_rootfiles_info:
+			hashed_data_path = self._args.hashed_rootfiles_info_path
+
+			# a way to check that gfal-tools should be used - maybe there is smtg more intelligent
+			if "://" in self._args.hashed_rootfiles_info_path:
+				hashed_data_path = "temp_hashed_samples_{0}".format(hashlib.md5(str(self._config)).hexdigest())
+				self.gfal_copy(from_path=self._args.hashed_rootfiles_info_path, where_path=hashed_data_path)
+
+			import shelve
+			hashed_data_path = os.path.abspath(hashed_data_path)
+			log.debug("hashed_data_path: " + hashed_data_path)
+			d = shelve.open(hashed_data_path)
+
+		# if (not (isinstance(self._config["InputFiles"], list)) and not isinstance(self._config["InputFiles"], basestring)):
 		self._config["InputFiles"] = []
 		for entry in filelist:
 			if os.path.splitext(entry)[1] == ".root":
@@ -305,19 +351,29 @@ class HiggsToTauTauAnalysisWrapper():
 					self.setInputFilenames(filelist, alreadyInGridControl)
 				else:
 					self._config["InputFiles"].append(entry)
+
 					if not alreadyInGridControl:
-                                                fileevents = 1
-                                                if self._args.n_events:
-                                                        f = ROOT.TFile.Open(entry)
-                                                        fileevents = f.Get("Events").GetEntries()
-                                                        print "Checking events for",entry,":",fileevents
-                                                        f.Close()
+						fileevents = 1
+						if self._args.n_events:
+							if self._args.hashed_rootfiles_info and entry in d:
+								fileevents = d[entry]
+								log.debug("hashed_data_path for " + entry + " : " + str(fileevents))
+							else:
+								f = ROOT.TFile.Open(entry)
+								fileevents = f.Get("Events").GetEntries()
+								log.debug("Checking events that are not found in the cashes for " + str(entry) + " : " + str(fileevents))
+								f.Close()
+
+								if self._args.hashed_rootfiles_info and self._args.hashed_rootfiles_info_force:
+									d[entry] = fileevents
+
 						self._gridControlInputFiles.setdefault(self.extractNickname(entry), []).append(entry + " = " + str(fileevents))
+
 			elif os.path.splitext(entry)[1] == ".dbs":
 				tmpDBS = self.readDbsFile(entry)
 				tmpDBS = self.removeProcessedFiles(tmpDBS, entry)
 				filelist = []
-				for key,item in tmpDBS.iteritems():
+				for key, item in tmpDBS.iteritems():
 					filelist += item
 				self.setInputFilenames(filelist, alreadyInGridControl)
 			elif os.path.isdir(entry):
@@ -331,6 +387,18 @@ class HiggsToTauTauAnalysisWrapper():
 				self.setInputFilenames(txtFileContent)
 			else:
 				log.warning("Found file in input search path that is not further considered: " + entry + "\n")
+
+		if self._args.hashed_rootfiles_info:
+			d.close()
+
+			if self._args.hashed_rootfiles_info and self._args.hashed_rootfiles_info_force:
+				log.info("Hashes updated: " + hashed_data_path)
+			else:
+				log.info("Hashes NOT updated: " + hashed_data_path)
+
+			if self._args.hashed_rootfiles_info_force and "temp_hashed_samples" in hashed_data_path:
+				self.gfal_copy(from_path=hashed_data_path, where_path=self._args.hashed_rootfiles_info_path, force=True)
+
 
 	def readDbsFile(self, path):
 		dbsInput = {}
@@ -584,10 +652,17 @@ class HiggsToTauTauAnalysisWrapper():
 			epilogArguments += ("--ld-library-paths %s " % " ".join(self._args.ld_library_paths))
 
 		if self._args.sub_analysis != "":
-			epilogArguments += (" --sub-analysis %s " % " ".join(self._args.sub_analysis))
+			epilogArguments += (" --sub-analysis %s " % self._args.sub_analysis)
 		epilogArguments += (" --analysis-channels %s " % " ".join(self._args.analysis_channels))
 		if self._args.no_svfit:
 			epilogArguments += (" --no-svfit ")
+		if self._args.pipelines is not None:
+			epilogArguments += (" --pipelines %s " % " ".join(self._args.pipelines))
+
+		if self._args.tau_es_group is not None:
+			epilogArguments += (" --tau-es-group %s " % self._args.tau_es_group)
+		if self._args.etau_fake_es_group is not None:
+			epilogArguments += (" --etau-fake-es-group %s " % self._args.etau_fake_es_group)
 
 		if self._args.batch_jobs_debug:
 			print "single job arguments epilogArguments:", epilogArguments

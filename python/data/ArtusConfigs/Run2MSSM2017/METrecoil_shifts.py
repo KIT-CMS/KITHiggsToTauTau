@@ -11,11 +11,11 @@ import Artus.Utility.jsonTools as jsonTools
 #import Kappa.Skimming.datasetsHelperTwopz as datasetsHelperTwopz
 #import os
 
-def build_config(nickname):
+def build_config(nickname, **kwargs):
   config = jsonTools.JsonDict()
   #datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
-  
-  
+
+
   # define frequently used conditions
   #isEmbedded = datasetsHelper.isEmbedded(nickname)
   #isData = datasetsHelper.isData(nickname) and (not isEmbedded)
@@ -25,7 +25,7 @@ def build_config(nickname):
   isSignal = re.search("HToTauTau",nickname)
   isEWK = re.search("EWK",nickname)
 
-  
+
   ## fill config:
   # includes
   includes = [
@@ -33,7 +33,7 @@ def build_config(nickname):
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
     config += analysis_config_module.build_config(nickname)
-  
+
   # explicit configuration
   if isDY or isWjets or isSignal or isEWK:
     config["metRecoilResponseUp"] = {
@@ -56,5 +56,5 @@ def build_config(nickname):
       "MetSysShift" : -1,
       "SvfitCacheFileFolder" : "metRecoilResolutionDown"
     }
-  
+
   return config
