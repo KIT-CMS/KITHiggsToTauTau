@@ -32,6 +32,9 @@ void DiLeptonQuantitiesProducer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diLepEta", [](event_type const& event, product_type const& product) {
 		return product.m_diLeptonSystem.Eta();
 	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dr_tt", [](event_type const& event, product_type const& product) {
+		return product.deltaR;
+	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diLepPhi", [](event_type const& event, product_type const& product) {
 		return product.m_diLeptonSystem.Phi();
 	});
@@ -151,7 +154,8 @@ void DiLeptonQuantitiesProducer::Produce(event_type const& event, product_type& 
 	{
 		product.m_validCollinearApproximation = false;
 	}
-	
+	product.deltaR = Quantities::DeltaR(product.m_flavourOrderedLeptons[0]->p4, product.m_flavourOrderedLeptons[1]->p4);
+
 	product.pZetaVis = Quantities::PZetaVis(product.m_flavourOrderedLeptons[0]->p4, product.m_flavourOrderedLeptons[1]->p4);
 	product.pZetaMiss = Quantities::PZetaMissVis(product.m_flavourOrderedLeptons[0]->p4, product.m_flavourOrderedLeptons[1]->p4,
 	                                             product.m_met.p4, 0.0);

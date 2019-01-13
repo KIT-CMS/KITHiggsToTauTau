@@ -299,10 +299,13 @@ class HiggsToTauTauAnalysisWrapper():
 					if not alreadyInGridControl:
                                                 fileevents = 1
                                                 if self._args.n_events:
-                                                        f = ROOT.TFile.Open(entry)
-                                                        fileevents = f.Get("Events").GetEntries()
-                                                        print "Checking events for",entry,":",fileevents
-                                                        f.Close()
+							try:
+                                                        	f = ROOT.TFile.Open(entry)
+                                                        	fileevents = f.Get("Events").GetEntries()
+                                                        	print "Checking events for",entry,":",fileevents
+                                                        	f.Close()
+							except:
+								pass
 						self._gridControlInputFiles.setdefault(self.extractNickname(entry), []).append(entry + " = " + str(fileevents))
 			elif os.path.splitext(entry)[1] == ".dbs":
 				tmpDBS = self.readDbsFile(entry)

@@ -102,3 +102,28 @@ public:
 	virtual void Produce(event_type const& event, product_type & product,
 						 setting_type const& settings) const override;
 };
+
+
+class EmbeddedWeightProducer: public RooWorkspaceWeightProducer {
+public:
+	EmbeddedWeightProducer();
+
+	virtual std::string GetProducerId() const override {
+		return "EmbeddedWeightProducer";
+	}
+
+	virtual void Produce(event_type const& event, product_type & product,
+						 setting_type const& settings) const override;
+};
+
+class QCDFactorProducer: public RooWorkspaceWeightProducer {
+public: 
+        QCDFactorProducer();
+
+        virtual std::string GetProducerId() const override {
+                return "QCDFactorProducer";
+        }
+
+        virtual void Produce(event_type const& event, product_type & product,
+                                                 setting_type const& settings) const override;
+};

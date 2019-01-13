@@ -179,7 +179,7 @@ def build_config(nickname):
                                                               "producer:ValidBTaggedJetsProducer",
                                                               "producer:GroupedJetUncertaintyShiftProducer"))
                                                               #"producer:TaggedJetUncertaintyShiftProducer"))
-  if not isData:                 config["Processors"].append( "producer:MetCorrector") #"producer:MvaMetCorrector"
+  if not isData and not isEmbedded:                 config["Processors"].append( "producer:MetCorrector") #"producer:MvaMetCorrector"
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer"))

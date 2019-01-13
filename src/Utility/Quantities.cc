@@ -27,6 +27,11 @@ RMDataV Quantities::Zeta(RMFLV const& lepton1, RMFLV const& lepton2)
 	return (v1 + v2).Unit();
 }
 
+double Quantities::DeltaR(RMFLV const& vector1, RMFLV const& vector2)
+{
+	return ROOT::Math::VectorUtil::DeltaR(vector1, vector2);
+}
+
 double Quantities::PZetaVis(RMFLV const& lepton1, RMFLV const& lepton2)
 {
 	RMDataV diLeptonV = lepton1.Vect() + lepton2.Vect();

@@ -237,6 +237,10 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new EmuQcdWeightProducer();
 	else if(id == RooWorkspaceWeightProducer().GetProducerId())
 		return new RooWorkspaceWeightProducer();
+	else if(id == EmbeddedWeightProducer().GetProducerId())
+		return new EmbeddedWeightProducer();
+    else if(id == QCDFactorProducer().GetProducerId())
+		return new QCDFactorProducer();
 	else if(id == TauTauTriggerScaleFactorProducer().GetProducerId())
 		return new TauTauTriggerScaleFactorProducer();
 	else if(id == MuMuTriggerScaleFactorProducer().GetProducerId())
