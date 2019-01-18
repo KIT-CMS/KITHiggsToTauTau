@@ -50,7 +50,9 @@ void DiLeptonQuantitiesProducer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_tt", [](event_type const& event, product_type const& product) {
 		return Quantities::CalculateMtH2Tau(product.m_flavourOrderedLeptons[0]->p4, product.m_flavourOrderedLeptons[1]->p4);
 	});
-	
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mTemu", [](event_type const& event, product_type const& product) {
+		return Quantities::CalculateMtH2Tau(product.m_flavourOrderedLeptons[0]->p4, product.m_flavourOrderedLeptons[1]->p4);
+	});
 	float smearing = settings.GetMassSmearing();
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diLepMassSmearUp", [smearing](event_type const& event, product_type const& product) {
 		double recoGenMassDiff = (product.m_diLeptonSystem.mass() - product.m_diLeptonGenSystem.mass());
@@ -76,7 +78,21 @@ void DiLeptonQuantitiesProducer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diLepMetMt", [](event_type const& event, product_type const& product) {
 		return Quantities::CalculateMt(product.m_diLeptonSystem, product.m_met.p4);
 	});
-	
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dPhiLep1Met", [](event_type const& event, product_type const& product) {
+		return ROOT::Math::VectorUtil::DeltaPhi(product.m_flavourOrderedLeptons[0]->p4, product.m_met.p4);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dPhiLep2Met", [](event_type const& event, product_type const& product) {
+		return ROOT::Math::VectorUtil::DeltaPhi(product.m_flavourOrderedLeptons[1]->p4, product.m_met.p4);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dphi_emet", [](event_type const& event, product_type const& product) {
+		return ROOT::Math::VectorUtil::DeltaPhi(product.m_flavourOrderedLeptons[0]->p4, product.m_met.p4);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dphi_mumet", [](event_type const& event, product_type const& product) {
+		return ROOT::Math::VectorUtil::DeltaPhi(product.m_flavourOrderedLeptons[1]->p4, product.m_met.p4);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mTdileptonMET", [](event_type const& event, product_type const& product) {
+		return Quantities::CalculateMt(product.m_diLeptonSystem, product.m_met.p4);
+	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pZetaVis", [](event_type const& event, product_type const& product) {
 		return product.pZetaVis;
 	});
@@ -84,6 +100,9 @@ void DiLeptonQuantitiesProducer::Init(setting_type const& settings)
 		return product.pZetaMiss;
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pZetaMissVis", [](event_type const& event, product_type const& product) {
+		return product.pZetaMissVis;
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dzeta", [](event_type const& event, product_type const& product) {
 		return product.pZetaMissVis;
 	});
 }

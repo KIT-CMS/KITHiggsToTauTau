@@ -317,6 +317,27 @@ def build_config(nickname):
       "pt_ttjj",
       "mt_tot"
   ])
+  config["Quantities"].extend([
+      "diLepMetMt",
+      "pZetaMiss",
+      "pZetaVis",
+      "dr_tt",
+      "diLepMetMass",
+      "diLepMetPhi",
+      "diLepMetEta",
+      "diLepMetPt",
+      "dphi_mumet",
+      "dphi_emet",
+      "mTdileptonMET",
+      "mt_tt",
+      "mTemu",
+      "mt_sv",
+      "mt_max",
+      "mtmax",
+      "dPhiLep1Met",
+      "dPhiLep2Met",
+      "dzeta"
+  ])
   if isEmbedded:
     config["Quantities"].extend([
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", 
@@ -340,7 +361,7 @@ def build_config(nickname):
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2Analysis.Includes.ggHNNLOQuantities").build_list())
 
-  config["Quantities"].extend(["dr_tt", "pt_ttjj",
+  config["Quantities"].extend(["pt_ttjj",
       "em_qcd_osss_binned_Weight",
       "em_qcd_extrap_up_Weight",
       "em_qcd_extrap_down_Weight",
@@ -401,7 +422,9 @@ def build_config(nickname):
                                                               "producer:ImpactParameterCorrectionsProducer")) #"producer:MVATestMethodsProducer"
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
+  #~ if isGluonFusion:              config["Processors"].append( "producer:ValidGenJetsProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+
   
   
   config["AddGenMatchedParticles"] = True

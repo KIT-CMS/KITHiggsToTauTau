@@ -8,7 +8,7 @@
 double DiJetQuantitiesProducer::GetDiJetQuantity(product_type const& product,
                                                  dijet_extractor_lambda dijetQuantity)
 {
-	return ((static_cast<HttProduct const&>(product)).m_diJetSystemAvailable ? dijetQuantity((static_cast<HttProduct const&>(product)).m_diJetSystem) : -11);
+	return ((static_cast<HttProduct const&>(product)).m_diJetSystemAvailable ? dijetQuantity((static_cast<HttProduct const&>(product)).m_diJetSystem) : DefaultValues::UndefinedFloat);
 }
 
 void DiJetQuantitiesProducer::Init(setting_type const& settings)
@@ -43,7 +43,7 @@ void DiJetQuantitiesProducer::Init(setting_type const& settings)
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diJetAbsDeltaEta", [](event_type const& event, product_type const& product) {
 		return product.m_diJetSystemAvailable ? std::abs(product.m_validJets[0]->p4.Eta() - product.m_validJets[1]->p4.Eta()) :
-		                                        -1;
+		                                        DefaultValues::UndefinedFloat;
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diJetdiLepPhi", [](event_type const& event, product_type const& product) {
 		return product.m_diJetSystemAvailable ? (product.m_diJetSystem + product.m_diLeptonSystem).Phi() :
