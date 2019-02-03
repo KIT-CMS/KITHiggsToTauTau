@@ -108,6 +108,7 @@ bool NewMTTagAndProbePairCandidatesProducer::AdditionalCriteria(DiTauPair const 
                         break;
 		}
 	}
+        LOG(DEBUG) << "Tau pair passing the b jet veto: " << validDiTauPair;
 	return validDiTauPair;
 }
 
@@ -119,19 +120,16 @@ void NewMTTagAndProbePairCandidatesProducer::Produce(event_type const &event, pr
     LOG(DEBUG) << "Tau isolation of in unordered pairs:";
     for (std::vector<DiTauPair>::const_iterator pair = product.m_validDiTauPairCandidates.begin(); pair != product.m_validDiTauPairCandidates.end(); pair++)
     {
-        LOG(DEBUG) << static_cast<KTau*>(pair->second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata);
+        LOG(DEBUG) << pair->second->p4.Pt()*SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, static_cast<KLepton*>(pair->second), static_cast<double>(static_cast<KLepton*>(pair->second)->pfIso()));
     }
 
-    sort(product.m_validDiTauPairCandidates.begin(), product.m_validDiTauPairCandidates.end(),
-            [event](const DiTauPair& pair1, const DiTauPair& pair2) -> bool
-            {
-               return static_cast<KTau*>(pair1.second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata) > static_cast<KTau*>(pair2.second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata); 
-            });
+    std::sort(product.m_validDiTauPairCandidates.begin(), product.m_validDiTauPairCandidates.end(),
+              DiTauPairIsoPtComparator(&(product.m_leptonIsolationOverPt), settings.GetDiTauPairIsTauIsoMVA()));
 
     LOG(DEBUG) << "Tau isolation of ordered pairs:";
     for (std::vector<DiTauPair>::const_iterator pair = product.m_validDiTauPairCandidates.begin(); pair != product.m_validDiTauPairCandidates.end(); pair++)
     {
-        LOG(DEBUG) << static_cast<KTau*>(pair->second)->getDiscriminator("byIsolationMVArun2017v2DBoldDMwLTraw2017", event.m_tauMetadata);
+        LOG(DEBUG) << pair->second->p4.Pt()*SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, static_cast<KLepton*>(pair->second), static_cast<double>(static_cast<KLepton*>(pair->second)->pfIso()));
     }
 
     // Invalidate all pairs except the one with the most isolated tau.
