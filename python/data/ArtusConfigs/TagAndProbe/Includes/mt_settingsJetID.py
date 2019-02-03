@@ -27,15 +27,15 @@ def build_config(nickname, **kwargs):
     config += analysis_config_module.build_config(nickname)
 
   # explicit configuration
-  config["JetID"] = "tight"
+  config["JetID"] = "none"
   config["JetIDVersion"] = "2017"
   config["PuJetIDs"] = []
   config["PuJetIDFullDiscrName"] = "pileupJetIdfullDiscriminant"
   config["JetTaggerLowerCuts"] = []
   config["JetTaggerUpperCuts"] = []
   config["JetLowerPtCuts"] = ["20.0"]
-  config["JetUpperAbsEtaCuts"] = ["4.7"]
-  config["JetLeptonLowerDeltaRCut"] = 0.5
+  config["JetUpperAbsEtaCuts"] = ["2.4"]
+  config["JetLeptonLowerDeltaRCut"] = -1.
 
 
   return config

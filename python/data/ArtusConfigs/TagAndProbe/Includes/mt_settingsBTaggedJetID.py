@@ -21,7 +21,8 @@ def build_config(nickname, **kwargs):
     config["BTaggedJetCombinedSecondaryVertexName"] = "pfCombinedInclusiveSecondaryVertexV2BJetTags"
     config["BTaggerWorkingPoints"] = [
         "tight:0.9693",
-        "medium:0.8838",
+        #"medium:0.8838",
+        "medium:0.8484",
         "loose:0.5803",
     ]
 

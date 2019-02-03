@@ -28,16 +28,16 @@ def build_config(nickname, **kwargs):
 
   # explicit configuration
   config["LooseElectronReco"] = "none"
-  config["LooseElectronID"] = "none"
+  config["LooseElectronID"] = "user"
   config["LooseElectronIDType"] = "cutbased2015andlater" # still MVA, using boolean functionality of IsCutBased()
 
   # signal electron ID
   config["LooseElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-iso-V1-wpLoose"
 
 
-  config["LooseElectronIsoType"] = "user"
+  config["LooseElectronIsoType"] = "none"
   config["LooseElectronIso"] = "none"
-  config["LooseElectronLowerPtCut"] = ["10.0"]
-  config["LooseElectronUpperAbsEtaCut"] = ["2.5"]
+  config["LooseElectronLowerPtCuts"] = ["10.0"]
+  config["LooseElectronUpperAbsEtaCuts"] = ["2.5"]
 
   return config

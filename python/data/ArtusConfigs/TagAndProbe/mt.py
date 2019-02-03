@@ -52,10 +52,6 @@ def build_config(nickname, **kwargs):
   #config["TauID"] = "TauIDRecommendation13TeV"
   config["TauID"] = "none"
   config["TauUseOldDMs"] = True
-  config["MuonLowerPtCuts"] = ["24.0"]
-  config["MuonUpperAbsEtaCuts"] = ["2.1"]
-  config["TauLowerPtCuts"] = ["20.0"]
-  config["TauUpperAbsEtaCuts"] = ["2.1"]
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingTaus"] = 0.5
   config["DeltaRTriggerMatchingMuons"] = 0.5
@@ -160,25 +156,27 @@ def build_config(nickname, **kwargs):
   config["InvalidateNonMatchingJets"] = False
   #ValidMuonsProducer
   config["DirectIso"] = True
+  config["UseUWGenMatching"] = True
 
   config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesMT").build_list()
 
   config["Processors"] =   []
 
-  config["Processors"].extend((                               "producer:HttValidLooseElectronsProducer",   # Electrons for electron veto
-                                                              "filter:MaxLooseElectronsCountFilter",
+  config["Processors"].extend((                               "producer:MetSelector",
                                                               "producer:HttValidLooseMuonsProducer",
                                                               "filter:MaxLooseMuonsCountFilter",
-                                                              "producer:MetSelector",
                                                               "producer:ValidMuonsProducer",
                                                               "filter:ValidMuonsFilter",
-                                                              "producer:MuonTriggerMatchingProducer",
                                                               "filter:MuonsCountFilter",
                                                               "producer:ValidTausProducer",
                                                               "filter:ValidTausFilter",
+                                                              "filter:MinTausCountFilter",
+                                                              "producer:HttValidLooseElectronsProducer",   # Electrons for electron veto
+                                                              "filter:MaxLooseElectronsCountFilter",
+                                                              "producer:MuonTriggerMatchingProducer",
                                                               "producer:TauTriggerMatchingProducer",
                                                               "producer:TauL1TauTriggerMatchingProducer",
-                                                              "filter:MinTausCountFilter",
+                                                              "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer",
                                                               "producer:NewMTTagAndProbePairCandidatesProducer",
                                                               "filter:ValidDiTauPairCandidatesFilter",
