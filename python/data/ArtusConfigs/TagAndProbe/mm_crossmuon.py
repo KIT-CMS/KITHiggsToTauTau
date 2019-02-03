@@ -57,7 +57,7 @@ def build_config(nickname, **kwargs):
   config["MuonIsoTypeUserMode"] = "fromcmsswr04"
   config["MuonIsoType"] = "user"
   config["MuonIsoSignalConeSize"] = 0.4
-  config["MuonID"] = "Medium"
+  config["MuonID"] = "medium"
   config["MuonIso"] = "none"
   config["DirectIso"] = True
   config["MuonDeltaBetaCorrectionFactor"] = 0.5
