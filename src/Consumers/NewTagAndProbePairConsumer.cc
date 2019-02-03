@@ -1,4 +1,6 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Consumers/NewTagAndProbePairConsumer.h"
+#include "Artus/KappaAnalysis/interface/Utility/GeneratorInfo.h"
+#include "Artus/Utility/interface/Utility.h"
 
 NewMMTagAndProbePairConsumer::NewMMTagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
 {
@@ -627,14 +629,51 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         {
                 FloatQuantities["metPt"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
         }
-        else if (quantity == "mt")
+        else if (quantity == "mt_t")
         {
-                FloatQuantities["mt"] = Quantities::CalculateMt(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).first)->p4,product.m_met.p4);
+                FloatQuantities["mt_t"] = Quantities::CalculateMt(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).first)->p4,product.m_met.p4);
         }
 
         if (quantity == "decayMode_p")
         {
             IntQuantities["decayMode_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->decayMode;
+        }
+
+        if (quantity == "trkpt_p")
+        {
+            FloatQuantities["trkpt_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->chargedHadronCandidates.size() > 0 ? static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->chargedHadronCandidates[0].p4.Pt() : DefaultValues::UndefinedFloat;
+        }
+
+        if (quantity == "gen_match_p")
+        {
+            KLepton* lepton = static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).second);
+            if (settings.GetUseUWGenMatching())
+            {
+                IntQuantities["gen_match_p"] = Utility::ToUnderlyingValue(GeneratorInfo::GetGenMatchingCodeUW(event, lepton));
+            }
+            else
+            {
+                KGenParticle* genParticle = GeneratorInfo::GetGenMatchedParticle(                                                                                                                  
+                                                        lepton, product.m_genParticleMatchedLeptons, product.m_genTauMatchedLeptons
+                                                        );
+                if (genParticle)
+                {
+                    IntQuantities["gen_match_p"] =  Utility::ToUnderlyingValue(GeneratorInfo::GetGenMatchingCode(genParticle));
+                }
+                else
+                {
+                    IntQuantities["gen_match_p"] =  Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_FAKE);
+                }
+            }
+        }
+
+        if (quantity == "puWeight")
+        {
+            FloatQuantities["puWeight"] = SafeMap::GetWithDefault(product.m_weights, std::string("puWeight"), SafeMap::GetWithDefault(product.m_optionalWeights, std::string("puWeight"), 1.0));
+        }
+        if (quantity == "bkgSubWeight")
+        {
+            FloatQuantities["bkgSubWeight"] = (product.m_isSingleMuon && !product.m_validDiTauPairCandidates.at(0).IsOppositelyCharged()) ? -1. : 1.; 
         }
 }
 

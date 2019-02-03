@@ -15,24 +15,14 @@ def build_list():
     "run",
     "lumi",
     "evt",
-   # "m_vis",
+    # "m_vis",
+    # Tag (muon) related quantities
     "pt_t", "pt_p",
     "eta_t", "eta_p",
     "phi_t", "phi_p",
-    "iso_t",
-    "id_p",
-    "m_ll",
-    "trg_singlemuon_24",
-    "trg_singlemuon_27",
-    "trg_crossmuon_mu20tau27",
-    "trg_monitor_mu20tau27",
-    "trg_monitor_mu24tau35_medium_tightID",
-    "trg_monitor_mu24tau35_tight",
-    "trg_monitor_mu24tau35_tight_tightID",
-    "trg_singletau_leading",
-    "trg_singletau_trailing",
-    "metPt",
-    "mt", #transverse mass of muon and met
+    "iso_t", "mt_t", #transverse mass of muon and met
+    "id_t",
+    # Probe (tau) related quantities
     "againstElectronVLooseMVA6_p",
     "againstElectronLooseMVA6_p",
     "againstElectronMediumMVA6_p",
@@ -58,7 +48,24 @@ def build_list():
     "byVVTightIsolationMVArun2017v1DBoldDMwLT2017_p",
     "decayModeFinding_p",
     "decayMode_p",
+    "gen_match_p",
+    "trkpt_p", # pT of the leading charged hadron track of the tau
+    # Event quantities
+    "m_ll",
+    "metPt",
     "isOS",
+    # Trigger decisions
+    "trg_singlemuon_27",
+    "trg_crossmuon_mu20tau27",
+    "trg_monitor_mu20tau27",
+    "trg_monitor_mu24tau35_medium_tightID",
+    "trg_monitor_mu24tau35_tight",
+    "trg_monitor_mu24tau35_tight_tightID",
+    "trg_singletau_leading",
+    "trg_singletau_trailing",
+    # Weights
+    "puWeight",
+    "bkgSubWeight"
     ]
 
   return quantities_list

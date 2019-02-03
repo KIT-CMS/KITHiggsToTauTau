@@ -63,7 +63,7 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 
 		FloatQuantities["m_ll"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["metPt"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["mt"] = DefaultValues::UndefinedFloat;
+		FloatQuantities["mt_t"] = DefaultValues::UndefinedFloat;
 
 		FloatQuantities["againstMuonLoose3_p"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["againstMuonTight3_p"] = DefaultValues::UndefinedFloat;
@@ -175,6 +175,11 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 
 		FloatQuantities["decayModeFinding_p"] = DefaultValues::UndefinedFloat;
                 IntQuantities["decayMode_p"] = DefaultValues::UndefinedInt;
+                FloatQuantities["trkpt_p"] = DefaultValues::UndefinedFloat;
+                IntQuantities["gen_match_p"] = DefaultValues::UndefinedInt;
+
+                FloatQuantities["puWeight"] = DefaultValues::UndefinedFloat;
+                FloatQuantities["bkgSubWeight"] = DefaultValues::UndefinedFloat;
 
 		// IntQuantities["trg_t_IsoMu24"]=false;
 		// IntQuantities["trg_t_IsoMu27"]=false;
