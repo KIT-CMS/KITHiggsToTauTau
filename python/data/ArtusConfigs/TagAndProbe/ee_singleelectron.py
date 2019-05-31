@@ -121,9 +121,9 @@ def build_config(nickname, **kwargs):
                             "producer:ElectronTriggerMatchingProducer",
                             "filter:MinElectronsCountFilter",
                             "producer:NewEETagAndProbePairCandidatesProducer",
-                            "filter:ValidDiTauPairCandidatesFilter",
-                            "producer:TaggedJetCorrectionsProducer",
-                            "producer:ValidTaggedJetsProducer"]
+                            "filter:ValidDiTauPairCandidatesFilter"]
+                            #"producer:TaggedJetCorrectionsProducer",
+                            #"producer:ValidTaggedJetsProducer"]
 
   config["Consumers"] = [#"KappaLambdaNtupleConsumer",
                          "NewEETagAndProbePairConsumer",
