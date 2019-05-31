@@ -1,0 +1,1 @@
+root://dcache-cms-xrootd.desy.de:1094//store/user/aakhmets/higgs-kit/skimming/01_05_2019_Data-MC-Embedding_skim/SUSYGluGluToBBHToTauTau_M-300_TuneCP5_13TeV-amcatnlo-pythia8/crab_SUSYGluGluToBBHToTauTau_M300_af1e0a44ebb7ec0d46a8b5d7b63e4360/190501_102116/0000/kappa_SUSYGluGluToBBHToTauTauM300_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_amcatnlo-pythia8_v1_1.root
