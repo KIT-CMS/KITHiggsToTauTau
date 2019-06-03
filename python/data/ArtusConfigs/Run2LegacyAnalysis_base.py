@@ -178,6 +178,27 @@ def build_config(nickname, **kwargs):
       config["Generator"] = "amcatnlo"
 
 
+  if isData or is Embedded:
+    if re.search("(DoubleEG|ElectronEmbedding)", nickname):
+      allowed_channels = ["ee"]
+    elif re.search("(MuonEG|ElMuFinalState)", nickname):
+      allowed_channels = ["em"]
+    elif re.search("(SingleElectron|ElTauFinalState)", nickname):
+      allowed_channels = ["et"]
+    elif re.search("(DoubleMuon|MuonEmbedding)", nickname):
+      allowed_channels = ["mm"]
+    elif re.search("(SingleMuon|MuonEmbedding)", nickname):
+      allowed_channels = ["mt"]
+    elif re.search("(^Tau|TauTauFinalState)", nickname):
+      allowed_channels = ["et", "mt", "tt"]
+    else:
+      print "Unknown format of nickname %s for type data or embedded!"
+      raise Exception
+    if "all" in analysis_channels:
+      analysis_channels = allowed_channels
+    else:
+      analysis_channels=list(set(analysis_channels).intersection(set(allowed_channels)))  
+
   # pipelines - channels including systematic shifts
   config["Pipelines"] = jsonTools.JsonDict()
   if "all" in analysis_channels or "ee" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.ee"%str(year)).build_config(nickname, **kwargs)
