@@ -178,7 +178,7 @@ def build_config(nickname, **kwargs):
       config["Generator"] = "amcatnlo"
 
 
-  if isData or is Embedded:
+  if isData or isEmbedded:
     if re.search("(DoubleEG|ElectronEmbedding)", nickname):
       allowed_channels = ["ee"]
     elif re.search("(MuonEG|ElMuFinalState)", nickname):
