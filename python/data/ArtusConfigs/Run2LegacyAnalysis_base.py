@@ -187,7 +187,7 @@ def build_config(nickname, **kwargs):
       allowed_channels = ["et"]
     elif re.search("(DoubleMuon|MuonEmbedding)", nickname):
       allowed_channels = ["mm"]
-    elif re.search("(SingleMuon|MuonEmbedding)", nickname):
+    elif re.search("(SingleMuon|MuTauFinalState)", nickname):
       allowed_channels = ["mt"]
     elif re.search("(^Tau|TauTauFinalState)", nickname):
       allowed_channels = ["et", "mt", "tt"]
