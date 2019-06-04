@@ -183,12 +183,12 @@ def build_config(nickname, **kwargs):
       allowed_channels = ["ee"]
     elif re.search("(MuonEG|ElMuFinalState)", nickname):
       allowed_channels = ["em"]
-    elif re.search("(SingleElectron|ElTauFinalState)", nickname):
-      allowed_channels = ["et"]
+    elif re.search("(SingleElectron|EGamma|ElTauFinalState)", nickname):
+      allowed_channels = ["ee", "et"]
     elif re.search("(DoubleMuon|MuonEmbedding)", nickname):
       allowed_channels = ["mm"]
     elif re.search("(SingleMuon|MuTauFinalState)", nickname):
-      allowed_channels = ["mt"]
+      allowed_channels = ["mm", "mt"]
     elif re.search("(^Tau|TauTauFinalState)", nickname):
       allowed_channels = ["et", "mt", "tt"]
     else:
