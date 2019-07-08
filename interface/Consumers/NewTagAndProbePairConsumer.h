@@ -182,10 +182,6 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
                 FloatQuantities["puWeight"] = DefaultValues::UndefinedFloat;
                 FloatQuantities["bkgSubWeight"] = DefaultValues::UndefinedFloat;
 
-		// IntQuantities["trg_t_IsoMu24"]=false;
-		// IntQuantities["trg_t_IsoMu27"]=false;
-		// IntQuantities["trg_p_IsoMu24"]=false;
-		// IntQuantities["trg_p_IsoMu27"]=false;
 		// Create Map entries for selected trigger quantities
 		m_hltFiredBranchNames = Utility::ParseVectorToMap(settings.GetHLTBranchNames());
 		for (auto hltNames : m_hltFiredBranchNames)
@@ -335,8 +331,8 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
                                                                                                 if (checkLowerPtCutsByHltNick.find(hltNames.first) != checkLowerPtCutsByHltNick.end())
                                                                                                 {
                                                                                                     LOG(DEBUG) << "Checking pT of trigger: " << hltNames.first;
-                                                                                                    LOG(DEBUG) << "pT of trigger object: " << product.m_triggerMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->p4.Pt() << "\t threshold: " << *std::max_element(checkLowerPtCutsByHltNick.at(hltNames.first).begin(), checkLowerPtCutsByHltNick.at(hltNames.first).end());
-                                                                                                    hltFiredProbe = hltFiredProbe && product.m_triggerMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second))->p4.Pt() > *std::max_element(checkLowerPtCutsByHltNick.at(hltNames.first).begin(), checkLowerPtCutsByHltNick.at(hltNames.first).end());
+                                                                                                    LOG(DEBUG) << "pT of trigger object: " << product.m_triggerMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second)).p4.Pt() << "\t threshold: " << *std::max_element(checkLowerPtCutsByHltNick.at(hltNames.first).begin(), checkLowerPtCutsByHltNick.at(hltNames.first).end());
+                                                                                                    hltFiredProbe = hltFiredProbe && product.m_triggerMatchedLeptons.at(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(i).second)).p4.Pt() > *std::max_element(checkLowerPtCutsByHltNick.at(hltNames.first).begin(), checkLowerPtCutsByHltNick.at(hltNames.first).end());
                                                                                                     LOG(DEBUG) << "Trigger object passed additional pT cut? " << hltFiredProbe;
                                                                                                 }
                                                                                                 if (checkL1Probe)
