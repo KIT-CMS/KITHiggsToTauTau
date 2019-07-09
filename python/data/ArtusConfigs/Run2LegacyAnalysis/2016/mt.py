@@ -118,7 +118,7 @@ def build_config(nickname, **kwargs):
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:hltPFTau20TrackLooseIsoAgainstMuon",
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:hltOverlapFilterSingleIsoMu19LooseIsoPFTau20"
   ]
-  
+
   ### Electron scale and smear corrections
   config["ElectronScaleAndSmearUsed"] = True if not isEmbedded else False
   config["ElectronScaleAndSmearTag"] = "ecalTrkEnergyPostCorr"
@@ -151,15 +151,15 @@ def build_config(nickname, **kwargs):
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
           "1:muonEffIDWeight",
-          
+
           #"1:MuTau_TauLeg_EmbeddedEfficiencyWeight",
           #"1:MuTau_TauLeg_DataEfficiencyWeight",
-          
+
           "0:isoWeight",
           "0:idWeight",
           "0:singleTriggerMCEfficiencyWeightKIT",
           "0:singleTriggerDataEfficiencyWeightKIT",
-          
+
           "0:crossTriggerMCEfficiencyWeight",
           "0:crossTriggerDataEfficiencyWeight"
           ]
@@ -167,15 +167,15 @@ def build_config(nickname, **kwargs):
           "0:m_sel_trg_ratio",
           "0:m_sel_idEmb_ratio",
           "1:m_sel_idEmb_ratio",
-          
+
           #"1:t_TightIso_mt_emb",
           #"1:t_genuine_TightIso_mt_data,t_fake_TightIso_mt_data",
-          
+
           "0:m_iso_ratio_emb",
           "0:m_id_ratio_emb",
           "0:m_trg_emb",
           "0:m_trg_data",
-          
+
           "0:m_trgMu19leg_eta2p1_desy_mc", #temporary because not yet measured for embedded
           "0:m_trgMu19leg_eta2p1_desy_data"
           ]
@@ -183,7 +183,7 @@ def build_config(nickname, **kwargs):
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
           "0:gt_pt,gt_eta",
           "1:gt_pt,gt_eta",
-          
+
           #"1:t_pt,t_eta",
           #"1:t_pt,t_eta",
 
@@ -191,7 +191,7 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
-          
+
           "0:m_pt,m_eta",
           "0:m_pt,m_eta"]
   else:
@@ -287,7 +287,7 @@ def build_config(nickname, **kwargs):
       "muonEffIDWeight_2",
       # "crosstriggerWeight_1",
       # "crosstriggerWeight_2"
-      ])  
+      ])
 
   ### Processors & consumers configuration
   config["Processors"] =   []#                                  ["producer:MuonCorrectionsProducer"] if isEmbedded else []
@@ -340,13 +340,11 @@ def build_config(nickname, **kwargs):
 
   # Subanalyses settings
   if btag_eff:
-     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    if pipelines != ['nominal']:
+        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
 
-     btag_eff_unwanted = ["KappaLambdaNtupleConsumer", "CutFlowTreeConsumer", "KappaElectronsConsumer", "KappaTausConsumer", "KappaTaggedJetsConsumer", "RunTimeConsumer", "PrintEventsConsumer"]
-     for unwanted in btag_eff_unwanted:
-      if unwanted in config["Consumers"]: config["Consumers"].remove(unwanted)
-
-     config["Consumers"].append("BTagEffConsumer")
+    return importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.btag_efficiency_subanalysis").build_config(nickname, nominal_config=config, channel='mt', **kwargs)
 
   if tau_es:
     # needed pipelines : nominal tauES_subanalysis tauMuFakeESperDM_shifts METunc_shifts METrecoil_shifts JECunc_shifts regionalJECunc_shifts btagging_shifts

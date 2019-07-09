@@ -23,7 +23,7 @@ def build_config(nickname, **kwargs):
 
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
-  
+
   # define frequently used conditions
   isEmbedded = datasetsHelper.isEmbedded(nickname)
   isData = datasetsHelper.isData(nickname) and (not isEmbedded)
@@ -33,7 +33,7 @@ def build_config(nickname, **kwargs):
   isSignal = re.search("HToTauTau",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
-  
+
   ## fill config:
   # includes
   includes = [
@@ -51,7 +51,7 @@ def build_config(nickname, **kwargs):
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
     config += analysis_config_module.build_config(nickname, **kwargs)
-  
+
   # explicit configuration
   config["Channel"] = "EM"
   config["MinNElectrons"] = 1
@@ -171,21 +171,21 @@ def build_config(nickname, **kwargs):
           "0:m_sel_trg_ratio",
           "0:m_sel_idEmb_ratio",
           "1:m_sel_idEmb_ratio",
-          
+
           "1:m_iso_ratio",
           "1:m_id_ratio",
-          
+
           #"1:m_trg23_binned_ic_data",
-          #"1:m_trg23_binned_ic_embed",         
+          #"1:m_trg23_binned_ic_embed",
           #"1:m_trg8_binned_ic_data",
           #"1:m_trg8_binned_ic_embed",
-          
+
           "0:e_iso_ratio",
           "0:e_id_ratio",
           "0:e_trk_ratio",
 
           #"0:e_trg23_binned_ic_data",
-          #"0:e_trg23_binned_ic_embed",    
+          #"0:e_trg23_binned_ic_embed",
           #"0:e_trg12_binned_ic_data",
           #"0:e_trg12_binned_ic_embed",
     ]
@@ -193,7 +193,7 @@ def build_config(nickname, **kwargs):
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
           "0:gt_pt,gt_eta",
           "1:gt_pt,gt_eta",
-          
+
           "1:m_pt,m_eta",
           "1:m_pt,m_eta",
 
@@ -234,21 +234,21 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceObjectNames"] = [
         "1:m_iso_ratio",
         "1:m_id_ratio",
-        
+
         #"1:m_trg23_binned_ic_data",
-        #"1:m_trg23_binned_ic_mc",         
+        #"1:m_trg23_binned_ic_mc",
         #"1:m_trg8_binned_ic_data",
         #"1:m_trg8_binned_ic_mc",
-        
+
         "0:e_iso_ratio",
         "0:e_id_ratio",
         "0:e_trk_ratio",
 
         #"0:e_trg23_binned_ic_data",
-        #"0:e_trg23_binned_ic_mc",    
+        #"0:e_trg23_binned_ic_mc",
         #"0:e_trg12_binned_ic_data",
         #"0:e_trg12_binned_ic_mc",
-        
+
     ]
     config["RooWorkspaceObjectArguments"] = [
         "1:m_pt,m_eta",
@@ -452,13 +452,11 @@ def build_config(nickname, **kwargs):
 
   # Subanalyses settings
   if btag_eff:
-     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    if pipelines != ['nominal']:
+        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
 
-     btag_eff_unwanted = ["KappaLambdaNtupleConsumer", "CutFlowTreeConsumer", "KappaElectronsConsumer", "KappaTausConsumer", "KappaTaggedJetsConsumer", "RunTimeConsumer", "PrintEventsConsumer"]
-     for unwanted in btag_eff_unwanted:
-      if unwanted in config["Consumers"]: config["Consumers"].remove(unwanted)
-
-     config["Consumers"].append("BTagEffConsumer")
+    return importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.btag_efficiency_subanalysis").build_config(nickname, nominal_config=config, channel='mt', **kwargs)
 
   # pipelines - systematic shifts
   needed_pipelines = ['nominal', 'eleES_shifts', 'regionalJECunc_shifts', 'METunc_shifts', 'METrecoil_shifts', 'btagging_shifts']

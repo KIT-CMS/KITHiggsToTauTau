@@ -134,7 +134,7 @@ def build_config(nickname, **kwargs):
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
             "1:muonEffIDWeight",
-            
+
             "0:eleRecoWeight",
             "0:isoWeight",
             "0:idWeight",
@@ -145,7 +145,7 @@ def build_config(nickname, **kwargs):
             "0:m_sel_trg_ratio",
             "0:m_sel_idEmb_ratio",
             "1:m_sel_idEmb_ratio",
-            
+
             "0:e_trk_ratio",
             "0:e_iso_ratio_emb",
             "0:e_id_ratio_emb",
@@ -156,7 +156,7 @@ def build_config(nickname, **kwargs):
             "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
             "0:gt_pt,gt_eta",
             "1:gt_pt,gt_eta",
-            
+
             "0:e_pt,e_eta",
             "0:e_pt,e_eta",
             "0:e_pt,e_eta",
@@ -187,8 +187,8 @@ def build_config(nickname, **kwargs):
       "0:e_pt,e_eta",
       "0:e_pt,e_eta"
     ]
-  
-  
+
+
   ### Ntuple output quantities configuration
   config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(isMC = (not isData) and (not isEmbedded), nickname = nickname)
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
@@ -219,7 +219,7 @@ def build_config(nickname, **kwargs):
      "muonEffTrgWeight",
      "muonEffIDWeight_1",
      "muonEffIDWeight_2"
-     ]) 
+     ])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
@@ -277,13 +277,11 @@ def build_config(nickname, **kwargs):
 
   # Subanalyses settings
   if btag_eff:
-     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    if pipelines != ['nominal']:
+        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
 
-     btag_eff_unwanted = ["KappaLambdaNtupleConsumer", "CutFlowTreeConsumer", "KappaElectronsConsumer", "KappaTausConsumer", "KappaTaggedJetsConsumer", "RunTimeConsumer", "PrintEventsConsumer"]
-     for unwanted in btag_eff_unwanted:
-      if unwanted in config["Consumers"]: config["Consumers"].remove(unwanted)
-
-     config["Consumers"].append("BTagEffConsumer")
+    return importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.btag_efficiency_subanalysis").build_config(nickname, nominal_config=config, channel='mt', **kwargs)
 
   if etau_fake_es:
     # needed : nominal, tauESperDM_shifts, et_eleFakeTauES_subanalysis, maybe METunc_shifts METrecoil_shifts JECunc_shifts

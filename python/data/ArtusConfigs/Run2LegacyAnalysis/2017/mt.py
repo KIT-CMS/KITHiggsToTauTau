@@ -371,6 +371,13 @@ def build_config(nickname, **kwargs):
                          "cutflow_histogram"]
 
   # Subanalyses settings
+  if btag_eff:
+    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    if pipelines != ['nominal']:
+        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
+
+    return importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.btag_efficiency_subanalysis").build_config(nickname, nominal_config=config, channel='mt', **kwargs)
+
   if tau_es:
     # needed pipelines : nominal tauES_subanalysis tauMuFakeESperDM_shifts METunc_shifts METrecoil_shifts JECunc_shifts regionalJECunc_shifts btagging_shifts
     config["Quantities"].extend(["leadingTauEnergyAssymetry"])
@@ -381,40 +388,6 @@ def build_config(nickname, **kwargs):
       raise Exception("pipelines is None in %s" % (__file__))
   elif 'auto' in pipelines:
       pipelines = needed_pipelines
-
-  if btag_eff:
-    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
-
-    btag_eff_unwanted = ["KappaLambdaNtupleConsumer", "CutFlowTreeConsumer", "KappaElectronsConsumer", "KappaTausConsumer", "KappaTaggedJetsConsumer", "RunTimeConsumer", "PrintEventsConsumer"]
-    for unwanted in btag_eff_unwanted:
-        if unwanted in config["Consumers"]:
-            config["Consumers"].remove(unwanted)
-
-    config["Consumers"].append("BTagEffConsumer")
-
-    if pipelines != ['nominal']:
-        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
-
-    # print kwargs["btager"];
-    # includes
-    btag_conf = {}
-    for bwp in kwargs["btager_wp"]:
-        key = kwargs["btager"] + '_' + bwp
-        btag_conf[key] = copy.deepcopy(config)
-        btag_conf[key].update(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.settingsBTaggedJetID").build_config(nickname, **{"btager":kwargs["btager"], "btager_wp":bwp}))
-        print config["BTagWPs"], '->', btag_conf[key]["BTagWPs"]
-
-    return_conf = jsonTools.JsonDict()
-    for conf_name in btag_conf.keys():
-        log.info('Add pipeline: %s' % (conf_name))
-        pipe = ACU.apply_uncertainty_shift_configs('mt', btag_conf[conf_name], importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.nominal").build_config(nickname, **kwargs))
-        newname = pipe.keys()[0] + '_' + conf_name
-        log.info('rename pipeline %s -> %s' % (pipe.keys()[0], newname))
-        pipe[newname] = pipe.pop(pipe.keys()[0])
-        return_conf += pipe
-    print return_conf
-    return return_conf
-
 
   return_conf = jsonTools.JsonDict()
   for pipeline in pipelines:

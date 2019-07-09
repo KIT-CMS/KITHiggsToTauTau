@@ -460,13 +460,11 @@ def build_config(nickname, **kwargs):
 
   # Subanalyses settings
   if btag_eff:
-     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    if pipelines != ['nominal']:
+        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
 
-     btag_eff_unwanted = ["KappaLambdaNtupleConsumer", "CutFlowTreeConsumer", "KappaElectronsConsumer", "KappaTausConsumer", "KappaTaggedJetsConsumer", "RunTimeConsumer", "PrintEventsConsumer"]
-     for unwanted in btag_eff_unwanted:
-      if unwanted in config["Consumers"]: config["Consumers"].remove(unwanted)
-
-     config["Consumers"].append("BTagEffConsumer")
+    return importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.btag_efficiency_subanalysis").build_config(nickname, nominal_config=config, channel='mt', **kwargs)
 
   # pipelines - systematic shifts
   needed_pipelines = ['nominal', 'eleES_shifts', 'regionalJECunc_shifts', 'METunc_shifts', 'METrecoil_shifts', 'btagging_shifts']

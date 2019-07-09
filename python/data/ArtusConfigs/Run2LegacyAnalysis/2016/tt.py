@@ -87,20 +87,20 @@ def build_config(nickname, **kwargs):
     "trg_muonelectron_mu23ele12",
     "trg_muonelectron_mu8ele23",
   ]
-  # split by run for data as the doubletau trigger path changes 
-  if re.search("Run2016(B|C|D|E|F|G)", nickname): 
+  # split by run for data as the doubletau trigger path changes
+  if re.search("Run2016(B|C|D|E|F|G)", nickname):
     config["TauTriggerFilterNames"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumIsolationDz02Reg"]
     config["HltPaths"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg"]
     config["HLTBranchNames"].append("trg_doubletau:HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v")
     config["DiTauPairLepton1LowerPtCuts"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
     config["DiTauPairLepton2LowerPtCuts"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
-  elif re.search("Run2016H", nickname): 
+  elif re.search("Run2016H", nickname):
     config["TauTriggerFilterNames"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumCombinedIsolationDz02Reg"]
     config["HltPaths"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg"]
     config["HLTBranchNames"].append("trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v")
     config["DiTauPairLepton1LowerPtCuts"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
     config["DiTauPairLepton2LowerPtCuts"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
-  else: 
+  else:
     config["TauTriggerFilterNames"] = [
     "HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumIsolationDz02Reg",
     "HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumCombinedIsolationDz02Reg"]
@@ -116,7 +116,7 @@ def build_config(nickname, **kwargs):
     config["DiTauPairLepton2LowerPtCuts"] = [
     "HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg:40.0",
     "HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
-    
+
 
   ### Electron scale and smear corrections
   config["ElectronScaleAndSmearUsed"] = True if not isEmbedded else False
@@ -155,7 +155,7 @@ def build_config(nickname, **kwargs):
           "1:TriggerEmbeddedEfficiencyWeight",
           "0:TriggerDataEfficiencyWeight",
           "1:TriggerDataEfficiencyWeight",
-          #~ "0:doubleTauTrgWeight"                 
+          #~ "0:doubleTauTrgWeight"
           ]
     config["EmbeddedWeightWorkspaceObjectNames"]=[
           "0:m_sel_trg_ratio",
@@ -174,7 +174,7 @@ def build_config(nickname, **kwargs):
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
           "0:gt_pt,gt_eta",
           "1:gt_pt,gt_eta",
-          
+
           "0:t_pt,t_dm",
           "1:t_pt,t_dm",
           "0:t_pt,t_dm",
@@ -231,7 +231,7 @@ def build_config(nickname, **kwargs):
           "muonEffIDWeight_1",
           "muonEffIDWeight_2",
           "doubleTauTrgWeight", #"trg_doubletau"
-]) 
+])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
@@ -285,13 +285,11 @@ def build_config(nickname, **kwargs):
 
   # Subanalyses settings
   if btag_eff:
-     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
+    if pipelines != ['nominal']:
+        raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
 
-     btag_eff_unwanted = ["KappaLambdaNtupleConsumer", "CutFlowTreeConsumer", "KappaElectronsConsumer", "KappaTausConsumer", "KappaTaggedJetsConsumer", "RunTimeConsumer", "PrintEventsConsumer"]
-     for unwanted in btag_eff_unwanted:
-      if unwanted in config["Consumers"]: config["Consumers"].remove(unwanted)
-
-     config["Consumers"].append("BTagEffConsumer")
+    return importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.btag_efficiency_subanalysis").build_config(nickname, nominal_config=config, channel='mt', **kwargs)
 
   # pipelines - systematic shifts
   needed_pipelines = ['nominal', 'tauESperDM_shifts', 'regionalJECunc_shifts', 'METunc_shifts', 'METrecoil_shifts', 'btagging_shifts']
