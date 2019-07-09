@@ -7,9 +7,14 @@ log = logging.getLogger(__name__)
 import Artus.Utility.jsonTools as jsonTools
 import Kappa.Skimming.datasetsHelperTwopz as datasetsHelperTwopz
 import os
+import six
 
 
 def build_config(nickname, **kwargs):
+    btager = kwargs["btager"]
+    btager_wp = kwargs["btager_wp"]
+    if not isinstance(btager_wp, six.string_types):
+        btager_wp = "medium"
 
     config = jsonTools.JsonDict()
     datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
@@ -116,8 +121,8 @@ def build_config(nickname, **kwargs):
         },
     }
 
-    btag = btaggers_collection["DeepCSV"][year]
-    config["BTagWPs"] = ["medium"]
+    btag = btaggers_collection[btager][year]
+    config["BTagWPs"] = [btager_wp]
 
     config["BTagScaleFactorFile"] = btag["BTagScaleFactorFile"]
     config["BTagEfficiencyFile"] = btag["BTagEfficiencyFile"][config["BTagWPs"][0]]

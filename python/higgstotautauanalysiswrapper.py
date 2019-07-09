@@ -198,6 +198,9 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("--sub-analysis", default='', type=str, action='store', choices=['btag-eff', 'etau-fake-es', 'tau-es'],
 			help="Keys to run a sub-analysis on top of base analyseis. Only one sub-analysis can be run at a time! Example: btag-egg Option to simplify the configs in order to estimate the efficiencies faster. [Default: %(default)s]")
 
+		self._parser.add_argument("--btager", default="DeepCSV", type=str, help="Btagger used. [Default: %(default)s]")
+		self._parser.add_argument("--btager-wp", default=["medium"], type=str, nargs='+', choices=["tight", "medium", "loose"], help="Btagger working point. [Default: %(default)s]")
+
 		self._parser.add_argument("--etau-fake-es-group", default=None, type=int, help="Dew to many open files all ES can't be processed at ones, therefore they were subdivided on 4 groups. [Default: %(default)s]")
 
 		self._parser.add_argument("--tau-es-charged", '--tes-c', dest='tau_es_charged', default=None, type=float, nargs='*', help="Charged component TES shifts. [Default: %(default)s]")
@@ -249,7 +252,7 @@ class HiggsToTauTauAnalysisWrapper():
 		                                help="Print out the JSON config before running Artus.")
 		configOptionsGroup.add_argument("--print-envvars", nargs="+",
 		                                help="Log specified environment variables.")
-		configOptionsGroup.add_argument("-s", "--save-config", default=None,
+		configOptionsGroup.add_argument("-s", "--save-config", "--save-json", default=None,
 		                                help="Save the JSON config to FILENAME.")
 		configOptionsGroup.add_argument("-f", "--fast", type=int,
 		                                help="Limit number of input files or grid-control jobs. 3=files[0:3].")
@@ -347,6 +350,8 @@ class HiggsToTauTauAnalysisWrapper():
 			tau_es_neutral=self._args.tau_es_neutral,
 			tau_es_method=self._args.tau_es_method,
 			minimal_setup=self._args.minimal_setup,
+			btager=self._args.btager,
+			btager_wp=self._args.btager_wp,
 		)
 
 	def gfal_copy(self, from_path="", where_path="", force=False):
@@ -710,6 +715,9 @@ class HiggsToTauTauAnalysisWrapper():
 
 		if self._args.minimal_setup:
 			epilogArguments += (" --minimal-setup ")
+
+		epilogArguments += (" --btager %s " % self._args.btager)
+		epilogArguments += (" --btager-wp %s " % ' '.join(self._args.btager_wp))
 
 		if self._args.batch_jobs_debug:
 			epilogArguments += (" --save-config conf.json ")
