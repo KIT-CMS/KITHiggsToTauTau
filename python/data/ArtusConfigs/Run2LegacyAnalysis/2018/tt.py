@@ -51,7 +51,7 @@ def build_config(nickname, **kwargs):
   ]
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
-    config += analysis_config_module.build_config(nickname)
+    config += analysis_config_module.build_config(nickname, **kwargs)
 
   # explicit configuration
   config["Channel"] = "TT"
