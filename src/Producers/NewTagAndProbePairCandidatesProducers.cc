@@ -142,3 +142,65 @@ void NewMTTagAndProbePairCandidatesProducer::Produce(event_type const &event, pr
     LOG(DEBUG) << this->GetProducerId() << "-----END-----";
 }
 
+
+NewETTagAndProbePairCandidatesProducer::NewETTagAndProbePairCandidatesProducer() : NewTagAndProbePairCandidatesProducerBase<KElectron, KTau>(
+																					   &HttTypes::product_type::m_validElectrons,
+																					   &HttTypes::product_type::m_validTaus)
+{
+}
+
+std::string NewETTagAndProbePairCandidatesProducer::GetProducerId() const
+{
+	return "NewETTagAndProbePairCandidatesProducer";
+}
+
+
+bool NewETTagAndProbePairCandidatesProducer::AdditionalCriteria(DiTauPair const &diTauPair, event_type const &event,
+																	 product_type &product, setting_type const &settings) const
+{
+	// Check for overlap of tag electron with a b-tagged jet and veto events where overlap is present.
+        KElectron *electron = static_cast<KElectron*>(diTauPair.first);
+	KLepton *tau = static_cast<KLepton*>(diTauPair.second);
+	bool validDiTauPair = true;
+	for (auto bJet : product.m_bTaggedJets)
+	{
+		if (ROOT::Math::VectorUtil::DeltaR(tau->p4, bJet->p4) > 0.5 && ROOT::Math::VectorUtil::DeltaR(electron->p4, bJet->p4) > 0.5)
+		{
+			validDiTauPair = false;
+                        break;
+		}
+	}
+        LOG(DEBUG) << "Tau pair passing the b jet veto: " << validDiTauPair;
+	return validDiTauPair;
+}
+
+void NewETTagAndProbePairCandidatesProducer::Produce(event_type const &event, product_type &product,
+                                                     setting_type const &settings) const
+{
+    NewTagAndProbePairCandidatesProducerBase::Produce(event, product, settings); 
+    LOG(DEBUG) << this->GetProducerId() << " -----CONTINUE-----";
+    LOG(DEBUG) << "Tau isolation of in unordered pairs:";
+    for (std::vector<DiTauPair>::const_iterator pair = product.m_validDiTauPairCandidates.begin(); pair != product.m_validDiTauPairCandidates.end(); pair++)
+    {
+        LOG(DEBUG) << pair->second->p4.Pt()*SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, static_cast<KLepton*>(pair->second), static_cast<double>(static_cast<KLepton*>(pair->second)->pfIso()));
+    }
+
+    std::sort(product.m_validDiTauPairCandidates.begin(), product.m_validDiTauPairCandidates.end(),
+              DiTauPairIsoPtComparator(&(product.m_leptonIsolationOverPt), settings.GetDiTauPairIsTauIsoMVA()));
+
+    LOG(DEBUG) << "Tau isolation of ordered pairs:";
+    for (std::vector<DiTauPair>::const_iterator pair = product.m_validDiTauPairCandidates.begin(); pair != product.m_validDiTauPairCandidates.end(); pair++)
+    {
+        LOG(DEBUG) << pair->second->p4.Pt()*SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, static_cast<KLepton*>(pair->second), static_cast<double>(static_cast<KLepton*>(pair->second)->pfIso()));
+    }
+
+    // Invalidate all pairs except the one with the most isolated tau.
+    if (product.m_validDiTauPairCandidates.size() > 1)
+    {
+        LOG(DEBUG) << "Invalidate " << product.m_validDiTauPairCandidates.end() - (product.m_validDiTauPairCandidates.begin()+1) << " tau pair(s).";
+        std::move(product.m_validDiTauPairCandidates.begin()+1, product.m_validDiTauPairCandidates.end(), std::back_inserter(product.m_invalidDiTauPairCandidates));
+        product.m_validDiTauPairCandidates.erase(product.m_validDiTauPairCandidates.begin()+1, product.m_validDiTauPairCandidates.end());
+    }
+    LOG(DEBUG) << this->GetProducerId() << "-----END-----";
+}
+

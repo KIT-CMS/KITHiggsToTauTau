@@ -686,3 +686,120 @@ std::string NewMTTagAndProbePairConsumer::GetConsumerId() const
 {
 	return "NewMTTagAndProbePairConsumer";
 }
+
+
+
+NewETTagAndProbePairConsumer::NewETTagAndProbePairConsumer() : NewTagAndProbePairConsumerBase()
+{
+}
+
+void NewETTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
+				 					 std::map<std::string, bool>& BoolQuantities,
+                                                                         std::map<std::string, int>& IntQuantities,
+                                                                         std::map<std::string, float>& FloatQuantities)
+{
+	if (quantity == "id_t")
+	{
+		BoolQuantities["id_t"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(0).first)->idMedium();
+	}
+        else if (quantity == "isOS")
+        {
+                BoolQuantities["isOS"] = product.m_validDiTauPairCandidates.at(0).IsOppositelyCharged(); 
+        }
+
+        std::vector<std::string> tauDiscriminators;
+        tauDiscriminators.push_back("againstElectronVLooseMVA6");
+        tauDiscriminators.push_back("againstElectronLooseMVA6");
+        tauDiscriminators.push_back("againstElectronMediumMVA6");
+        tauDiscriminators.push_back("againstElectronTightMVA6");
+        tauDiscriminators.push_back("againstElectronVTightMVA6");
+        tauDiscriminators.push_back("againstMuonLoose3");
+        tauDiscriminators.push_back("againstMuonTight3");
+        tauDiscriminators.push_back("byIsolationMVArun2v1DBoldDMwLTraw");
+        tauDiscriminators.push_back("byVLooseIsolationMVArun2v1DBoldDMwLT");
+        tauDiscriminators.push_back("byLooseIsolationMVArun2v1DBoldDMwLT");
+        tauDiscriminators.push_back("byMediumIsolationMVArun2v1DBoldDMwLT");
+        tauDiscriminators.push_back("byTightIsolationMVArun2v1DBoldDMwLT");
+        tauDiscriminators.push_back("byVTightIsolationMVArun2v1DBoldDMwLT");
+        tauDiscriminators.push_back("byVVTightIsolationMVArun2v1DBoldDMwLT");
+        tauDiscriminators.push_back("byIsolationMVArun2017v2DBoldDMwLTraw2017");
+        tauDiscriminators.push_back("byVVLooseIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVLooseIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byLooseIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byMediumIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byTightIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVTightIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVVTightIsolationMVArun2017v2DBoldDMwLT2017");
+        tauDiscriminators.push_back("byIsolationMVArun2017v1DBoldDMwLTraw2017");
+        tauDiscriminators.push_back("byVVLooseIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVLooseIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byLooseIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byMediumIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byVVTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("decayModeFinding");
+
+        for (std::string tauDiscriminator : tauDiscriminators)
+        {
+            if (quantity == tauDiscriminator + "_p")
+            {
+                FloatQuantities[tauDiscriminator+"_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator(tauDiscriminator, event.m_tauMetadata);
+            }
+        }
+        if (quantity == "metPt")
+        {
+                FloatQuantities["metPt"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
+        }
+        else if (quantity == "mt_t")
+        {
+                FloatQuantities["mt_t"] = Quantities::CalculateMt(static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).first)->p4,product.m_met.p4);
+        }
+
+        if (quantity == "decayMode_p")
+        {
+            IntQuantities["decayMode_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->decayMode;
+        }
+
+        if (quantity == "trkpt_p")
+        {
+            FloatQuantities["trkpt_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->chargedHadronCandidates.size() > 0 ? static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->chargedHadronCandidates[0].p4.Pt() : DefaultValues::UndefinedFloat;
+        }
+
+        if (quantity == "gen_match_p")
+        {
+            KLepton* lepton = static_cast<KLepton*>(product.m_validDiTauPairCandidates.at(0).second);
+            if (settings.GetUseUWGenMatching())
+            {
+                IntQuantities["gen_match_p"] = Utility::ToUnderlyingValue(GeneratorInfo::GetGenMatchingCodeUW(event, lepton));
+            }
+            else
+            {
+                KGenParticle* genParticle = GeneratorInfo::GetGenMatchedParticle(                                                                                                                  
+                                                        lepton, product.m_genParticleMatchedLeptons, product.m_genTauMatchedLeptons
+                                                        );
+                if (genParticle)
+                {
+                    IntQuantities["gen_match_p"] =  Utility::ToUnderlyingValue(GeneratorInfo::GetGenMatchingCode(genParticle));
+                }
+                else
+                {
+                    IntQuantities["gen_match_p"] =  Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_FAKE);
+                }
+            }
+        }
+
+        if (quantity == "puWeight")
+        {
+            FloatQuantities["puWeight"] = SafeMap::GetWithDefault(product.m_weights, std::string("puWeight"), SafeMap::GetWithDefault(product.m_optionalWeights, std::string("puWeight"), 1.0));
+        }
+        if (quantity == "bkgSubWeight")
+        {
+            FloatQuantities["bkgSubWeight"] = (product.m_isSingleMuon && !product.m_validDiTauPairCandidates.at(0).IsOppositelyCharged()) ? -1. : 1.; 
+        }
+}
+
+std::string NewETTagAndProbePairConsumer::GetConsumerId() const
+{
+	return "NewETTagAndProbePairConsumer";
+}
