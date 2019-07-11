@@ -17,7 +17,7 @@ from string import Template
 from datetime import datetime
 from copy import deepcopy
 from multiprocessing import Process
-
+from math import ceil
 import Artus.Utility.jsonTools as jsonTools
 import Artus.Utility.tools as tools
 import Artus.Utility.profile_cpp as profile_cpp
@@ -663,11 +663,11 @@ class HiggsToTauTauAnalysisWrapper():
 		n_files = len(base_config["InputFiles"])
 		if(n_threads > n_files):
 			n_threads = n_files		
-		files_per_thread = int(n_files/n_threads)
+		files_per_thread = int(ceil(float(n_files)/float(n_threads)))
 	
-		for i in range(n_threads):
+		for i, filesplit in enumerate(range(0, n_files, files_per_thread)):
 			new_config = deepcopy(base_config)
-			new_config["InputFiles"] = base_config["InputFiles"][i:i+files_per_thread]
+			new_config["InputFiles"] = base_config["InputFiles"][filesplit:filesplit+files_per_thread]
 			new_config["OutputPath"] = base_config["OutputPath"].replace(".root","_{}.root".format(i))
 			outputs.append(new_config["OutputPath"])
 			with open(self._configFilename.replace(".json","_{}.json".format(i)), 'w') as outfile:
