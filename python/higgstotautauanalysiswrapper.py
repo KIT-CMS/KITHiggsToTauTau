@@ -15,7 +15,9 @@ import subprocess
 import re
 from string import Template
 from datetime import datetime
-
+from copy import deepcopy
+from multiprocessing import Process
+from math import ceil
 import Artus.Utility.jsonTools as jsonTools
 import Artus.Utility.tools as tools
 import Artus.Utility.profile_cpp as profile_cpp
@@ -44,7 +46,7 @@ class HiggsToTauTauAnalysisWrapper():
 				self._args.hashed_rootfiles_info_path = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/cache/Samples/Autumn18"
 			elif 'Run2Legacy' in self._args.analysis:
 				self._args.hashed_rootfiles_info_path = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/cache/Samples/Run2Legacy"
-			else:
+			elif self._args.hashed_rootfiles_info:
 				log.warning("--hashed-rootfiles-info-path wasn't defined and no default value is known")
 
 		self._date_now = datetime.now().strftime("%Y-%m-%d_%H-%M")
@@ -127,7 +129,10 @@ class HiggsToTauTauAnalysisWrapper():
 			if self._args.profile:
 				exitCode = self.measurePerformance(self._args.profile,self._args.profile_options)
 			elif not self._args.no_run:
-				exitCode = self.callExecutable()
+				if self._args.n_threads > 1:
+					self.callExecutable_parallel(self._args.n_threads)
+				else:
+					exitCode = self.callExecutable()
 
 			# clean up
 			if (not self.tmp_directory_remote_files is None):
@@ -309,7 +314,8 @@ class HiggsToTauTauAnalysisWrapper():
 		                                 help="Path to root files info hashes. Also supporting srm:// pathes. [Default: %(default)s]")
 		runningOptionsGroup.add_argument("--hashed-rootfiles-info-force", action='store_true', default=False,
 		                                 help="Force to update the file that is set by hashed-rootfiles-info-path [Default: %(default)s]")
-
+		runningOptionsGroup.add_argument("-N", "--n_threads", type=int, default=1,
+		                                 help="Run in parallel (for local running) [Default: %(default)s]")
 
 	def import_analysis_configs(self):
 		# define known analysis keys here
@@ -639,6 +645,61 @@ class HiggsToTauTauAnalysisWrapper():
 		# os.system("rm " + self._configFilename)
 
 		return exitCode
+
+
+	def callExecutable_parallel(self, n_threads): ###could be inherited from artusWrapper!
+		"""run Artus analysis in parallel (C++ executable)"""
+		#exitCode = 0
+
+		# check output directory
+		outputDir = os.path.dirname(self._args.output_file)
+		if outputDir and not os.path.exists(outputDir):
+			os.makedirs(outputDir)
+
+		base_config = json.load(open(self._configFilename))
+		expression_list = []
+		outputs = []
+		# Multiprocessing only splits by input files: Maximum number of threads is number of inputfiles
+		n_files = len(base_config["InputFiles"])
+		if(n_threads > n_files):
+			n_threads = n_files		
+		files_per_thread = int(ceil(float(n_files)/float(n_threads)))
+	
+		for i, filesplit in enumerate(range(0, n_files, files_per_thread)):
+			new_config = deepcopy(base_config)
+			new_config["InputFiles"] = base_config["InputFiles"][filesplit:filesplit+files_per_thread]
+			new_config["OutputPath"] = base_config["OutputPath"].replace(".root","_{}.root".format(i))
+			outputs.append(new_config["OutputPath"])
+			with open(self._configFilename.replace(".json","_{}.json".format(i)), 'w') as outfile:
+				json.dump(new_config, outfile)			
+			command = self._executable + " " + self._configFilename.replace(".json","_{}.json".format(i))
+			expression_list.append(command)
+
+		procs = []
+		for command in expression_list:
+			log.info("Execute \"%s\"." % command)
+			p = Process(target=logger.subprocessCall, args=([command.split()]))
+			procs.append(p)
+			p.start()
+		for p in procs:
+			p.join()
+		hadd_command = "hadd -f -n {} output.root".format(n_threads)
+		for output in outputs:
+			hadd_command+=" "+output
+		os.system(hadd_command)
+		for output in outputs:
+			os.system("rm "+output)
+		# if exitCode != 0:
+		# 	log.error("Exit with code %s.\n\n" % exitCode)
+		# 	log.info("Dump configuration:\n")
+		# 	log.info(self._configFilename)
+
+		# remove tmp. config
+		# logging.getLogger(__name__).info("Remove temporary config file.")
+		# os.system("rm " + self._configFilename)
+
+		# return exitCode
+
 
 	def sendToBatchSystem(self):
 

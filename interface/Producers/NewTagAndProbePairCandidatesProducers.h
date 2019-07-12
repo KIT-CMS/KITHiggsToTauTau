@@ -169,3 +169,16 @@ class NewMTTagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidat
     virtual bool AdditionalCriteria(DiTauPair const &diTauPair, event_type const &event,
                                     product_type &product, setting_type const &settings) const override;
 };
+
+class NewETTagAndProbePairCandidatesProducer : public NewTagAndProbePairCandidatesProducerBase<KElectron, KTau>
+{
+  public:
+    NewETTagAndProbePairCandidatesProducer();
+    virtual std::string GetProducerId() const override;
+    virtual void Produce(event_type const &event, product_type &product,
+                                                         setting_type const &settings) const override;
+
+  protected:
+    virtual bool AdditionalCriteria(DiTauPair const &diTauPair, event_type const &event,
+                                    product_type &product, setting_type const &settings) const override;
+};

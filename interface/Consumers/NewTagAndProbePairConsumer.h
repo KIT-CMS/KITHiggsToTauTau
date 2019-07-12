@@ -429,3 +429,18 @@ class NewMTTagAndProbePairConsumer : public NewTagAndProbePairConsumerBase
                                               std::map<std::string, int>& IntQuantities,
                                               std::map<std::string, float>& FloatQuantities) override;
 };
+
+
+
+class NewETTagAndProbePairConsumer : public NewTagAndProbePairConsumerBase
+{
+  public:
+        NewETTagAndProbePairConsumer();
+	virtual std::string GetConsumerId() const override;
+
+  protected:
+	virtual void AdditionalQuantities(int i, std::string quantity, product_type const &product, event_type const& event, setting_type const &settings,
+                                              std::map<std::string, bool>& BoolQuantities,
+                                              std::map<std::string, int>& IntQuantities,
+                                              std::map<std::string, float>& FloatQuantities) override;
+};
