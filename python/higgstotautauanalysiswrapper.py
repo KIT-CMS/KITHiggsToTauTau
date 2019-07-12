@@ -683,7 +683,7 @@ class HiggsToTauTauAnalysisWrapper():
 			p.start()
 		for p in procs:
 			p.join()
-		hadd_command = "hadd -f -n {} output.root".format(n_threads)
+		hadd_command = "hadd -f -n {} {}".format(n_threads, base_config["OutputPath"])
 		for output in outputs:
 			hadd_command+=" "+output
 		os.system(hadd_command)

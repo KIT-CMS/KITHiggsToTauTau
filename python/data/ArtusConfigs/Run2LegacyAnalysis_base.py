@@ -201,10 +201,10 @@ def build_config(nickname, **kwargs):
 
   # pipelines - channels including systematic shifts
   config["Pipelines"] = jsonTools.JsonDict()
-  if "all" in analysis_channels or "ee" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.ee"%str(year)).build_config(nickname, **kwargs)
+  if "ee" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.ee"%str(year)).build_config(nickname, **kwargs)
   if "all" in analysis_channels or "em" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.em"%str(year)).build_config(nickname, **kwargs)
   if "all" in analysis_channels or "et" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.et"%str(year)).build_config(nickname, **kwargs)
-  if "all" in analysis_channels or "mm" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.mm"%str(year)).build_config(nickname, **kwargs)
+  if "mm" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.mm"%str(year)).build_config(nickname, **kwargs)
   if "all" in analysis_channels or "mt" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.mt"%str(year)).build_config(nickname, **kwargs)
   if "all" in analysis_channels or "tt" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.tt"%str(year)).build_config(nickname, **kwargs)
 

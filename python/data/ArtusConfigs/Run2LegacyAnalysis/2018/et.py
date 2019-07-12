@@ -218,8 +218,8 @@ def build_config(nickname, **kwargs):
       "1:crossTriggerDataEfficiencyWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -227,7 +227,7 @@ def build_config(nickname, **kwargs):
 
           "0:crossTriggerEmbeddedWeight",
           "1:crossTriggerEmbeddedWeight",
-          "1:muon_crossTriggerEmbeddedWeight",
+
 
           "0:isoWeight",
           "0:idWeight",
@@ -246,8 +246,8 @@ def build_config(nickname, **kwargs):
           "1:m_sel_idEmb_ratio",
 
           "0:e_trg_EleTau_Ele24Leg_embed_kit_ratio",
-          "1:et_emb_LooseChargedIsoPFTau30_kit_ratio",
-          "1:mt_emb_LooseChargedIsoPFTau27_kit_ratio",
+          "1:et_emb_LooseChargedIsoPFTau30_tight_kit_ratio",
+          
 
           "0:e_iso_binned_embed_kit_ratio",
           "0:e_id90_embed_kit_ratio",
@@ -267,7 +267,7 @@ def build_config(nickname, **kwargs):
 
           "0:e_pt,e_eta",
           "1:t_pt",
-          "1:t_pt",
+         
 
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
@@ -281,7 +281,7 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta"
           ]
   else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
     config["RooWorkspaceWeightNames"]=[
           "0:crossTriggerMCEfficiencyWeight",
           "0:crossTriggerDataEfficiencyWeight",
