@@ -54,10 +54,13 @@ def build_list(**kwargs):
             "trg_singleelectron_35",
 
             "trg_crossmuon_mu20tau27",
+            "trg_crossmuon_mu20tau27_hps",
             "trg_crossele_ele24tau30",
+            "trg_crossele_ele24tau30_hps",
             "trg_doubletau_35_tightiso_tightid",
             "trg_doubletau_40_mediso_tightid",
             "trg_doubletau_40_tightiso",
+            "trg_doubletau_35_mediso_hps",
             "trg_muonelectron_mu12ele23",
             "trg_muonelectron_mu23ele12",
             "trg_muonelectron_mu8ele23",

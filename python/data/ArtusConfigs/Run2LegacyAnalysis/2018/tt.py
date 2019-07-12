@@ -59,34 +59,22 @@ def build_config(nickname, **kwargs):
 
   ### HLT & Trigger Object configuration
   config["HltPaths"] = [
-          "HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg",
           "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg",
           "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg",
           "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg",
           "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg",
-          "HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg",
-          "HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg",
-          "HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
-          "HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg_v:40.0",
           "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v:40.0",
           "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:45.0",
-          "HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:45.0",
+          "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v:45.0",
           "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v:40.0",
-          "HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_v:40.0",
-          "HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v:45.0",
-          "HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v:45.0",
   ]
   config["DiTauPairLepton2LowerPtCuts"] = [
-          "HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg_v:40.0",
           "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v:40.0",
           "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:45.0",
-          "HLT_DoubleTightChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:45.0",
+          "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v:45.0",
           "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v:40.0",
-          "HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_v:40.0",
-          "HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v:45.0",
-          "HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v:45.0",
   ]
   config["CheckL1MatchForDiTauPairLepton1"] = True
   config["CheckL1MatchForDiTauPairLepton2"] = True
@@ -100,10 +88,13 @@ def build_config(nickname, **kwargs):
       "trg_singleelectron_35",
 
       "trg_crossmuon_mu20tau27",
+      "trg_crossmuon_mu20tau27_hps",
       "trg_crossele_ele24tau30",
+      "trg_crossele_ele24tau30_hps",
       "trg_doubletau_35_tightiso_tightid",
       "trg_doubletau_40_mediso_tightid",
       "trg_doubletau_40_tightiso",
+      "trg_doubletau_35_mediso_hps",
       "trg_muonelectron_mu12ele23",
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
@@ -112,10 +103,13 @@ def build_config(nickname, **kwargs):
       "trg_singletau_trailing",
 
       "trg_crossmuon_mu20tau27",
+      "trg_crossmuon_mu20tau27_hps",
       "trg_crossele_ele24tau30",
+      "trg_crossele_ele24tau30_hps",
       "trg_doubletau_35_tightiso_tightid",
       "trg_doubletau_40_mediso_tightid",
       "trg_doubletau_40_tightiso",
+      "trg_doubletau_35_mediso_hps"
       "trg_muonelectron_mu12ele23",
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
@@ -124,17 +118,17 @@ def build_config(nickname, **kwargs):
       "trg_singlemuon_24:HLT_IsoMu24_v",
       "trg_singlemuon_27:HLT_IsoMu27_v",
       "trg_crossmuon_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
+      "trg_crossmuon_mu20tau27_hps:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v",
       "trg_singleelectron_27:HLT_Ele27_WPTight_Gsf_v",
       "trg_singleelectron_32:HLT_Ele32_WPTight_Gsf_v",
       "trg_singleelectron_32_fallback:HLT_Ele32_WPTight_Gsf_DoubleL1EG_v",
       "trg_singleelectron_35:HLT_Ele35_WPTight_Gsf_v",
       "trg_crossele_ele24tau30:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
+      "trg_crossele_ele24tau30_hps:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v",
       "trg_doubletau_35_tightiso_tightid:HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v",
-      "trg_doubletau_35_tightiso_tightid:HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_v",
       "trg_doubletau_40_mediso_tightid:HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v",
-      "trg_doubletau_40_mediso_tightid:HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v",
       "trg_doubletau_40_tightiso:HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v",
-      "trg_doubletau_40_tightiso:HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg_v",
+      "trg_doubletau_35_mediso_hps:HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v",
       "trg_singletau_leading:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
       "trg_singletau_trailing:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
       "trg_muonelectron_mu12ele23:HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
@@ -144,25 +138,23 @@ def build_config(nickname, **kwargs):
   if isEmbedded:
     config["TauTriggerFilterNames"] = [
             "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
-            "HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
             "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
-            "HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
             "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
-            "HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2"
+            "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
     ]
   else:
     config["TauTriggerFilterNames"] = [
             "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v:hltDoublePFTau35TrackPt1TightChargedIsolationAndTightOOSCPhotonsDz02Reg",
-            "HLT_DoubleTightChargedIsoPFTauHPS35_Trk1_TightID_eta2p1_Reg_v:hltHpsDoublePFTau35TrackPt1TightChargedIsolationAndTightOOSCPhotonsDz02Reg",
             "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:hltDoublePFTau40TrackPt1MediumChargedIsolationAndTightOOSCPhotonsDz02Reg",
-            "HLT_DoubleMediumChargedIsoPFTauHPS40_Trk1_TightID_eta2p1_Reg_v:hltHpsDoublePFTau40TrackPt1MediumChargedIsolationAndTightOOSCPhotonsDz02Reg",
             "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v:hltDoublePFTau40TrackPt1TightChargedIsolationDz02Reg",
-            "HLT_DoubleTightChargedIsoPFTauHPS40_Trk1_eta2p1_Reg_v:hltHpsDoublePFTau40TrackPt1TightChargedIsolationDz02Reg"
+            "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v:hltHpsDoublePFTau35TrackPt1MediumChargedIsolationDz02Reg",
     ]
+  # TODO: Check if this is still necessary for 2018.
   config["TauTriggerCheckL1Match"] = [
           "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v",
           "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v",
-          "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v"
+          "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v",
+          "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v",
   ]
 
   ### Electron scale and smear corrections
