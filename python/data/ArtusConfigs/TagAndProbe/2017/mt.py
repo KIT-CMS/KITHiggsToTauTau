@@ -64,20 +64,21 @@ def build_config(nickname, **kwargs):
       "trg_singletau_trailing",
       "trg_singletau_leading",
       "trg_crossmuon_mu20tau27",
-      "trg_monitor_mu24tau35_medium_tightID",
-      "trg_monitor_mu24tau35_tight",
-      "trg_monitor_mu24tau35_tight_tightID",
+      "trg_monitor_mu24tau35_tightiso_tightid",
+      "trg_monitor_mu24tau40_mediso_tightid",
+      "trg_monitor_mu24tau40_tightiso",
       "trg_monitor_mu20tau27",
   ]
   config["HLTBranchNames"] = [
       "trg_singlemuon_27:HLT_IsoMu27_v",
       "trg_crossmuon_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
+      "trg_monitor_mu24tau35_tightiso_tightid:HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1_v",
+      # Measurement for 40 GeV legs performed with 35 GeV threshold tightened to 40 GeV.
+      "trg_monitor_mu24tau40_mediso_tightid:HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1_v",
+      "trg_monitor_mu24tau40_tightiso:HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1_v",
+      "trg_monitor_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
       "trg_singletau_leading:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
       "trg_singletau_trailing:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
-      "trg_monitor_mu24tau35_medium_tightID:HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1_v",
-      "trg_monitor_mu24tau35_tight:HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1_v",
-      "trg_monitor_mu24tau35_tight_tightID:HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1_v",
-      "trg_monitor_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
   ]
   config["TauTrigger2017InputOld"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017.root"
   config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017_New.root"
@@ -109,8 +110,7 @@ def build_config(nickname, **kwargs):
               "HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1_v:hltSingleL2IsoTau26eta2p2",
               "HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_eta2p1_Reg_CrossL1_v:hltSingleL2IsoTau26eta2p2",
               "HLT_IsoMu24_eta2p1_TightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_CrossL1_v:hltSingleL2IsoTau26eta2p2",
-              "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltPFTau180TrackPt50LooseAbsOrRelMediumHighPtRelaxedIsoIso",
-              "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSelectedPFTau180MediumChargedIsolationL1HLTMatched"
+              "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSingleL2Tau80eta2p2",
         ]
   else:
       config["MuonTriggerFilterNames"] = [
@@ -138,14 +138,14 @@ def build_config(nickname, **kwargs):
         ]
   config["CheckTriggerLowerPtCutsByHltNick"] = [
           "trg_monitor_mu20tau27:30.0",
-          "trg_monitor_mu24tau35_medium_tightID:40.0",
-          "trg_monitor_mu24tau35_tight:40.0",
+          "trg_monitor_mu24tau40_mediso_tightid:40.0",
+          "trg_monitor_mu24tau40_tightiso:40.0",
     ]
   config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
-          "trg_monitor_mu24tau35_medium_tightID:32.0",
-          "trg_monitor_mu24tau35_tight:32.0",
-          "trg_monitor_mu24tau35_tight_tightID:32.0",
           "trg_monitor_mu20tau27:26.0",
+          "trg_monitor_mu24tau35_tightiso_tightid:32.0",
+          "trg_monitor_mu24tau40_mediso_tightid:32.0",
+          "trg_monitor_mu24tau40_tightiso:32.0",
     ]
 
   #TriggerMatchingProducers
@@ -157,7 +157,7 @@ def build_config(nickname, **kwargs):
   config["DirectIso"] = True
   config["UseUWGenMatching"] = True
 
-  config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesMT").build_list()
+  config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesMT").build_list(2017)
 
   config["Processors"] =   []
 
