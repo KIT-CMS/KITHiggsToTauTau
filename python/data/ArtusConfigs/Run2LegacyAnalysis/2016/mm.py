@@ -63,7 +63,7 @@ def build_config(nickname, **kwargs):
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
           "HLT_IsoMu22_v:23.0",
-          "HLT_IsoTkMu22_v:23.0"
+          "HLT_IsoTkMu22_v:23.0",
           "HLT_IsoMu22_eta2p1_v:23.0",
           "HLT_IsoTkMu22_eta2p1_v_23.0",
   ]
