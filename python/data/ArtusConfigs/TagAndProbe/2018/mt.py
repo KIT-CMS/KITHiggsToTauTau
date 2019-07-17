@@ -246,6 +246,10 @@ def build_config(nickname, **kwargs):
           "trg_monitor_mu20tau27_hps:26.0",
           "trg_monitor_mu20tau27:26.0",
     ]
+  config["TauTriggerCheckAdditionalL1TauMatchUseIsolatedL1Tau"] = [
+          "trg_monitor_mu20tau27_hps",
+          "trg_monitor_mu20tau27"
+    ]
 
   #TriggerMatchingProducers
   config["InvalidateNonMatchingElectrons"] = False

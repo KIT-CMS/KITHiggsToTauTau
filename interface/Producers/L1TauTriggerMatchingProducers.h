@@ -116,6 +116,7 @@ class L1TauTriggerMatchingProducerBase: public ProducerBase<HttTypes>
                         {
                                 float deltaRMax = 0.5;
                                 float bestL1Pt = -1.0;
+                                bool isL1Isolated = false;
                                 for (std::vector<KL1Tau>::iterator l1o = event.m_l1taus->begin(); l1o != event.m_l1taus->end(); ++l1o)
                                 {
                                         float currentDeltaR = ROOT::Math::VectorUtil::DeltaR((it->first)->p4, l1o->p4);
@@ -123,6 +124,7 @@ class L1TauTriggerMatchingProducerBase: public ProducerBase<HttTypes>
                                         {
                                                 bestL1Pt = l1o->p4.Pt();
                                                 deltaRMax = currentDeltaR;
+                                                isL1Isolated = l1o->hwIso;
                                         }
                                 }
                                 std::map<std::string, bool> hlt_to_l1;
@@ -132,6 +134,12 @@ class L1TauTriggerMatchingProducerBase: public ProducerBase<HttTypes>
                                         LOG(DEBUG) << "Check L1 trigger matching for trigger nick: " << hlt->first << "\t with threshold: " << *std::max_element(hlt->second.begin(), hlt->second.end());
                                         hlt_to_l1[hlt->first] = bestL1Pt >= *std::max_element(hlt->second.begin(), hlt->second.end());
                                         LOG(DEBUG) << "Lepton matches to L1 object with pT " << bestL1Pt << "? " << hlt_to_l1[hlt->first];
+                                        if (useL1TauIsolationByHltNick.find(hlt->first) != useL1TauIsolationByHltNick.end())
+                                        {
+                                            LOG(DEBUG) << "Checking L1 isolation for trigger " << hlt->first;
+                                            hlt_to_l1[hlt->first] = hlt_to_l1[hlt->first] && isL1Isolated;
+                                            LOG(DEBUG) << "L1 object fulfils pT and isolation requirements? " << hlt_to_l1[hlt->first];
+                                        }
                                 }
                                 (product.*m_additionalL1TauMatchedLeptons)[&(*(it->first))] = hlt_to_l1;
                         }
