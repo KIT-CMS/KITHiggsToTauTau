@@ -38,22 +38,22 @@ def build_config(nickname, **kwargs):
   # explicit configuration
   if isDY or isWjets or isSignal or isHWW or isEWK:
     config["metRecoilResponseUp"] = {
-      "MetSysType" : 1,
+      "MetSysType" : 0,
       "MetSysShift" : 1,
       "SvfitCacheFileFolder" : "metRecoilResponseUp"
     }
     config["metRecoilResponseDown"] = {
-      "MetSysType" : 1,
+      "MetSysType" : 0,
       "MetSysShift" : -1,
       "SvfitCacheFileFolder" : "metRecoilResponseDown"
     }
     config["metRecoilResolutionUp"] = {
-      "MetSysType" : 2,
+      "MetSysType" : 1,
       "MetSysShift" : 1,
       "SvfitCacheFileFolder" : "metRecoilResolutionUp"
     }
     config["metRecoilResolutionDown"] = {
-      "MetSysType" : 2,
+      "MetSysType" : 1,
       "MetSysShift" : -1,
       "SvfitCacheFileFolder" : "metRecoilResolutionDown"
     }
