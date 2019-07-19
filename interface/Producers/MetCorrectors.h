@@ -8,8 +8,8 @@
 
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/HttTypes.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/HttEnumTypes.h"
-#include "HiggsAnalysis/KITHiggsToTauTau/interface/Utility/RecoilCorrector.h"
-#include "HiggsAnalysis/KITHiggsToTauTau/interface/Utility/MEtSys.h"
+#include "HTT-utilities/RecoilCorrections/interface/RecoilCorrector.h"
+#include "HTT-utilities/RecoilCorrections/interface/MEtSys.h"
 
 #include <boost/regex.hpp>
 #include <boost/algorithm/string.hpp>
@@ -32,7 +32,7 @@ public:
 	typedef typename HttTypes::event_type event_type;
 	typedef typename HttTypes::product_type product_type;
 	typedef typename HttTypes::setting_type setting_type;
-	enum CorrectionMethod { NONE=0, QUANTILE_MAPPING=1, MEAN_RESOLUTION=2};
+	enum CorrectionMethod { NONE=0, QUANTILE_MAPPING=1, MEAN_RESOLUTION=2, QUANTILE_MAPPING_HIST=3};
 	
 	MetCorrectorBase(TMet* product_type::*metMemberUncorrected,
 			 TMet product_type::*metMemberCorrected,
@@ -63,17 +63,17 @@ public:
 		{
 			m_metShiftCorrector = new MEtSys((settings.*GetMetShiftCorrectorFile)());
 
-			if (settings.GetMetSysType() == 1)
+			if (settings.GetMetSysType() == 0)
 			{
 				m_sysType = MEtSys::SysType::Response;
 			}
-			else if (settings.GetMetSysType() == 2)
+			else if (settings.GetMetSysType() == 1)
 			{
 				m_sysType = MEtSys::SysType::Resolution;
 			}
 			else
 			{
-				m_sysType = MEtSys::SysType::NoType;
+				//m_sysType = MEtSys::SysType::NoType;
 				LOG(FATAL) << "Invalid HttSettings::MetSysType option";
 			}
 			
@@ -108,6 +108,8 @@ public:
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::QUANTILE_MAPPING;
 		else if(settings.GetMetCorrectionMethod() == "meanResolution")
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::MEAN_RESOLUTION;
+		else if(settings.GetMetCorrectionMethod() == "quantileMappingHist")
+			m_correctionMethod = MetCorrectorBase::CorrectionMethod::QUANTILE_MAPPING_HIST;
 		else if(settings.GetMetCorrectionMethod() == "none")
 		{
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::NONE;
@@ -115,6 +117,7 @@ public:
 		}
                 else
 			LOG(FATAL) << "Invalid MetCorrectionMethod option. Available are 'quantileMapping' and 'meanResolution' and 'none'";
+                LOG(INFO) << "MetCorrectionMethod is " << settings.GetMetCorrectionMethod() << std::endl;
 
 		if (settings.GetMetUncertaintyShift())
 		{
@@ -318,6 +321,17 @@ public:
 				correctedMetY);
 		else if(m_correctionMethod == MetCorrectorBase::CorrectionMethod::MEAN_RESOLUTION)
 			m_recoilCorrector->CorrectByMeanResolution(
+				metX,
+				metY,
+				genPx,
+				genPy,
+				visPx,
+				visPy,
+				nJets30,
+				correctedMetX,
+				correctedMetY);
+		else if(m_correctionMethod == MetCorrectorBase::CorrectionMethod::QUANTILE_MAPPING_HIST)
+			m_recoilCorrector->CorrectWithHist(
 				metX,
 				metY,
 				genPx,

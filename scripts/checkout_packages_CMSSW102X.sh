@@ -16,7 +16,7 @@ export VO_CMS_SW_DIR=/cvmfs/cms.cern.ch
 source $VO_CMS_SW_DIR/cmsset_default.sh
 
 # set up CMSSW release area
-scramv1 project CMSSW_10_2_14; pushd CMSSW_10_2_14/src
+scramv1 project CMSSW_10_2_15_patch2; pushd CMSSW_10_2_15_patch2/src
 eval `scramv1 runtime -sh`
 
 # JEC
@@ -52,6 +52,9 @@ git clone git@github.com:svfit/SVfitTF TauAnalysis/SVfitTF
 
 # Jet2Tau Fakes
 git clone git@github.com:CMS-HTT/Jet2TauFakes.git HTTutilities/Jet2TauFakes
+
+# Recoil Corrections
+git clone git@github.com:KIT-CMS/RecoilCorrections.git HTT-utilities/RecoilCorrections
 
 # EmuQCD Method
 git clone git@github.com:CMS-HTT/QCDModelingEMu.git HTT-utilities/QCDModelingEMu

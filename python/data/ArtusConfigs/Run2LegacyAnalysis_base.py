@@ -135,13 +135,21 @@ def build_config(nickname, **kwargs):
   elif year == 2018: config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_2017_v2.root" #TODO replace with 2018 measurements
   config["DoZptUncertainties"] = True
 
-  if year == 2016:   config["MetRecoilCorrectorFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/TypeI-PFMet_Run2016_legacy.root"
-  elif year == 2017: config["MetRecoilCorrectorFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/Type1_PFMET_2017.root"
-  elif year == 2018: config["MetRecoilCorrectorFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/TypeI-PFMet_Run2018.root"
-  if year == 2016:   config["MetShiftCorrectorFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/PFMEtSys_2016.root"
-  elif year == 2017: config["MetShiftCorrectorFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
-  elif year == 2018: config["MetShiftCorrectorFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
-  config["MetCorrectionMethod"] = "none" if (isData  or isEmbedded) else "meanResolution"
+  if year == 2016:   config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2016.root"
+  elif year == 2017: config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root"
+  elif year == 2018: config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2018.root"
+  if year == 2016:   config["MetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/PFMEtSys_2016.root"
+  elif year == 2017: config["MetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
+  elif year == 2018: config["MetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
+
+  if year == 2016:   config["PuppiMetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PuppiMET_2016.root"
+  elif year == 2017: config["PuppiMetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PuppiMET_2017.root"
+  elif year == 2018: config["PuppiMetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PuppiMET_2018.root"
+  if year == 2016:   config["PuppiMetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/PFMEtSys_2016.root"
+  elif year == 2017: config["PuppiMetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
+  elif year == 2018: config["PuppiMetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
+
+  config["MetCorrectionMethod"] = "none" if (isData  or isEmbedded) else "quantileMappingHist"
   config["UpdateMetWithCorrectedLeptons"] = True
   config["UpdateMetWithCorrectedLeptonsFromSignalOnly"] = True
   config["ChooseMvaMet"] = False

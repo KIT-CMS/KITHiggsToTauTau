@@ -112,8 +112,8 @@ PuppiMetCorrector::PuppiMetCorrector() :
 	MetCorrectorBase(&HttTypes::product_type::m_puppimetUncorr,
 			 &HttTypes::product_type::m_puppimet,
 			 &HttTypes::product_type::m_puppimetCorrections,
-			 &HttTypes::setting_type::GetMetRecoilCorrectorFile,
-			 &HttTypes::setting_type::GetMetShiftCorrectorFile,
+			 &HttTypes::setting_type::GetPuppiMetRecoilCorrectorFile,
+			 &HttTypes::setting_type::GetPuppiMetShiftCorrectorFile,
 			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons,
 			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly
 	)
