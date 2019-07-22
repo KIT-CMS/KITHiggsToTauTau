@@ -1,22 +1,14 @@
 #!/bin/bash
 
-if [ "$1" == "" ]; then
-  echo "$0: Please provide the analysis branch you want to use"
-  exit 1
-fi
-BRANCH=$1
-
 CORES=`grep -c ^processor /proc/cpuinfo`
-if [ ! "$2" == "" ]; then
-  CORES=$2
+if [ ! "$1" == "" ]; then
+  CORES=$1
 fi
 
-export SCRAM_ARCH=slc6_amd64_gcc700
-export VO_CMS_SW_DIR=/cvmfs/cms.cern.ch
-source $VO_CMS_SW_DIR/cmsset_default.sh
+source /cvmfs/cms.cern.ch/cmsset_default.sh
 
 # set up CMSSW release area
-scramv1 project CMSSW_10_2_15_patch2; pushd CMSSW_10_2_15_patch2/src
+scramv1 project CMSSW_10_2_16; pushd CMSSW_10_2_16/src
 eval `scramv1 runtime -sh`
 
 # JEC
