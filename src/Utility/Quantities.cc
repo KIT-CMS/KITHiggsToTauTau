@@ -70,23 +70,15 @@ double Quantities::MetChiSquare(TVector2 const& v, ROOT::Math::SMatrix<double, 2
 double Quantities::MetPerpToZ(RMFLV const& lepton1, RMFLV const& lepton2, RMFLV const& met)
 {
 	RMFLV diLepton = lepton1 + lepton2;
-        auto diLepton2D = ROOT::Math::Polar2DVectorF(diLepton.Pt(), diLepton.Phi());
-        auto diLepton2D_Dir = diLepton2D.Unit();
-        auto met2D = ROOT::Math::Polar2DVectorF(met.Pt(), met.Phi());
-
-        float metpar =  met2D.Dot(diLepton2D_Dir);
-        auto metperp_vec = (met2D - metpar*diLepton2D_Dir);
-        float metperp = metperp_vec.R() * ((metperp_vec.Phi() <= diLepton2D.Phi() ) ? -1.0 : 1.0);
-        return metperp;
+        float deltaPhiDiLepMEt = ROOT::Math::VectorUtil::DeltaPhi(diLepton, met);
+        auto metU2 = met.Pt() * TMath::Sin(deltaPhiDiLepMEt);
+        return metU2;
 }
 
 double Quantities::MetParToZ(RMFLV const& lepton1, RMFLV const& lepton2, RMFLV const& met)
 {
 	RMFLV diLepton = lepton1 + lepton2;
-        auto diLepton2D = ROOT::Math::Polar2DVectorF(diLepton.Pt(), diLepton.Phi());
-        auto diLepton2D_Dir = diLepton2D.Unit();
-        auto met2D = ROOT::Math::Polar2DVectorF(met.Pt(), met.Phi());
-
-        float metpar =  met2D.Dot(diLepton2D_Dir);
-        return metpar;
+        float deltaPhiDiLepMEt = ROOT::Math::VectorUtil::DeltaPhi(diLepton, met);
+        auto metU1 = met.Pt() * TMath::Cos(deltaPhiDiLepMEt);
+        return metU1;
 }
