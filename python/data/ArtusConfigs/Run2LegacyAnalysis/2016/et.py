@@ -128,8 +128,8 @@ def build_config(nickname, **kwargs):
   config["TopPtReweightingStrategy"] = "Run1"
 
   if isEmbedded:
-      config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_1.root"
-      config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_1.root"
+      config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
+      config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
       config["EmbeddedWeightWorkspaceWeightNames"]=[
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
@@ -165,7 +165,7 @@ def build_config(nickname, **kwargs):
   ]
   else:
     ### Efficiencies & weights configuration
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_1.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
     config["RooWorkspaceWeightNames"] = [
       "0:eleRecoWeight",
       "0:isoWeight",
