@@ -13,9 +13,9 @@ void BTagEffConsumer::Init(setting_type const& settings)
     double ptBins[ptNBins];
     ptBins[0] = 20, ptBins[1] = 30, ptBins[2] = 40, ptBins[3] = 50, ptBins[4] = 60, ptBins[5] = 70, ptBins[6] = 80, ptBins[7] = 100, ptBins[8] = 120;
     ptBins[9] = 160, ptBins[10] = 210, ptBins[11] = 260, ptBins[12] = 320, ptBins[13] = 400, ptBins[14] = 500, ptBins[15] = 600, ptBins[16] = 700, ptBins[17] = 800, ptBins[18] = 900, ptBins[19] = 1000;
-    int etaNBins = 5;
+    int etaNBins = 6;
     double etaBins[etaNBins];
-    etaBins[0] = 0.0, etaBins[1] = 0.9, etaBins[2] = 1.2, etaBins[3] = 2.1, etaBins[4] = 2.4;//, etaBins[4] =  5.0;
+    etaBins[0] = 0.0, etaBins[1] = 0.9, etaBins[2] = 1.2, etaBins[3] = 2.1, etaBins[4] = 2.4, etaBins[5] = 2.5; //, etaBins[4] =  5.0;
     m_BTaggingEff_Denom_b   = new TH2D("BTaggingEff_Denom_b", ";p_{T} [GeV];#eta", ptNBins-1, ptBins, etaNBins-1, etaBins);
     m_BTaggingEff_Denom_c   = new TH2D("BTaggingEff_Denom_c", ";p_{T} [GeV];#eta", ptNBins-1, ptBins, etaNBins-1, etaBins);
     m_BTaggingEff_Denom_udsg = new TH2D("BTaggingEff_Denom_udsg", ";p_{T} [GeV];#eta", ptNBins-1, ptBins, etaNBins-1, etaBins);
