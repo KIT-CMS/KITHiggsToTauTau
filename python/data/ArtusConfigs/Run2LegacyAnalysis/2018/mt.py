@@ -389,10 +389,6 @@ def build_config(nickname, **kwargs):
   # Subanalyses settings
   if btag_eff:
     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
-
-
-  if btag_eff:
-    config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
     if pipelines != ['nominal']:
         raise Exception("There is no use case for calculating btagging efficiency with systematics shifts: %s" % ' '.join(pipelines))
 
