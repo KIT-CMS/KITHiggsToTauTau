@@ -69,7 +69,13 @@ class HiggsToTauTauAnalysisWrapper():
 			self._args.hashed_rootfiles_info_path = os.path.expandvars(self._args.hashed_rootfiles_info_path)
 			log.info("Hashes file : " + self._args.hashed_rootfiles_info_path +
 				"\n\t will" + (not self._args.hashed_rootfiles_info_force) * " NOT" + " be updated")
+
 		self.setInputFilenames(self._args.input_files)
+
+		if self._args.nick_restrict is not None:
+			for k in self._gridControlInputFiles.keys():
+				if k not in self._args.nick_restrict:
+					self._gridControlInputFiles.pop(k, None)
 
 		if not self._args.n_events is None:
 			self._config["ProcessNEvents"] = self._args.n_events
@@ -241,6 +247,8 @@ class HiggsToTauTauAnalysisWrapper():
 		#configOptionsGroup.add_argument("-p", "--pipeline-configs", nargs="+", action="append",
 		#                                help="JSON pipeline configurations. Single entries (whitespace separated strings) are first merged. Then all entries are expanded to get all possible combinations. For each expansion, this option has to be used. Afterwards, all results are merged into the JSON base config.")
 		configOptionsGroup.add_argument("--nick", default="auto",
+		                                help="Kappa nickname name that can be used for switch between sample-dependent settings.")
+		configOptionsGroup.add_argument("--nick-restrict", default=None, type=str, nargs="*",
 		                                help="Kappa nickname name that can be used for switch between sample-dependent settings.")
 
 		configOptionsGroup.add_argument("--disable-repo-versions", default=False, action="store_true",
@@ -662,16 +670,16 @@ class HiggsToTauTauAnalysisWrapper():
 		# Multiprocessing only splits by input files: Maximum number of threads is number of inputfiles
 		n_files = len(base_config["InputFiles"])
 		if(n_threads > n_files):
-			n_threads = n_files		
+			n_threads = n_files
 		files_per_thread = int(ceil(float(n_files)/float(n_threads)))
-	
+
 		for i, filesplit in enumerate(range(0, n_files, files_per_thread)):
 			new_config = deepcopy(base_config)
 			new_config["InputFiles"] = base_config["InputFiles"][filesplit:filesplit+files_per_thread]
 			new_config["OutputPath"] = base_config["OutputPath"].replace(".root","_{}.root".format(i))
 			outputs.append(new_config["OutputPath"])
 			with open(self._configFilename.replace(".json","_{}.json".format(i)), 'w') as outfile:
-				json.dump(new_config, outfile)			
+				json.dump(new_config, outfile)
 			command = self._executable + " " + self._configFilename.replace(".json","_{}.json".format(i))
 			expression_list.append(command)
 
