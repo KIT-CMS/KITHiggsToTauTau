@@ -427,6 +427,9 @@ public:
         double m_ggh_NNLO_weight = 1.0;
         std::vector<double> m_THU_ggH;
 
+        //filled by TauQuantitiesForTauIDFakeRateMeasurementProducer
+        KTau* m_validTauForTauIDFakeRateMeasurement = nullptr;
+
         //filled by L1TauTriggerMatchingProducers
         std::map<KLepton*, std::map<std::string, bool>* > m_additionalL1TauMatchedLeptons;
         std::map<KTau*, std::map<std::string, bool> > m_additionalL1TauMatchedTaus;
