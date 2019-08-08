@@ -395,7 +395,7 @@ public:
             	LOG(DEBUG) << "Original MET (px,py): " << (product.*m_metMemberUncorrected)->p4.Px() << "," << (product.*m_metMemberUncorrected)->p4.Py() << " corrected MET (px,py): " << (product.*m_metMemberCorrected).p4.Px() << "," << (product.*m_metMemberCorrected).p4.Py();
 		
 		// Apply the correction to the MET object, if required (done for all the samples)
-		if (m_doMetSys)
+		if (m_doMetSys && apply_RC)
 		{
 			float correctedMetShiftX, correctedMetShiftY;
 			
@@ -404,7 +404,6 @@ public:
 				genPx, genPy,
 				visPx, visPy,
 				nJets30,
-				m_processType,
 				m_sysType,
 				m_sysShift,
 				correctedMetShiftX,

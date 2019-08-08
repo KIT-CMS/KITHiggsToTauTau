@@ -139,18 +139,19 @@ def build_config(nickname, **kwargs):
   if year == 2016:   config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2016.root"
   elif year == 2017: config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2017.root"
   elif year == 2018: config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2018.root"
-  if year == 2016:   config["MetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/PFMEtSys_2016.root"
-  elif year == 2017: config["MetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
-  elif year == 2018: config["MetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
+  if year == 2016:   config["MetShiftCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/PFMETSys_2016.root"
+  elif year == 2017: config["MetShiftCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/PFMETSys_2017.root"
+  elif year == 2018: config["MetShiftCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/PFMETSys_2018.root"
 
   if year == 2016:   config["PuppiMetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PuppiMET_2016.root"
   elif year == 2017: config["PuppiMetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PuppiMET_2017.root"
   elif year == 2018: config["PuppiMetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PuppiMET_2018.root"
-  if year == 2016:   config["PuppiMetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/PFMEtSys_2016.root"
-  elif year == 2017: config["PuppiMetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
-  elif year == 2018: config["PuppiMetShiftCorrectorFile"] = "HiggsAnalysis/KITHiggsToTauTau/data/root/recoilMet/MEtSys_2017.root"
+  if year == 2016:   config["PuppiMetShiftCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/PuppiMETSys_2016.root"
+  elif year == 2017: config["PuppiMetShiftCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/PuppiMETSys_2017.root"
+  elif year == 2018: config["PuppiMetShiftCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/PuppiMETSys_2018.root"
 
   config["MetCorrectionMethod"] = "none" if (isData  or isEmbedded) else "quantileMappingHist"
+  #config["MetCorrectionMethod"] = "none" if (isData  or isEmbedded) else "meanResolution"
   config["UpdateMetWithCorrectedLeptons"] = True
   config["UpdateMetWithCorrectedLeptonsFromSignalOnly"] = True
   config["ChooseMvaMet"] = False
