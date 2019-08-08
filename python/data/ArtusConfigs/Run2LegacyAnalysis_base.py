@@ -16,6 +16,7 @@ def build_config(nickname, **kwargs):
   # extract the known additional parameters --analysis-channels
   analysis_channels = ['all'] if "analysis_channels" not in kwargs else kwargs["analysis_channels"]
   btag_eff = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "btag-eff" else False
+  etau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "etau-fake-es" else False
   no_svfit = True if "no_svfit" in kwargs and kwargs["no_svfit"] else False
 
   log.debug("%s \n %25s %-30r \n %30s %-25s" % ("    Run2LegacyAnalysis_base::", "btag_eff:", btag_eff, "analysis_channels: ", ' '.join(analysis_channels)))
@@ -205,7 +206,7 @@ def build_config(nickname, **kwargs):
     if "all" in analysis_channels:
       analysis_channels = allowed_channels
     else:
-      analysis_channels=list(set(analysis_channels).intersection(set(allowed_channels)))  
+      analysis_channels=list(set(analysis_channels).intersection(set(allowed_channels)))
 
   # pipelines - channels including systematic shifts
   config["Pipelines"] = jsonTools.JsonDict()
@@ -215,6 +216,19 @@ def build_config(nickname, **kwargs):
   if "mm" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.mm"%str(year)).build_config(nickname, **kwargs)
   if "all" in analysis_channels or "mt" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.mt"%str(year)).build_config(nickname, **kwargs)
   if "all" in analysis_channels or "tt" in analysis_channels: config["Pipelines"] += importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.%s.tt"%str(year)).build_config(nickname, **kwargs)
+
+  if etau_fake_es:
+    isEWKZ2Jets = re.search("EWKZ2Jets", nickname)
+    for pipeline_name, pipeline_config in config["Pipelines"].iteritems():
+      # Lower the tau pt cut to 20 to be able to perform the FES variation on the plotting step instead of artus.
+      # Meaning: the higher cut should be re-applied later on.
+      if ((pipeline_name.startswith('et_') and pipeline_name.endswith("Shift_0")) or (pipeline_name == 'et_nominal')) and (isDY or isEWKZ2Jets or isEmbedded):
+        pipeline_config["TauLowerPtCuts"] = ["20.0"]
+        pipeline_config["Quantities"].extend(["leadingTauLV"])
+
+      # Ensuring the MinimalPlotLevel filter can be restored during the plotting
+      pipeline_config["Quantities"].extend(["nDiElectronVetoPairsOS", "extraelec_veto", "extramuon_veto"])
+      pipeline_config["Quantities"] = list(set(pipeline_config["Quantities"]))
 
   if btag_eff or no_svfit:  # disable SVFit
     for pipeline_config in config["Pipelines"].values():
