@@ -21,6 +21,8 @@ from math import ceil
 import Artus.Utility.jsonTools as jsonTools
 import Artus.Utility.tools as tools
 import Artus.Utility.profile_cpp as profile_cpp
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 import sys
 import importlib
@@ -72,10 +74,14 @@ class HiggsToTauTauAnalysisWrapper():
 
 		self.setInputFilenames(self._args.input_files)
 
+		print 'was:', self._gridControlInputFiles.keys()
 		if self._args.nick_restrict is not None:
+			self._args.nick_restrict = ' '.join(self._args.nick_restrict).split()
 			for k in self._gridControlInputFiles.keys():
 				if k not in self._args.nick_restrict:
 					self._gridControlInputFiles.pop(k, None)
+
+		print 'left:', self._gridControlInputFiles.keys()
 
 		if not self._args.n_events is None:
 			self._config["ProcessNEvents"] = self._args.n_events
@@ -116,8 +122,6 @@ class HiggsToTauTauAnalysisWrapper():
 			# save final config
 			self.saveConfig(self._args.save_config)
 			if self._args.print_config:
-				import pprint
-				pp = pprint.PrettyPrinter(indent=4)
 				log.info(pp.pformat(self._config))
 
 			# set LD_LIBRARY_PATH
@@ -488,9 +492,10 @@ class HiggsToTauTauAnalysisWrapper():
 			with open(job, "r") as jobinfo:
 				parse_files = False
 				for line in jobinfo:
-					var, status = line.strip().split("=")
-					status = status.replace('"', '')
-					if "status" in line and "SUCCESS" in line:
+					if not line.startswith('status'):
+						continue
+					if "SUCCESS" in line:
+						n_successfull_jobs += 1
 						parse_files = True
 						break
 			if parse_files:
@@ -505,8 +510,8 @@ class HiggsToTauTauAnalysisWrapper():
 							break
 				main_key = ""
 				for key in dbs.keys():
-					#pdb.set_trace()
-					if re.search("kappa_%s_[0-9]+.root"%key, files[0]):
+					# pdb.set_trace()
+					if re.search("kappa_%s_[0-9]+.root" % key, files[0]):
 						main_key = key
 						break
 				for sfile in files:
@@ -518,7 +523,7 @@ class HiggsToTauTauAnalysisWrapper():
 		length = 0
 		for key, item in dbs.iteritems():
 			length += len(item)
-		log.info("Final dbs consists of %i files" %length)
+		log.info("Final dbs consists of %i files" % length)
 		return dbs
 
 	def extractNickname(self, string): ###could be inherited from artusWrapper!
