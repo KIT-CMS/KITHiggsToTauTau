@@ -115,9 +115,9 @@ public:
 			m_correctionMethod = MetCorrectorBase::CorrectionMethod::NONE;
 			LOG(WARNING) << "MetCorrectionMethod is 'none'. No recoil corrections will be applied";
 		}
-                else
+        else
 			LOG(FATAL) << "Invalid MetCorrectionMethod option. Available are 'quantileMapping' and 'meanResolution' and 'none'";
-                LOG(INFO) << "MetCorrectionMethod is " << settings.GetMetCorrectionMethod() << std::endl;
+        LOG(DEBUG) << "MetCorrectionMethod is " << settings.GetMetCorrectionMethod() << std::endl;
 
 		if (settings.GetMetUncertaintyShift())
 		{
