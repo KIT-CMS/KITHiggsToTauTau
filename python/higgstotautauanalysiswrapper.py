@@ -495,7 +495,6 @@ class HiggsToTauTauAnalysisWrapper():
 					if not line.startswith('status'):
 						continue
 					if "SUCCESS" in line:
-						n_successfull_jobs += 1
 						parse_files = True
 						break
 			if parse_files:
