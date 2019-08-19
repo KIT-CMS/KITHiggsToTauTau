@@ -31,9 +31,9 @@ def build_config(nickname, **kwargs):
                 "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_2016LegacySF_V1.csv",
                 #TODO measure efficiencies for year 2016
                 "BTagEfficiencyFile": {
-                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_tight.root",
-                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root",
-                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_loose.root",
+                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2016_tight_all_proc_DeepCSV_tight_inclusive_inclusive.root",
+                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2016_medium_all_proc_DeepCSV_medium_inclusive_inclusive.root",
+                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2016_loose_all_proc_DeepCSV_loose_inclusive_inclusive.root",
                 },
                 "BTaggerWorkingPoints": [
                     "tight:0.8953",
@@ -45,9 +45,9 @@ def build_config(nickname, **kwargs):
             2017 : {
                 "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_94XSF_V4_B_F.csv",
                 "BTagEfficiencyFile": {
-                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_tight.root",
-                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root",
-                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_loose.root",
+                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2017_tight_all_proc_DeepCSV_tight_inclusive_inclusive.root",
+                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2017_medium_all_proc_DeepCSV_medium_inclusive_inclusive.root",
+                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/data/Eff_DeepCSV_2017_loose_all_proc_DeepCSV_loose_inclusive_inclusive.root",
                 },
                 "BTaggerWorkingPoints": [
                     "tight:0.8001",
@@ -60,9 +60,9 @@ def build_config(nickname, **kwargs):
                 "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_102XSF_V1.csv",
                 #TODO measure efficiencies for year 2018
                 "BTagEfficiencyFile": {
-                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_tight.root",
-                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root",
-                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_loose.root",
+                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2018_tight_all_proc_DeepCSV_tight_inclusive_inclusive.root",
+                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2018_medium_all_proc_DeepCSV_medium_inclusive_inclusive.root",
+                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2018_loose_all_proc_DeepCSV_loose_inclusive_inclusive.root",
                 },
                 "BTaggerWorkingPoints": [
                     "tight:0.7527",
@@ -77,9 +77,9 @@ def build_config(nickname, **kwargs):
                 "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_2016LegacySF_V1.csv",
                 #TODO measure efficiencies for year 2016
                 "BTagEfficiencyFile": {
-                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_tight.root",
-                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root",
-                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_loose.root",
+                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2016_tight_all_proc_DeepFlavour_tight_inclusive_inclusive.root",
+                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2016_medium_all_proc_DeepFlavour_medium_inclusive_inclusive.root",
+                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2016_loose_all_proc_DeepFlavour_loose_inclusive_inclusive.root",
                 },
                 "BTaggerWorkingPoints": [
                     "tight:0.7221",
@@ -92,9 +92,9 @@ def build_config(nickname, **kwargs):
                 "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepFlavour_94XSF_V2_B_F.csv",
                 #TODO measure efficiencies for year 2017
                 "BTagEfficiencyFile": {
-                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_tight.root",
-                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root",
-                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_loose.root",
+                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2017_loose_all_proc_DeepFlavour_loose_inclusive_inclusive.root",
+                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2017_medium_all_proc_DeepFlavour_medium_inclusive_inclusive.root",
+                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2017_tight_all_proc_DeepFlavour_tight_inclusive_inclusive.root",
                 },
                 "BTaggerWorkingPoints": [
                     "tight:0.7489",
@@ -107,9 +107,9 @@ def build_config(nickname, **kwargs):
                 "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_102XSF_V1.csv",
                 #TODO measure efficiencies for year 2018
                 "BTagEfficiencyFile": {
-                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_tight.root",
-                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_medium.root",
-                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/tagging_efficiencies_march2018_btageff-all_samp-inc-DeepCSV_loose.root",
+                    "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2018_loose_all_proc_DeepFlavour_loose_inclusive_inclusive.root",
+                    "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2018_medium_all_proc_DeepFlavour_medium_inclusive_inclusive.root",
+                    "loose": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2018_tight_all_proc_DeepFlavour_tight_inclusive_inclusive.root",
                 },
                 "BTaggerWorkingPoints": [
                     "tight:0.7264",
