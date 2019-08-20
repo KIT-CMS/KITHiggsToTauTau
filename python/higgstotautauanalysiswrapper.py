@@ -218,7 +218,7 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("--sub-analysis", default='', type=str, action='store', choices=['btag-eff', 'etau-fake-es', 'tau-es'],
 			help="Keys to run a sub-analysis on top of base analyseis. Only one sub-analysis can be run at a time! Example: btag-egg Option to simplify the configs in order to estimate the efficiencies faster. [Default: %(default)s]")
 
-		self._parser.add_argument("--btager", default="DeepCSV", type=str, help="Btagger used. [Default: %(default)s]")
+		self._parser.add_argument("--btager", default="DeepFlavour", type=str, help="Btagger used. [Default: %(default)s]")
 		self._parser.add_argument("--btager-wp", default=["medium"], type=str, nargs='+', choices=["tight", "medium", "loose"], help="Btagger working point. [Default: %(default)s]")
 
 		self._parser.add_argument("--etau-fake-es-group", default=None, type=int, help="Dew to many open files all ES can't be processed at ones, therefore they were subdivided on 4 groups. [Default: %(default)s]")
