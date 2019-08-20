@@ -77,9 +77,14 @@ class HiggsToTauTauAnalysisWrapper():
 		print 'was:', self._gridControlInputFiles.keys()
 		if self._args.nick_restrict is not None:
 			self._args.nick_restrict = ' '.join(self._args.nick_restrict).split()
+			self._config["InputFiles"] = []
 			for k in self._gridControlInputFiles.keys():
 				if k not in self._args.nick_restrict:
 					self._gridControlInputFiles.pop(k, None)
+				else:
+					for l in self._gridControlInputFiles[k]:
+						self._config["InputFiles"].append(l.replace(" ", "").split('=')[0])
+			self._config["InputFiles"] = list(set(self._config["InputFiles"]))
 
 		print 'left:', self._gridControlInputFiles.keys()
 
