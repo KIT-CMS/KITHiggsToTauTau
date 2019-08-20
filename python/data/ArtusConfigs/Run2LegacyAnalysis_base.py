@@ -122,10 +122,12 @@ def build_config(nickname, **kwargs):
                                                                     "producer:GenBosonDiLeptonDecayModeProducer"))
     if isEmbedded:                      config["Processors"].append( "producer:GeneratorWeightProducer")
     #if isTTbar:                        config["Processors"].append( "producer:TTbarGenDecayModeProducer")
+  print nickname
+  pu_nick = nickname if not "h1M125tautau" in nickname else "GluGluHToTauTauM125_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_ext1-v1"
 
   if isData or isEmbedded:                config["PileupWeightFile"] = "not needed"
   elif year == 2016: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2016_271036-284044_13TeVMoriond17_23Sep2016ReReco_69p2mbMinBiasXS.root"
-  elif year == 2017: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2017_294927-306462_13TeVFall17_31Mar2018ReReco_69p2mbMinBiasXS/%s.root"%nickname
+  elif year == 2017: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2017_294927-306462_13TeVFall17_31Mar2018ReReco_69p2mbMinBiasXS/%s.root"%pu_nick
   elif year == 2018: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2018_314472-325175_13TeV_17SeptEarlyReReco2018ABC_PromptEraD_Collisions18.root"
   else:
     print "PileupWeightFile not defined"

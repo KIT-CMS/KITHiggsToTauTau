@@ -256,7 +256,20 @@ def build_config(nickname, **kwargs):
     ])
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
-
+  config["Quantities"].extend([
+      "diBJetPt",
+      "diBJetEta",
+      "diBJetPhi",
+      "diBJetMass",
+      "diBJetDeltaPhi",
+      "diBJetAbsDeltaEta",
+      "diBJetdiLepPhi",
+      "pt_ttvisbb",
+      "pt_ttbb",
+      "pt_ttbb_puppi",
+      "m_ttvisbb",
+      "m_ttbb",
+      "m_ttbb_puppi"])
   ### Processors & consumers configuration
   config["Processors"] = []
   #if not (isEmbedded):           config["Processors"].append( "producer:ElectronCorrectionsProducer")
@@ -288,6 +301,7 @@ def build_config(nickname, **kwargs):
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
+                                                              "producer:DiBJetQuantitiesProducer",
                                                               "filter:MinimalPlotlevelFilter"))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")

@@ -332,7 +332,31 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
         });
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj", [](event_type const& event, product_type const& product)
         {
-                return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
+                return product.m_diJetSystemAvailable ? (product.m_diLeptonSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diBJetSystemAvailable ? (product.m_diLeptonSystem + product.m_diBJetSystem).Pt() : DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diBJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem).Pt() : DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_puppi", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diBJetSystemAvailable ? (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem).Pt() : DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttvisbb", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diBJetSystemAvailable ? (product.m_diLeptonSystem + product.m_diBJetSystem).mass() : DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diBJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem).mass() : DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_puppi", [](event_type const& event, product_type const& product)
+        {
+                return product.m_diBJetSystemAvailable ? (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem).mass() : DefaultValues::UndefinedFloat;
         });
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj_puppi", [](event_type const& event, product_type const& product)
         {

@@ -321,7 +321,20 @@ def build_config(nickname, **kwargs):
     ])
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
-
+  config["Quantities"].extend([
+      "diBJetPt",
+      "diBJetEta",
+      "diBJetPhi",
+      "diBJetMass",
+      "diBJetDeltaPhi",
+      "diBJetAbsDeltaEta",
+      "diBJetdiLepPhi",
+      "pt_ttvisbb",
+      "pt_ttbb",
+      "pt_ttbb_puppi",
+      "m_ttvisbb",
+      "m_ttbb",
+      "m_ttbb_puppi"])
   ### Processors & consumers configuration
   config["Processors"] =   []#                                  ["producer:MuonCorrectionsProducer"] if isEmbedded else []
   #if not (isEmbedded):           config["Processors"].append( "producer:ElectronCorrectionsProducer")
@@ -353,7 +366,8 @@ def build_config(nickname, **kwargs):
                                                               "producer:PuppiMetCorrector",
                                                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
-                                                              "producer:DiJetQuantitiesProducer"))
+                                                              "producer:DiJetQuantitiesProducer",
+                                                              "producer:DiBJetQuantitiesProducer"))
   if not isEmbedded:             config["Processors"].extend(("producer:SimpleEleTauFakeRateWeightProducer",
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
