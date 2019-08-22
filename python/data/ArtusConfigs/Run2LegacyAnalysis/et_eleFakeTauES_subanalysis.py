@@ -44,12 +44,12 @@ def build_config(nickname, **kwargs):
     datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
 
     # define frequently used conditions
-    isEmbedded = datasetsHelper.isEmbedded(nickname)
+    # isEmbedded = datasetsHelper.isEmbedded(nickname)
     isDY = re.search("DY.?JetsToLLM", nickname)
     isEWKZ2Jets = re.search("EWKZ2Jets", nickname)
 
     # Pipelines for producing shapes for calculating the TauElectronFakeEnergyCorrection*
-    if isDY or isEWKZ2Jets or isEmbedded:
+    if isDY or isEWKZ2Jets:
 
         root_str = lambda x: str(x).replace("-", "neg").replace(".", "p")
 

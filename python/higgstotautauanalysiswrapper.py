@@ -74,8 +74,9 @@ class HiggsToTauTauAnalysisWrapper():
 
 		self.setInputFilenames(self._args.input_files)
 
-		print 'was:', self._gridControlInputFiles.keys()
+
 		if self._args.nick_restrict is not None:
+			log.info('old nicks list: [' + ', '.join(self._gridControlInputFiles.keys()) + ' ]')
 			self._args.nick_restrict = ' '.join(self._args.nick_restrict).split()
 			self._config["InputFiles"] = []
 			for k in self._gridControlInputFiles.keys():
@@ -85,8 +86,7 @@ class HiggsToTauTauAnalysisWrapper():
 					for l in self._gridControlInputFiles[k]:
 						self._config["InputFiles"].append(l.replace(" ", "").split('=')[0])
 			self._config["InputFiles"] = list(set(self._config["InputFiles"]))
-
-		print 'left:', self._gridControlInputFiles.keys()
+			log.info('new nicks list: [' + ', '.join(self._gridControlInputFiles.keys()) + ' ]')
 
 		if not self._args.n_events is None:
 			self._config["ProcessNEvents"] = self._args.n_events
