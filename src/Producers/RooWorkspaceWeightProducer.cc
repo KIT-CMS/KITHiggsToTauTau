@@ -197,6 +197,11 @@ void EmbeddedWeightProducer::Produce( event_type const& event, product_type & pr
 				{
 					args.push_back(lepton->p4.Pt());
 				}
+				if(arg=="t_dm")
+				{
+					KTau* tau = static_cast<KTau*>(lepton);
+					args.push_back(tau->decayMode);
+				}
 			}
 			if(weightNames.second.at(index).find("muonEffTrgWeight") != std::string::npos){
 				product.m_weights[weightNames.second.at(index)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
