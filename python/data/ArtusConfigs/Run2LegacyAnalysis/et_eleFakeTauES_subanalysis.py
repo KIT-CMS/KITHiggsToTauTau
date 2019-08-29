@@ -25,6 +25,8 @@ def build_config(nickname, **kwargs):
     """Produce shifts for e->tau FR ES measurements"""
     log.debug("Produce shifts for e->tau FR ES measurements")
     etau_fake_es_group = kwargs["etau_fake_es_group"] if "etau_fake_es_group" in kwargs else None
+    etau_fake_es_shifts = kwargs["etau_fake_es_shifts"] if "etau_fake_es_shifts" in kwargs else None
+
     etau_es_shifts_groups = [
         [-4, -3, -2, -1.75, -1.5, -1.25, -1, -0.75, -0.5, -0.25],
         [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5],
@@ -36,9 +38,12 @@ def build_config(nickname, **kwargs):
     if isinstance(etau_fake_es_group, int) and abs(etau_fake_es_group) < len(etau_es_shifts_groups):
         etau_es_shifts = etau_es_shifts_groups[etau_fake_es_group]
         print "FES:", etau_es_shifts
-    else:
+    elif etau_fake_es_shifts is None:
         print "FES shifts not properly specified -> skipping. etau_fake_es_group :", etau_fake_es_group
         return
+    else:
+        etau_es_shifts = etau_fake_es_shifts
+
 
     config = jsonTools.JsonDict()
     datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))

@@ -222,6 +222,7 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("--btager-wp", default=["medium"], type=str, nargs='+', choices=["tight", "medium", "loose"], help="Btagger working point. [Default: %(default)s]")
 
 		self._parser.add_argument("--etau-fake-es-group", default=None, type=int, help="Dew to many open files all ES can't be processed at ones, therefore they were subdivided on 4 groups. [Default: %(default)s]")
+		self._parser.add_argument("--etau-fake-es-shifts", '--fes-c', dest='etau_fake_es_shifts', default=None, type=float, nargs='*', help="FES shifts. [Default: %(default)s]")
 
 		self._parser.add_argument("--tau-es-charged", '--tes-c', dest='tau_es_charged', default=None, type=float, nargs='*', help="Charged component TES shifts. [Default: %(default)s]")
 		self._parser.add_argument("--tau-es-neutral", '--tes-n', dest='tau_es_neutral', default=None, type=float, nargs='*', help="Neutral component TES shifts. [Default: %(default)s]")
@@ -369,6 +370,7 @@ class HiggsToTauTauAnalysisWrapper():
 			no_svfit= not self._args.svfit,
 			pipelines=self._args.pipelines,
 			etau_fake_es_group=self._args.etau_fake_es_group,
+			etau_fake_es_shifts=self._args.etau_fake_es_shifts,
 			tau_es_charged=self._args.tau_es_charged,
 			tau_es_neutral=self._args.tau_es_neutral,
 			tau_es_method=self._args.tau_es_method,
@@ -769,7 +771,7 @@ class HiggsToTauTauAnalysisWrapper():
                 if self._args.n_events:
                         epilogArguments += "-e " + str(self._args.n_events) + " --skip-events $SKIP_EVENTS"
 		if self._args.copy_remote_files:
-			epilogArguments += "--copy-remote-files "
+			epilogArguments += " --copy-remote-files "
 		if not self._args.ld_library_paths is None:
 			epilogArguments += ("--ld-library-paths %s " % " ".join(self._args.ld_library_paths))
 
@@ -781,12 +783,15 @@ class HiggsToTauTauAnalysisWrapper():
 		if self._args.pipelines is not None:
 			epilogArguments += (" --pipelines %s " % " ".join(self._args.pipelines))
 
+		if self._args.etau_fake_es_shifts is not None:
+			epilogArguments += (" --etau-fake-es-shifts %s " % (' '.join(str(i) for i in self._args.etau_fake_es_shifts)))
 		if self._args.tau_es_charged is not None:
 			epilogArguments += (" --tau-es-charged %s " % (' '.join(str(i) for i in self._args.tau_es_charged)))
 		if self._args.tau_es_neutral is not None:
 			epilogArguments += (" --tau-es-neutral %s " % (' '.join(str(i) for i in self._args.tau_es_neutral)))
 		if self._args.tau_es_method is not None:
 			epilogArguments += (" --tau-es-method %s " % self._args.tau_es_method)
+
 
 		if self._args.etau_fake_es_group is not None:
 			epilogArguments += (" --etau-fake-es-group %s " % self._args.etau_fake_es_group)
