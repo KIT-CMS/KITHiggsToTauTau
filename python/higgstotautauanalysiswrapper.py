@@ -215,14 +215,17 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("-x", "--executable", help="Artus executable. [Default: %(default)s]", default=os.path.basename(sys.argv[0]))
 		self._parser.add_argument("-a", "--analysis", required=True, help="Analysis nick [SM, MSSM] or import path ('HiggsAnalysis.KITHiggsToTauTau. ...' or 'HiggsAnalysis/KITHiggsToTauTau/python/ ... .py') of the config module.")
 
-		self._parser.add_argument("--sub-analysis", default='', type=str, action='store', choices=['btag-eff', 'etau-fake-es', 'tau-es'],
+		self._parser.add_argument("--sub-analysis", default='', type=str, action='store',
+			choices=['btag-eff', 'etau-fake-es', 'mtau-fake-es', 'tau-es'],
 			help="Keys to run a sub-analysis on top of base analyseis. Only one sub-analysis can be run at a time! Example: btag-egg Option to simplify the configs in order to estimate the efficiencies faster. [Default: %(default)s]")
 
 		self._parser.add_argument("--btager", default="DeepFlavour", type=str, help="Btagger used. [Default: %(default)s]")
 		self._parser.add_argument("--btager-wp", default=["medium"], type=str, nargs='+', choices=["tight", "medium", "loose"], help="Btagger working point. [Default: %(default)s]")
 
 		self._parser.add_argument("--etau-fake-es-group", default=None, type=int, help="Dew to many open files all ES can't be processed at ones, therefore they were subdivided on 4 groups. [Default: %(default)s]")
-		self._parser.add_argument("--etau-fake-es-shifts", '--fes-c', dest='etau_fake_es_shifts', default=None, type=float, nargs='*', help="FES shifts. [Default: %(default)s]")
+		self._parser.add_argument("--etau-fake-es-shifts", dest='etau_fake_es_shifts', default=None, type=float, nargs='*', help="FES shifts for e->tau. [Default: %(default)s]")
+
+		self._parser.add_argument("--mtau-fake-es-shifts", dest='mtau_fake_es_shifts', default=None, type=float, nargs='*', help="FES shifts for m->tau. [Default: %(default)s]")
 
 		self._parser.add_argument("--tau-es-charged", '--tes-c', dest='tau_es_charged', default=None, type=float, nargs='*', help="Charged component TES shifts. [Default: %(default)s]")
 		self._parser.add_argument("--tau-es-neutral", '--tes-n', dest='tau_es_neutral', default=None, type=float, nargs='*', help="Neutral component TES shifts. [Default: %(default)s]")
@@ -233,7 +236,8 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("--pipelines", default=["nominal"], type=str, nargs='*', action='store',
 			choices=[
 				'nominal', 'tauESperDM_shifts', 'regionalJECunc_shifts', 'tauEleFakeESperDM_shifts', 'METunc_shifts', 'METrecoil_shifts', 'eleES_shifts', 'muonES_shifts', 'btagging_shifts',
-				'tauES_subanalysis', 'et_eleFakeTauES_subanalysis', 'tauMuFakeESperDM_shifts', 'JECunc_shifts',
+				'tauMuFakeESperDM_shifts', 'JECunc_shifts',
+				'tauES_subanalysis', 'et_eleFakeTauES_subanalysis', 'mt_muoFakeTauES_subanalysis',
                                 'auto'
 			],
 			help="Pipelines to activate. Default: %(default)s]")
@@ -371,6 +375,7 @@ class HiggsToTauTauAnalysisWrapper():
 			pipelines=self._args.pipelines,
 			etau_fake_es_group=self._args.etau_fake_es_group,
 			etau_fake_es_shifts=self._args.etau_fake_es_shifts,
+			mtau_fake_es_shifts=self._args.mtau_fake_es_shifts,
 			tau_es_charged=self._args.tau_es_charged,
 			tau_es_neutral=self._args.tau_es_neutral,
 			tau_es_method=self._args.tau_es_method,
@@ -783,18 +788,20 @@ class HiggsToTauTauAnalysisWrapper():
 		if self._args.pipelines is not None:
 			epilogArguments += (" --pipelines %s " % " ".join(self._args.pipelines))
 
+		if self._args.etau_fake_es_group is not None:
+			epilogArguments += (" --etau-fake-es-group %s " % self._args.etau_fake_es_group)
 		if self._args.etau_fake_es_shifts is not None:
 			epilogArguments += (" --etau-fake-es-shifts %s " % (' '.join(str(i) for i in self._args.etau_fake_es_shifts)))
+
+		if self._args.mtau_fake_es_shifts is not None:
+			epilogArguments += (" --mtau-fake-es-shifts %s " % (' '.join(str(i) for i in self._args.mtau_fake_es_shifts)))
+
 		if self._args.tau_es_charged is not None:
 			epilogArguments += (" --tau-es-charged %s " % (' '.join(str(i) for i in self._args.tau_es_charged)))
 		if self._args.tau_es_neutral is not None:
 			epilogArguments += (" --tau-es-neutral %s " % (' '.join(str(i) for i in self._args.tau_es_neutral)))
 		if self._args.tau_es_method is not None:
 			epilogArguments += (" --tau-es-method %s " % self._args.tau_es_method)
-
-
-		if self._args.etau_fake_es_group is not None:
-			epilogArguments += (" --etau-fake-es-group %s " % self._args.etau_fake_es_group)
 
 		if self._args.minimal_setup:
 			epilogArguments += (" --minimal-setup ")
