@@ -15,6 +15,7 @@ import os
 
 def build_config(nickname, **kwargs):
   etau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "etau-fake-es" else False
+  mtau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "mtau-fake-es" else False
   tau_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "tau-es" else False
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
@@ -68,14 +69,16 @@ def build_config(nickname, **kwargs):
         config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.036 # values for 2017 measured by RWTH/KIT; down: 1.029, central 1.036, up: 1.043 #TODO measure for 2018
 
     #TODO measure mu->tau fake ES for all years (1prong & 1prong pi0's)
-    if year == 2016:
-      config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0 # using only 1.5% uncertainty for the time-being
-      config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 1.0 # using only 1.5% uncertainty for the time-being
-    elif year == 2017:
-      config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0 # using only 2% uncertainty for the time-being
-      config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 1.0 # using only 2% uncertainty for the time-being
-    elif year == 2018:
-      config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0 # using only 2% uncertainty for the time-being
-      config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 1.0 # using only 2% uncertainty for the time-being
+    if not mtau_fake_es:
+      log.info("Fake m->tau Energy Correction applied")
+      if year == 2016:
+        config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0 # using only 1.5% uncertainty for the time-being
+        config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 1.0 # using only 1.5% uncertainty for the time-being
+      elif year == 2017:
+        config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0 # using only 2% uncertainty for the time-being
+        config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 1.0 # using only 2% uncertainty for the time-being
+      elif year == 2018:
+        config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0 # using only 2% uncertainty for the time-being
+        config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 1.0 # using only 2% uncertainty for the time-being
 
   return config

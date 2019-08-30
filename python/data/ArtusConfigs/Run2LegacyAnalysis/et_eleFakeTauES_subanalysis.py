@@ -62,6 +62,6 @@ def build_config(nickname, **kwargs):
             config["eleTauEsInclusiveShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionShift")
             config["eleTauEsOneProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngShift")
             config["eleTauEsOneProngPiZerosShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngPiZerosShift")
-            config["eleTauEsThreeProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionThreeProngShift")
+            # config["eleTauEsThreeProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionThreeProngShift")
 
     return config
