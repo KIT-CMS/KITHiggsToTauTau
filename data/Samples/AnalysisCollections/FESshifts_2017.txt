@@ -1,2 +1,2 @@
 $CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/AnalysisCollections/FESshifts_2017_MC.txt
-$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/AnalysisCollections/FESshifts_2017_EMB.txt
+#$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/AnalysisCollections/FESshifts_2017_EMB.txt
