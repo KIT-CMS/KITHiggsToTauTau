@@ -141,7 +141,7 @@ def build_config(nickname, **kwargs):
       ]
 
   ### Signal pair selection configuration
-  config["ElectronScaleAndSmearUsed"] = False
+  config["ElectronScaleAndSmearUsed"] = True if not isEmbedded else False
   config["ElectronScaleAndSmearTag"] = "ecalTrkEnergyPostCorr"
   config["ElectronLowerPtCuts"] = ["13.0"]
   config["ElectronUpperAbsEtaCuts"] = ["2.5"]
@@ -164,8 +164,8 @@ def build_config(nickname, **kwargs):
 
   ### Efficiencies & weights configuration
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1_em-channel.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1_em-channel.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -173,7 +173,6 @@ def build_config(nickname, **kwargs):
           "1:isoWeight",
           "1:looseIsoWeight",
           "1:idWeight",
-          "1:idisoWeight",
           "1:trackWeight",
 
           "1:trigger_23_data_Weight",
@@ -183,7 +182,6 @@ def build_config(nickname, **kwargs):
 
           "0:isoWeight",
           "0:idWeight",
-          "0:idisoWeight",
           "0:trackWeight",
 
           "0:trigger_23_data_Weight",
@@ -196,19 +194,17 @@ def build_config(nickname, **kwargs):
           "0:m_sel_trg_ratio",
           "0:m_sel_idEmb_ratio",
           "1:m_sel_idEmb_ratio",
-          "1:m_iso_binned_embed_ratio",
+          "1:m_iso_binned_embed_kit_ratio",
           "1:m_looseiso_binned_embed_ratio",
-          "1:m_id_embed_ratio",
-          "1:m_idiso_binned_embed_ratio",
+          "1:m_id_embed_kit_ratio",
           "1:m_trk_ratio",
           "1:m_trg_binned_23_data",
           "1:m_trg_binned_23_embed",
           "1:m_trg_binned_8_data",
           "1:m_trg_binned_8_embed",
 
-          "0:e_iso_binned_embed_ratio",
-          "0:e_id_embed_ratio",
-          "0:e_idiso_binned_embed_ratio",
+          "0:e_iso_binned_embed_kit_ratio",
+          "0:e_id90_embed_kit_ratio",
           "0:e_trk_ratio",
 
           "0:e_trg_binned_23_data",
@@ -223,7 +219,6 @@ def build_config(nickname, **kwargs):
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta",
-          "1:m_pt,m_eta,m_iso",
           "1:m_eta",
 
           "1:m_pt,m_eta,m_iso",
@@ -233,15 +228,14 @@ def build_config(nickname, **kwargs):
 
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
-          "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           ]
-  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1_em-channel.root"
-  config["QCDFactorWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1_em-channel.root"
+  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+  config["QCDFactorWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
   config["QCDFactorWorkspaceWeightNames"]=[
       "0:em_qcd_osss_binned_Weight",
       "0:em_qcd_extrap_up_Weight",
@@ -273,58 +267,55 @@ def build_config(nickname, **kwargs):
       "0:em_qcd_extrap_uncert",
   ]
   config["QCDFactorWorkspaceObjectArguments"] = [
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
 
-      "0:e_pt,m_pt",
+      "0:m_pt,e_pt",
   ]
-  if not isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1_em-channel.root"
-    config["RooWorkspaceWeightNames"] = [
-        "0:isoWeight",
-        "0:idWeight",
-        "0:trackWeight",
+  if not isEmbedded and not isData:
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    config["RooWorkspaceWeightNames"]=[
         "1:isoWeight",
+        "1:looseIsoWeight",
         "1:idWeight",
-        "0:trigger_12_Weight",
-        "0:trigger_23_Weight",
-        "1:trigger_8_Weight",
-        "1:trigger_23_Weight",
         "1:trackWeight",
+
         "1:trigger_23_data_Weight",
         "1:trigger_23_mc_Weight",
         "1:trigger_8_data_Weight",
         "1:trigger_8_mc_Weight",
+
+        "0:isoWeight",
+        "0:idWeight",
+        "0:trackWeight",
+
         "0:trigger_23_data_Weight",
         "0:trigger_23_mc_Weight",
         "0:trigger_12_data_Weight",
         "0:trigger_12_mc_Weight",
     ]
     config["RooWorkspaceObjectNames"] = [
-        "0:e_iso_binned_ratio",
-        "0:e_id_ratio",
-        "0:e_trk_ratio",
+        "1:m_iso_binned_kit_ratio",
         "1:m_looseiso_binned_ratio",
-        "1:m_id_ratio",
-        "0:e_trg_binned_12_ratio",
-        "0:e_trg_binned_23_ratio",
-        "1:m_trg_binned_8_ratio",
-        "1:m_trg_binned_23_ratio",
+        "1:m_id_kit_ratio",
         "1:m_trk_ratio",
-
         "1:m_trg_binned_23_data",
         "1:m_trg_binned_23_mc",
         "1:m_trg_binned_8_data",
         "1:m_trg_binned_8_mc",
+
+        "0:e_iso_binned_kit_ratio",
+        "0:e_id90_kit_ratio",
+        "0:e_trk_ratio",
 
         "0:e_trg_binned_23_data",
         "0:e_trg_binned_23_mc",
@@ -332,26 +323,24 @@ def build_config(nickname, **kwargs):
         "0:e_trg_binned_12_mc",
     ]
     config["RooWorkspaceObjectArguments"] = [
-        "0:e_pt,e_eta,e_iso",
-        "0:e_pt,e_eta",
-        "0:e_pt,e_eta",
+        "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta",
-        "0:e_pt,e_eta,e_iso",
-        "0:e_pt,e_eta,e_iso",
-        "1:m_pt,m_eta,m_iso",
-        "1:m_pt,m_eta,m_iso",
         "1:m_eta",
-        "1:m_pt,m_eta,m_iso",
-        "1:m_pt,m_eta,m_iso",
-        "1:m_pt,m_eta,m_iso",
-        "1:m_pt,m_eta,m_iso",
-        "0:e_pt,e_eta,e_iso",
-        "0:e_pt,e_eta,e_iso",
-        "0:e_pt,e_eta,e_iso",
-        "0:e_pt,e_eta,e_iso",
 
-  ]
+        "1:m_pt,m_eta,m_iso",
+        "1:m_pt,m_eta,m_iso",
+        "1:m_pt,m_eta,m_iso",
+        "1:m_pt,m_eta,m_iso",
+
+        "0:e_pt,e_eta,e_iso",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta,e_iso",
+        "0:e_pt,e_eta,e_iso",
+        "0:e_pt,e_eta,e_iso",
+        "0:e_pt,e_eta,e_iso",
+        ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
@@ -421,7 +410,7 @@ def build_config(nickname, **kwargs):
 
   ### Processors & consumers configuration
   config["Processors"] = []
-  # config["Processors"].append( "producer:ElectronCorrectionsProducer")
+  config["Processors"].append( "producer:ElectronCorrectionsProducer")
   config["Processors"].extend((                               "producer:HttValidLooseElectronsProducer",
                                                               "producer:HttValidLooseMuonsProducer",
                                                               "producer:HltProducer",
