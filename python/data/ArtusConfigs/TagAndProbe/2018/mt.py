@@ -219,7 +219,7 @@ def build_config(nickname, **kwargs):
               "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltPFTau180TrackPt50LooseAbsOrRelMediumHighPtRelaxedIsoIso",
               "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSelectedPFTau180MediumChargedIsolationL1HLTMatched",
         ]
-
+  """
   if isEmbedded:
       config["CheckTriggerLowerPtCutsByHltNick"] = [
               "trg_monitor_mu20tau27_hps:30.0",
@@ -242,6 +242,7 @@ def build_config(nickname, **kwargs):
               "trg_monitor_mu24tau40_tight_hps:40.0",
               "trg_monitor_mu24tau40_tight:40.0",
       ]
+  """
   config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
           "trg_monitor_mu20tau27_hps:26.0",
           "trg_monitor_mu20tau27:26.0",

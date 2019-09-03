@@ -57,6 +57,7 @@ def build_list():
     # Trigger decisions
     "trg_singleelectron_35",
     "trg_crosselectron_ele24tau30",
+    "trg_crosselectron_ele24tau30_hps",
     # Weights
     "puWeight",
     "bkgSubWeight"
