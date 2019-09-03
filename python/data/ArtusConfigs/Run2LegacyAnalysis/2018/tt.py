@@ -201,14 +201,16 @@ def build_config(nickname, **kwargs):
       "1:crossTriggerDataEfficiencyWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
             "1:muonEffIDWeight",
             "0:triggerWeight",
             "1:triggerWeight",
+            #"0:triggerdmBinnedWeight",
+            #"1:triggerdmBinnedWeight",
             ]
     config["EmbeddedWeightWorkspaceObjectNames"]=[
             "0:m_sel_trg_ratio",
@@ -216,6 +218,8 @@ def build_config(nickname, **kwargs):
             "1:m_sel_idEmb_ratio",
             "0:tt_emb_PFTau35OR40_tight_kit_ratio",
             "1:tt_emb_PFTau35OR40_tight_kit_ratio",
+            #"0:tt_emb_PFTau35OR40_tight_dm_binned_kit_ratio",
+            #"1:tt_emb_PFTau35OR40_tight_dm_binned_kit_ratio",
             ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
             "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -223,10 +227,12 @@ def build_config(nickname, **kwargs):
             "1:gt_pt,gt_eta",
             "0:t_pt",
             "1:t_pt",
+            #"0:t_pt,t_dm",
+            #"1:t_pt,t_dm",
             ]
   else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_5.root"
-    config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_5.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["TauTauTriggerWeightWorkspaceWeightNames"] = [
         "0:triggerWeight",
         "1:triggerWeight"
@@ -255,7 +261,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2"
+          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2" #, "triggerdmBinnedWeight_1", "triggerdmBinnedWeight_2"
           ])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([

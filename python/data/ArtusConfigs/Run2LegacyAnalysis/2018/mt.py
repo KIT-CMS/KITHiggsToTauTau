@@ -218,14 +218,18 @@ def build_config(nickname, **kwargs):
       "1:crossTriggerDataEfficiencyWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
           "1:muonEffIDWeight",
 
           "0:crossTriggerEmbeddedWeight",
+          "0:crosstrigger_20_embed_eff_Weight",
+          "0:crosstrigger_20_data_eff_Weight",
+          "0:crosstrigger_20_embed_Weight",
+
           "0:crossTriggerDataEfficiencyWeight",
           "0:crossTriggerEmbeddedEfficiencyWeight",
           "1:crossTriggerEmbeddedWeight",
@@ -243,12 +247,17 @@ def build_config(nickname, **kwargs):
           "1:m_sel_idEmb_ratio",
 
           "0:m_trg_MuTau_Mu20Leg_embed_kit_ratio",
+          "0:m_trg_binned_20_embed",          
+          "0:m_trg_binned_20_data",
+          "0:m_trg_binned_20_embed_ratio",
+
           "0:m_trg_MuTau_Mu20Leg_kit_data",
           "0:m_trg_MuTau_Mu20Leg_kit_embed",
           "1:mt_emb_LooseChargedIsoPFTau27_tight_kit_ratio",
 
           "0:m_iso_binned_embed_kit_ratio",
           "0:m_id_embed_kit_ratio",
+          ""
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",
@@ -260,6 +269,10 @@ def build_config(nickname, **kwargs):
           "1:gt_pt,gt_eta",
 
           "0:m_pt,m_eta",
+          "0:m_pt,m_eta,m_iso",
+          "0:m_pt,m_eta,m_iso",
+          "0:m_pt,m_eta,m_iso",
+    
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
           "1:t_pt",
@@ -272,14 +285,18 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta"
           ]
   else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["RooWorkspaceWeightNames"]=[
           "0:crossTriggerMCEfficiencyWeight",
           "0:crossTriggerDataEfficiencyWeight",
           "0:crossTriggerMCWeight",
+          "0:crosstrigger_20_mc_eff_Weight",
+          "0:crosstrigger_20_data_eff_Weight",
+          "0:crosstrigger_20_mc_Weight",
 
           "0:isoWeight",
           "0:idWeight",
+          "0:trackWeight",
 
           "0:trigger_24_Weight",
           "0:trigger_27_Weight",
@@ -289,9 +306,12 @@ def build_config(nickname, **kwargs):
           "0:m_trg_MuTau_Mu20Leg_kit_mc",
           "0:m_trg_MuTau_Mu20Leg_kit_data",
           "0:m_trg_MuTau_Mu20Leg_kit_ratio",
-
+          "0:m_trg_binned_20_mc",          
+          "0:m_trg_binned_20_data",
+          "0:m_trg_binned_20_ratio",
           "0:m_iso_binned_kit_ratio",
           "0:m_id_kit_ratio",
+          "0:m_trk_ratio",
 
           "0:m_trg24_kit_ratio",
           "0:m_trg27_kit_ratio",
@@ -301,9 +321,13 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
 
           "0:m_pt,m_eta,m_iso",
+          "0:m_pt,m_eta,m_iso",
+          "0:m_pt,m_eta,m_iso",
           "0:m_pt,m_eta",
+          "0:m_eta",
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
@@ -322,12 +346,12 @@ def build_config(nickname, **kwargs):
       "had_gen_match_pT_2",
       "flagMETFilter",
       "crossTriggerMCWeight_1",
-      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1"
+      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1", "crosstrigger_20_data_eff_Weight_1", "crosstrigger_20_mc_eff_Weight_1", "crosstrigger_20_mc_Weight_1"
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "crossTriggerDataEfficiencyWeight_1","crossTriggerEmbeddedEfficiencyWeight_1", "crossTriggerMCEfficiencyWeight_1", "crossTriggerMCWeight_1"
+           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "crossTriggerDataEfficiencyWeight_1","crossTriggerEmbeddedEfficiencyWeight_1", "crossTriggerMCEfficiencyWeight_1", "crosstrigger_20_data_eff_Weight_1", "crosstrigger_20_embed_eff_Weight_1", "crosstrigger_20_embed_Weight_1"
           ])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
