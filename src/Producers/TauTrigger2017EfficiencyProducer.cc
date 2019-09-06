@@ -24,10 +24,14 @@ void TauTrigger2017EfficiencyProducer::Produce( event_type const& event, product
                                     if(mc_weight)
                                     {
                                             product.m_weights[weightNames.second.at(index)+"_"+wp+"_"+t+"_"+std::to_string(weightNames.first+1)] = TauSFs.at(wp).at(t)->getTriggerEfficiencyMC(lepton->p4.Pt(),lepton->p4.Eta(),lepton->p4.Phi(),dm);
+                                            product.m_weights[weightNames.second.at(index)+"Up_"+wp+"_"+t+"_"+std::to_string(weightNames.first+1)] = TauSFs.at(wp).at(t)->getTriggerEfficiencyMCUncertUp(lepton->p4.Pt(),lepton->p4.Eta(),lepton->p4.Phi(),dm);
+                                            product.m_weights[weightNames.second.at(index)+"Down_"+wp+"_"+t+"_"+std::to_string(weightNames.first+1)] = TauSFs.at(wp).at(t)->getTriggerEfficiencyMCUncertDown(lepton->p4.Pt(),lepton->p4.Eta(),lepton->p4.Phi(),dm);
                                     }
                                     else
                                     {
                                             product.m_weights[weightNames.second.at(index)+"_"+wp+"_"+t+"_"+std::to_string(weightNames.first+1)] = TauSFs.at(wp).at(t)->getTriggerEfficiencyData(lepton->p4.Pt(),lepton->p4.Eta(),lepton->p4.Phi(),dm);
+                                            product.m_weights[weightNames.second.at(index)+"Up_"+wp+"_"+t+"_"+std::to_string(weightNames.first+1)] = TauSFs.at(wp).at(t)->getTriggerEfficiencyDataUncertUp(lepton->p4.Pt(),lepton->p4.Eta(),lepton->p4.Phi(),dm);
+                                            product.m_weights[weightNames.second.at(index)+"Down_"+wp+"_"+t+"_"+std::to_string(weightNames.first+1)] = TauSFs.at(wp).at(t)->getTriggerEfficiencyDataUncertDown(lepton->p4.Pt(),lepton->p4.Eta(),lepton->p4.Phi(),dm);
                                     }
                                 }
                         }
