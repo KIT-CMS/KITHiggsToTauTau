@@ -392,6 +392,11 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017IDTypes, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017EfficiencyWeightNames, {});
 
+	// settings for TauIDEfficiencyProducer
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFWorkingPoints, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFTypes, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDScaleFactorWeightNames, {});
+
 	// settings for the EmbeddingConsumer
 	IMPL_SETTING_DEFAULT(int, DeltaRBinning, 100);
 	IMPL_SETTING_DEFAULT(float, DeltaRMaximum, 0.4);
