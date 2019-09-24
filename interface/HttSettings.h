@@ -385,12 +385,13 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceObjectNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceObjectArguments, {});
 
-	// settings for TauTrigger2017EfficiencyProducer
-	IMPL_SETTING_DEFAULT(std::string, TauTrigger2017Input, "");
+	// settings for TauTriggerEfficiencyProducer
+	IMPL_SETTING_DEFAULT(std::string, TauTriggerInput, "");
+        IMPL_SETTING_DEFAULT(std::string, TauTriggerInputKIT, "");
 	IMPL_SETTING_DEFAULT(std::string, TauTrigger, "");
-	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017WorkingPoints, {});
-	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017IDTypes, {});
-	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017EfficiencyWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerWorkingPoints, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerIDTypes, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerEfficiencyWeightNames, {});
 
 	// settings for the EmbeddingConsumer
 	IMPL_SETTING_DEFAULT(int, DeltaRBinning, 100);

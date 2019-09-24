@@ -275,7 +275,7 @@ def build_config(nickname, **kwargs):
                                                               "filter:MinimalPlotlevelFilter"))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
-  #if not isData:                 config["Processors"].append( "producer:TauTrigger2017EfficiencyProducer")
+  #if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauTauTriggerWeightProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")

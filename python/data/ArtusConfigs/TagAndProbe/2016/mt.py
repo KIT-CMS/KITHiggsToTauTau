@@ -81,9 +81,9 @@ def build_config(nickname, **kwargs):
       "trg_singletau_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
       "trg_singletau_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
   ]
-  config["TauTrigger2017InputOld"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017.root"
-  config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017_New.root"
-  config["TauTrigger2017WorkingPoints"] = [
+  config["TauTriggerInputOld"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_New.root"
+  config["TauTriggerWorkingPoints"] = [
        "vvloose",
        "vloose",
        "loose",
@@ -92,7 +92,7 @@ def build_config(nickname, **kwargs):
        "vtight",
        "vvtight",
   ]
-  config["TauTrigger2017IDTypes"] = [
+  config["TauTriggerIDTypes"] = [
        "MVA",
   ]
 

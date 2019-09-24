@@ -200,9 +200,10 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedTaus"] = True
 
   ### Efficiencies & weights configuration
-  config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root"
+  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2018KIT_v4.root"
   config["TauTrigger"] = "mutau"
-  config["TauTrigger2017WorkingPoints"] = [
+  config["TauTriggerWorkingPoints"] = [
        "vloose",
        "loose",
        "medium",
@@ -210,13 +211,29 @@ def build_config(nickname, **kwargs):
        "vtight",
        "vvtight",
   ]
-  config["TauTrigger2017IDTypes"] = [
+  config["TauTriggerIDTypes"] = [
        "MVAv2",
   ]
-  config["TauTrigger2017EfficiencyWeightNames"] = [
-      "1:crossTriggerMCEfficiencyWeight",
-      "1:crossTriggerDataEfficiencyWeight",
-  ]
+  if isEmbedded:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "1:crossTriggerDataEfficiencyWeight",
+        "1:crossTriggerKITDataEfficiencyWeight",
+        "1:crossTriggerEMBEfficiencyWeight",  
+    ]
+  else:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "1:crossTriggerMCEfficiencyWeight",
+        "1:crossTriggerDataEfficiencyWeight",
+    ]  
+
+   # Define weight names to be written out - only store weights that are actually filled
+  tauTriggerWeights = []
+  for WeightName in config["TauTriggerEfficiencyWeightNames"]:
+    for shift in ["","Up","Down"]:
+      for IDType in config["TauTriggerIDTypes"]:
+        for wp in config["TauTriggerWorkingPoints"]:
+          tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+
   if isEmbedded:
     config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
@@ -257,7 +274,6 @@ def build_config(nickname, **kwargs):
 
           "0:m_iso_binned_embed_kit_ratio",
           "0:m_id_embed_kit_ratio",
-          ""
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",
@@ -339,8 +355,8 @@ def build_config(nickname, **kwargs):
   ### Ntuple output quantities configuration
   config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(minimal_setup=minimal_setup, isMC = (not isData) and (not isEmbedded), nickname = nickname)
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
-  config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.lheWeights").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
+  config["Quantities"].extend(tauTriggerWeights)
   config["Quantities"].extend([
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
@@ -403,7 +419,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
 
-  if not isData:                 config["Processors"].append( "producer:TauTrigger2017EfficiencyProducer")
+  if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
