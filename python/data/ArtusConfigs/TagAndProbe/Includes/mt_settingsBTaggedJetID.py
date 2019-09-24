@@ -115,7 +115,7 @@ def build_config(nickname, **kwargs):
         },
     }
 
-    btag = btaggers_collection["DeepCSV"][year]
+    btag = btaggers_collection["DeepFlavour"][year]
     config["BTagWPs"] = ["medium"]
 
     config["BTagScaleFactorFile"] = btag["BTagScaleFactorFile"]
@@ -130,7 +130,7 @@ def build_config(nickname, **kwargs):
     config["BTagShift"] = 0
     config["BMistagShift"] = 0
 
-    config["ValidTaggedJetsProducerDebug"] = False
+    config["ValidTaggedJetsProducerDebug"] = True
     # Further settings taken into account by ValidBTaggedJetsProducer:
     # - Year, written into the 'base' config
 
