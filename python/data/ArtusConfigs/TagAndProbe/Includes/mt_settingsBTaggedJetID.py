@@ -130,7 +130,7 @@ def build_config(nickname, **kwargs):
     config["BTagShift"] = 0
     config["BMistagShift"] = 0
 
-    config["ValidTaggedJetsProducerDebug"] = True
+    config["ValidTaggedJetsProducerDebug"] = False
     # Further settings taken into account by ValidBTaggedJetsProducer:
     # - Year, written into the 'base' config
 
