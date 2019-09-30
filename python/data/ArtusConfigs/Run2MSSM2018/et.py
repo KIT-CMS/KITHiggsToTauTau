@@ -145,9 +145,9 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v",
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
   ]
-  config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
   config["TauTrigger"] = "etau"
-  config["TauTrigger2017WorkingPoints"] = [
+  config["TauTriggerWorkingPoints"] = [
        "vloose",
        "loose",
        "medium",
@@ -155,10 +155,10 @@ def build_config(nickname, **kwargs):
        "vtight",
        "vvtight",
   ]
-  config["TauTrigger2017IDTypes"] = [
+  config["TauTriggerIDTypes"] = [
        "MVAv2",
   ]
-  config["TauTrigger2017EfficiencyWeightNames"] = [
+  config["TauTriggerEfficiencyWeightNames"] = [
       "1:crossTriggerMCEfficiencyWeight",
       "1:crossTriggerDataEfficiencyWeight",
   ]
@@ -436,7 +436,7 @@ def build_config(nickname, **kwargs):
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
-  if not isData:                 config["Processors"].append( "producer:TauTrigger2017EfficiencyProducer")
+  if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   config["Processors"].append(                                "producer:SvfitProducer")

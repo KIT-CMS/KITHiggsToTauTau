@@ -54,7 +54,7 @@ git clone git@github.com:CMS-HTT/QCDModelingEMu.git HTT-utilities/QCDModelingEMu
 sed '/CombineHarvester/d' ${CMSSW_BASE}/src/HiggsAnalysis/KITHiggsToTauTau/BuildFile.xml -i
 
 # TauTriggerSFs2017 tool
-git clone git@github.com:cms-tau-pog/TauTriggerSFs.git  TauAnalysisTools/TauTriggerSFs -b run2_SFs  # for 2017 & 2018 triggers
+git clone git@github.com:KIT-CMS/TauTriggerSFs.git  TauAnalysisTools/TauTriggerSFs -b run2_SFs_TriggerFitsForEmbedded  # for 2017 & 2018 triggers
 
 # TauIDSF tool
 git clone git@github.com:cms-tau-pog/TauIDSFs.git TauPOG/TauIDSFs

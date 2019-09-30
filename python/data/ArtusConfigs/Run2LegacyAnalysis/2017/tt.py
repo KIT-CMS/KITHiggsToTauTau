@@ -173,9 +173,10 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedTaus"] = True
 
   ### Efficiencies & weights configuration
-  config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
+  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2017KIT.root"
   config["TauTrigger"] = "ditau"
-  config["TauTrigger2017WorkingPoints"] = [
+  config["TauTriggerWorkingPoints"] = [
        "vloose",
        "loose",
        "medium",
@@ -183,15 +184,34 @@ def build_config(nickname, **kwargs):
        "vtight",
        "vvtight",
   ]
-  config["TauTrigger2017IDTypes"] = [
+  config["TauTriggerIDTypes"] = [
        "MVAv2",
   ]
-  config["TauTrigger2017EfficiencyWeightNames"] = [
-      "0:crossTriggerMCEfficiencyWeight",
-      "0:crossTriggerDataEfficiencyWeight",
-      "1:crossTriggerMCEfficiencyWeight",
-      "1:crossTriggerDataEfficiencyWeight",
-  ]
+  if isEmbedded:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "0:crossTriggerDataEfficiencyWeight",
+        "0:crossTriggerKITDataEfficiencyWeight",
+        "0:crossTriggerEMBEfficiencyWeight",
+        "1:crossTriggerDataEfficiencyWeight",
+        "1:crossTriggerKITDataEfficiencyWeight",
+        "1:crossTriggerEMBEfficiencyWeight",
+    ]
+  else:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "0:crossTriggerMCEfficiencyWeight",
+        "0:crossTriggerDataEfficiencyWeight",
+        "1:crossTriggerMCEfficiencyWeight",
+        "1:crossTriggerDataEfficiencyWeight",
+    ]
+
+  # Define weight names to be written out - only store weights that are actually filled
+  tauTriggerWeights = []
+  for WeightName in config["TauTriggerEfficiencyWeightNames"]:
+    for shift in ["","Up","Down"]:
+      for IDType in config["TauTriggerIDTypes"]:
+        for wp in config["TauTriggerWorkingPoints"]:
+          tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+
   config["TauIDSFWorkingPoints"] = [
        "VLoose",
        "Loose",
@@ -254,6 +274,7 @@ def build_config(nickname, **kwargs):
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.lheWeights").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
+  config["Quantities"].extend(tauTriggerWeights)
   config["Quantities"].extend([
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
@@ -307,7 +328,7 @@ def build_config(nickname, **kwargs):
                                                               "filter:MinimalPlotlevelFilter"))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
-  if not isData:                 config["Processors"].append( "producer:TauTrigger2017EfficiencyProducer")
+  if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
