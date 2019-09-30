@@ -182,6 +182,7 @@ def build_config(nickname, **kwargs):
 
   ### Efficiencies & weights configuration
   config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
+  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2017KIT.root"
   config["TauTrigger"] = "mutau"
   config["TauTriggerWorkingPoints"] = [
        "vloose",
@@ -194,10 +195,26 @@ def build_config(nickname, **kwargs):
   config["TauTriggerIDTypes"] = [
        "MVAv2",
   ]
-  config["TauTriggerEfficiencyWeightNames"] = [
-      "1:crossTriggerMCEfficiencyWeight",
-      "1:crossTriggerDataEfficiencyWeight",
-  ]
+  if isEmbedded:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "1:crossTriggerDataEfficiencyWeight",
+        "1:crossTriggerKITDataEfficiencyWeight",
+        "1:crossTriggerEMBEfficiencyWeight",  
+    ]
+  else:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "1:crossTriggerMCEfficiencyWeight",
+        "1:crossTriggerDataEfficiencyWeight",
+    ]  
+
+   # Define weight names to be written out - only store weights that are actually filled
+  tauTriggerWeights = []
+  for WeightName in config["TauTriggerEfficiencyWeightNames"]:
+    for shift in ["","Up","Down"]:
+      for IDType in config["TauTriggerIDTypes"]:
+        for wp in config["TauTriggerWorkingPoints"]:
+          tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+
   if isEmbedded:
     config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
@@ -303,6 +320,7 @@ def build_config(nickname, **kwargs):
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.lheWeights").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
+  config["Quantities"].extend(tauTriggerWeights)
   config["Quantities"].extend([
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
