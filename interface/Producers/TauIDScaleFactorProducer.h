@@ -27,12 +27,12 @@ public:
 	{
 		ProducerBase<HttTypes>::Init(settings);
                 const int year = settings.GetYear();
-                const std::string channel = settings.GetChannel();
+                const bool isTT = settings.GetChannel()=="TT";
                 for(auto wp: settings.GetTauIDSFWorkingPoints())
                 {
                         for(auto t: settings.GetTauIDSFTypes())
                         {
-                                TauIDSFs[wp][t] = new TauIDSFTool(year, t, wp, channel=="TT");
+                                TauIDSFs[wp][t] = new TauIDSFTool(year, t, wp, isTT);
                         }
                 }
                 m_weightNames = Utility::ParseMapTypes<int,std::string>(Utility::ParseVectorToMap(settings.GetTauIDScaleFactorWeightNames()));
