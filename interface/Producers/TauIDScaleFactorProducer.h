@@ -10,7 +10,12 @@
 /**
    \brief TauIDScaleFactorProducer
    Config tags:
-   - Fill me with something meaningful
+        TauIDSFWorkingPoints
+        TauIDSFTypes
+        TauIDScaleFactorWeightNames
+        Year
+        Channel
+        UseUWGenMatching
 
 */
 

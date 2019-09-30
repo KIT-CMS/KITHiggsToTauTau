@@ -392,7 +392,7 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017IDTypes, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTrigger2017EfficiencyWeightNames, {});
 
-	// settings for TauIDEfficiencyProducer
+	// settings for TauIDScaleFactorProducer
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFWorkingPoints, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFTypes, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDScaleFactorWeightNames, {});
