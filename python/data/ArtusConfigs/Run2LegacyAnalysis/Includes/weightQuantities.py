@@ -16,6 +16,14 @@ def build_list(**kwargs):
         "singleTriggerMCEfficiencyWeightKIT_2",
         "singleTriggerDataEfficiencyWeightKIT_2",
 
+        # tau id scale factor weights
+        "tauIDScaleFactorWeight_tight_MVAoldDM2017v2_1",
+        "tauIDScaleFactorWeightUp_tight_MVAoldDM2017v2_1",
+        "tauIDScaleFactorWeightDown_tight_MVAoldDM2017v2_1",
+        "tauIDScaleFactorWeight_tight_MVAoldDM2017v2_2",
+        "tauIDScaleFactorWeightUp_tight_MVAoldDM2017v2_2",
+        "tauIDScaleFactorWeightDown_tight_MVAoldDM2017v2_2",
+
         "eleRecoWeight_1",
         "idWeight_1",
         "isoWeight_1",
@@ -36,6 +44,39 @@ def build_list(**kwargs):
 
     if not minimal_setup:
         quantities.extend([
+            # tau id scale factor weights
+            "tauIDScaleFactorWeight_vloose_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeight_loose_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeight_medium_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeight_vtight_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeight_vvtight_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeight_vloose_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeight_loose_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeight_medium_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeight_vtight_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeight_vvtight_MVAoldDM2017v2_2",
+
+            "tauIDScaleFactorWeightUp_vloose_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightUp_loose_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightUp_medium_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightUp_vtight_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightUp_vvtight_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightUp_vloose_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightUp_loose_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightUp_medium_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightUp_vtight_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightUp_vvtight_MVAoldDM2017v2_2",
+
+            "tauIDScaleFactorWeightDown_vloose_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightDown_loose_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightDown_medium_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightDown_vtight_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightDown_vvtight_MVAoldDM2017v2_1",
+            "tauIDScaleFactorWeightDown_vloose_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightDown_loose_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightDown_medium_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightDown_vtight_MVAoldDM2017v2_2",
+            "tauIDScaleFactorWeightDown_vvtight_MVAoldDM2017v2_2",
             "ggA_b_weight",
             "ggA_i_weight",
             "ggA_t_weight",

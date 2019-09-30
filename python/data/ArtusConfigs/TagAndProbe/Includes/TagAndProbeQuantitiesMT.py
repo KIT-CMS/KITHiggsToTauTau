@@ -14,7 +14,7 @@ def build_list(year):
   # Trigger decisions
   if year == 2016:
       trigger_flags = [
-          "trg_singlemuon_24"
+          "trg_singlemuon_24",
           "trg_singlemuon_27",
           "trg_crossmuon_mu19tau20_singlel1",
           "trg_crossmuon_mu19tau20",
