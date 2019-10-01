@@ -31,7 +31,7 @@ public:
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);
-                const std::string year = std::to_string(settings.GetYear());
+                const std::string year = m_yearMap.at(settings.GetYear());
                 const bool isTT = settings.GetChannel()=="TT";
                 for(auto wp: settings.GetTauIDSFWorkingPoints())
                 {
@@ -48,4 +48,9 @@ public:
 private:
         std::map<std::string,std::map<std::string,TauIDSFTool*>> TauIDSFs;
         std::map<int,std::vector<std::string>> m_weightNames;
+        const std::map<int, std::string> m_yearMap = {
+            {2016, "2016Legacy"},
+            {2017, "2017ReReco"},
+            {2018, "2018ReReco"}
+        };
 };
