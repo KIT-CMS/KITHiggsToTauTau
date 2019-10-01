@@ -19,6 +19,18 @@ void NewMMTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
 	{
 		BoolQuantities["id_p"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->idMedium();
 	}
+	else if (quantity == "id_loose_p")
+	{
+		BoolQuantities["id_loose_p"] = static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->idLoose();
+	}
+	else if (quantity == "id_global_p")
+	{
+		BoolQuantities["id_global_p"] = static_cast<KMuon *>(product.m_validDiTauPairCandidates.at(i).second)->isGlobalMuon();
+	}
+	else if (quantity == "id_emb_p")
+	{
+		BoolQuantities["id_emb_p"] = static_cast<KMuon *>(product.m_validDiTauPairCandidates.at(i).second)->isGlobalMuon() && static_cast<KLepton *>(product.m_validDiTauPairCandidates.at(i).second)->idLoose();
+	}
         else
         {
                 for (auto hltNames : m_hltFiredBranchNames)
