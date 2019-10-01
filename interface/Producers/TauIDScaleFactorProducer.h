@@ -31,7 +31,7 @@ public:
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);
-                const int year = settings.GetYear();
+                const std::string year = std::to_string(settings.GetYear());
                 const bool isTT = settings.GetChannel()=="TT";
                 for(auto wp: settings.GetTauIDSFWorkingPoints())
                 {
