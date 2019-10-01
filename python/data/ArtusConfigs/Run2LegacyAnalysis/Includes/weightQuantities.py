@@ -15,6 +15,10 @@ def build_list(**kwargs):
         "singleTriggerDataEfficiencyWeightKIT_1",
         "singleTriggerMCEfficiencyWeightKIT_2",
         "singleTriggerDataEfficiencyWeightKIT_2",
+        "crossTriggerMCEfficiencyWeight_1",
+        "crossTriggerDataEfficiencyWeight_1",
+        "crossTriggerMCEfficiencyWeight_2",
+        "crossTriggerDataEfficiencyWeight_2",
 
         # tau id scale factor weights
         "tauIDScaleFactorWeight_tight_MVAoldDM2017v2_1",
