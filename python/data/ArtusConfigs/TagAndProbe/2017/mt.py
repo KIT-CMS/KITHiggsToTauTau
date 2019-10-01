@@ -136,17 +136,20 @@ def build_config(nickname, **kwargs):
               "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltPFTau180TrackPt50LooseAbsOrRelMediumHighPtRelaxedIsoIso",
               "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSelectedPFTau180MediumChargedIsolationL1HLTMatched"
         ]
-  config["CheckTriggerLowerPtCutsByHltNick"] = [
-          "trg_monitor_mu20tau27:30.0",
-          "trg_monitor_mu24tau40_mediso_tightid:40.0",
-          "trg_monitor_mu24tau40_tightiso:40.0",
-    ]
-  config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
-          "trg_monitor_mu20tau27:26.0",
-          "trg_monitor_mu24tau35_tightiso_tightid:32.0",
-          "trg_monitor_mu24tau40_mediso_tightid:32.0",
-          "trg_monitor_mu24tau40_tightiso:32.0",
-    ]
+  if isEmbedded:
+      pass
+  else:
+      config["CheckTriggerLowerPtCutsByHltNick"] = [
+              "trg_monitor_mu20tau27:30.0",
+              "trg_monitor_mu24tau40_mediso_tightid:40.0",
+              "trg_monitor_mu24tau40_tightiso:40.0",
+        ]
+      config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
+              "trg_monitor_mu20tau27:26.0",
+              "trg_monitor_mu24tau35_tightiso_tightid:32.0",
+              "trg_monitor_mu24tau40_mediso_tightid:32.0",
+              "trg_monitor_mu24tau40_tightiso:32.0",
+        ]
 
   #TriggerMatchingProducers
   config["InvalidateNonMatchingElectrons"] = False
