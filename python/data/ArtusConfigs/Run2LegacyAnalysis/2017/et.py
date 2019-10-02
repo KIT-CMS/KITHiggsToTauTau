@@ -274,9 +274,9 @@ def build_config(nickname, **kwargs):
           "0:e_trg_EleTau_Ele24Leg_desy_mc",
           "0:e_trg_EleTau_Ele24Leg_desy_data",
 
-          "0:e_trg27_trg35_kit_mc",
-          "0:e_trg27_trg35_kit_data",
-          "0:e_trg27_trg35_kit_embed",
+          "0:e_trg27_trg32_trg35_kit_mc",
+          "0:e_trg27_trg32_trg35_kit_data",
+          "0:e_trg27_trg32_trg35_kit_embed",
 
           "0:e_trg_EleTau_Ele24Leg_kit_ratio_embed",
           "1:et_emb_LooseChargedIsoPFTau30_kit_ratio",
