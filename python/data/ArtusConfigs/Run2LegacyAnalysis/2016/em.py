@@ -143,8 +143,8 @@ def build_config(nickname, **kwargs):
 
   ### Efficiencies & weights configuration
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -168,9 +168,9 @@ def build_config(nickname, **kwargs):
           #"0:trigger_12_embed_Weight",
     ]
     config["EmbeddedWeightWorkspaceObjectNames"]=[
-          "0:m_sel_trg_ratio",
-          "0:m_sel_idEmb_ratio",
-          "1:m_sel_idEmb_ratio",
+          "0:m_sel_trg_kit_ratio",
+          "0:m_sel_idemb_kit_ratio",
+          "1:m_sel_idemb_kit_ratio",
 
           "1:m_iso_ratio",
           "1:m_id_ratio",

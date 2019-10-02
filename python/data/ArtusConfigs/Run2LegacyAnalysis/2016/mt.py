@@ -161,8 +161,8 @@ def build_config(nickname, **kwargs):
       "1:tauIDScaleFactorWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -180,9 +180,9 @@ def build_config(nickname, **kwargs):
           "0:crossTriggerDataEfficiencyWeight"
           ]
     config["EmbeddedWeightWorkspaceObjectNames"]=[
-          "0:m_sel_trg_ratio",
-          "0:m_sel_idEmb_ratio",
-          "1:m_sel_idEmb_ratio",
+          "0:m_sel_trg_kit_ratio",
+          "0:m_sel_idemb_kit_ratio",
+          "1:m_sel_idemb_kit_ratio",
 
           #"1:t_TightIso_mt_emb",
           #"1:t_genuine_TightIso_mt_data,t_fake_TightIso_mt_data",
