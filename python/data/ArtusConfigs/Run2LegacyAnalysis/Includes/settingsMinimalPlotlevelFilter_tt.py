@@ -19,13 +19,13 @@ def build_config(nickname, **kwargs):
 
   config["PlotlevelFilterExpressionQuantities"] = [
     "flagMETFilter",
-    "againstElectronVLooseMVA6_2",
+    "byVVLooseDeepTau2017v2p1VSe_2",
     "extraelec_veto",
-    "againstMuonLoose3_2",
+    "byVLooseDeepTau2017v2p1VSmu_2",
     "extramuon_veto",
-    "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_1",
-    "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2"
+    "byVVLooseDeepTau2017v2p1VSjet_1",
+    "byVVLooseDeepTau2017v2p1VSjet_2"
   ]
-  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(againstElectronVLooseMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_1 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)"
+  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(byVLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSe_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSjet_1 > 0.5)*(byVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
   
   return config

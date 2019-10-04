@@ -124,7 +124,7 @@ def build_config(nickname, **kwargs):
 
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
-  config["TauUseOldDMs"] = True
+  config["TauUseOldDMs"] = False
   config["TauLowerPtCuts"] = ["40.0"]
   config["TauUpperAbsEtaCuts"] = ["2.1"]
   config["DiTauPairMinDeltaRCut"] = 0.5
@@ -143,6 +143,8 @@ def build_config(nickname, **kwargs):
 
   # Weights and efficiency config
   config["TauIDSFWorkingPoints"] = [
+       #"VVVLoose",
+       "VVLoose",
        "VLoose",
        "Loose",
        "Medium",
@@ -151,7 +153,7 @@ def build_config(nickname, **kwargs):
        "VVTight",
   ]
   config["TauIDSFTypes"] = [
-       "MVAoldDM2017v2",
+       "DeepTau2017v2p1VSjet",
   ]
   config["TauIDScaleFactorWeightNames"] = [
       "0:tauIDScaleFactorWeight",
