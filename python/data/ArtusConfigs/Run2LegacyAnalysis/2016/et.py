@@ -129,7 +129,7 @@ def build_config(nickname, **kwargs):
 
   # Weights and efficiency config
   config["TauIDSFWorkingPoints"] = [
-       #"VVVLoose",
+       "VVVLoose",
        "VVLoose",
        "VLoose",
        "Loose",

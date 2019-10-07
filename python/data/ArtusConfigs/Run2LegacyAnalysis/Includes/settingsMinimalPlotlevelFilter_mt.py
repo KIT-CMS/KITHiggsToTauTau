@@ -20,9 +20,9 @@ def build_config(nickname, **kwargs):
         "flagMETFilter",
         "byVVLooseDeepTau2017v2p1VSe_2",
         "byLooseDeepTau2017v2p1VSmu_2",
-        "byVVLooseDeepTau2017v2p1VSjet_2",
+        "byVVVLooseDeepTau2017v2p1VSjet_2",
     ]
-    config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(byLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSe_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
+    config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(byLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSe_2 > 0.5)*(byVVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
 
     # as for the TES version of 2016
     if not tau_es and not mtau_fake_es:

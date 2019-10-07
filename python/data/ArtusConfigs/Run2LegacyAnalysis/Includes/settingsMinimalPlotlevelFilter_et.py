@@ -24,9 +24,9 @@ def build_config(nickname, **kwargs):
     "flagMETFilter",
     "byMediumDeepTau2017v2p1VSe_2",
     "byVLooseDeepTau2017v2p1VSmu_2",
-    "byVVLooseDeepTau2017v2p1VSjet_2",
+    "byVVVLooseDeepTau2017v2p1VSjet_2",
   ]
-  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(byVLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byMediumDeepTau2017v2p1VSe_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
+  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(byVLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byMediumDeepTau2017v2p1VSe_2 > 0.5)*(byVVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
 
   if not etau_fake_es and not tau_es:
     config["PlotlevelFilterExpressionQuantities"].append('nDiElectronVetoPairsOS')

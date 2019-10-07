@@ -221,7 +221,7 @@ def build_config(nickname, **kwargs):
           tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
           
   config["TauIDSFWorkingPoints"] = [
-       #"VVVLoose",
+       "VVVLoose",
        "VVLoose",
        "VLoose",
        "Loose",

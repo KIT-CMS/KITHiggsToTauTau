@@ -244,7 +244,7 @@ def build_config(nickname, **kwargs):
 
 
   config["TauIDSFWorkingPoints"] = [
-       #"VVVLoose",
+       "VVVLoose",
        "VVLoose",
        "VLoose",
        "Loose",

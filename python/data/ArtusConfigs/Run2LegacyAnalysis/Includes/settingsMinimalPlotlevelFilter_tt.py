@@ -23,9 +23,9 @@ def build_config(nickname, **kwargs):
     "extraelec_veto",
     "byVLooseDeepTau2017v2p1VSmu_2",
     "extramuon_veto",
-    "byVVLooseDeepTau2017v2p1VSjet_1",
-    "byVVLooseDeepTau2017v2p1VSjet_2"
+    "byVVVLooseDeepTau2017v2p1VSjet_1",
+    "byVVVLooseDeepTau2017v2p1VSjet_2"
   ]
-  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(byVLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSe_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSjet_1 > 0.5)*(byVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
+  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(byVLooseDeepTau2017v2p1VSmu_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSe_2 > 0.5)*(byVVVLooseDeepTau2017v2p1VSjet_1 > 0.5)*(byVVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
   
   return config
