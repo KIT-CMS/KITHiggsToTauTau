@@ -664,6 +664,16 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
                 FloatQuantities[tauDiscriminator+"_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator(tauDiscriminator, event.m_tauMetadata);
             }
         }
+        //temporary fix for VVVLoose deep tau ID WP
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("byVVVLooseDeepTau2017v2p1VSjet_p", [leptonIndex](event_type const& event, product_type const& product)
+        {
+                return float(static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator("byDeepTau2017v2p1VSjetraw", event.m_tauMetadata) > 0.2599605);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("byVVVLooseDeepTau2017v2p1VSe_p", [leptonIndex](event_type const& event, product_type const& product)
+        {
+                return float(static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator("byDeepTau2017v2p1VSeraw", event.m_tauMetadata) > 0.0630386);
+	});
+        //end of fix
         if (quantity == "metPt")
         {
                 FloatQuantities["metPt"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
