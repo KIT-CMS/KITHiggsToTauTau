@@ -13,6 +13,7 @@ def build_list(**kwargs):
     quantities = [
         "singleTriggerMCEfficiencyWeightKIT_1",
         "singleTriggerDataEfficiencyWeightKIT_1",
+
         "singleTriggerMCEfficiencyWeightKIT_2",
         "singleTriggerDataEfficiencyWeightKIT_2",
         "crossTriggerMCEfficiencyWeight_1",
@@ -48,6 +49,7 @@ def build_list(**kwargs):
 
     if not minimal_setup:
         quantities.extend([
+
             # tau id scale factor weights
             "tauIDScaleFactorWeight_vloose_MVAoldDM2017v2_1",
             "tauIDScaleFactorWeight_loose_MVAoldDM2017v2_1",
@@ -81,6 +83,9 @@ def build_list(**kwargs):
             "tauIDScaleFactorWeightDown_medium_MVAoldDM2017v2_2",
             "tauIDScaleFactorWeightDown_vtight_MVAoldDM2017v2_2",
             "tauIDScaleFactorWeightDown_vvtight_MVAoldDM2017v2_2",
+
+            "crossTriggerDataEfficiencyWeight_1",
+            "crossTriggerDataEfficiencyWeight_2",
             "ggA_b_weight",
             "ggA_i_weight",
             "ggA_t_weight",
