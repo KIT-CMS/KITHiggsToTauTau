@@ -238,8 +238,8 @@ def build_config(nickname, **kwargs):
       "1:tauIDScaleFactorWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -278,7 +278,7 @@ def build_config(nickname, **kwargs):
           "0:e_trg27_trg32_trg35_kit_data",
           "0:e_trg27_trg32_trg35_kit_embed",
 
-          "0:e_trg_EleTau_Ele24Leg_kit_ratio_embed",
+          "0:e_trg_EleTau_Ele24Leg_embed_kit_ratio",
           "1:et_emb_LooseChargedIsoPFTau30_kit_ratio",
 
           "0:e_iso_binned_embed_kit_ratio",
