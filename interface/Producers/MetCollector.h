@@ -42,6 +42,18 @@ public:
 		{
 			return (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
 		});
+		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("metPx", [](KappaEvent const& event, KappaProduct const& product)
+		{
+			return (static_cast<HttProduct const&>(product)).m_met.p4.Px();
+		});
+		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("metPy", [](KappaEvent const& event, KappaProduct const& product)
+		{
+			return (static_cast<HttProduct const&>(product)).m_met.p4.Py();
+		});
+		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("metPz", [](KappaEvent const& event, KappaProduct const& product)
+		{
+			return (static_cast<HttProduct const&>(product)).m_met.p4.Pz();
+		});
 		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("metPhi", [](KappaEvent const& event, KappaProduct const& product)
 		{
 			return (static_cast<HttProduct const&>(product)).m_met.p4.Phi();
@@ -99,6 +111,18 @@ public:
 		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puppiMetPt", [](KappaEvent const& event, KappaProduct const& product)
 		{
 			return (static_cast<HttProduct const&>(product)).m_puppimet.p4.Pt();
+		});
+		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puppiMetPx", [](KappaEvent const& event, KappaProduct const& product)
+		{
+			return (static_cast<HttProduct const&>(product)).m_puppimet.p4.Px();
+		});
+		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puppiMetPy", [](KappaEvent const& event, KappaProduct const& product)
+		{
+			return (static_cast<HttProduct const&>(product)).m_puppimet.p4.Py();
+		});
+		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puppiMetPz", [](KappaEvent const& event, KappaProduct const& product)
+		{
+			return (static_cast<HttProduct const&>(product)).m_puppimet.p4.Pz();
 		});
 		LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puppiMetPhi", [](KappaEvent const& event, KappaProduct const& product)
 		{

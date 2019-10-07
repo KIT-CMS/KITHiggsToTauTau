@@ -21,7 +21,6 @@ def build_config(nickname, **kwargs):
   no_svfit = True if "no_svfit" in kwargs and kwargs["no_svfit"] else False
 
   log.debug("%s \n %25s %-30r \n %30s %-25s" % ("    Run2LegacyAnalysis_base::", "btag_eff:", btag_eff, "analysis_channels: ", ' '.join(analysis_channels)))
-
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
 
@@ -32,7 +31,7 @@ def build_config(nickname, **kwargs):
   isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
   isSUSYggH = re.search("SUSYGluGluToHToTauTau", nickname)
-  isSignal = re.search("HToTauTau",nickname)
+  isSignal = re.search("HToTauTau|125tautau",nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
 
   ## fill config:
@@ -63,6 +62,9 @@ def build_config(nickname, **kwargs):
       "^(GluGlu|GluGluTo|VBF|Wminus|Wplus|Z)(HToTauTau|H2JetsToTauTau)" : [
         25
       ],
+      "h1M125tautau" : [
+	35, 45
+	],
       "W.?JetsToLN|EWKW" : [
         24
       ],
@@ -73,10 +75,12 @@ def build_config(nickname, **kwargs):
         ]
   }
   config["BosonPdgIds"] = [0]
+  if "h1M125tautau" in nickname: 
+    config["MatchNMSSMBosons"] = True
   for key, pdgids in BosonPdgIds.items():
     if re.search(key, nickname): config["BosonPdgIds"] = pdgids
-
-  config["BosonStatuses"] = [62]
+  print config["BosonPdgIds"]
+  config["BosonStatuses"] = [62,22]
   config["UseUWGenMatching"] = True
 
   # MET filters (JetMMET)
