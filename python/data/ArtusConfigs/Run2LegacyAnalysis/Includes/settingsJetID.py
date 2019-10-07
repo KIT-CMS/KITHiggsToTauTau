@@ -46,6 +46,6 @@ def build_config(nickname, **kwargs):
     config["JetApplyPUIDForEENoise"] = False
   elif year == 2017:
     config["JetApplyEENoiseVeto"] = True
-    config["JetApplyPUIDForEENoise"] = True
+    config["JetApplyPUIDForEENoise"] = False
 
   return config

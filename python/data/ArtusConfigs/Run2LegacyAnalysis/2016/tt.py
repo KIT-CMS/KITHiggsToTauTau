@@ -141,9 +141,25 @@ def build_config(nickname, **kwargs):
   config["AddGenMatchedTauJets"] = True
   config["BranchGenMatchedTaus"] = True
 
+  # Weights and efficiency config
+  config["TauIDSFWorkingPoints"] = [
+       "VLoose",
+       "Loose",
+       "Medium",
+       "Tight",
+       "VTight",
+       "VVTight",
+  ]
+  config["TauIDSFTypes"] = [
+       "MVAoldDM2017v2",
+  ]
+  config["TauIDScaleFactorWeightNames"] = [
+      "0:tauIDScaleFactorWeight",
+      "1:tauIDScaleFactorWeight",
+  ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_12_embedded.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_12_embedded.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -158,9 +174,9 @@ def build_config(nickname, **kwargs):
           #~ "0:doubleTauTrgWeight"
           ]
     config["EmbeddedWeightWorkspaceObjectNames"]=[
-          "0:m_sel_trg_ratio",
-          "0:m_sel_idEmb_ratio",
-          "1:m_sel_idEmb_ratio",
+          "0:m_sel_trg_kit_ratio",
+          "0:m_sel_idemb_kit_ratio",
+          "1:m_sel_idemb_kit_ratio",
 
           "0:t_TightIso_tt_emb_ratio",
           "1:t_TightIso_tt_emb_ratio",
@@ -275,7 +291,7 @@ def build_config(nickname, **kwargs):
                                                               "filter:MinimalPlotlevelFilter"))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
-  #if not isData:                 config["Processors"].append( "producer:TauTrigger2017EfficiencyProducer")
+  if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   if not isData:                 config["Processors"].append( "producer:TauTauTriggerWeightProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")

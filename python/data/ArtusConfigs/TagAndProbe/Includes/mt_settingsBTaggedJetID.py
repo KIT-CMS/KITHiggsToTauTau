@@ -115,7 +115,7 @@ def build_config(nickname, **kwargs):
         },
     }
 
-    btag = btaggers_collection["DeepCSV"][year]
+    btag = btaggers_collection["DeepFlavour"][year]
     config["BTagWPs"] = ["medium"]
 
     config["BTagScaleFactorFile"] = btag["BTagScaleFactorFile"]

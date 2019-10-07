@@ -60,6 +60,10 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["sc_eta_p"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["phi_p"] = DefaultValues::UndefinedFloat;
 		BoolQuantities["id_p"] = false;
+		BoolQuantities["id_emb_p"] = false;
+		BoolQuantities["id_loose_p"] = false;
+		BoolQuantities["id_global_p"] = false;
+
 		FloatQuantities["iso_p"] = DefaultValues::UndefinedFloat;
 
 		FloatQuantities["m_ll"] = DefaultValues::UndefinedFloat;

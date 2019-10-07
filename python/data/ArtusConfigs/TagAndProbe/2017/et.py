@@ -68,9 +68,9 @@ def build_config(nickname, **kwargs):
       "trg_singleelectron_35:HLT_Ele35_WPTight_Gsf",
       "trg_crosselectron_ele24tau30:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1",
   ]
-  config["TauTrigger2017InputOld"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017.root"
-  config["TauTrigger2017Input"] = "$CMSSW_BASE/src/TauTriggerSFs2017/TauTriggerSFs2017/data/tauTriggerEfficiencies2017_New.root"
-  config["TauTrigger2017WorkingPoints"] = [
+  config["TauTriggerInputOld"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_New.root"
+  config["TauTriggerWorkingPoints"] = [
        "vvloose",
        "vloose",
        "loose",
@@ -79,7 +79,7 @@ def build_config(nickname, **kwargs):
        "vtight",
        "vvtight",
   ]
-  config["TauTrigger2017IDTypes"] = [
+  config["TauTriggerIDTypes"] = [
        "MVA",
   ]
 
@@ -87,10 +87,10 @@ def build_config(nickname, **kwargs):
   if isEmbedded:
     config["ElectronTriggerFilterNames"] = [
             "HLT_Ele35_WPTight_Gsf_v:hltEle35noerWPTightGsfTrackIsoFilter",
-            "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v:hltEle24erWPTightGsfTrackIsoFilterForTau",
+            "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v:hltEle24erWPTightGsfTrackIsoFilterForTau",
       ]
     config["TauTriggerFilterNames"] = [
-            "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v:hltL1sBigORLooseIsoEGXXerIsoTauYYerdRMin0p3",
+            "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v:hltL1sBigORLooseIsoEGXXerIsoTauYYerdRMin0p3",
       ]
   else:
     config["ElectronTriggerFilterNames"] = [

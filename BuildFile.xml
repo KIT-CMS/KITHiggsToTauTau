@@ -15,6 +15,7 @@
 <use name="Artus/Utility" />
 <use name="TauAnalysis/ClassicSVfit" />
 <use name="TauAnalysisTools/TauTriggerSFs" />
+<use name="TauPOG/TauIDSFs" />
 <use name="quantile_mapping/quantile_mapping" />
 <!--<use name="HHKinFit2/HHKinFit2" />-->
 <use name="HTTutilities/Jet2TauFakes" />

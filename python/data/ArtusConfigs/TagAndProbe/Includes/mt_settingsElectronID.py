@@ -39,8 +39,10 @@ def build_config(nickname, **kwargs):
   config["ElectronIDList"] = [
     "egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp80",
     "egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wp90",
+    "egmGsfElectronIDs:mvaEleID-Fall17-iso-V2-wpLoose",
     "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80",
     "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90",
+    "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wpLoose",
     "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-veto",
     "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-loose",
     "egmGsfElectronIDs:cutBasedElectronID-Fall17-94X-V2-medium",
