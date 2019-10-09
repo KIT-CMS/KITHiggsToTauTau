@@ -644,6 +644,7 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSjet");
         tauDiscriminators.push_back("byDeepTau2017v2p1VSeraw");
         //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSe");
         tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSe");
         tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSe");
         tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSe");
@@ -793,6 +794,7 @@ void NewETTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSjet");
         tauDiscriminators.push_back("byDeepTau2017v2p1VSeraw");
         //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSe");
         tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSe");
         tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSe");
         tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSe");
