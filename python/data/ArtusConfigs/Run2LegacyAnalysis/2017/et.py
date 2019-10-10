@@ -321,14 +321,13 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta"
           ]
   else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_2017_v3.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["RooWorkspaceWeightNames"] = [
         "0:crossTriggerMCEfficiencyWeight",
         "0:crossTriggerDataEfficiencyWeight",
-        #"0:singleTriggerMCEfficiencyWeight",
-        #"0:singleTriggerDataEfficiencyWeight",
-        "0:singleTriggerMCEfficiencyWeightIC",
-        "0:singleTriggerDataEfficiencyWeightIC",
+        "0:crossTriggerMCEfficiencyWeightKIT",
+        "0:crossTriggerDataEfficiencyWeightKIT",
+
         "0:singleTriggerMCEfficiencyWeightKIT",
         "0:singleTriggerDataEfficiencyWeightKIT",
 
@@ -344,10 +343,9 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceObjectNames"] = [
         "0:e_trg_EleTau_Ele24Leg_desy_mc",
         "0:e_trg_EleTau_Ele24Leg_desy_data",
-        #"0:e_trg_SingleEle_Ele32OREle35_desy_mc",
-        #"0:e_trg_SingleEle_Ele32OREle35_desy_data",
-        "0:e_trg_27_32_35_mc",
-        "0:e_trg_27_32_35_data",
+        "0:e_trg_EleTau_Ele24Leg_kit_mc",
+        "0:e_trg_EleTau_Ele24Leg_kit_data",
+
         "0:e_trg27_trg32_trg35_kit_mc",
         "0:e_trg27_trg32_trg35_kit_data",
 
@@ -363,8 +361,12 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceObjectArguments"] = [
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
-        #"0:e_pt,e_eta",
-        #"0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+      
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
@@ -372,12 +374,7 @@ def build_config(nickname, **kwargs):
 
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
-        "0:e_pt,e_eta",
-        "0:e_pt,e_eta",
-
-        "0:e_pt,e_eta",
-        "0:e_pt,e_eta",
-        "0:e_pt,e_eta",
+        "0:e_eta,e_pt",
     ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
@@ -460,7 +457,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
-  if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
+  #if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")

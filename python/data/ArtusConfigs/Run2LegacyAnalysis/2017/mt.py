@@ -231,8 +231,8 @@ def build_config(nickname, **kwargs):
       "1:tauIDScaleFactorWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
@@ -240,11 +240,21 @@ def build_config(nickname, **kwargs):
 
           "0:crossTriggerMCEfficiencyWeight",
           "0:crossTriggerDataEfficiencyWeight",
+
+          "0:crossTriggerMCEfficiencyWeightKIT",
+          "0:crossTriggerDataEfficiencyWeightKIT",
+          "0:crossTriggerEmbeddedEfficiencyWeightKIT",
+
           "0:crossTriggerEmbeddedWeight",
           "1:crossTriggerEmbeddedWeight",
 
           "0:isoWeight",
           "0:idWeight",
+
+          "0:singleTriggerMCEfficiencyWeightKIT",
+          "0:singleTriggerDataEfficiencyWeightKIT",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT",
+
           "0:trigger_24_Weight",
           "0:trigger_27_Weight",
           "0:trigger_24_27_Weight"
@@ -256,11 +266,20 @@ def build_config(nickname, **kwargs):
 
           "0:m_trg_MuTau_Mu20Leg_desy_mc",
           "0:m_trg_MuTau_Mu20Leg_desy_data",
-          "0:m_trg_MuTau_Mu20Leg_kit_ratio_embed",
+
+          "0:m_trg_MuTau_Mu20Leg_kit_mc",
+          "0:m_trg_MuTau_Mu20Leg_kit_data",
+          "0:m_trg_MuTau_Mu20Leg_kit_embed",
+
+          "0:m_trg_MuTau_Mu20Leg_embed_kit_ratio",
           "1:mt_emb_LooseChargedIsoPFTau27_kit_ratio",
 
           "0:m_iso_binned_embed_kit_ratio",
           "0:m_id_embed_kit_ratio",
+
+          "0:m_trg24_27_kit_mc",
+          "0:m_trg24_27_kit_data",
+          "0:m_trg24_27_kit_embed",
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",
@@ -273,7 +292,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
-          "0:m_pt",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
           "1:t_pt",
 
           "0:m_pt,m_eta,m_iso",
@@ -281,17 +305,24 @@ def build_config(nickname, **kwargs):
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
           "0:m_pt,m_eta"
           ]
   else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_2017_v3.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["RooWorkspaceWeightNames"]=[
         "0:crossTriggerMCEfficiencyWeight",
         "0:crossTriggerDataEfficiencyWeight",
-        #"0:singleTriggerMCEfficiencyWeight",
-        #"0:singleTriggerDataEfficiencyWeight",
-        "0:singleTriggerMCEfficiencyWeightIC",
-        "0:singleTriggerDataEfficiencyWeightIC",
+
+        "0:crossTriggerMCEfficiencyWeightKIT",
+        "0:crossTriggerDataEfficiencyWeightKIT",
+
+        "0:singleTriggerMCEfficiencyWeightDESY",
+        "0:singleTriggerDataEfficiencyWeightDESY",
+
         "0:singleTriggerMCEfficiencyWeightKIT",
         "0:singleTriggerDataEfficiencyWeightKIT",
 
@@ -300,12 +331,15 @@ def build_config(nickname, **kwargs):
 #        "0:trackWeight", # new recommendation for 2017 data/MC is to remove it (will result in SF = 1.0).
     ]
     config["RooWorkspaceObjectNames"] = [
-        "0:m_trg20_mc",
-        "0:m_trg20_data",
-        #"0:m_trg_SingleMu_Mu24ORMu27_desy_mc",
-        #"0:m_trg_SingleMu_Mu24ORMu27_desy_data",
-        "0:m_trg_mc",
-        "0:m_trg_data",
+        "0:m_trg_MuTau_Mu20Leg_desy_mc",
+        "0:m_trg_MuTau_Mu20Leg_desy_data",
+
+        "0:m_trg_MuTau_Mu20Leg_kit_mc",
+        "0:m_trg_MuTau_Mu20Leg_kit_data",
+
+        "0:m_trg_SingleMu_Mu24ORMu27_desy_mc",
+        "0:m_trg_SingleMu_Mu24ORMu27_desy_data",
+
         "0:m_trg24_27_kit_mc",
         "0:m_trg24_27_kit_data",
 
@@ -316,10 +350,13 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceObjectArguments"] = [
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
-        #"0:m_pt,m_eta",
-        #"0:m_pt,m_eta",
+        
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
+
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
 
@@ -340,7 +377,7 @@ def build_config(nickname, **kwargs):
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
       "flagMETFilter",
-      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1"
+      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1","singleTriggerDataEfficiencyWeightDESY_1","singleTriggerMCEfficiencyWeightDESY_1"
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())

@@ -228,8 +228,8 @@ def build_config(nickname, **kwargs):
       "1:tauIDScaleFactorWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
@@ -251,21 +251,6 @@ def build_config(nickname, **kwargs):
             "0:t_pt",
             "1:t_pt",
             ]
-  else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_5.root"
-    config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_5.root"
-    config["TauTauTriggerWeightWorkspaceWeightNames"] = [
-        "0:triggerWeight",
-        "1:triggerWeight"
-    ]
-    config["TauTauTriggerWeightWorkspaceObjectNames"] = [
-        "0:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio",
-        "1:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio"
-    ]
-    config["TauTauTriggerWeightWorkspaceObjectArguments"] = [
-        "0:t_pt,t_dm",
-        "1:t_pt,t_dm"
-    ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
