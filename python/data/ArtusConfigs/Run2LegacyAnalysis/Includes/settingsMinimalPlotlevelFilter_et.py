@@ -25,8 +25,10 @@ def build_config(nickname, **kwargs):
     "againstElectronTightMVA6_2",
     "againstMuonLoose3_2",
     "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2",
+    "nBJets20"
+
   ]
-  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(againstMuonLoose3_2 > 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)"
+  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(againstMuonLoose3_2 > 0.5)*(againstElectronTightMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)*(nBJets20 > 1.5)"
 
   if not etau_fake_es and not tau_es:
     config["PlotlevelFilterExpressionQuantities"].append('nDiElectronVetoPairsOS')

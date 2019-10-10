@@ -449,6 +449,7 @@ def build_config(nickname, **kwargs):
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   if not isData:                 config["Processors"].append( "producer:HttValidGenTausProducer")
   config["Processors"].extend((                               "producer:MetCorrector",
@@ -457,16 +458,16 @@ def build_config(nickname, **kwargs):
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
                                                               "producer:DiBJetQuantitiesProducer"))
+
+
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
-  config["Processors"].append( "producer:QCDFactorProducer")
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
-  config["Processors"].append(
-                                                              "producer:EventWeightProducer")
+  config["Processors"].append("producer:QCDFactorProducer")
+  config["Processors"].append("producer:EventWeightProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",
                          "cutflow_histogram"]

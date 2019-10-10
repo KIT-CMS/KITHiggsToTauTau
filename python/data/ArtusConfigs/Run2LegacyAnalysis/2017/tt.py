@@ -331,6 +331,8 @@ def build_config(nickname, **kwargs):
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
+
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   config["Processors"].extend((                               "producer:MetCorrector",
                                                               "producer:PuppiMetCorrector",
@@ -341,8 +343,8 @@ def build_config(nickname, **kwargs):
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
-                                                              "producer:DiBJetQuantitiesProducer",
-                                                              "filter:MinimalPlotlevelFilter"))
+                                                              "producer:DiBJetQuantitiesProducer"))
+                                                              
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")

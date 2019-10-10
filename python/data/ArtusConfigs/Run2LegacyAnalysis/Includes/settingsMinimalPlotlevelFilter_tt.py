@@ -24,8 +24,10 @@ def build_config(nickname, **kwargs):
     "againstMuonLoose3_2",
     "extramuon_veto",
     "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_1",
-    "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2"
+    "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2",
+    "nBJets20"
+
   ]
-  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(againstElectronVLooseMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_1 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)"
+  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(againstMuonLoose3_2 > 0.5)*(againstElectronVLooseMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_1 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)*(nBJets20 > 1.5)"
   
   return config

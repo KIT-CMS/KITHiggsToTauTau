@@ -21,8 +21,10 @@ def build_config(nickname, **kwargs):
         "againstElectronVLooseMVA6_2",
         "againstMuonTight3_2",
         "byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2",
+        "nBJets20"
+
     ]
-    config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(againstMuonTight3_2 > 0.5)*(againstElectronVLooseMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)"
+    config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(againstMuonTight3_2 > 0.5)*(againstElectronVLooseMVA6_2 > 0.5)*(byVLooseIsolationMVArun2017v2DBoldDMwLT2017_2 > 0.5)*(nBJets20 > 1.5)"
 
     # as for the TES version of 2016
     if not tau_es and not mtau_fake_es:
