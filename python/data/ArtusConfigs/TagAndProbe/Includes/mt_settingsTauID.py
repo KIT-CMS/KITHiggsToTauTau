@@ -28,8 +28,8 @@ def build_config(nickname, **kwargs):
 
   # explicit configuration
   #config["TauID_documentation"] = []
-  config["TauDiscriminatorIsolationName"] = "byIsolationMVArun2017v2DBoldDMwLTraw2017" # Fall17 trainings
-  config["TauDiscriminators"] = ["byVVLooseIsolationMVArun2017v2DBoldDMwLT2017", "againstMuonLoose3", "againstElectronVLooseMVA6", "decayModeFinding"]
+  config["TauDiscriminatorIsolationName"] = "byDeepTau2017v2p1VSjetraw" # Fall17 trainings
+  config["TauDiscriminators"] = ["byVLooseDeepTau2017v2p1VSmu", "decayModeFindingNewDMs"]  # TODO: Add back VVVLoose WPs of jet and mu discriminators once they are skimmed
   config["TauElectronLowerDeltaRCut"] = -1.0
   config["TauMuonLowerDeltaRCut"] = -1.0
 
