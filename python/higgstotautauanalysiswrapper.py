@@ -818,7 +818,7 @@ class HiggsToTauTauAnalysisWrapper():
 		backend = open(os.path.expandvars("$CMSSW_BASE/src/Artus/Configuration/data/grid-control_backend_" + self._args.batch + ".conf"), 'r').read()
 
 		seoutputfiles = "se output files = *.root"
-		if not self._args.log_to_se: seoutputfiles += " *.log"
+		if self._args.log_to_se: seoutputfiles += " *.log"
 		if self._args.batch_jobs_debug: seoutputfiles += " *.json"
 
 		self.replacingDict = dict(
