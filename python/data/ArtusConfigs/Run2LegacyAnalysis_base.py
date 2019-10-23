@@ -31,7 +31,7 @@ def build_config(nickname, **kwargs):
   isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
   isSUSYggH = re.search("SUSYGluGluToHToTauTau", nickname)
-  isSignal = re.search("HToTauTau|125tautau",nickname)
+  isSignal = re.search("HToTauTau|NMSSM",nickname)
   isNMSSM = re.search("NMSSM",nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
 

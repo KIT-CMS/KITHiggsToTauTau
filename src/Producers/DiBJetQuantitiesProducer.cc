@@ -38,11 +38,11 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
 	});
 	
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diBJetDeltaPhi", [](event_type const& event, product_type const& product) {
-		return product.m_diBJetSystemAvailable ? ROOT::Math::VectorUtil::DeltaPhi(product.m_validJets[0]->p4, product.m_validJets[1]->p4) :
+		return product.m_diBJetSystemAvailable ? ROOT::Math::VectorUtil::DeltaPhi(product.m_bTaggedJets[0]->p4, product.m_bTaggedJets[1]->p4) :
 		                                        DefaultValues::UndefinedFloat;
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diBJetAbsDeltaEta", [](event_type const& event, product_type const& product) {
-		return product.m_diBJetSystemAvailable ? std::abs(product.m_validJets[0]->p4.Eta() - product.m_validJets[1]->p4.Eta()) :
+		return product.m_diBJetSystemAvailable ? std::abs(product.m_bTaggedJets[0]->p4.Eta() - product.m_bTaggedJets[1]->p4.Eta()) :
 		                                        DefaultValues::UndefinedFloat;
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diBJetdiLepPhi", [](event_type const& event, product_type const& product) {
