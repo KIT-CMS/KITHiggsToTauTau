@@ -633,7 +633,31 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         tauDiscriminators.push_back("byTightIsolationMVArun2017v1DBoldDMwLT2017");
         tauDiscriminators.push_back("byVTightIsolationMVArun2017v1DBoldDMwLT2017");
         tauDiscriminators.push_back("byVVTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSjetraw");
+        //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSeraw");
+        //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSmuraw");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSmu");
         tauDiscriminators.push_back("decayModeFinding");
+        tauDiscriminators.push_back("decayModeFindingNewDMs");
 
         for (std::string tauDiscriminator : tauDiscriminators)
         {
@@ -642,6 +666,16 @@ void NewMTTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
                 FloatQuantities[tauDiscriminator+"_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator(tauDiscriminator, event.m_tauMetadata);
             }
         }
+        //temporary fix for VVVLoose deep tau ID WP
+	if (quantity == "byVVVLooseDeepTau2017v2p1VSjet_p")
+        {
+                FloatQuantities["byVVVLooseDeepTau2017v2p1VSjet_p"] = float(static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator("byDeepTau2017v2p1VSjetraw", event.m_tauMetadata) > 0.2599605);
+	};
+	if (quantity == "byVVVLooseDeepTau2017v2p1VSe_p")
+        {
+                FloatQuantities["byVVVLooseDeepTau2017v2p1VSe_p"] = float(static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator("byDeepTau2017v2p1VSeraw", event.m_tauMetadata) > 0.0630386);
+	};
+        //end of fix
         if (quantity == "metPt")
         {
                 FloatQuantities["metPt"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();
@@ -750,6 +784,29 @@ void NewETTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         tauDiscriminators.push_back("byTightIsolationMVArun2017v1DBoldDMwLT2017");
         tauDiscriminators.push_back("byVTightIsolationMVArun2017v1DBoldDMwLT2017");
         tauDiscriminators.push_back("byVVTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSjetraw");
+        //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSeraw");
+        //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSmuraw");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSmu");
         tauDiscriminators.push_back("decayModeFinding");
 
         for (std::string tauDiscriminator : tauDiscriminators)
@@ -759,6 +816,16 @@ void NewETTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
                 FloatQuantities[tauDiscriminator+"_p"] = static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator(tauDiscriminator, event.m_tauMetadata);
             }
         }
+	//temporary fix for VVVLoose deep tau ID WP
+        if (quantity == "byVVVLooseDeepTau2017v2p1VSjet_p")
+        {
+                FloatQuantities["byVVVLooseDeepTau2017v2p1VSjet_p"] = float(static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator("byDeepTau2017v2p1VSjetraw", event.m_tauMetadata) > 0.2599605);
+        };
+        if (quantity == "byVVVLooseDeepTau2017v2p1VSe_p")
+        {
+                FloatQuantities["byVVVLooseDeepTau2017v2p1VSe_p"] = float(static_cast<KTau*>(product.m_validDiTauPairCandidates.at(0).second)->getDiscriminator("byDeepTau2017v2p1VSeraw", event.m_tauMetadata) > 0.0630386);
+        };
+	//end of fix
         if (quantity == "metPt")
         {
                 FloatQuantities["metPt"] = (static_cast<HttProduct const&>(product)).m_met.p4.Pt();

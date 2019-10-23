@@ -30,8 +30,7 @@ def build_config(nickname, **kwargs):
   isTTbar = re.search("TT(To|_|Jets)", nickname)
   isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("(W.?Jets|WG)ToLNu", nickname)
-  isSignal = re.search("h1M125tautau|HToTauTau",nickname)
-  isNMSSM = re.search("h1M125",nickname)  
+  isSignal = re.search("HToTauTau",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
   isMSSMggH = re.search("SUSYGluGuToH", nickname)
@@ -156,7 +155,7 @@ def build_config(nickname, **kwargs):
 
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
-  config["TauUseOldDMs"] = True
+  config["TauUseOldDMs"] = False
   config["TauLowerPtCuts"] = ["40.0"]
   config["TauUpperAbsEtaCuts"] = ["2.1"]
   config["DiTauPairMinDeltaRCut"] = 0.5
@@ -214,6 +213,8 @@ def build_config(nickname, **kwargs):
           tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
 
   config["TauIDSFWorkingPoints"] = [
+       "VVVLoose",
+       "VVLoose",
        "VLoose",
        "Loose",
        "Medium",
@@ -222,15 +223,15 @@ def build_config(nickname, **kwargs):
        "VVTight",
   ]
   config["TauIDSFTypes"] = [
-       "MVAoldDM2017v2",
+       "DeepTau2017v2p1VSjet",
   ]
   config["TauIDScaleFactorWeightNames"] = [
       "0:tauIDScaleFactorWeight",
       "1:tauIDScaleFactorWeight",
   ]
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
-    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspaceWeightNames"]=[
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
@@ -252,21 +253,6 @@ def build_config(nickname, **kwargs):
             "0:t_pt",
             "1:t_pt",
             ]
-  else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_5.root"
-    config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v16_5.root"
-    config["TauTauTriggerWeightWorkspaceWeightNames"] = [
-        "0:triggerWeight",
-        "1:triggerWeight"
-    ]
-    config["TauTauTriggerWeightWorkspaceObjectNames"] = [
-        "0:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio",
-        "1:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio"
-    ]
-    config["TauTauTriggerWeightWorkspaceObjectArguments"] = [
-        "0:t_pt,t_dm",
-        "1:t_pt,t_dm"
-    ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
@@ -294,22 +280,7 @@ def build_config(nickname, **kwargs):
     ])
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
-  if isNMSSM:
-    config["Quantities"].extend(["genBosonMass_h1","genBosonMass_h2","genBosonMass_h3","genBosonPt_h1","genBosonPt_h2","genBosonPt_h3","genBosonEta_h1","genBosonEta_h2","genBosonEta_h3"])
-  config["Quantities"].extend([
-      "diBJetPt",
-      "diBJetEta",
-      "diBJetPhi",
-      "diBJetMass",
-      "diBJetDeltaPhi",
-      "diBJetAbsDeltaEta",
-      "diBJetdiLepPhi",
-      "pt_ttvisbb",
-      "pt_ttbb",
-      "pt_ttbb_puppi",
-      "m_ttvisbb",
-      "m_ttbb",
-      "m_ttbb_puppi"])
+
   ### Processors & consumers configuration
   config["Processors"] = []
   #if not (isEmbedded):           config["Processors"].append( "producer:ElectronCorrectionsProducer")
@@ -331,8 +302,6 @@ def build_config(nickname, **kwargs):
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
-
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   config["Processors"].extend((                               "producer:MetCorrector",
                                                               "producer:PuppiMetCorrector",
@@ -343,8 +312,7 @@ def build_config(nickname, **kwargs):
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
-                                                              "producer:DiBJetQuantitiesProducer"))
-                                                              
+                                                              "filter:MinimalPlotlevelFilter"))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")

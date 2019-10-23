@@ -302,18 +302,6 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Px", [](event_type const& event, product_type const& product)
-	{
-		return product.m_flavourOrderedLeptons.at(0)->p4.Px();
-	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Py", [](event_type const& event, product_type const& product)
-	{
-		return product.m_flavourOrderedLeptons.at(0)->p4.Py();
-	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Pz", [](event_type const& event, product_type const& product)
-	{
-		return product.m_flavourOrderedLeptons.at(0)->p4.Pz();
-	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1E", [](event_type const& event, product_type const& product)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.E();
@@ -490,18 +478,6 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Px", [](event_type const& event, product_type const& product)
-	{
-		return product.m_flavourOrderedLeptons.at(1)->p4.Px();
-	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Py", [](event_type const& event, product_type const& product)
-	{
-		return product.m_flavourOrderedLeptons.at(1)->p4.Py();
-	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Pz", [](event_type const& event, product_type const& product)
-	{
-		return product.m_flavourOrderedLeptons.at(1)->p4.Pz();
-	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ChargedPt", [](event_type const& event, product_type const& product)
 	{
 		return (product.m_flavourOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(1))->sumChargedHadronCandidates().Pt()  : product.m_flavourOrderedLeptons.at(1)->p4.Pt());
@@ -664,6 +640,29 @@ void DecayChannelProducer::Init(setting_type const& settings)
         tauDiscriminators.push_back("byTightIsolationMVArun2017v1DBoldDMwLT2017");
         tauDiscriminators.push_back("byVTightIsolationMVArun2017v1DBoldDMwLT2017");
         tauDiscriminators.push_back("byVVTightIsolationMVArun2017v1DBoldDMwLT2017");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSjetraw");
+        //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSjet");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSeraw");
+        //tauDiscriminators.push_back("byVVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSe");
+        tauDiscriminators.push_back("byDeepTau2017v2p1VSmuraw");
+        tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSmu");
+        tauDiscriminators.push_back("byTightDeepTau2017v2p1VSmu");
 	tauDiscriminators.push_back("chargedIsoPtSum");
 	tauDiscriminators.push_back("decayModeFinding");
 	tauDiscriminators.push_back("decayModeFindingNewDMs");
@@ -709,6 +708,32 @@ void DecayChannelProducer::Init(setting_type const& settings)
 				}
 			});
 		}
+		//temporary fix for VVVLoose deep tau ID WP
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("byVVVLooseDeepTau2017v2p1VSjet_" + std::to_string(leptonIndex+1), [leptonIndex](event_type const& event, product_type const& product)
+                {
+			KLepton* lepton = product.m_flavourOrderedLeptons.at(leptonIndex);
+			if (lepton->flavour() == KLeptonFlavour::TAU)
+			{
+				return float(static_cast<KTau*>(lepton)->getDiscriminator("byDeepTau2017v2p1VSjetraw", event.m_tauMetadata) > 0.2599605);
+			}
+			else
+			{
+				return DefaultValues::UndefinedFloat;
+			}
+		});
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("byVVVLooseDeepTau2017v2p1VSe_" + std::to_string(leptonIndex+1), [leptonIndex](event_type const& event, product_type const& product)
+                {
+			KLepton* lepton = product.m_flavourOrderedLeptons.at(leptonIndex);
+			if (lepton->flavour() == KLeptonFlavour::TAU)
+			{
+				return float(static_cast<KTau*>(lepton)->getDiscriminator("byDeepTau2017v2p1VSeraw", event.m_tauMetadata) > 0.0630386);
+			}
+			else
+			{
+				return DefaultValues::UndefinedFloat;
+			}
+		});
+                //end of fix
 
 		for (std::string electronDiscriminator : electronDiscriminators)
 		{

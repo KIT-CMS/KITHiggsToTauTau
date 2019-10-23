@@ -46,12 +46,11 @@ def build_config(nickname, **kwargs):
 
   # Electron Requirements
   config["ElectronLowerPtCuts"] = ["10.0"]
-  config["ElectronUpperAbsEtaCuts"] = ["2.1"]
+  config["ElectronUpperAbsEtaCuts"] = ["2.4"]
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["TagElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90"
-  #config["OldElectronIDName"] = "electronMVAValueMapProducer:ElectronMVAEstimatorRun2Spring15NonTri  #config["TagElectronSecondIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V1-wp90"
-  config["ElectronID"] = "user"
-  config["ElectronIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp90"
+  config["TagElectronSecondIDName"] = "egmGsfElectronIDs:mvaEleID-Fall17-noIso-V2-wp80"
+
   config["ElectronTrackDxyCut"] = 0.05
   config["ElectronTrackDzCut"] = 0.1
   config["ElectronIsoPtSumOverPtUpperThresholdEE"] = 0.1
@@ -91,8 +90,8 @@ def build_config(nickname, **kwargs):
   config["TagAdditionalCriteria"] = [
     "pt:29.0",
     "eta:2.1",
-    "iso_sum:0.1",
-    "dxy:0.05",
+    "iso_sum:0.2",
+    "dxy:0.045",
     "dz:0.1",
   ]
 

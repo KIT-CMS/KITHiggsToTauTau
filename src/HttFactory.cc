@@ -18,7 +18,6 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/DataMcScaleFactorProducers.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/DiLeptonQuantitiesProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/DiJetQuantitiesProducer.h"
-#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/DiBJetQuantitiesProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SvfitProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/MetprojectionProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauTauRestFrameSelector.h"
@@ -163,8 +162,6 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new DiLeptonQuantitiesProducer();
 	else if(id == DiJetQuantitiesProducer().GetProducerId())
 		return new DiJetQuantitiesProducer();
-	else if(id == DiBJetQuantitiesProducer().GetProducerId())
-		return new DiBJetQuantitiesProducer();
 	else if(id == SvfitProducer().GetProducerId())
 		return new SvfitProducer();
 	else if(id == MetprojectionProducer().GetProducerId())

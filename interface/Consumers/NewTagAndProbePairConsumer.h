@@ -70,31 +70,65 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["metPt"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["mt_t"] = DefaultValues::UndefinedFloat;
 
-		FloatQuantities["againstMuonLoose3_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["againstMuonTight3_p"] = DefaultValues::UndefinedFloat;
-		
-		FloatQuantities["againstElectronVLooseMVA6_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["againstElectronLooseMVA6_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["againstElectronMediumMVA6_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["againstElectronTightMVA6_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["againstElectronVTightMVA6_p"] = DefaultValues::UndefinedFloat;
+                std::vector<std::string> tauDiscriminators;
+                tauDiscriminators.push_back("againstElectronVLooseMVA6");
+                tauDiscriminators.push_back("againstElectronLooseMVA6");
+                tauDiscriminators.push_back("againstElectronMediumMVA6");
+                tauDiscriminators.push_back("againstElectronTightMVA6");
+                tauDiscriminators.push_back("againstElectronVTightMVA6");
+                tauDiscriminators.push_back("againstMuonLoose3");
+                tauDiscriminators.push_back("againstMuonTight3");
+                tauDiscriminators.push_back("byIsolationMVArun2v1DBoldDMwLTraw");
+                tauDiscriminators.push_back("byVLooseIsolationMVArun2v1DBoldDMwLT");
+                tauDiscriminators.push_back("byLooseIsolationMVArun2v1DBoldDMwLT");
+                tauDiscriminators.push_back("byMediumIsolationMVArun2v1DBoldDMwLT");
+                tauDiscriminators.push_back("byTightIsolationMVArun2v1DBoldDMwLT");
+                tauDiscriminators.push_back("byVTightIsolationMVArun2v1DBoldDMwLT");
+                tauDiscriminators.push_back("byVVTightIsolationMVArun2v1DBoldDMwLT");
+                tauDiscriminators.push_back("byIsolationMVArun2017v2DBoldDMwLTraw2017");
+                tauDiscriminators.push_back("byVVLooseIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byVLooseIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byLooseIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byMediumIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byTightIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byVTightIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byVVTightIsolationMVArun2017v2DBoldDMwLT2017");
+                tauDiscriminators.push_back("byIsolationMVArun2017v1DBoldDMwLTraw2017");
+                tauDiscriminators.push_back("byVVLooseIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byVLooseIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byLooseIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byMediumIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byTightIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byVTightIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byVVTightIsolationMVArun2017v1DBoldDMwLT2017");
+                tauDiscriminators.push_back("byDeepTau2017v2p1VSjetraw");
+                tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byTightDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSjet");
+                tauDiscriminators.push_back("byDeepTau2017v2p1VSeraw");
+                tauDiscriminators.push_back("byVVLooseDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byTightDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byVTightDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byVVTightDeepTau2017v2p1VSe");
+                tauDiscriminators.push_back("byDeepTau2017v2p1VSmuraw");
+                tauDiscriminators.push_back("byVLooseDeepTau2017v2p1VSmu");
+                tauDiscriminators.push_back("byLooseDeepTau2017v2p1VSmu");
+                tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSmu");
+                tauDiscriminators.push_back("byTightDeepTau2017v2p1VSmu");
+                tauDiscriminators.push_back("decayModeFinding");
+                tauDiscriminators.push_back("decayModeFindingNewDMs");
 
-		FloatQuantities["byVVLooseIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVLooseIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byLooseIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byMediumIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVVTightIsolationMVArun2017v2DBoldDMwLT2017_p"] = DefaultValues::UndefinedFloat;
-                
-                FloatQuantities["byIsolationMVArun2v1DBoldDMwLTraw_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byLooseIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byMediumIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
-		FloatQuantities["byVVTightIsolationMVArun2v1DBoldDMwLT_p"] = DefaultValues::UndefinedFloat;
+                for (std::string tauDiscriminator : tauDiscriminators)
+                {
+                    FloatQuantities[tauDiscriminator + "_p"] = DefaultValues::UndefinedFloat;
+                }
 
 		BoolQuantities["isOS"] = false;
 
@@ -178,7 +212,6 @@ class NewTagAndProbePairConsumerBase : public ConsumerBase<HttTypes>
 		FloatQuantities["scetaseed_t"] = DefaultValues::UndefinedFloat;
 		FloatQuantities["scetaseed_p"] = DefaultValues::UndefinedFloat;
 
-		FloatQuantities["decayModeFinding_p"] = DefaultValues::UndefinedFloat;
                 IntQuantities["decayMode_p"] = DefaultValues::UndefinedInt;
                 FloatQuantities["trkpt_p"] = DefaultValues::UndefinedFloat;
                 IntQuantities["gen_match_p"] = DefaultValues::UndefinedInt;

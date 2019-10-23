@@ -51,7 +51,7 @@ def build_config(nickname, **kwargs):
 
   #config["TauID"] = "TauIDRecommendation13TeV"
   config["TauID"] = "none"
-  config["TauUseOldDMs"] = True
+  config["TauUseOldDMs"] = False
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingTaus"] = 0.5
   config["DeltaRTriggerMatchingMuons"] = 0.5
