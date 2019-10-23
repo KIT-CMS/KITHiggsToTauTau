@@ -432,10 +432,10 @@ def build_config(nickname, **kwargs):
                                                               "producer:NewValidEMPairCandidatesProducer",
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   if not isData:                 config["Processors"].append( "producer:HttValidGenTausProducer")
   config["Processors"].extend((                               "producer:MetCorrector",

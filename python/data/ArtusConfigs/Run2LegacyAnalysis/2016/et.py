@@ -270,6 +270,7 @@ def build_config(nickname, **kwargs):
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer",
                                                               "producer:DiVetoElectronVetoProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")                                                           
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
@@ -284,7 +285,6 @@ def build_config(nickname, **kwargs):
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")

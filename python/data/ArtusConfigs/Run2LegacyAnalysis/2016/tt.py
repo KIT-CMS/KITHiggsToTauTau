@@ -279,6 +279,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:NewValidTTPairCandidatesProducer",
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
@@ -292,8 +293,7 @@ def build_config(nickname, **kwargs):
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
-                                                              "producer:DiBJetQuantitiesProducer",
-                                                              "filter:MinimalPlotlevelFilter"))
+                                                              "producer:DiBJetQuantitiesProducer"))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")

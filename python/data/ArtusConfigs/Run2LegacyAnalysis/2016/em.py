@@ -429,6 +429,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:NewValidEMPairCandidatesProducer",
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
@@ -446,7 +447,6 @@ def build_config(nickname, **kwargs):
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   config["Processors"].append( "producer:QCDFactorProducer")
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   config["Processors"].append(
                                                               "producer:EventWeightProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
