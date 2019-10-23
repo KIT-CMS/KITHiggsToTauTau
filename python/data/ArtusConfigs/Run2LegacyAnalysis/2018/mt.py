@@ -290,7 +290,6 @@ def build_config(nickname, **kwargs):
 
           "0:m_iso_binned_embed_kit_ratio",
           "0:m_id_embed_kit_ratio",
-          ""
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",

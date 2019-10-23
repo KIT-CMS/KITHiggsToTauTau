@@ -332,7 +332,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
         });
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj", [](event_type const& event, product_type const& product)
         {
-                return product.m_diJetSystemAvailable ? (product.m_diLeptonSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
+                return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat; 
         });
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb", [](event_type const& event, product_type const& product)
         {

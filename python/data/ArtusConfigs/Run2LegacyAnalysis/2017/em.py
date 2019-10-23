@@ -403,20 +403,6 @@ def build_config(nickname, **kwargs):
       "em_qcd_osss_1jet_shapeup_Weight",
       "em_qcd_osss_1jet_shapedown_Weight",
       "em_qcd_extrap_uncert_Weight"])
-  config["Quantities"].extend([
-      "diBJetPt",
-      "diBJetEta",
-      "diBJetPhi",
-      "diBJetMass",
-      "diBJetDeltaPhi",
-      "diBJetAbsDeltaEta",
-      "diBJetdiLepPhi",
-      "pt_ttvisbb",
-      "pt_ttbb",
-      "pt_ttbb_puppi",
-      "m_ttvisbb",
-      "m_ttbb",
-      "m_ttbb_puppi"])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
