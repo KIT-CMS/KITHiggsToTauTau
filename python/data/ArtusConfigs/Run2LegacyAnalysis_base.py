@@ -79,8 +79,7 @@ def build_config(nickname, **kwargs):
   if isNMSSM:
     config["MatchNMSSMBosons"] = True
   for key, pdgids in BosonPdgIds.items():
-    if re.search(key, nickname): config["BosonPdgIds"] = pdgids
-  print config["BosonPdgIds"]
+    if re.search(key, nickname): config["BosonPdgIds"] = pdgids 
   config["BosonStatuses"] = [62]
   if isNMSSM:
     config["BosonStatuses"].append(22)
@@ -131,8 +130,6 @@ def build_config(nickname, **kwargs):
     if isEmbedded:                      config["Processors"].append( "producer:GeneratorWeightProducer")
     #if isTTbar:                        config["Processors"].append( "producer:TTbarGenDecayModeProducer")
  
-
-
   if isData or isEmbedded:                config["PileupWeightFile"] = "not needed"
   elif year == 2016: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2016_271036-284044_13TeVMoriond17_23Sep2016ReReco_69p2mbMinBiasXS.root"
   elif year == 2017: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2017_294927-306462_13TeVFall17_31Mar2018ReReco_69p2mbMinBiasXS/%s.root"%nickname
