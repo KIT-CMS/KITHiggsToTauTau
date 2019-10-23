@@ -20,8 +20,9 @@ def build_config(nickname, **kwargs):
   config["PlotlevelFilterExpressionQuantities"] = [
     "flagMETFilter",
     "extraelec_veto",
-    "extramuon_veto"
+    "extramuon_veto",
+    "nBJets20"
   ]
-  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)"
+  config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(extraelec_veto < 0.5)*(extramuon_veto < 0.5)*(nBJets20 > 1.5)"
 
   return config
