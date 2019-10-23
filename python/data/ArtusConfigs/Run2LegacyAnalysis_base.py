@@ -32,7 +32,7 @@ def build_config(nickname, **kwargs):
   isWjets = re.search("W.?JetsToLNu", nickname)
   isSUSYggH = re.search("SUSYGluGluToHToTauTau", nickname)
   isSignal = re.search("HToTauTau|125tautau",nickname)
-  isNMSSM = re.search("NMSSM")
+  isNMSSM = re.search("NMSSM",nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
 
   ## fill config:
