@@ -200,13 +200,13 @@ def build_config(nickname, **kwargs):
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerDataEfficiencyWeight",
         "1:crossTriggerKITDataEfficiencyWeight",
-        "1:crossTriggerEMBEfficiencyWeight",  
+        "1:crossTriggerEMBEfficiencyWeight",
     ]
   else:
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerMCEfficiencyWeight",
         "1:crossTriggerDataEfficiencyWeight",
-    ]  
+    ]
 
    # Define weight names to be written out - only store weights that are actually filled
   tauTriggerWeights = []
@@ -233,10 +233,10 @@ def build_config(nickname, **kwargs):
   config["TauIDScaleFactorWeightNames"] = [
       "1:tauIDScaleFactorWeight",
   ]
+  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
-    config["EmbeddedWeightWorkspaceWeightNames"]=[
+    config["EmbeddedWeightWorkspaceWeightNames"] = [
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
           "1:muonEffIDWeight",
@@ -262,7 +262,7 @@ def build_config(nickname, **kwargs):
           "0:trigger_27_Weight",
           "0:trigger_24_27_Weight"
           ]
-    config["EmbeddedWeightWorkspaceObjectNames"]=[
+    config["EmbeddedWeightWorkspaceObjectNames"] = [
           "0:m_sel_trg_ratio",
           "0:m_sel_idEmb_ratio",
           "1:m_sel_idEmb_ratio",
@@ -314,9 +314,8 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta",
           "0:m_pt,m_eta"
           ]
-  else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
-    config["RooWorkspaceWeightNames"]=[
+  elif not isData:
+    config["RooWorkspaceWeightNames"] = [
         "0:crossTriggerMCEfficiencyWeight",
         "0:crossTriggerDataEfficiencyWeight",
 
@@ -331,7 +330,7 @@ def build_config(nickname, **kwargs):
 
         "0:isoWeight",
         "0:idWeight",
-#        "0:trackWeight", # new recommendation for 2017 data/MC is to remove it (will result in SF = 1.0).
+        # "0:trackWeight", # new recommendation for 2017 data/MC is to remove it (will result in SF = 1.0).
     ]
     config["RooWorkspaceObjectNames"] = [
         "0:m_trg_MuTau_Mu20Leg_desy_mc",
@@ -348,14 +347,11 @@ def build_config(nickname, **kwargs):
 
         "0:m_iso_kit_ratio",
         "0:m_id_kit_ratio",
-#        "0:m_trk_ratio",
+        # "0:m_trk_ratio",
     ]
     config["RooWorkspaceObjectArguments"] = [
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
-        
-        "0:m_pt,m_eta",
-        "0:m_pt,m_eta",
 
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
@@ -365,7 +361,10 @@ def build_config(nickname, **kwargs):
 
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
-#        "0:m_eta",
+
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        # "0:m_eta",
     ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
@@ -471,7 +470,7 @@ def build_config(nickname, **kwargs):
   for pipeline in pipelines:
       if pipeline not in needed_pipelines:
           log.warning("Warning: pipeline NOT in the list of needed pipelines. Still adding it.")
-      log.info('Add pipeline: %s' %(pipeline))
+      log.info('Add pipeline: %s' % (pipeline))
       return_conf += ACU.apply_uncertainty_shift_configs('mt', config, importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis." + pipeline).build_config(nickname, **kwargs))
 
   return return_conf

@@ -137,7 +137,7 @@ def build_config(nickname, **kwargs):
 
   ### Efficiencies & weights configuration
   config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
-  config["RooWorkspaceWeightNames"]=[
+  config["RooWorkspaceWeightNames"] = [
       "0:singleTriggerMCEfficiencyWeightKIT",
       "0:singleTriggerDataEfficiencyWeightKIT",
 

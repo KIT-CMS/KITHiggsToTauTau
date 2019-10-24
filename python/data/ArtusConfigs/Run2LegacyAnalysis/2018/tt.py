@@ -239,10 +239,10 @@ def build_config(nickname, **kwargs):
       "0:tauIDScaleFactorWeight",
       "1:tauIDScaleFactorWeight",
   ]
+  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
   if isEmbedded:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
-    config["EmbeddedWeightWorkspaceWeightNames"]=[
+    config["EmbeddedWeightWorkspaceWeightNames"] = [
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
             "1:muonEffIDWeight",
@@ -251,7 +251,7 @@ def build_config(nickname, **kwargs):
             #"0:triggerdmBinnedWeight",
             #"1:triggerdmBinnedWeight",
             ]
-    config["EmbeddedWeightWorkspaceObjectNames"]=[
+    config["EmbeddedWeightWorkspaceObjectNames"] = [
             "0:m_sel_trg_ratio",
             "0:m_sel_idEmb_ratio",
             "1:m_sel_idEmb_ratio",
@@ -269,8 +269,7 @@ def build_config(nickname, **kwargs):
             #"0:t_pt,t_dm",
             #"1:t_pt,t_dm",
             ]
-  else:
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+  elif not isData:
     config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
     config["TauTauTriggerWeightWorkspaceWeightNames"] = [
         "0:triggerWeight",
