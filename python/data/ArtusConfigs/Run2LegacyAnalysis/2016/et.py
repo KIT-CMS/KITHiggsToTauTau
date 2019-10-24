@@ -33,6 +33,7 @@ def build_config(nickname, **kwargs):
   isSignal = re.search("HToTauTau",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
+  isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
   # includes
@@ -287,6 +288,7 @@ def build_config(nickname, **kwargs):
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",
                          "cutflow_histogram"]

@@ -33,6 +33,7 @@ def build_config(nickname, **kwargs):
   isSignal = re.search("HToTauTau",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
+  isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
   # includes
@@ -101,7 +102,7 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
   ]
-  
+
   config["HLTBranchNames"] = [
       "trg_singlemuon_24:HLT_IsoMu24_v",
       "trg_singlemuon_27:HLT_IsoMu27_v",
@@ -441,6 +442,7 @@ def build_config(nickname, **kwargs):
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   config["Processors"].append( "producer:QCDFactorProducer")
   config["Processors"].append(                                "filter:MinimalPlotlevelFilter")

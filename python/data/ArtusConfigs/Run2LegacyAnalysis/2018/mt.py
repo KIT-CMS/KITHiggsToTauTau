@@ -33,6 +33,7 @@ def build_config(nickname, **kwargs):
   isSignal = re.search("HToTauTau",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
+  isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
   # includes
@@ -218,13 +219,13 @@ def build_config(nickname, **kwargs):
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerDataEfficiencyWeight",
         "1:crossTriggerKITDataEfficiencyWeight",
-        "1:crossTriggerEMBEfficiencyWeight",  
+        "1:crossTriggerEMBEfficiencyWeight",
     ]
   else:
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerMCEfficiencyWeight",
         "1:crossTriggerDataEfficiencyWeight",
-    ]  
+    ]
 
    # Define weight names to be written out - only store weights that are actually filled
   tauTriggerWeights = []
@@ -278,7 +279,7 @@ def build_config(nickname, **kwargs):
           "1:m_sel_idEmb_ratio",
 
           "0:m_trg_MuTau_Mu20Leg_embed_kit_ratio",
-          "0:m_trg_binned_20_embed",          
+          "0:m_trg_binned_20_embed",
           "0:m_trg_binned_20_data",
           "0:m_trg_binned_20_embed_ratio",
 
@@ -302,7 +303,7 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta,m_iso",
           "0:m_pt,m_eta,m_iso",
           "0:m_pt,m_eta,m_iso",
-    
+
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
           "1:t_pt",
@@ -336,7 +337,7 @@ def build_config(nickname, **kwargs):
           "0:m_trg_MuTau_Mu20Leg_kit_mc",
           "0:m_trg_MuTau_Mu20Leg_kit_data",
           "0:m_trg_MuTau_Mu20Leg_kit_ratio",
-          "0:m_trg_binned_20_mc",          
+          "0:m_trg_binned_20_mc",
           "0:m_trg_binned_20_data",
           "0:m_trg_binned_20_ratio",
           "0:m_iso_binned_kit_ratio",
@@ -436,6 +437,7 @@ def build_config(nickname, **kwargs):
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",
                          "cutflow_histogram"]
