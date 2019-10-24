@@ -177,6 +177,9 @@ public:
 	bool m_diJetSystemAvailable = false;
 	RMDLV m_diBJetSystem;
 	bool m_diBJetSystemAvailable = false;
+	RMDLV m_JetPlusBJetSystem;
+	bool m_JetPlusBJetSystemAvailable = false;
+	bool m_leadJetIsBJet = false;
 	int m_nCentralJets20 = 0;
 	int m_nCentralJets30 = 0;
 
