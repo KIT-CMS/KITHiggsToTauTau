@@ -31,7 +31,7 @@ def build_config(nickname, **kwargs):
   isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("(W.?Jets|WG)ToLNu", nickname)
   isSignal = re.search("NMSSM|HToTauTau",nickname)
-  isNMSSM = re.search("NMSSM",nickname)  
+  isNMSSM = re.search("NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
   isMSSMggH = re.search("SUSYGluGuToH", nickname)
@@ -208,13 +208,13 @@ def build_config(nickname, **kwargs):
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerDataEfficiencyWeight",
         "1:crossTriggerKITDataEfficiencyWeight",
-        "1:crossTriggerEMBEfficiencyWeight",  
+        "1:crossTriggerEMBEfficiencyWeight",
     ]
   else:
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerMCEfficiencyWeight",
         "1:crossTriggerDataEfficiencyWeight",
-    ]  
+    ]
 
    # Define weight names to be written out - only store weights that are actually filled
   tauTriggerWeights = []
@@ -367,7 +367,7 @@ def build_config(nickname, **kwargs):
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
-      
+
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
 
@@ -463,7 +463,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
-  #if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
+  if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
