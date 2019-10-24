@@ -22,7 +22,7 @@ def build_config(nickname, **kwargs):
   #isTTbar = re.search("TT(To|_|Jets)", nickname)
   isDY = re.search("DY.?JetsToLL", nickname)
   isWjets = re.search("(W.?Jets|WG)ToLNu", nickname)
-  isSignal = re.search("HToTauTau",nickname)
+  isSignal = re.search("HToTauTau|NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
   isEWK = re.search("EWK",nickname)
 
