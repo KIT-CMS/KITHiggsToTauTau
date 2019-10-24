@@ -129,7 +129,41 @@ def build_config(nickname, **kwargs):
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
-  # Weights and efficiency config
+  ### Efficiencies & weights configuration
+  # config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016.root"
+  # config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2016KIT.root"
+  # config["TauTrigger"] = "etau"
+  # config["TauTriggerWorkingPoints"] = [
+  #      "vloose",
+  #      "loose",
+  #      "medium",
+  #      "tight",
+  #      "vtight",
+  #      "vvtight",
+  # ]
+  # config["TauTriggerIDTypes"] = [
+  #      "MVAv2",
+  # ]
+  # if isEmbedded:
+  #   config["TauTriggerEfficiencyWeightNames"] = [
+  #       "1:crossTriggerDataEfficiencyWeight",
+  #       "1:crossTriggerKITDataEfficiencyWeight",
+  #       "1:crossTriggerEMBEfficiencyWeight",
+  #   ]
+  # else:
+  #   config["TauTriggerEfficiencyWeightNames"] = [
+  #       "1:crossTriggerMCEfficiencyWeight",
+  #       "1:crossTriggerDataEfficiencyWeight",
+  #   ]
+
+  #  # Define weight names to be written out - only store weights that are actually filled
+  # tauTriggerWeights = []
+  # for WeightName in config["TauTriggerEfficiencyWeightNames"]:
+  #   for shift in ["","Up","Down"]:
+  #     for IDType in config["TauTriggerIDTypes"]:
+  #       for wp in config["TauTriggerWorkingPoints"]:
+  #         tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+
   config["TauIDSFWorkingPoints"] = [
        "VLoose",
        "Loose",
@@ -144,10 +178,11 @@ def build_config(nickname, **kwargs):
   config["TauIDScaleFactorWeightNames"] = [
       "1:tauIDScaleFactorWeight",
   ]
+
+  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
   if isEmbedded:
-      config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
       config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
-      config["EmbeddedWeightWorkspaceWeightNames"]=[
+      config["EmbeddedWeightWorkspaceWeightNames"] = [
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
             "1:muonEffIDWeight",
@@ -158,7 +193,7 @@ def build_config(nickname, **kwargs):
             "0:singleTriggerMCEfficiencyWeightKIT",
             "0:singleTriggerDataEfficiencyWeightKIT"
             ]
-      config["EmbeddedWeightWorkspaceObjectNames"]=[
+      config["EmbeddedWeightWorkspaceObjectNames"] = [
             "0:m_sel_trg_kit_ratio",
             "0:m_sel_idemb_kit_ratio",
             "1:m_sel_idemb_kit_ratio",
@@ -180,9 +215,7 @@ def build_config(nickname, **kwargs):
             "0:e_pt,e_eta",
             "0:e_pt,e_eta"
   ]
-  else:
-    ### Efficiencies & weights configuration
-    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
+  elif not isData:
     config["RooWorkspaceWeightNames"] = [
       "0:eleRecoWeight",
       "0:isoWeight",
@@ -269,7 +302,7 @@ def build_config(nickname, **kwargs):
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer",
                                                               "producer:DiVetoElectronVetoProducer"))
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")                                                           
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
