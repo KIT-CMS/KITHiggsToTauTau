@@ -31,7 +31,7 @@ def build_config(nickname, **kwargs):
   isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("(W.?Jets|WG)ToLNu", nickname)
   isSignal = re.search("NMSSM|HToTauTau",nickname)
-  isNMSSM = re.search("NMSSM",nickname)  
+  isNMSSM = re.search("NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
   isMSSMggH = re.search("SUSYGluGuToH", nickname)
@@ -231,14 +231,14 @@ def build_config(nickname, **kwargs):
   if isEmbedded:
     config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
-    config["EmbeddedWeightWorkspaceWeightNames"]=[
+    config["EmbeddedWeightWorkspaceWeightNames"] = [
             "0:muonEffTrgWeight",
             "0:muonEffIDWeight",
             "1:muonEffIDWeight",
             "0:triggerWeight",
             "1:triggerWeight",
             ]
-    config["EmbeddedWeightWorkspaceObjectNames"]=[
+    config["EmbeddedWeightWorkspaceObjectNames"] = [
             "0:m_sel_trg_ratio",
             "0:m_sel_idEmb_ratio",
             "1:m_sel_idEmb_ratio",
@@ -252,6 +252,21 @@ def build_config(nickname, **kwargs):
             "0:t_pt",
             "1:t_pt",
             ]
+  # MISSING:
+  # elif not isData:
+  #   config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+  #   config["TauTauTriggerWeightWorkspaceWeightNames"] = [
+  #       "0:triggerWeight",
+  #       "1:triggerWeight"
+  #   ]
+  #   config["TauTauTriggerWeightWorkspaceObjectNames"] = [
+  #       "0:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio",  # MEDIUM OR TIGHT?
+  #       "1:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio",  # MEDIUM OR TIGHT?
+  #   ]
+  #   config["TauTauTriggerWeightWorkspaceObjectArguments"] = [
+  #       "0:t_pt,t_dm",
+  #       "1:t_pt,t_dm"
+  #   ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
@@ -314,7 +329,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
                                                               "producer:DiBJetQuantitiesProducer"))
-                                                              
+
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
