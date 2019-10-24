@@ -21,7 +21,6 @@ def build_config(nickname, **kwargs):
   no_svfit = True if "no_svfit" in kwargs and kwargs["no_svfit"] else False
 
   log.debug("%s \n %25s %-30r \n %30s %-25s" % ("    Run2LegacyAnalysis_base::", "btag_eff:", btag_eff, "analysis_channels: ", ' '.join(analysis_channels)))
-
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
 
@@ -32,7 +31,8 @@ def build_config(nickname, **kwargs):
   isDY = re.search("DY.?JetsToLLM(10to50|50)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
   isSUSYggH = re.search("SUSYGluGluToHToTauTau", nickname)
-  isSignal = re.search("HToTauTau",nickname)
+  isSignal = re.search("HToTauTau|NMSSM",nickname)
+  isNMSSM = re.search("NMSSM",nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
 
   ## fill config:
@@ -63,6 +63,9 @@ def build_config(nickname, **kwargs):
       "^(GluGlu|GluGluTo|VBF|Wminus|Wplus|Z)(HToTauTau|H2JetsToTauTau)" : [
         25
       ],
+      "NMSSM" : [
+	35, 45
+	],
       "W.?JetsToLN|EWKW" : [
         24
       ],
@@ -73,10 +76,13 @@ def build_config(nickname, **kwargs):
         ]
   }
   config["BosonPdgIds"] = [0]
+  if isNMSSM:
+    config["MatchNMSSMBosons"] = True
   for key, pdgids in BosonPdgIds.items():
-    if re.search(key, nickname): config["BosonPdgIds"] = pdgids
-
+    if re.search(key, nickname): config["BosonPdgIds"] = pdgids 
   config["BosonStatuses"] = [62]
+  if isNMSSM:
+    config["BosonStatuses"].append(22)
   config["UseUWGenMatching"] = True
 
   # MET filters (JetMMET)
@@ -123,7 +129,7 @@ def build_config(nickname, **kwargs):
                                                                     "producer:GenBosonDiLeptonDecayModeProducer"))
     if isEmbedded:                      config["Processors"].append( "producer:GeneratorWeightProducer")
     #if isTTbar:                        config["Processors"].append( "producer:TTbarGenDecayModeProducer")
-
+ 
   if isData or isEmbedded:                config["PileupWeightFile"] = "not needed"
   elif year == 2016: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2016_271036-284044_13TeVMoriond17_23Sep2016ReReco_69p2mbMinBiasXS.root"
   elif year == 2017: config["PileupWeightFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/pileup/Data_Pileup_2017_294927-306462_13TeVFall17_31Mar2018ReReco_69p2mbMinBiasXS/%s.root"%nickname
