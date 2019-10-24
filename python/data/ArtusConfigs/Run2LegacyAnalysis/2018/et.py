@@ -34,6 +34,7 @@ def build_config(nickname, **kwargs):
   isNMSSM = re.search("NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
+  isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
   # includes
@@ -227,13 +228,13 @@ def build_config(nickname, **kwargs):
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerDataEfficiencyWeight",
         "1:crossTriggerKITDataEfficiencyWeight",
-        "1:crossTriggerEMBEfficiencyWeight",  
+        "1:crossTriggerEMBEfficiencyWeight",
     ]
   else:
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerMCEfficiencyWeight",
         "1:crossTriggerDataEfficiencyWeight",
-    ]  
+    ]
 
    # Define weight names to be written out - only store weights that are actually filled
   tauTriggerWeights = []
@@ -290,7 +291,7 @@ def build_config(nickname, **kwargs):
 
           "0:e_trg_EleTau_Ele24Leg_embed_kit_ratio",
           "1:et_emb_LooseChargedIsoPFTau30_tight_kit_ratio",
-          
+
 
           "0:e_iso_binned_embed_kit_ratio",
           "0:e_id90_embed_kit_ratio",
@@ -310,7 +311,7 @@ def build_config(nickname, **kwargs):
 
           "0:e_pt,e_eta",
           "1:t_pt",
-         
+
 
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
@@ -461,6 +462,7 @@ def build_config(nickname, **kwargs):
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",
                          "cutflow_histogram"]
