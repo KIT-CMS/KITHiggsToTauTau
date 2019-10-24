@@ -233,6 +233,7 @@ class HiggsToTauTauAnalysisWrapper():
 
 		self._parser.add_argument("-c", "--analysis-channels", default=['all'], nargs='+', type=str, choices=['all', 'mt', 'tt', 'et', 'ee', 'em', 'mm'], help="List of channels processed from the analysis. [Default: %(default)s]")
 		self._parser.add_argument("--svfit", default=False, action="store_true", help="Enable SVfit. Default: %(default)s]")
+		self._parser.add_argument("--addlheweights", default=False, action="store_true", help="Enable lheweights. Default: %(default)s]")
 		self._parser.add_argument("--pipelines", default=["nominal"], type=str, nargs='*', action='store',
 			choices=[
 				'nominal', 'tauESperDM_shifts', 'regionalJECunc_shifts', 'tauEleFakeESperDM_shifts', 'METunc_shifts', 'METrecoil_shifts', 'eleES_shifts', 'muonES_shifts', 'btagging_shifts',
@@ -372,6 +373,7 @@ class HiggsToTauTauAnalysisWrapper():
 			sub_analysis=self._args.sub_analysis,
 			analysis_channels=self._args.analysis_channels,
 			no_svfit= not self._args.svfit,
+			addlheweights= self._args.addlheweights,
 			pipelines=self._args.pipelines,
 			etau_fake_es_group=self._args.etau_fake_es_group,
 			etau_fake_es_shifts=self._args.etau_fake_es_shifts,
@@ -785,6 +787,8 @@ class HiggsToTauTauAnalysisWrapper():
 		epilogArguments += (" --analysis-channels %s " % " ".join(self._args.analysis_channels))
 		if self._args.svfit:
 			epilogArguments += (" --svfit ")
+		if self._args.addlheweights:
+			epilogArguments += (" --addlheweights ")
 		if self._args.pipelines is not None:
 			epilogArguments += (" --pipelines %s " % " ".join(self._args.pipelines))
 
