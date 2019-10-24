@@ -175,6 +175,8 @@ public:
 	// filled by the DiJetQuantitiesProducer
 	RMDLV m_diJetSystem;
 	bool m_diJetSystemAvailable = false;
+	RMDLV m_diBJetSystem;
+	bool m_diBJetSystemAvailable = false;
 	int m_nCentralJets20 = 0;
 	int m_nCentralJets30 = 0;
 

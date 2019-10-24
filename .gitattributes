@@ -1,3 +1,1 @@
-data/cache/Samples/Run2Legacy filter=lfs diff=lfs merge=lfs -text
-data/cache/Samples/Fall17v2 filter=lfs diff=lfs merge=lfs -text
-data/cache/Samples/Autumn18 filter=lfs diff=lfs merge=lfs -text
+
