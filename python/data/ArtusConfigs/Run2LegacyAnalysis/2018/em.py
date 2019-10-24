@@ -103,7 +103,6 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
   ]
-
   config["HLTBranchNames"] = [
       "trg_singlemuon_24:HLT_IsoMu24_v",
       "trg_singlemuon_27:HLT_IsoMu27_v",
@@ -446,7 +445,7 @@ def build_config(nickname, **kwargs):
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
-  config["Processors"].append( "producer:QCDFactorProducer")
+  config["Processors"].append("producer:QCDFactorProducer")
   config["Processors"].append(
                                                               "producer:EventWeightProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
@@ -474,4 +473,5 @@ def build_config(nickname, **kwargs):
           log.warning("Warning: pipeline NOT in the list of needed pipelines. Still adding it.")
       log.info('Add pipeline: %s' %(pipeline))
       return_conf += ACU.apply_uncertainty_shift_configs('em', config, importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis." + pipeline).build_config(nickname, **kwargs))
+
   return return_conf

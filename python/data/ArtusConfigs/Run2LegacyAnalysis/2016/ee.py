@@ -203,4 +203,5 @@ def build_config(nickname, **kwargs):
   for pipeline in pipelines:
     log.info('Add pipeline: %s' %(pipeline))
     return_conf += ACU.apply_uncertainty_shift_configs('mm', config, importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis." + pipeline).build_config(nickname, **kwargs))
+
   return return_conf
