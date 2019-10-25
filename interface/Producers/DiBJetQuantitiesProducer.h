@@ -16,6 +16,9 @@ public:
 	static double GetDiBJetQuantity(product_type const& product,
 	                               dibjet_extractor_lambda dibjetQuantity);
 
+	static double GetJetPlusBJetQuantity(product_type const& product,
+	                               dibjet_extractor_lambda dibjetQuantity);
+
 	virtual std::string GetProducerId() const override {
 		return "DiBJetQuantitiesProducer";
 	}
