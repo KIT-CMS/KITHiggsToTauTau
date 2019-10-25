@@ -23,6 +23,17 @@ public:
 
 	std::string GetProducerId() const;
 
+        ~TauTriggerEfficiencyProducer()
+        {
+                for (std::map<std::string, std::map<std::string, TauTriggerSFs2017*>>::iterator wp_map_it = TauSFs.begin(); wp_map_it != TauSFs.end(); wp_map_it++)
+                {
+                        for (std::map<std::string, TauTriggerSFs2017*>::iterator trig_map_it = wp_map_it->second.begin(); trig_map_it != wp_map_it->second.end(); trig_map_it++)
+                        {
+                                delete trig_map_it->second;
+                        }
+                }
+        }
+
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);

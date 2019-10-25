@@ -28,6 +28,17 @@ public:
 
 	std::string GetProducerId() const;
 
+        ~TauIDScaleFactorProducer()
+        {
+                for (std::map<std::string, std::map<std::string, TauIDSFTool*>>::iterator wp_map_it = TauIDSFs.begin(); wp_map_it != TauIDSFs.end(); wp_map_it++)
+                {
+                        for (std::map<std::string, TauIDSFTool*>::iterator trig_map_it = wp_map_it->second.begin(); trig_map_it != wp_map_it->second.end(); trig_map_it++)
+                        {
+                                delete trig_map_it->second;
+                        }
+                }
+        }
+
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);
