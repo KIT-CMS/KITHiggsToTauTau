@@ -471,7 +471,7 @@ def build_config(nickname, **kwargs):
   for pipeline in pipelines:
       if pipeline not in needed_pipelines:
           log.warning("Warning: pipeline NOT in the list of needed pipelines. Still adding it.")
-      log.info('Add pipeline: %s' %(pipeline))
+      log.info('Add pipeline: %s' % (pipeline))
       return_conf += ACU.apply_uncertainty_shift_configs('em', config, importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis." + pipeline).build_config(nickname, **kwargs))
 
   return return_conf
