@@ -80,6 +80,18 @@ def build_list(**kwargs):
         "m_ttvisbb",
         "m_ttbb",
         "m_ttbb_puppi",
+        "jetPlusBJetPt", 
+        "jetPlusBJetMass",
+        "mbb",
+        "pt_bb",
+        "jetUsedFordiBJetSystemIsTrueBJet",
+        "bJetIsTrueBJet",
+        "bJet2IsTrueBJet", 
+        "leadingJetHadronFlavour",
+        "nBJetsTruePassed",
+        "nBJetsFalsePassed",
+        "nBJetsTrueFailed",
+        "nBJetsFalseFailed"
     ]
 
     quantities.extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.weightQuantities").build_list(minimal_setup=minimal_setup, isMC=kwargs["isMC"]))
