@@ -302,7 +302,7 @@ def build_config(nickname, **kwargs):
     ]
 
   config["QCDFactorWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
-  config["QCDFactorWorkspaceWeightNames"] = [
+  config["QCDFactorWorkspaceWeightNames"]=[
       "0:em_qcd_osss_binned_Weight",
       "0:em_qcd_extrap_up_Weight",
       "0:em_qcd_extrap_down_Weight",
@@ -331,19 +331,65 @@ def build_config(nickname, **kwargs):
       "0:em_qcd_extrap_uncert",
   ]
   config["QCDFactorWorkspaceObjectArguments"] = [
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt,dR,njets,iso",
-      "0:e_pt,m_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:m_pt,e_pt",
   ]
+  
+  ## Read out IC factors additionally
+
+  config["QCDFactorWorkspaceWeightNames"].extend([
+      "0:em_ic_qcd_osss_binned_Weight",
+      "0:em_ic_qcd_extrap_up_Weight",
+      "0:em_ic_qcd_extrap_down_Weight",
+      "0:em_ic_qcd_osss_0jet_rateup_Weight",
+      "0:em_ic_qcd_osss_0jet_ratedown_Weight",
+      "0:em_ic_qcd_osss_0jet_shapeup_Weight",
+      "0:em_ic_qcd_osss_0jet_shapedown_Weight",
+      "0:em_ic_qcd_osss_1jet_rateup_Weight",
+      "0:em_ic_qcd_osss_1jet_ratedown_Weight",
+      "0:em_ic_qcd_osss_1jet_shapeup_Weight",
+      "0:em_ic_qcd_osss_1jet_shapedown_Weight",
+      "0:em_ic_qcd_extrap_uncert_Weight",
+  ])
+  config["QCDFactorWorkspaceObjectNames"].extend([
+      "0:em_ic_qcd_osss_binned",
+      "0:em_ic_qcd_extrap_up",
+      "0:em_ic_qcd_extrap_down",
+      "0:em_ic_qcd_osss_0jet_rateup",
+      "0:em_ic_qcd_osss_0jet_ratedown",
+      "0:em_ic_qcd_osss_0jet_shapeup",
+      "0:em_ic_qcd_osss_0jet_shapedown",
+      "0:em_ic_qcd_osss_1jet_rateup",
+      "0:em_ic_qcd_osss_1jet_ratedown",
+      "0:em_ic_qcd_osss_1jet_shapeup",
+      "0:em_ic_qcd_osss_1jet_shapedown",
+      "0:em_ic_qcd_extrap_uncert",
+  ])
+  config["QCDFactorWorkspaceObjectArguments"].extend([
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:m_pt,e_pt",
+  ])
+
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
@@ -401,7 +447,20 @@ def build_config(nickname, **kwargs):
       "em_qcd_osss_1jet_ratedown_Weight",
       "em_qcd_osss_1jet_shapeup_Weight",
       "em_qcd_osss_1jet_shapedown_Weight",
-      "em_qcd_extrap_uncert_Weight"])
+      "em_qcd_extrap_uncert_Weight",
+      "em_ic_qcd_osss_binned_Weight",
+      "em_ic_qcd_extrap_up_Weight",
+      "em_ic_qcd_extrap_down_Weight",
+      "em_ic_qcd_osss_0jet_rateup_Weight",
+      "em_ic_qcd_osss_0jet_ratedown_Weight",
+      "em_ic_qcd_osss_0jet_shapeup_Weight",
+      "em_ic_qcd_osss_0jet_shapedown_Weight",
+      "em_ic_qcd_osss_1jet_rateup_Weight",
+      "em_ic_qcd_osss_1jet_ratedown_Weight",
+      "em_ic_qcd_osss_1jet_shapeup_Weight",
+      "em_ic_qcd_osss_1jet_shapedown_Weight",
+      "em_ic_qcd_extrap_uncert_Weight",
+      ])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
