@@ -37,6 +37,7 @@ void RooWorkspaceWeightProducer::Init(setting_type const& settings)
 
 	TDirectory *savedir(gDirectory);
 	TFile *savefile(gFile);
+	// LOG(DEBUG) << "RooWorkspaceWeightProducer::RooWorkspace : " << settings.GetRooWorkspace().c_str();
 	TFile f(settings.GetRooWorkspace().c_str());
 	gSystem->AddIncludePath("-I$ROOFITSYS/include");
 	m_workspace = (RooWorkspace*)f.Get("w");
@@ -55,13 +56,18 @@ void RooWorkspaceWeightProducer::Init(setting_type const& settings)
 			boost::split(objects, objectName.second[index], boost::is_any_of(","));
 			for(auto object:objects)
 			{
+				// LOG(DEBUG) << "\t object.c_str() : " << object.c_str();
+				// LOG(DEBUG) << "\t objectName.first : " << objectName.first;
+				// LOG(DEBUG) << "\t m_functorArgs[objectName.first][index].c_str() : " << m_functorArgs[objectName.first][index].c_str();
+				// LOG(DEBUG) << "\t m_workspace->argSet(m_functorArgs[objectName.first][index].c_str())) : " << m_workspace->argSet(m_functorArgs[objectName.first][index].c_str());
+
 				m_functors[objectName.first].push_back(m_workspace->function(object.c_str())->functor(m_workspace->argSet(m_functorArgs[objectName.first][index].c_str())));
 			}
 		}
 	}
 }
 
-void RooWorkspaceWeightProducer::Produce( event_type const& event, product_type & product, 
+void RooWorkspaceWeightProducer::Produce( event_type const& event, product_type & product,
 	                     setting_type const& settings) const
 {
 
@@ -157,13 +163,13 @@ void EmbeddedWeightProducer::Produce( event_type const& event, product_type & pr
 				}
 				if(arg=="gt_pt") {
 					args.push_back(genTau->p4.Pt());
-				}					
+				}
 				if(arg=="m_eta") {
 					args.push_back(lepton->p4.Eta());
 				}
 				if(arg=="gt_eta") {
 					args.push_back(genTau->p4.Eta());
-				}				
+				}
 				if(arg=="gt1_eta")
 				{
 					KGenParticle* genTau1Tmp = product.m_flavourOrderedGenTaus[0];
@@ -185,7 +191,7 @@ void EmbeddedWeightProducer::Produce( event_type const& event, product_type & pr
 					args.push_back(genTau2->p4.Pt());
 				}
 				if(arg=="e_eta")
-				{			
+				{
 					KElectron* electron = static_cast<KElectron*>(lepton);
 					args.push_back(electron->superclusterPosition.Eta());
 				}
@@ -243,15 +249,15 @@ void QCDFactorProducer::Produce( event_type const& event, product_type & product
 			{
 				if(arg=="e_pt") {
 					args.push_back(electron->p4.Pt());
-				}	
+				}
 				if(arg=="m_pt") {
 					args.push_back(muon->p4.Pt());
-				}			
+				}
 				if(arg=="m_eta") {
 					args.push_back(muon->p4.Eta());
 				}
 				if(arg=="e_eta")
-				{			
+				{
 					KElectron* Electron = static_cast<KElectron*>(electron);
 					args.push_back(Electron->superclusterPosition.Eta());
 				}
