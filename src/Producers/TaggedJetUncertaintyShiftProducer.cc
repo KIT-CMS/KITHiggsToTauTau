@@ -81,21 +81,19 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		std::string njetsQuantity = "njetspt30_" + uncertainty;
 		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(njetsQuantity, [individualUncertainty](event_type const& event, product_type const& product)
 		{
-			int nJetsPt30 = 0;
-			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
+			if (product.m_nJetsPt30.count(individualUncertainty))
 			{
-				nJetsPt30 = KappaProduct::GetNJetsAbovePtThreshold((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second, 30.0);
+				return (product.m_nJetsPt30).find(individualUncertainty)->second;
 			}
-			return nJetsPt30;
+			return 0;
 		});
 
 		std::string mjjQuantity = "mjj_" + uncertainty;
 		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mjjQuantity, [individualUncertainty](event_type const& event, product_type const& product)
 		{
-			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
+			if (product.m_mjjQuantity.count(individualUncertainty))
 			{
-				std::vector<KJet*> shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second;
-				return shiftedJets.size() > 1 ? (shiftedJets.at(0)->p4 + shiftedJets.at(1)->p4).mass() : -11.f;
+				return (product.m_mjjQuantity).find(individualUncertainty)->second;
 			}
 			return -11.f;
 		});
@@ -103,24 +101,21 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		std::string jdetaQuantity = "jdeta_" + uncertainty;
 		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(jdetaQuantity, [individualUncertainty](event_type const& event, product_type const& product)
 		{
-			float jdeta = -1;
-			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
+			if (product.m_jdeta.count(individualUncertainty))
 			{
-				std::vector<KJet*> shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second;
-				return shiftedJets.size() > 1 ? std::abs(shiftedJets.at(0)->p4.Eta() - shiftedJets.at(1)->p4.Eta()) : -1;
+				return (product.m_jdeta).find(individualUncertainty)->second;
 			}
-			return jdeta;
+			return float(-1);
 		});
 
 		std::string nbjetsQuantity = "nbtag_" + uncertainty;
 		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(nbjetsQuantity, [individualUncertainty](event_type const& event, product_type const& product)
 		{
-			int nbtag = 0;
-			if ((product.m_correctedBTaggedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
+			if (product.m_nbtag.count(individualUncertainty))
 			{
-				nbtag = KappaProduct::GetNJetsAbovePtThreshold((product.m_correctedBTaggedJetsBySplitUncertainty).find(individualUncertainty)->second, 20.0);
+				return (product.m_nbtag).find(individualUncertainty)->second;
 			}
-			return nbtag;
+			return 0;
 		});
 	}
 }
@@ -246,9 +241,32 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 				if (!validJet) delete *jet;
 			}
 
-			(product.m_correctedJetsBySplitUncertainty)[uncertainty] = shiftedJets;
-			(product.m_correctedBTaggedJetsBySplitUncertainty)[uncertainty] = shiftedBTaggedJets;
+			// (product.m_correctedJetsBySplitUncertainty)[uncertainty] = shiftedJets;
+			// (product.m_correctedBTaggedJetsBySplitUncertainty)[uncertainty] = shiftedBTaggedJets;
+
+			(product.m_nJetsPt30)[uncertainty] = KappaProduct::GetNJetsAbovePtThreshold((product.m_correctedJetsBySplitUncertainty).find(uncertainty)->second, 30.0);
+
+			// std::vector<KJet*> shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(uncertainty)->second;
+			(product.m_mjjQuantity)[uncertainty] = shiftedJets.size() > 1 ? (shiftedJets.at(0)->p4 + shiftedJets.at(1)->p4).mass() : -11.f;
+
+			// shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(uncertainty)->second;
+			(product.m_jdeta)[uncertainty] = shiftedJets.size() > 1 ? std::abs(shiftedJets.at(0)->p4.Eta() - shiftedJets.at(1)->p4.Eta()) : -1;
+
+			(product.m_nbtag)[uncertainty] = KappaProduct::GetNJetsAbovePtThreshold(shiftedBTaggedJets, 20.0);
+
+			// free memory
+			for (auto p : shifted_copied_jets)
+				delete p;
+			shifted_copied_jets.clear();
+
+			for (auto p : shiftedJets)
+				delete p;
+			shiftedJets.clear();
+
+			for (auto p : shiftedBTaggedJets)
+				delete p;
+			shiftedBTaggedJets.clear();
 		}
-	}
+ 	}
 }
 
