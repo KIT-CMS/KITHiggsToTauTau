@@ -364,7 +364,6 @@ def build_config(nickname, **kwargs):
 
   ### Ntuple output quantities configuration
   config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(minimal_setup=minimal_setup, isMC = (not isData) and (not isEmbedded), nickname = nickname)
-  config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.lheWeights").build_list())
   # config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
   config["Quantities"].extend([
@@ -457,7 +456,7 @@ def build_config(nickname, **kwargs):
       "em_ic_qcd_osss_1jet_ratedown_Weight",
       "em_ic_qcd_osss_1jet_shapeup_Weight",
       "em_ic_qcd_osss_1jet_shapedown_Weight",
-      "em_ic_qcd_extrap_uncert_Weight",      
+      "em_ic_qcd_extrap_uncert_Weight",
       ])
   if re.search("HToTauTauM125", nickname):
     config["Quantities"].extend([
