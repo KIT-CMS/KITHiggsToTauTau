@@ -28,6 +28,15 @@ class TaggedJetUncertaintyShiftProducer: public ProducerBase<HttTypes>
 		std::string GetProducerId() const override;
 		virtual void Produce(event_type const& event, product_type& product, setting_type const& settings) const override;
 
+		~TaggedJetUncertaintyShiftProducer()
+		{
+			for (auto const& [key, val]: JetCorParMap)
+			   delete val;
+
+			for (auto const& [key, val]: JetUncMap)
+			   delete val;
+		}
+
 	private:
 		std::string uncertaintyFile;
 		std::vector<std::string> individualUncertainties;
