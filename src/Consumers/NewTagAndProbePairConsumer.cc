@@ -808,6 +808,7 @@ void NewETTagAndProbePairConsumer::AdditionalQuantities(int i, std::string quant
         tauDiscriminators.push_back("byMediumDeepTau2017v2p1VSmu");
         tauDiscriminators.push_back("byTightDeepTau2017v2p1VSmu");
         tauDiscriminators.push_back("decayModeFinding");
+        tauDiscriminators.push_back("decayModeFindingNewDMs");
 
         for (std::string tauDiscriminator : tauDiscriminators)
         {
