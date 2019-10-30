@@ -103,20 +103,6 @@ def build_config(nickname, **kwargs):
       "trg_singletau_leading:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
       "trg_singletau_trailing:HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v",
   ]
-  config["TauTriggerInputOld"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
-  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_New.root"
-  config["TauTriggerWorkingPoints"] = [
-       "vvloose",
-       "vloose",
-       "loose",
-       "medium",
-       "tight",
-       "vtight",
-       "vvtight",
-  ]
-  config["TauTriggerIDTypes"] = [
-       "MVA",
-  ]
 
   config["EventWeight"] = "eventWeight"
   #TriggerMatchingProducers,HttTriggerSettingsProducer

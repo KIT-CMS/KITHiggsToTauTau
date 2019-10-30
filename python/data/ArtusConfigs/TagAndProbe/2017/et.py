@@ -52,7 +52,7 @@ def build_config(nickname, **kwargs):
 
   #config["TauID"] = "TauIDRecommendation13TeV"
   config["TauID"] = "none"
-  config["TauUseOldDMs"] = True
+  config["TauUseOldDMs"] = False
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingTaus"] = 0.5
   config["DeltaRTriggerMatchingMuons"] = 0.5
@@ -67,20 +67,6 @@ def build_config(nickname, **kwargs):
   config["HLTBranchNames"] = [
       "trg_singleelectron_35:HLT_Ele35_WPTight_Gsf",
       "trg_crosselectron_ele24tau30:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1",
-  ]
-  config["TauTriggerInputOld"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root"
-  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_New.root"
-  config["TauTriggerWorkingPoints"] = [
-       "vvloose",
-       "vloose",
-       "loose",
-       "medium",
-       "tight",
-       "vtight",
-       "vvtight",
-  ]
-  config["TauTriggerIDTypes"] = [
-       "MVA",
   ]
 
   config["EventWeight"] = "eventWeight"
