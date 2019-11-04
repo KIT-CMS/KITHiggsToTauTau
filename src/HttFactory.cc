@@ -65,6 +65,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauDecayModeWeightProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SMggHNNLOProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/L1TauTriggerMatchingProducers.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauQuantitiesForTauIDFakeRateMeasurementProducer.h"
 
 // filters
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Filters/LooseObjectsCountFilters.h"
@@ -331,6 +332,8 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
                 return new MuonL1TauTriggerMatchingProducer();
         else if(id == ElectronL1TauTriggerMatchingProducer().GetProducerId())
                 return new ElectronL1TauTriggerMatchingProducer();
+        else if (id == TauQuantitiesForTauIDFakeRateMeasurementProducer().GetProducerId())
+                return new TauQuantitiesForTauIDFakeRateMeasurementProducer();
 	else
 		return KappaFactory::createProducer( id );
 }
