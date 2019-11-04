@@ -160,9 +160,10 @@ def build_config(nickname, **kwargs):
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
+  config["TauVeto2ProngDMs"] = True
   config["MuonLowerPtCuts"] = ["21.0"]
-  config["MuonUpperAbsEtaCuts"] = ["2.1"]
-  config["TauLowerPtCuts"] = ["23.0"]
+  config["MuonUpperAbsEtaCuts"] = ["2.4"]
+  config["TauLowerPtCuts"] = ["20.0"]
   config["TauUpperAbsEtaCuts"] = ["2.3"]
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingTaus"] = 0.5
