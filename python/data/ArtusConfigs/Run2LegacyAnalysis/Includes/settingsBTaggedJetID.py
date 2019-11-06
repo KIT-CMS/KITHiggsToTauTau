@@ -25,11 +25,15 @@ def build_config(nickname, **kwargs):
         "https://twiki.cern.ch/twiki/bin/viewauth/CMS/BtagRecommendation"
     ]
 
+    btaggersf_file_type = 'wponly'
     btaggers_collection = {
-        "DeepCSV" : {
-            2016 : {
-                "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_2016LegacySF_V1.csv",
-                #TODO measure efficiencies for year 2016
+        "DeepCSV": {
+            2016: {
+                "BTagScaleFactorFile": {
+                    'raw': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_2016LegacySF_V1.csv",
+                    'wponly': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_2016LegacySF_WP_V1.csv",
+                },
+                # TODO measure efficiencies for year 2016
                 "BTagEfficiencyFile": {
                     "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2016_tight_all_proc_DeepCSV_tight_inclusive_inclusive.root",
                     "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2016_medium_all_proc_DeepCSV_medium_inclusive_inclusive.root",
@@ -42,8 +46,11 @@ def build_config(nickname, **kwargs):
                 ],
                 "BTaggedJetCombinedSecondaryVertexName": "pfDeepCSVJetTagsprobbb+pfDeepCSVJetTagsprobb",
             },
-            2017 : {
-                "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_94XSF_V4_B_F.csv",
+            2017: {
+                "BTagScaleFactorFile": {
+                    'raw': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_94XSF_V4_B_F.csv",
+                    'wponly': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_94XSF_WP_V4_B_F.csv",
+                },
                 "BTagEfficiencyFile": {
                     "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2017_tight_all_proc_DeepCSV_tight_inclusive_inclusive.root",
                     "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2017_medium_all_proc_DeepCSV_medium_inclusive_inclusive.root",
@@ -56,8 +63,11 @@ def build_config(nickname, **kwargs):
                 ],
                 "BTaggedJetCombinedSecondaryVertexName": "pfDeepCSVJetTagsprobbb+pfDeepCSVJetTagsprobb",
             },
-            2018 : {
-                "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_102XSF_V1.csv",
+            2018: {
+                "BTagScaleFactorFile": {
+                    'raw': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_102XSF_V1.csv",
+                    'wponly': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepCSV_102XSF_WP_V1.csv",
+                },
                 #TODO measure efficiencies for year 2018
                 "BTagEfficiencyFile": {
                     "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepCSV_2018_tight_all_proc_DeepCSV_tight_inclusive_inclusive.root",
@@ -72,10 +82,12 @@ def build_config(nickname, **kwargs):
                 "BTaggedJetCombinedSecondaryVertexName": "pfDeepCSVJetTagsprobbb+pfDeepCSVJetTagsprobb",
             },
         },
-        "DeepFlavour" : {
-            2016 : {
-                "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_2016LegacySF_V1.csv",
-                #TODO measure efficiencies for year 2016
+        "DeepFlavour": {
+            2016: {
+                "BTagScaleFactorFile": {
+                    'raw': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_2016LegacySF_V1.csv",
+                    'wponly': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_2016LegacySF_WP_V1.csv",
+                },
                 "BTagEfficiencyFile": {
                     "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2016_tight_all_proc_DeepFlavour_tight_inclusive_inclusive.root",
                     "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2016_medium_all_proc_DeepFlavour_medium_inclusive_inclusive.root",
@@ -88,9 +100,11 @@ def build_config(nickname, **kwargs):
                 ],
                 "BTaggedJetCombinedSecondaryVertexName": "pfDeepFlavourJetTagsprobb+pfDeepFlavourJetTagsprobbb+pfDeepFlavourJetTagsproblepb",
             },
-            2017 : {
-                "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepFlavour_94XSF_V2_B_F.csv",
-                #TODO measure efficiencies for year 2017
+            2017: {
+                "BTagScaleFactorFile": {
+                    'raw': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepFlavour_94XSF_V2_B_F.csv",
+                    'wponly': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepFlavour_94XSF_WP_V3_B_F.csv",
+                },
                 "BTagEfficiencyFile": {
                     "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2017_loose_all_proc_DeepFlavour_loose_inclusive_inclusive.root",
                     "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2017_medium_all_proc_DeepFlavour_medium_inclusive_inclusive.root",
@@ -103,9 +117,12 @@ def build_config(nickname, **kwargs):
                 ],
                 "BTaggedJetCombinedSecondaryVertexName": "pfDeepFlavourJetTagsprobb+pfDeepFlavourJetTagsprobbb+pfDeepFlavourJetTagsproblepb",
             },
-            2018 : {
-                "BTagScaleFactorFile": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_102XSF_V1.csv",
-                #TODO measure efficiencies for year 2018
+            2018:
+            {
+                "BTagScaleFactorFile": {
+                    'raw': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_102XSF_V1.csv",
+                    'wponly': "$CMSSW_BASE/src/Artus/KappaAnalysis/data/DeepJet_102XSF_WP_V1.csv",
+                },
                 "BTagEfficiencyFile": {
                     "tight": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2018_loose_all_proc_DeepFlavour_loose_inclusive_inclusive.root",
                     "medium": "$CMSSW_BASE/src/Artus/KappaAnalysis/data/Eff_DeepFlavour_2018_medium_all_proc_DeepFlavour_medium_inclusive_inclusive.root",
@@ -124,7 +141,7 @@ def build_config(nickname, **kwargs):
     btag = btaggers_collection[btager][year]
     config["BTagWPs"] = [btager_wp]
 
-    config["BTagScaleFactorFile"] = btag["BTagScaleFactorFile"]
+    config["BTagScaleFactorFile"] = btag["BTagScaleFactorFile"][btaggersf_file_type]
     config["BTagEfficiencyFile"] = btag["BTagEfficiencyFile"][config["BTagWPs"][0]]
     config["BTaggedJetCombinedSecondaryVertexName"] = btag["BTaggedJetCombinedSecondaryVertexName"]
     config["BTaggerWorkingPoints"] = btag["BTaggerWorkingPoints"]
