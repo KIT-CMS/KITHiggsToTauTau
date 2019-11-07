@@ -157,6 +157,7 @@ def build_config(nickname, **kwargs):
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
+  config["TauCheckAllowedDM"] = False
   config["TauLowerPtCuts"] = ["40.0"]
   config["TauUpperAbsEtaCuts"] = ["2.1"]
   config["DiTauPairMinDeltaRCut"] = 0.5

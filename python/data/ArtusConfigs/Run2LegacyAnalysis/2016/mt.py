@@ -128,6 +128,7 @@ def build_config(nickname, **kwargs):
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
+  config["TauCheckAllowedDM"] = False
   config["MuonLowerPtCuts"] = ["20.0"]
   config["MuonUpperAbsEtaCuts"] = ["2.1"]
   config["TauLowerPtCuts"] = ["30.0"]
