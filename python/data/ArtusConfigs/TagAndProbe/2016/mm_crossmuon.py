@@ -29,21 +29,7 @@ def build_config(nickname, **kwargs):
   isWjets = re.search("W.?JetsToLNu", nickname)
   isSignal = re.search("HToTauTau",nickname)
 
-  ## fill config:
-  # includes
   includes = [
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsLooseElectronID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsLooseMuonID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsElectronID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsVetoMuonID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMuonID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsTauID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJEC",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsSvfit",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsJetID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsBTaggedJetID",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsTauES",
-   # "HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2MSSM2017.Includes.settingsMinimalPlotlevelFilter_mt"
   ]
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
@@ -79,6 +65,13 @@ def build_config(nickname, **kwargs):
   config["DiTauPairMinDeltaRCut"] = 1.
 
   config["Year"] = 2016
+
+
+  #########################################################
+  # for the lepton leg measurement, only the lepton leg 
+  # of the crosstrigger has to be matched, 
+  # not the tau leg of the crosstrigger !
+  #########################################################
     
   config["MuonTriggerFilterNames"] = [
           "HLT_IsoMu22_v:hltL3crIsoL1sMu20L1f0L2f10QL3f22QL3trkIsoFiltered0p09",
@@ -86,9 +79,7 @@ def build_config(nickname, **kwargs):
           "HLT_IsoMu22_eta2p1_v:hltL3crIsoL1sSingleMu20erL1f0L2f10QL3f22QL3trkIsoFiltered0p09",
           "HLT_IsoTkMu22_eta2p1_v:hltL3fL1sMu20erL1f0Tkf22QL3trkIsoFiltered0p09",
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v:hltL3crIsoL1sMu18erTauJet20erL1f0L2f10QL3f19QL3trkIsoFiltered0p09",
-          "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v:hltOverlapFilterIsoMu19LooseIsoPFTau20",
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:hltL3crIsoL1sSingleMu18erIorSingleMu20erL1f0L2f10QL3f19QL3trkIsoFiltered0p09",
-          "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:hltOverlapFilterSingleIsoMu19LooseIsoPFTau20"
   ]
 
   config["HLTBranchNames"] = [
@@ -97,14 +88,19 @@ def build_config(nickname, **kwargs):
       "trg_t_IsoMu22:HLT_IsoMu22_eta2p1_v",
       "trg_t_IsoMu22:HLT_IsoTkMu22_eta2p1_v",
       "trg_p_IsoMu19Tau20:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
-      "trg_p_IsoMu19Tau20:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v"
+      "trg_p_IsoMu19Tau20:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v",
+      "trg_p_IsoMu19Tau20_singleL1:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v",
+      "trg_p_IsoMu19Tau20_crossL1:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
+      
   ]
 
   config["CheckTagTriggerMatch"] = [
       "trg_t_IsoMu22"
   ]
   config["CheckProbeTriggerMatch"] = [
-      "trg_p_IsoMu19Tau20"
+      "trg_p_IsoMu19Tau20",
+      "trg_p_IsoMu19Tau20_singleL1",
+      "trg_p_IsoMu19Tau20_crossL1"
   ]
   
   config["TagAdditionalCriteria"] = [
@@ -121,10 +117,14 @@ def build_config(nickname, **kwargs):
 
   config["InvertedMuonL1TauMatching"] = True
   config["MuonTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
-          "trg_p_IsoMu19Tau20:19."
+          "trg_p_IsoMu19Tau20:19.",
+          "trg_p_IsoMu19Tau20_singleL1:19",
+          "trg_p_IsoMu19Tau20_crossL1:19"
   ]
   config["MuonTriggerCheckAdditionalL1TauMatchUpperEtaCut"] = [
-          "trg_p_IsoMu19Tau20:2.1"
+          "trg_p_IsoMu19Tau20:2.1",
+          "trg_p_IsoMu19Tau20_singleL1:2.1",
+          "trg_p_IsoMu19Tau20_crossL1:2.1"
   ]
 
   config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesMMCross").build_list(2016)
