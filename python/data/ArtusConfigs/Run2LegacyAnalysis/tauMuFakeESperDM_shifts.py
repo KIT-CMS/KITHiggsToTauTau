@@ -27,16 +27,16 @@ def build_config(nickname, **kwargs):
   # TODO measure corrections & uncertainties for all years
   tauMuFakeES_uncertainties = {
     2016 : {
-      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.985, "up" : 1.015},
-      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.985, "up" : 1.015},
+      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.99, "up" : 1.01},
+      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.985, "up" : 1.005},
     },
     2017: {
-      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.98, "up" : 1.02},
-      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.98, "up" : 1.02},
+      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.988, "up" : 1.008},
+      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.982, "up" : 1.002},
     },
     2018: {
-      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.98, "up" : 1.02},
-      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.98, "up" : 1.02},
+      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.988, "up" : 1.008},
+      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.98, "up" : 1.0},
     }
   }
 
