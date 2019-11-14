@@ -101,7 +101,7 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
       "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v"
   ]
-  
+
   config["ElectronTriggerFilterNames"] = [
       "HLT_Ele25_eta2p1_WPTight_Gsf_v:hltEle25erWPTightGsfTrackIsoFilter",
       "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltEle24WPLooseL1SingleIsoEG22erGsfTrackIsoFilter"
@@ -128,7 +128,7 @@ def build_config(nickname, **kwargs):
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
-  config["TauCheckAllowedDM"] = False
+  config["TauVeto2ProngDMs"] = True
   config["ElectronScaleAndSmearUsed"] = True if not isEmbedded else False
   config["ElectronScaleAndSmearTag"] = "ecalTrkEnergyPostCorr"
   config["ElectronLowerPtCuts"] = ["26.0"]
@@ -269,7 +269,7 @@ def build_config(nickname, **kwargs):
       "0:e_trg_data",
 
       "0:e_trg_EleTau_Ele24Leg_kit_mc",
-      "0:e_trg_EleTau_Ele24Leg_kit_data"      
+      "0:e_trg_EleTau_Ele24Leg_kit_data"
     ]
     config["RooWorkspaceObjectArguments"] = [
       "0:e_pt,e_eta",
