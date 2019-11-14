@@ -132,7 +132,7 @@ def build_config(nickname, **kwargs):
     config["tauEsThreeProngDown"]["TauEnergyCorrectionThreeProng"] = 0.985
 
  
-     config["tauEsThreeProngOnePiZeroUp"] = {
+    config["tauEsThreeProngOnePiZeroUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
     config["tauEsThreeProngOnePiZeroUp"]["TauEnergyCorrectionThreeProngPiZeros"] = 1.015
