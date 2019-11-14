@@ -77,6 +77,7 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 			float tauEnergyCorrectionOneProng = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProng();
 			float tauEnergyCorrectionOneProngPiZeros = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZeros();
 			float tauEnergyCorrectionThreeProng = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProng();
+			float tauEnergyCorrectionThreeProngPiZeros = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZeros();
 			if (tau->decayMode == 0 && tauEnergyCorrectionOneProng != 1.0)
 			{
 				tau->p4 = tau->p4 * tauEnergyCorrectionOneProng;

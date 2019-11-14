@@ -151,7 +151,6 @@ def build_config(nickname, **kwargs):
     }
     config["tauEsThreeProngDown"]["TauEnergyCorrectionThreeProng"] = tauES_uncertainties_embedded[year]["TauEnergyCorrectionThreeProng"]["down"]
 
-
     config["tauEsThreeProngOnePiZeroUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
