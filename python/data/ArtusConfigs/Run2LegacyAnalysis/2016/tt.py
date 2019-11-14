@@ -211,12 +211,12 @@ def build_config(nickname, **kwargs):
           "0:muonEffIDWeight",
           "1:muonEffIDWeight",
 
-          "0:triggerWeight",
-          "1:triggerWeight",
-          "0:TriggerEmbeddedEfficiencyWeight",
-          "1:TriggerEmbeddedEfficiencyWeight",
-          "0:TriggerDataEfficiencyWeight",
-          "1:TriggerDataEfficiencyWeight",
+          #"0:triggerWeight",
+          #"1:triggerWeight",
+          #"0:TriggerEmbeddedEfficiencyWeight",
+          #"1:TriggerEmbeddedEfficiencyWeight",
+          #"0:TriggerDataEfficiencyWeight",
+          #"1:TriggerDataEfficiencyWeight",
           #~ "0:doubleTauTrgWeight"
           ]
     config["EmbeddedWeightWorkspaceObjectNames"] = [
@@ -224,12 +224,12 @@ def build_config(nickname, **kwargs):
           "0:m_sel_idemb_kit_ratio",
           "1:m_sel_idemb_kit_ratio",
 
-          "0:t_TightIso_tt_emb_ratio",
-          "1:t_TightIso_tt_emb_ratio",
-          "0:t_TightIso_tt_emb",
-          "1:t_TightIso_tt_emb",
-          "0:t_genuine_TightIso_tt_data,t_fake_TightIso_tt_data",
-          "1:t_genuine_TightIso_tt_data,t_fake_TightIso_tt_data",
+          #"0:t_TightIso_tt_emb_ratio",
+          #"1:t_TightIso_tt_emb_ratio",
+          #"0:t_TightIso_tt_emb",
+          #"1:t_TightIso_tt_emb",
+          #"0:t_genuine_TightIso_tt_data,t_fake_TightIso_tt_data",
+          #"1:t_genuine_TightIso_tt_data,t_fake_TightIso_tt_data",
           #~ "0:doubletau_corr"
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
@@ -237,12 +237,12 @@ def build_config(nickname, **kwargs):
           "0:gt_pt,gt_eta",
           "1:gt_pt,gt_eta",
 
-          "0:t_pt,t_dm",
-          "1:t_pt,t_dm",
-          "0:t_pt,t_dm",
-          "1:t_pt,t_dm",
-          "0:t_pt,t_dm",
-          "1:t_pt,t_dm",
+          #"0:t_pt,t_dm",
+          #"1:t_pt,t_dm",
+          #"0:t_pt,t_dm",
+          #"1:t_pt,t_dm",
+          #"0:t_pt,t_dm",
+          #"1:t_pt,t_dm",
           #~ "0:dR"
           ]
   # elif not isData:
