@@ -186,7 +186,7 @@ def build_config(nickname, **kwargs):
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
-  config["TauCheckAllowedDM"] = False
+  config["TauVeto2ProngDMs"] = True
   config["ElectronScaleAndSmearUsed"] = False
   config["ElectronScaleAndSmearTag"] = "ecalTrkEnergyPostCorr"
   config["ElectronLowerPtCuts"] = ["25.0"]
@@ -211,10 +211,12 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedTaus"] = True
 
   ### Efficiencies & weights configuration
-  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root"
-  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2018KIT.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2018KIT_deeptau.root"
+  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2018KIT_deeptau.root"
   config["TauTrigger"] = "etau"
   config["TauTriggerWorkingPoints"] = [
+       # "vvvloose",
+       # "vvloose",
        "vloose",
        "loose",
        "medium",
@@ -223,7 +225,8 @@ def build_config(nickname, **kwargs):
        "vvtight",
   ]
   config["TauTriggerIDTypes"] = [
-       "MVAv2",
+       # "MVAv2",
+       "DeepTau",
   ]
   if isEmbedded:
     config["TauTriggerEfficiencyWeightNames"] = [
