@@ -76,12 +76,14 @@ def build_config(nickname, **kwargs):
       "trg_doubletau",
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
+      "trg_eletaucross",
   ]
   config["CheckLepton2TriggerMatch"] = [
       "trg_mutaucross",
       "trg_doubletau",
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
+      "trg_eletaucross",
   ]
   config["HLTBranchNames"] = [
       "trg_singleelectron:HLT_Ele25_eta2p1_WPTight_Gsf_v",
@@ -89,19 +91,40 @@ def build_config(nickname, **kwargs):
       "trg_singlemuon:HLT_IsoTkMu22_v",
       "trg_singlemuon:HLT_IsoMu22_eta2p1_v",
       "trg_singlemuon:HLT_IsoTkMu22_eta2p1_v",
-      "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
+      #"trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
       "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v",
       "trg_doubletau:HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v",
-      "trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v"
+      "trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v",
       "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v",
       "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v",
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
+      "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v"
   ]
+  
   config["ElectronTriggerFilterNames"] = [
-      "HLT_Ele25_eta2p1_WPTight_Gsf_v:hltEle25erWPTightGsfTrackIsoFilter"
+      "HLT_Ele25_eta2p1_WPTight_Gsf_v:hltEle25erWPTightGsfTrackIsoFilter",
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltEle24WPLooseL1SingleIsoEG22erGsfTrackIsoFilter"
   ]
-
+  config["TauTriggerFilterNames"] = [
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltPFTau20TrackLooseIso",
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltOverlapFilterSingleIsoEle24WPLooseGsfLooseIsoPFTau20"
+  ]
+  if isData:
+    # these two trigger should be used data only
+    config["ElectronTriggerFilterNames"].extend(
+      ["HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltEle24WPLooseL1IsoEG22erTau20erGsfTrackIsoFilter",
+       "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltEle24WPLooseL1IsoEG22erIsoTau26erGsfTrackIsoFilter"])
+    config["HLTBranchNames"].extend(
+       [ "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v",
+         "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v"]
+     )
+    config["TauTriggerFilterNames"].extend(
+       ["HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltPFTau20TrackLooseIso",
+        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltOverlapFilterIsoEle24WPLooseGsfLooseIsoPFTau20",
+        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltPFTau30TrackLooseIso",
+        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltOverlapFilterIsoEle24WPLooseGsfLooseIsoPFTau30"]
+     )
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
@@ -131,39 +154,39 @@ def build_config(nickname, **kwargs):
   config["TopPtReweightingStrategy"] = "Run1"
 
   ### Efficiencies & weights configuration
-  # config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016.root"
-  # config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2016KIT.root"
-  # config["TauTrigger"] = "etau"
-  # config["TauTriggerWorkingPoints"] = [
-  #      "vloose",
-  #      "loose",
-  #      "medium",
-  #      "tight",
-  #      "vtight",
-  #      "vvtight",
-  # ]
-  # config["TauTriggerIDTypes"] = [
-  #      "MVAv2",
-  # ]
-  # if isEmbedded:
-  #   config["TauTriggerEfficiencyWeightNames"] = [
-  #       "1:crossTriggerDataEfficiencyWeight",
-  #       "1:crossTriggerKITDataEfficiencyWeight",
-  #       "1:crossTriggerEMBEfficiencyWeight",
-  #   ]
-  # else:
-  #   config["TauTriggerEfficiencyWeightNames"] = [
-  #       "1:crossTriggerMCEfficiencyWeight",
-  #       "1:crossTriggerDataEfficiencyWeight",
-  #   ]
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016KIT_deeptau.root"
+  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016KIT_deeptau.root"
+  config["TauTrigger"] = "etau"
+  config["TauTriggerWorkingPoints"] = [
+       "vloose",
+       "loose",
+       "medium",
+       "tight",
+       "vtight",
+       "vvtight",
+  ]
+  config["TauTriggerIDTypes"] = [
+       "DeepTau",
+  ]
+  if isEmbedded:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "1:crossTriggerDataEfficiencyWeight",
+        "1:crossTriggerKITDataEfficiencyWeight",
+        "1:crossTriggerEMBEfficiencyWeight",
+    ]
+  else:
+    config["TauTriggerEfficiencyWeightNames"] = [
+        "1:crossTriggerMCEfficiencyWeight",
+        "1:crossTriggerDataEfficiencyWeight",
+    ]
 
-  #  # Define weight names to be written out - only store weights that are actually filled
-  # tauTriggerWeights = []
-  # for WeightName in config["TauTriggerEfficiencyWeightNames"]:
-  #   for shift in ["","Up","Down"]:
-  #     for IDType in config["TauTriggerIDTypes"]:
-  #       for wp in config["TauTriggerWorkingPoints"]:
-  #         tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+   # Define weight names to be written out - only store weights that are actually filled
+  tauTriggerWeights = []
+  for WeightName in config["TauTriggerEfficiencyWeightNames"]:
+    for shift in ["","Up","Down"]:
+      for IDType in config["TauTriggerIDTypes"]:
+        for wp in config["TauTriggerWorkingPoints"]:
+          tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
 
   config["TauIDSFWorkingPoints"] = [
        "VVVLoose",
@@ -193,8 +216,11 @@ def build_config(nickname, **kwargs):
             "0:eleRecoWeight",
             "0:isoWeight",
             "0:idWeight",
-            "0:singleTriggerMCEfficiencyWeightKIT",
-            "0:singleTriggerDataEfficiencyWeightKIT"
+            "0:singleTriggerEmbeddedEfficiencyWeightKIT",
+            "0:singleTriggerDataEfficiencyWeightKIT",
+
+            "0:crossTriggerEmbeddedEfficiencyWeightKIT",
+            "0:crossTriggerDataEfficiencyWeightKIT"
             ]
       config["EmbeddedWeightWorkspaceObjectNames"] = [
             "0:m_sel_trg_kit_ratio",
@@ -205,7 +231,10 @@ def build_config(nickname, **kwargs):
             "0:e_iso_ratio_emb",
             "0:e_id_ratio_emb",
             "0:e_trg_emb",
-            "0:e_trg_data"
+            "0:e_trg_data",
+
+            "0:e_trg_EleTau_Ele24Leg_kit_embed",
+            "0:e_trg_EleTau_Ele24Leg_kit_data"
             ]
       config["EmbeddedWeightWorkspaceObjectArguments"] = [
             "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -216,7 +245,10 @@ def build_config(nickname, **kwargs):
             "0:e_pt,e_eta",
             "0:e_pt,e_eta",
             "0:e_pt,e_eta",
-            "0:e_pt,e_eta"
+            "0:e_pt,e_eta",
+
+            "0:e_pt,e_eta",
+            "0:e_pt,e_eta",
   ]
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
@@ -224,19 +256,28 @@ def build_config(nickname, **kwargs):
       "0:isoWeight",
       "0:idWeight",
       "0:singleTriggerMCEfficiencyWeightKIT",
-      "0:singleTriggerDataEfficiencyWeightKIT"
+      "0:singleTriggerDataEfficiencyWeightKIT",
+
+      "0:crossTriggerMCEfficiencyWeightKIT",
+      "0:crossTriggerDataEfficiencyWeightKIT"
     ]
     config["RooWorkspaceObjectNames"] = [
       "0:e_trk_ratio",
       "0:e_iso_ratio",
       "0:e_id_ratio",
       "0:e_trg_mc",
-      "0:e_trg_data"
+      "0:e_trg_data",
+
+      "0:e_trg_EleTau_Ele24Leg_kit_mc",
+      "0:e_trg_EleTau_Ele24Leg_kit_data"      
     ]
     config["RooWorkspaceObjectArguments"] = [
       "0:e_pt,e_eta",
       "0:e_pt,e_eta",
       "0:e_pt,e_eta",
+      "0:e_pt,e_eta",
+      "0:e_pt,e_eta",
+
       "0:e_pt,e_eta",
       "0:e_pt,e_eta"
     ]
@@ -246,6 +287,7 @@ def build_config(nickname, **kwargs):
   config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(isMC = (not isData) and (not isEmbedded), nickname = nickname)
   # config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
+  config["Quantities"].extend(tauTriggerWeights)
   config["Quantities"].extend([
       "nVetoElectrons",
       "nLooseElectrons",
@@ -253,7 +295,7 @@ def build_config(nickname, **kwargs):
       "nDiTauPairCandidates",
       "nAllDiTauPairCandidates",
       "trg_singleelectron",
-      "triggerWeight_singleEl_1",
+      #"triggerWeight_singleEl_1",
       "lep1ErrD0",
       "lep1ErrDz",
       "lep2ErrD0",
@@ -324,7 +366,7 @@ def build_config(nickname, **kwargs):
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
-
+  if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
