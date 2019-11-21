@@ -188,7 +188,7 @@ def build_config(nickname, **kwargs):
     config["SimpleEleTauFakeRateWeightVLoose"] = [0.986, 1.020]
     config["SimpleEleTauFakeRateWeightTight"] = [1.38, 1.03]
 
-  if re.search("GluGluHToTauTauM125", nickname):
+  if re.search("GluGluHToTauTau.*M125", nickname):
     config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root" # same for all years?
     if "powheg" in nickname:
       config["Generator"] = "powheg"

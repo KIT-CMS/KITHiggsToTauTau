@@ -33,7 +33,7 @@ def build_config(nickname, **kwargs):
   isSignal = re.search("NMSSM|HToTauTau",nickname)
   isNMSSM = re.search("NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
-  isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
+  isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
   isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
@@ -411,7 +411,7 @@ def build_config(nickname, **kwargs):
     config["Quantities"].extend([
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "muon_crossTriggerEmbeddedWeight_2"
     ])
-  if re.search("HToTauTauM125", nickname):
+  if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
       "htxs_stage1p1cat",
