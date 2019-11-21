@@ -468,7 +468,7 @@ def build_config(nickname, **kwargs):
       "em_qcd_osss_stat_2jet_shapedown_Weight",
       "em_qcd_extrap_uncert_Weight",
       ])
-  if re.search("HToTauTauM125", nickname):
+  if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
       "htxs_stage1p1cat",

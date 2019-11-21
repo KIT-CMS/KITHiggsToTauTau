@@ -336,7 +336,7 @@ def build_config(nickname, **kwargs):
           "TriggerDataEfficiencyWeight_2",
           "doubleTauTrgWeight", #"trg_doubletau"
 ])
-  if re.search("HToTauTauM125", nickname):
+  if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
       "htxs_stage1p1cat",

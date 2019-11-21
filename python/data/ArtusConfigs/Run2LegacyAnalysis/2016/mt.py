@@ -378,7 +378,7 @@ def build_config(nickname, **kwargs):
       "muonEffTrgWeight", "muonEffIDWeight_1", "muonEffIDWeight_2",
       # "crosstriggerWeight_1", "crosstriggerWeight_2",
       ])
-  if re.search("HToTauTauM125", nickname):
+  if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
       "htxs_stage1p1cat",
