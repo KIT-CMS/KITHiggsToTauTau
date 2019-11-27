@@ -52,6 +52,7 @@ def build_config(nickname, **kwargs):
   #config["TauID"] = "TauIDRecommendation13TeV"
   config["TauID"] = "none"
   config["TauUseOldDMs"] = False
+  config["TauVeto2ProngDMs"] = True
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingTaus"] = 0.5
   config["DeltaRTriggerMatchingMuons"] = 0.5
@@ -113,6 +114,9 @@ def build_config(nickname, **kwargs):
     ]
   config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
           "trg_monitor_mu19tau30:26.0",
+    ]
+  config["TauTriggerCheckAdditionalL1TauMatchUseIsolatedL1Tau"] = [
+          "trg_monitor_mu19tau30"
     ]
 
   #TriggerMatchingProducers

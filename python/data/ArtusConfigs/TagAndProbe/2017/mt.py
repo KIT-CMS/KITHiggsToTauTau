@@ -52,6 +52,7 @@ def build_config(nickname, **kwargs):
   #config["TauID"] = "TauIDRecommendation13TeV"
   config["TauID"] = "none"
   config["TauUseOldDMs"] = False
+  config["TauVeto2ProngDMs"] = True
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingTaus"] = 0.5
   config["DeltaRTriggerMatchingMuons"] = 0.5
@@ -122,20 +123,21 @@ def build_config(nickname, **kwargs):
               "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltPFTau180TrackPt50LooseAbsOrRelMediumHighPtRelaxedIsoIso",
               "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSelectedPFTau180MediumChargedIsolationL1HLTMatched"
         ]
-  if isEmbedded:
-      pass
-  else:
       config["CheckTriggerLowerPtCutsByHltNick"] = [
               "trg_monitor_mu20tau27:30.0",
               "trg_monitor_mu24tau40_mediso_tightid:40.0",
               "trg_monitor_mu24tau40_tightiso:40.0",
         ]
-      config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
-              "trg_monitor_mu20tau27:26.0",
-              "trg_monitor_mu24tau35_tightiso_tightid:32.0",
-              "trg_monitor_mu24tau40_mediso_tightid:32.0",
-              "trg_monitor_mu24tau40_tightiso:32.0",
-        ]
+  # L1 Tightening and isolation criterion should be applied in data, mc and embedded.
+  config["TauTriggerCheckAdditionalL1TauMatchLowerPtCut"] = [
+          "trg_monitor_mu20tau27:26.0",
+          "trg_monitor_mu24tau35_tightiso_tightid:32.0",
+          "trg_monitor_mu24tau40_mediso_tightid:32.0",
+          "trg_monitor_mu24tau40_tightiso:32.0",
+    ]
+  config["TauTriggerCheckAdditionalL1TauMatchUseIsolatedL1Tau"] = [
+          "trg_monitor_mu20tau27"
+    ]
 
   #TriggerMatchingProducers
   config["InvalidateNonMatchingElectrons"] = False
