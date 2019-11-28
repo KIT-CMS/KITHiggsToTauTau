@@ -97,6 +97,7 @@ def build_config(nickname, **kwargs):
           "trg_muonelectron_mu23ele12",
           "trg_muonelectron_mu8ele23",
           "trg_eletaucross",
+
   ]
   config["HLTBranchNames"] = [
           "trg_singleelectron:HLT_Ele25_eta2p1_WPTight_Gsf_v",
@@ -115,6 +116,7 @@ def build_config(nickname, **kwargs):
           "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v",
           "trg_singletau_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
           "trg_singletau_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
+
   ]
   config["ElectronTriggerFilterNames"] = [
           "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
