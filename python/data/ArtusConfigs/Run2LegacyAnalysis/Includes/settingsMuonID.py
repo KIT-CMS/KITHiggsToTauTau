@@ -27,7 +27,7 @@ def build_config(nickname, **kwargs):
     config += analysis_config_module.build_config(nickname)
 
   # explicit configuration
-  config["MuonID"] = "mediumHIPsafe2016" if re.search("Embedding2016(B|C|D|E|F)", nickname) else "medium"
+  config["MuonID"] = "medium"
   config["MuonIsoTypeUserMode"] = "fromcmsswr04"
 
   config["MuonIsoType"] = "user"
