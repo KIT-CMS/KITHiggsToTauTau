@@ -81,7 +81,7 @@ def build_config(nickname, **kwargs):
   ]
   config["DiTauPairLepton2UpperEtaCuts"] = [
           "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v:2.1",
-          "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau2HPS7_eta2p1_CrossL1_v:2.1",
+          "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v:2.1",
           "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:2.1",
   ]
   config["CheckLepton1TriggerMatch"] = [
