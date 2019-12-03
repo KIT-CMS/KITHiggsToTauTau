@@ -106,7 +106,8 @@ def build_config(nickname, **kwargs):
 
   ### Signal pair selection configuration
   config["MuonLowerPtCuts"] = ["15.0"]
-  config["MuonUpperAbsEtaCuts"] = ["2.1"]
+  # config["MuonUpperAbsEtaCuts"] = ["2.1"]
+  config["MuonUpperAbsEtaCuts"] = ["2.4"]
   config["DiTauPairMinDeltaRCut"] = 0.5
   config["DeltaRTriggerMatchingMuons"] = 0.5
   config["DiTauPairIsTauIsoMVA"] = True
@@ -122,6 +123,13 @@ def build_config(nickname, **kwargs):
   config["AddGenMatchedTauJets"] = True
   config["BranchGenMatchedMuons"] = True
   config["BranchGenMatchedTaus"] = True
+
+  # Additional taus for fake rate method of the tau id measurement
+  config["TauID"] = "TauIDRecommendation13TeV"
+  config["TauUseOldDMs"] = False
+  config["TauVeto2ProngDMs"] = True
+  config["TauLowerPtCuts"] = ["20.0"]
+  config["TauUpperAbsEtaCuts"] = ["2.3"]
 
   ### Efficiencies & weights configuration
   config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_1.root"
@@ -153,6 +161,7 @@ def build_config(nickname, **kwargs):
   config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(minimal_setup=minimal_setup, isMC = (not isData) and (not isEmbedded), nickname = nickname)
   # config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
+  config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.addTauIDFRQuantities").build_list())
   config["Quantities"].extend([
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
@@ -181,12 +190,17 @@ def build_config(nickname, **kwargs):
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
+  # Add production of tau quantities for TauID fake rate measurement
+  config["Processors"].extend((                               "producer:ValidTausProducer",
+                                                              "producer:TauQuantitiesForTauIDFakeRateMeasurementProducer"))
+
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   config["Processors"].extend((                               "producer:MetCorrector",
                                                               "producer:PuppiMetCorrector",
                                                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
-                                                              "producer:DiJetQuantitiesProducer"))
+                                                              "producer:DiJetQuantitiesProducer",
+                                                              "producer:DiBJetQuantitiesProducer"))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
