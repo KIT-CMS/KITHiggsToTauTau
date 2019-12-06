@@ -32,12 +32,12 @@ void TauDecayModeWeightProducer::Produce(event_type const& event, product_type& 
     {
         // Tau DM
         int decayMode = static_cast<KTau*>(product.m_flavourOrderedLeptons[1])->decayMode;
-		float effCorr_nominal;
-		float effCorr_up;
-		float effCorr_down;
-		float pi0Corr_nominal;
-		float pi0Corr_up;
-		float pi0Corr_down;
+		float effCorr_nominal = 1.0;
+		float effCorr_up = 1.0;
+		float effCorr_down = 1.0;
+		float pi0Corr_nominal = 1.0;
+		float pi0Corr_up = 1.0;
+		float pi0Corr_down = 1.0;
 		if (decayMode == 0) {
 			effCorr_nominal = 0.975;
 			effCorr_up = 0.983;
@@ -70,7 +70,7 @@ void TauDecayModeWeightProducer::Produce(event_type const& event, product_type& 
 			pi0Corr_up = 1.065;
 			pi0Corr_down = 1.037;
 		}	
-	    	else {
+	    else {
 			std::cout << "No weight defined for decay mode " << decayMode << std::endl;
 			std::cout << "Please check TauDecayModeWeightProducer.cc" << std::endl;
 			assert(0);
@@ -89,12 +89,12 @@ void TauDecayModeWeightProducer::Produce(event_type const& event, product_type& 
     {
         // Tau DM
         int decayMode_1 = static_cast<KTau*>(product.m_flavourOrderedLeptons[0])->decayMode;
-		float effCorr_nominal_1;
-		float effCorr_up_1;
-		float effCorr_down_1;
-		float pi0Corr_nominal_1;
-		float pi0Corr_up_1;
-		float pi0Corr_down_1;
+		float effCorr_nominal_1 = 1.0;
+		float effCorr_up_1 = 1.0;
+		float effCorr_down_1 = 1.0;
+		float pi0Corr_nominal_1 = 1.0;
+		float pi0Corr_up_1 = 1.0;
+		float pi0Corr_down_1 = 1.0;
 		if (decayMode_1 == 0) {
 			effCorr_nominal_1 = 0.975;
 			effCorr_up_1 = 0.983;
@@ -127,19 +127,19 @@ void TauDecayModeWeightProducer::Produce(event_type const& event, product_type& 
 			pi0Corr_up_1 = 1.065;
 			pi0Corr_down_1 = 1.037;
 		}	
-	    	else {
+	    else {
 			std::cout << "No weight defined for decay mode " << decayMode_1 << std::endl;
 			std::cout << "Please check TauDecayModeWeightProducer.cc" << std::endl;
 			assert(0);
 		}
         int decayMode_2 = static_cast<KTau*>(product.m_flavourOrderedLeptons[1])->decayMode;
-		float effCorr_nominal_2;
-		float effCorr_up_2;
-		float effCorr_down_2;
-		float pi0Corr_nominal_2;
-		float pi0Corr_up_2;
-		float pi0Corr_down_2;
-		else if (decayMode_2 == 0) {
+		float effCorr_nominal_2 = 1.0;
+		float effCorr_up_2 = 1.0;
+		float effCorr_down_2 = 1.0;
+		float pi0Corr_nominal_2 = 1.0;
+		float pi0Corr_up_2 = 1.0;
+		float pi0Corr_down_2 = 1.0;
+		if (decayMode_2 == 0) {
 			effCorr_nominal_2 = 0.975;
 			effCorr_up_2 = 0.983;
 			effCorr_down_2 = 0.967;
@@ -171,7 +171,7 @@ void TauDecayModeWeightProducer::Produce(event_type const& event, product_type& 
 			pi0Corr_up_2 = 1.065;
 			pi0Corr_down_2 = 1.037;
 		}	
-	    	else {
+	    else {
 			std::cout << "No weight defined for decay mode " << decayMode_2 << std::endl;
 			std::cout << "Please check TauDecayModeWeightProducer.cc" << std::endl;
 			assert(0);
@@ -187,6 +187,4 @@ void TauDecayModeWeightProducer::Produce(event_type const& event, product_type& 
 		product.m_optionalWeights["embeddedDecayModeWeight_effDown_pi0Down"] = effCorr_down_1*pi0Corr_down_1*effCorr_down_2*pi0Corr_down_2;
         
     }
-
-	
 }
