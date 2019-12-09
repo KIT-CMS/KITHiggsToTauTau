@@ -12,11 +12,11 @@ import os
 import importlib
 
 
-def fshift_dict(shift=None, dm=None):
+def fshift_dict(shift=None, dm=None, base_config="HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.nominal", base_config_name='nominal', nickname='pass'):
     if shift is None or dm is None:
         print "fshift_dict received wrong parameters"
         exit(1)
-    config = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.nominal").build_config(nickname="pass")["nominal"]
+    config = importlib.import_module(base_config).build_config(nickname=nickname)[base_config_name]
     config[dm] = 1 + shift / 100.
     return config
 
@@ -59,9 +59,17 @@ def build_config(nickname, **kwargs):
         root_str = lambda x: str(x).replace("-", "neg").replace(".", "p")
 
         for es in etau_es_shifts:
-            config["eleTauEsInclusiveShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionShift")
-            config["eleTauEsOneProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngShift")
-            config["eleTauEsOneProngPiZerosShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngPiZerosShift")
+            # nominal
+            # config["eleTauEsInclusiveShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionShift")
+            config["eleTauEsOneProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngShift", base_config="HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.nominal", base_config_name='nominal', nickname=nickname)
+            config["eleTauEsOneProngPiZerosShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngPiZerosShift", base_config="HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.nominal", base_config_name='nominal', nickname=nickname)
             # config["eleTauEsThreeProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionThreeProngShift")
+
+            # ele smearing and resolution
+            for pipeline in ['eleScaleUp', 'eleScaleDown', 'eleSmearUp', 'eleSmearDown']:
+                # config["eleTauEsInclusiveShift_" + root_str(es) + '_' + pipeline] = fshift_dict(es, "TauElectronFakeEnergyCorrectionShift", base_config="HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.eleES_shifts", base_config_name=pipeline)
+                config["eleTauEsOneProngShift_" + root_str(es) + '_' + pipeline] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngShift", base_config="HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.eleES_shifts", base_config_name=pipeline, nickname=nickname)
+                config["eleTauEsOneProngPiZerosShift_" + root_str(es) + '_' + pipeline] = fshift_dict(es, "TauElectronFakeEnergyCorrectionOneProngPiZerosShift", base_config="HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.eleES_shifts", base_config_name=pipeline, nickname=nickname)
+                # config["eleTauEsThreeProngShift_" + root_str(es)] = fshift_dict(es, "TauElectronFakeEnergyCorrectionThreeProngShift")
 
     return config

@@ -241,7 +241,17 @@ def build_config(nickname, **kwargs):
         pipeline_config["Quantities"].extend(["nDiMuonVetoPairsOS", "extraelec_veto", "extramuon_veto"])
       if pipeline_name.startswith('et_'):
         pipeline_config["Quantities"].extend(["nDiElectronVetoPairsOS", "extraelec_veto", "extramuon_veto"])
+
       pipeline_config["Quantities"] = list(set(pipeline_config["Quantities"]))
+
+    # delete pipelines with shifts&ele smearing if it is not in mother config
+    if isDY or isEWKZ2Jets:
+      for k in config["Pipelines"].keys():
+        if k.startswith('et_') \
+           and any([e in k for e in ['eleScaleUp', 'eleScaleDown', 'eleSmearUp', 'eleSmearDown']]) \
+           and 'ElectronScaleAndSmearUsed' in config["Pipelines"][k] \
+           and not config["Pipelines"][k]["ElectronScaleAndSmearUsed"]:
+          config["Pipelines"].pop(k, None)
 
   if btag_eff or no_svfit:  # disable SVFit
     for pipeline_config in config["Pipelines"].values():
