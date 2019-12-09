@@ -139,9 +139,9 @@ def build_config(nickname, **kwargs):
     print "PileupWeightFile not defined"
     exit(1)
 
-  if year == 2016:   config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
-  elif year == 2017: config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v17_6.root"
-  elif year == 2018: config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_2.root"
+  if year == 2016:   config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
+  elif year == 2017: config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+  elif year == 2018: config["ZptRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
   config["DoZptUncertainties"] = True
 
   if year == 2016:   config["MetRecoilCorrectorFile"] = "HTT-utilities/RecoilCorrections/data/Type1_PFMET_2016.root"
