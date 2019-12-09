@@ -184,6 +184,16 @@ def build_config(nickname, **kwargs):
       "recoilPerpToZ", "recoilParToZ",
       "puppirecoilPerpToZ", "puppirecoilParToZ",
   ])
+  config["Quantities"].pop(config["Quantities"].index("diBJetAbsDeltaEta"))
+  config["Quantities"].pop(config["Quantities"].index("diBJetDeltaPhi"))
+  config["Quantities"].pop(config["Quantities"].index("diBJetEta"))
+  config["Quantities"].pop(config["Quantities"].index("diBJetMass"))
+  config["Quantities"].pop(config["Quantities"].index("diBJetPhi"))
+  config["Quantities"].pop(config["Quantities"].index("diBJetPt"))
+  config["Quantities"].pop(config["Quantities"].index("diBJetdiLepPhi"))
+  config["Quantities"].pop(config["Quantities"].index("jetPlusBJetMass"))
+  config["Quantities"].pop(config["Quantities"].index("jetPlusBJetPt"))
+  config["Quantities"].pop(config["Quantities"].index("jetUsedFordiBJetSystemIsTrueBJet"))
 
   ### Processors & consumers configuration
   config["Processors"] =   []
