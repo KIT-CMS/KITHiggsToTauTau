@@ -35,8 +35,9 @@ def build_config(nickname, **kwargs):
 
   # explicit configuration
   if not re.search("Run201|Embedding", nickname):
-    # grouped JEC uncs documented in https://indico.cern.ch/event/740094/contributions/3055870/attachments/1680587/2699877/RegionalJES.pdf
-    config["jecUncEta0to5Up"] = {
+    # grouped JEC uncs documented in https://docs.google.com/spreadsheets/d/1Feuj1n0MdotcPq19Mht7SUIgvkXkA4hiB0BxEuBShLw/edit#gid=1345121349
+    
+    config["jecUncAbsoluteUp"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : 1.0,
       "SvfitCacheFileFolder" : "nominal",
@@ -44,20 +45,15 @@ def build_config(nickname, **kwargs):
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
             "SinglePionECAL",
             "SinglePionHCAL",
-            "AbsoluteFlavMap",
             "AbsoluteMPFBias",
             "AbsoluteScale",
-            "AbsoluteStat",
             "Fragmentation",
-            "FlavorQCD",
-            "TimePtEta",
             "PileUpDataMC",
             "RelativeFSR",
-            "RelativeStatFSR",
             "PileUpPtRef"
         ]
     }
-    config["jecUncEta0to5Down"] = {
+    config["jecUncAbsoluteDown"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : -1.0,
       "SvfitCacheFileFolder" : "nominal",
@@ -65,16 +61,11 @@ def build_config(nickname, **kwargs):
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
             "SinglePionECAL",
             "SinglePionHCAL",
-            "AbsoluteFlavMap",
             "AbsoluteMPFBias",
             "AbsoluteScale",
-            "AbsoluteStat",
             "Fragmentation",
-            "FlavorQCD",
-            "TimePtEta",
             "PileUpDataMC",
             "RelativeFSR",
-            "RelativeStatFSR",
             "PileUpPtRef"
         ]
     }
@@ -82,8 +73,50 @@ def build_config(nickname, **kwargs):
       # two additional sources only relevant in 2018 - from https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsToTauTauWorkingLegacyRun2#JES
       config["jecUncEta0to5Down"]["JetEnergyCorrectionSplitUncertaintyParameterNames"].append("AbsoluteSample")
       config["jecUncEta0to5Up"]["JetEnergyCorrectionSplitUncertaintyParameterNames"].append("AbsoluteSample")
-
-    config["jecUncEta0to3Up"] = {
+    
+    config["jecUncAbsoluteYearUp"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "AbsoluteStat",
+            "TimePtEta",
+            "RelativeStatFSR"
+        ]
+    }
+    config["jecUncAbsoluteYearDown"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "AbsoluteStat",
+            "TimePtEta",
+            "RelativeStatFSR"
+        ]
+    }
+    
+    config["jecUncFlavorQCDUp"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "FlavorQCD"
+        ]
+    }
+    config["jecUncFlavorQCDDown"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "FlavorQCD"
+        ]
+    }
+    
+    config["jecUncBBEC1Up"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : 1.0,
       "SvfitCacheFileFolder" : "nominal",
@@ -91,13 +124,10 @@ def build_config(nickname, **kwargs):
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
             "PileUpPtEC1",
             "PileUpPtBB",
-            "RelativeJEREC1",
-            "RelativePtEC1",
-            "RelativeStatEC",
             "RelativePtBB"
         ]
     }
-    config["jecUncEta0to3Down"] = {
+    config["jecUncBBEC1Down"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : -1.0,
       "SvfitCacheFileFolder" : "nominal",
@@ -105,45 +135,82 @@ def build_config(nickname, **kwargs):
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
             "PileUpPtEC1",
             "PileUpPtBB",
-            "RelativeJEREC1",
-            "RelativePtEC1",
-            "RelativeStatEC",
             "RelativePtBB"
         ]
     }
-    config["jecUncEta3to5Up"] = {
+    
+    config["jecUncBBEC1YearUp"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : 1.0,
       "SvfitCacheFileFolder" : "nominal",
       "UseJECShiftsForBJets" : True,
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
-            "RelativeStatHF",
-            "RelativePtHF",
-            "PileUpPtHF",
-            "RelativeJERHF"
+            "RelativeJEREC1",
+            "RelativePtEC1",
+            "RelativeStatEC"
         ]
     }
-    config["jecUncEta3to5Down"] = {
+    config["jecUncBBEC1YearDown"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : -1.0,
       "SvfitCacheFileFolder" : "nominal",
       "UseJECShiftsForBJets" : True,
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
-            "RelativeStatHF",
+            "RelativeJEREC1",
+            "RelativePtEC1",
+            "RelativeStatEC"
+        ]
+    }
+    
+    config["jecUncHFUp"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
             "RelativePtHF",
             "PileUpPtHF",
             "RelativeJERHF"
         ]
     }
+    config["jecUncHFDown"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativePtHF",
+            "PileUpPtHF",
+            "RelativeJERHF"
+        ]
+    }
+    
+    config["jecUncHFYearUp"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeStatHF"
+        ]
+    }
+    config["jecUncHFYearDown"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeStatHF"
+        ]
+    }
+    
     config["jecUncEC2Up"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : 1.0,
       "SvfitCacheFileFolder" : "nominal",
       "UseJECShiftsForBJets" : True,
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
-            "PileUpPtEC2",
-            "RelativeJEREC2",
-            "RelativePtEC2"
+            "PileUpPtEC2"
         ]
     }
     config["jecUncEC2Down"] = {
@@ -152,11 +219,31 @@ def build_config(nickname, **kwargs):
       "SvfitCacheFileFolder" : "nominal",
       "UseJECShiftsForBJets" : True,
       "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
-        "PileUpPtEC2",
+        "PileUpPtEC2"
+      ]
+    }
+    
+    config["jecUncEC2YearUp"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
+            "RelativeJEREC2",
+            "RelativePtEC2"
+        ]
+    }
+    config["jecUncEC2YearDown"] = {
+      "UseGroupedJetEnergyCorrectionUncertainty" : True,
+      "JetEnergyCorrectionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal",
+      "UseJECShiftsForBJets" : True,
+      "JetEnergyCorrectionSplitUncertaintyParameterNames" : [
         "RelativeJEREC2",
         "RelativePtEC2"
       ]
     }
+    
     config["jecUncRelativeBalUp"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : 1.0,
@@ -175,7 +262,8 @@ def build_config(nickname, **kwargs):
             "RelativeBal"
         ]
     }
-    config["jecUncRelativeSampleUp"] = {
+    
+    config["jecUncRelativeSampleYearUp"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : 1.0,
       "SvfitCacheFileFolder" : "nominal",
@@ -184,7 +272,7 @@ def build_config(nickname, **kwargs):
             "RelativeSample"
         ]
     }
-    config["jecUncRelativeSampleDown"] = {
+    config["jecUncRelativeSampleYearDown"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
       "JetEnergyCorrectionUncertaintyShift" : -1.0,
       "SvfitCacheFileFolder" : "nominal",
@@ -193,5 +281,4 @@ def build_config(nickname, **kwargs):
             "RelativeSample"
         ]
     }
-    
   return config
