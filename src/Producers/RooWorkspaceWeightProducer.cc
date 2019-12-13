@@ -37,7 +37,7 @@ void RooWorkspaceWeightProducer::Init(setting_type const& settings)
 
 	TDirectory *savedir(gDirectory);
 	TFile *savefile(gFile);
-	TFile f(settings.GetRooWorkspace().c_str());
+	TFile f((settings.*GetRooWorkspace)().c_str());
 	gSystem->AddIncludePath("-I$ROOFITSYS/include");
 	m_workspace = (RooWorkspace*)f.Get("w");
 	f.Close();
