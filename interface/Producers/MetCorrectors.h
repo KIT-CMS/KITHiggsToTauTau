@@ -384,7 +384,7 @@ public:
 				product.m_met = product.*m_metMemberCorrected;
 			}
 		}
-		if (!apply_RC && settings.GetUseGroupedJetEnergyCorrectionUncertainty())
+		if (!apply_RC)
                 {
 			(product.*m_metMemberCorrected).p4 += product.m_MET_shift.p4;
 			if (m_correctGlobalMet)

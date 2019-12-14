@@ -281,4 +281,13 @@ def build_config(nickname, **kwargs):
             "RelativeSample"
         ]
     }
+    
+    config["jerUncUp"] = {
+      "JetEnergyResolutionUncertaintyShift" : 1.0,
+      "SvfitCacheFileFolder" : "nominal"
+    }
+    config["jerUncDown"] = {
+      "JetEnergyResolutionUncertaintyShift" : -1.0,
+      "SvfitCacheFileFolder" : "nominal"
+    }
   return config
