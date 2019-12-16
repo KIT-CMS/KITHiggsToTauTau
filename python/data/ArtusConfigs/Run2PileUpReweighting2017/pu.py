@@ -18,6 +18,7 @@ import HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.ArtusConfigUtil
 def build_config(nickname, **kwargs):
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
+  isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
   
   config["Quantities"] = [
     "npu",
@@ -27,8 +28,15 @@ def build_config(nickname, **kwargs):
     "npartons",
     "topPtReweightWeightRun1",
     "topPtReweightWeightRun2",
-    "genbosonmass"
+    "htxs_stage0cat",
+    "htxs_stage1p1cat",
+    "htxs_stage1p1finecat",
+    "htxs_njets30",
+    "htxs_higgsPt",
+    "genbosonmass",
   ]
+  if isGluonFusion:
+    config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
   
   
   
