@@ -413,7 +413,9 @@ def build_config(nickname, **kwargs):
     config["Quantities"].extend([
       "htxs_stage0cat",
       "htxs_stage1p1cat",
-      "htxs_stage1p1finecat"
+      "htxs_stage1p1finecat",
+      "htxs_njets30",
+      "htxs_higgsPt",
     ])
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
