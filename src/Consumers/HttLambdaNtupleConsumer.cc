@@ -330,6 +330,14 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
         {
                 return event.m_genEventInfo->htxs_stage1p1finecat;
         });
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_njets30", [](KappaEvent const& event, KappaProduct const& product)
+        {
+                return event.m_genEventInfo->htxs_njets30;
+        });
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_higgsPt", [](KappaEvent const& event, KappaProduct const& product)
+        {
+                return event.m_genEventInfo->htxs_higgsPt;
+        });
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj", [](event_type const& event, product_type const& product)
         {
                 return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat; 
