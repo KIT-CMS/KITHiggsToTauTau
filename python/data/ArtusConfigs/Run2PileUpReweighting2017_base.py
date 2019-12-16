@@ -23,6 +23,7 @@ def build_config(nickname, **kwargs):
   isTTbar = re.search("TT(To|_|Jets)", nickname)
   isDY = re.search("DY.?JetsToLLM(10to50|50|150)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
+  isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
   
   
@@ -74,6 +75,12 @@ def build_config(nickname, **kwargs):
                                                                   "producer:GenPartonCounterProducer"))
   if isWjets or isDY or isEmbedded:  config["Processors"].append("producer:GenBosonDiLeptonDecayModeProducer")
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
+  if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root" # same for all years?
+  if "powheg" in nickname:
+    config["Generator"] = "powheg"
+  elif "amcatnlo" in nickname:
+    config["Generator"] = "amcatnlo"
 
   # pipelines - channels including systematic shifts
   config["Pipelines"] = jsonTools.JsonDict()
