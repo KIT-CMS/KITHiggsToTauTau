@@ -431,6 +431,9 @@ public:
         //filled by SMggHNNLOProducer
         double m_ggh_NNLO_weight = 1.0;
         std::vector<double> m_THU_ggH;
+        
+        //filled by SMvbfNNLOProducer
+        std::vector<double> m_THU_qqH;
 
         //filled by L1TauTriggerMatchingProducers
         std::map<KLepton*, std::map<std::string, bool>* > m_additionalL1TauMatchedLeptons;

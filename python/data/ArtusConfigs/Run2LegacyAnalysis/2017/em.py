@@ -33,7 +33,8 @@ def build_config(nickname, **kwargs):
   isSignal = re.search("NMSSM|HToTauTau",nickname)
   isNMSSM = re.search("NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
-  isGluonFusion = re.search("GluGluHToTauTauM125", nickname)
+  isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
+  isVBF = re.search("VBFHToTauTau.*M125", nickname)
   isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
@@ -230,7 +231,7 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
-          
+
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
@@ -265,7 +266,7 @@ def build_config(nickname, **kwargs):
         "1:m_id_kit_ratio",
         "1:m_idiso_binned_kit_ratio",
         "1:m_trk_ratio",
-        
+
 	    "1:m_trg_23_binned_ic_data",
 	    "1:m_trg_23_binned_ic_mc",
 	    "1:m_trg_8_binned_ic_data",
@@ -477,6 +478,8 @@ def build_config(nickname, **kwargs):
     ])
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
+  if isVBF:
+    config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.qqHNNLOQuantities").build_list())
   if isNMSSM:
     config["Quantities"].extend(["genBosonMass_h1","genBosonMass_h2","genBosonMass_h3","genBosonPt_h1","genBosonPt_h2","genBosonPt_h3","genBosonEta_h1","genBosonEta_h2","genBosonEta_h3"])
   ### Processors & consumers configuration
@@ -514,6 +517,7 @@ def build_config(nickname, **kwargs):
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isVBF:                      config["Processors"].append( "producer:SMvbfNNLOProducer")
   if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   config["Processors"].append("producer:QCDFactorProducer")
