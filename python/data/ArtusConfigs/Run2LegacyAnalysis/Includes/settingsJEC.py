@@ -30,7 +30,7 @@ def build_config(nickname, **kwargs):
   if year == 2016:
     config["JetEnergyCorrectionSplitUncertaintyParameters"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_07Aug2017GH_V11_L1fix_DATA_UncertaintySources_AK4PFchs.txt"
     config["JetEnergyResolutionSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_25nsV1_MC_PtResolution_AK4PFchs.txt"
-    config["JetEnergyResolutionSFSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16_25nsV1_MC_SF_AK4PFchs.txt"
+    config["JetEnergyResolutionSFSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_25nsV1_MC_SF_AK4PFchs.txt"
   elif year == 2017:
     config["JetEnergyCorrectionSplitUncertaintyParameters"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Fall17/Fall17_17Nov2017F_V32_DATA_UncertaintySources_AK4PFchs.txt"
     config["JetEnergyResolutionSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Fall17/Fall17_V3_MC_PtResolution_AK4PFchs.txt"
