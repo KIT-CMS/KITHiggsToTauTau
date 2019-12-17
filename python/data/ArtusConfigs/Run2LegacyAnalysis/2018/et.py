@@ -34,6 +34,7 @@ def build_config(nickname, **kwargs):
   isNMSSM = re.search("NMSSM",nickname)
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
+  isVBF = re.search("VBFHToTauTau.*M125", nickname)
   isMSSMggH = re.search("SUSYGluGuToH", nickname)
 
   ## fill config:
@@ -421,6 +422,8 @@ def build_config(nickname, **kwargs):
     ])
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
+  if isVBF:
+    config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.qqHNNLOQuantities").build_list())
   if isNMSSM:
     config["Quantities"].extend(["genBosonMass_h1","genBosonMass_h2","genBosonMass_h3","genBosonPt_h1","genBosonPt_h2","genBosonPt_h3","genBosonEta_h1","genBosonEta_h2","genBosonEta_h3"])
   ### Processors & consumers configuration
@@ -467,6 +470,7 @@ def build_config(nickname, **kwargs):
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isVBF:                      config["Processors"].append( "producer:SMvbfNNLOProducer")
   if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   config["Processors"].append(                                "producer:SvfitProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",

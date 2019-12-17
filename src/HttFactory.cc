@@ -64,6 +64,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/MetFilterFlagProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauDecayModeWeightProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SMggHNNLOProducer.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SMvbfNNLOProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/L1TauTriggerMatchingProducers.h"
 
 // filters
@@ -321,6 +322,8 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
                 return new TauDecayModeWeightProducer();
         else if(id == SMggHNNLOProducer().GetProducerId())
                 return new SMggHNNLOProducer();
+        else if(id == SMvbfNNLOProducer().GetProducerId())
+                return new SMvbfNNLOProducer();
         else if(id == MetFilterFlagProducer().GetProducerId())
                 return new MetFilterFlagProducer();
         else if(id == TauDecayModeWeightProducer().GetProducerId())
