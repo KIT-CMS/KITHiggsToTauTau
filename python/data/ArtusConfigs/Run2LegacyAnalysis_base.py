@@ -173,20 +173,20 @@ def build_config(nickname, **kwargs):
       exit(1)
 
   if year == 2016:
-    config["SimpleMuTauFakeRateWeightLoose"] = [1.25, 0.96, 1.29, 0.92, 5.00]
-    config["SimpleMuTauFakeRateWeightTight"] = [1.38, 0.72, 1.34, 1.03, 5.00]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [1.01, 0.994]
-    config["SimpleEleTauFakeRateWeightTight"] = [0.60, 0.88]
+    config["SimpleMuTauFakeRateWeightLoose"] = [1.25, 0.96, 1.29, 0.92, 5.01]
+    config["SimpleMuTauFakeRateWeightTight"] = [1.38, 0.72, 1.34, 1.03, 5.05]
+    config["SimpleEleTauFakeRateWeightVLoose"] = [1.38, 1.29]
+    config["SimpleEleTauFakeRateWeightTight"] = [1.22, 1.47]
   elif year == 2017:
     config["SimpleMuTauFakeRateWeightLoose"] = [1.12, 0.76, 0.99, 0.75, 4.44]
     config["SimpleMuTauFakeRateWeightTight"] = [0.92, 0.79, 0.67, 1.07, 4.08]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [1.00, 1.03]
-    config["SimpleEleTauFakeRateWeightTight"] = [1.38, 1.83]
+    config["SimpleEleTauFakeRateWeightVLoose"] = [1.11, 1.03]
+    config["SimpleEleTauFakeRateWeightTight"] = [1.22, 0.93]
   elif year == 2018:
-    config["SimpleMuTauFakeRateWeightLoose"] = [1.05, 0.96, 1.06, 1.45, 1.75]
-    config["SimpleMuTauFakeRateWeightTight"] = [1.20, 0.82, 0.91, 0.80, 3.62]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [0.986, 1.020]
-    config["SimpleEleTauFakeRateWeightTight"] = [1.38, 1.03]
+    config["SimpleMuTauFakeRateWeightLoose"] = [1.00, 1.08, 1.04, 0.95, 5.58]
+    config["SimpleMuTauFakeRateWeightTight"] = [0.81, 1.02, 0.92, 0.83, 4.52]
+    config["SimpleEleTauFakeRateWeightVLoose"] = [0.91, 0.91]
+    config["SimpleEleTauFakeRateWeightTight"] = [1.47, 0.66]
 
   if re.search("GluGluHToTauTau.*M125", nickname):
     config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root" # same for all years?

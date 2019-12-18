@@ -26,17 +26,17 @@ def build_config(nickname, **kwargs):
 
   tauEleFakeES_uncertainties = {
     2016 : {
-      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.985, "up" : 1.005},
-      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.050, "up" : 1.070},
+      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.992, "up" : 1.016},
+      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.015, "up" : 1.048},
     },
     2017: {
-      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.972, "up" : 0.992},
-      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.008, "up" : 1.028},
+      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.993, "up" : 1.012},
+      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.006, "up" : 1.036},
     },
     # TODO measure correcction & uncertainties for 2018; until now taking 2017 measurement
     2018: {
-      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.958, "up" : 0.978},
-      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.016, "up" : 1.036},
+      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 1.008, "up" : 1.020},
+      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.999, "up" : 1.029},
     }
   }
 

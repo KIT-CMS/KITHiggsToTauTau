@@ -27,21 +27,21 @@ def build_config(nickname, **kwargs):
   tauES_uncertainties = {
     2016 : {
       "TauEnergyCorrectionOneProng" : {"down" : 0.984, "up" : 0.997},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.994, "up" : 1.002},
-      "TauEnergyCorrectionThreeProng" : {"down" : 1.001, "up" : 1.015},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.992, "up" : 1.012},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.996, "up" : 1.003},
+      "TauEnergyCorrectionThreeProng" : {"down" : 1.004, "up" : 1.015},
+      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.991, "up" : 1.011},
     },
     2017: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.990, "up" : 1.009},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.996, "up" : 1.006},
-      "TauEnergyCorrectionThreeProng" : { "down" : 0.995, "up" : 1.007},
+      "TauEnergyCorrectionOneProng" : {"down" : 0.999, "up" : 1.017},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.998, "up" : 1.007},
+      "TauEnergyCorrectionThreeProng" : { "down" : 0.997, "up" : 1.007},
       "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.985, "up" : 1.011},
     },
     2018: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.976, "up" : 0.990},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.992, "up" : 1.000},
-      "TauEnergyCorrectionThreeProng" : { "down" : 0.982, "up" : 0.993},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.988, "up" : 1.011},
+      "TauEnergyCorrectionOneProng" : {"down" : 0.977, "up" : 0.991},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.993, "up" : 1.001},
+      "TauEnergyCorrectionThreeProng" : { "down" : 0.984, "up" : 0.994},
+      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.9992, "up" : 1.012},
     }
   }
 
