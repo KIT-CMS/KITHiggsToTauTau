@@ -61,7 +61,7 @@ def build_config(nickname, **kwargs):
       "DY.?JetsToLL|EWKZ2Jets|Embedding" : [
         23
       ],
-      "^(GluGlu|GluGluTo|VBF|Wminus|Wplus|Z)(HToTauTau|H2JetsToTauTau)" : [
+      "^(GluGlu|GluGluTo|VBF|Wminus|Wplus|Z)(HToTauTau|H2JetsToTauTau|HToWW)" : [
         25
       ],
       "NMSSM" : [
