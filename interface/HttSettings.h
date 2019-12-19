@@ -209,13 +209,26 @@ public:
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosCHShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosNTShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngShift, 1.0);
+
+	// FES analysis correction
+	/// detemine whether e->tau FES should be split in eta
+	IMPL_SETTING_DEFAULT(bool, FESetaSplit, false);
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProng, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngPiZeros, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionThreeProng, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngBarrel, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionThreeProngBarrel, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngEndcap, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionThreeProngEndcap, 1.0);
+
+	// FES subanalysis
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionOneProngPiZerosShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauElectronFakeEnergyCorrectionThreeProngShift, 1.0);
+
 	IMPL_SETTING_DEFAULT(float, TauMuonFakeEnergyCorrectionOneProng, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauMuonFakeEnergyCorrectionOneProngPiZeros, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauMuonFakeEnergyCorrectionThreeProng, 1.0);
@@ -410,7 +423,7 @@ public:
 	//  Settings for ValidTagAndProbePairs
 	IMPL_SETTING_STRINGLIST_DEFAULT(TagAdditionalCriteria,{});
 	IMPL_SETTING_STRINGLIST_DEFAULT(ProbeAdditionalCriteria,{});
-        
+
         // settings for L1TauTriggerMatchingProducers
         IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerCheckAdditionalL1TauMatchLowerPtCut,{});
         IMPL_SETTING_STRINGLIST_DEFAULT(MuonTriggerCheckAdditionalL1TauMatchLowerPtCut,{});
