@@ -69,10 +69,6 @@ def build_config(nickname, **kwargs):
             "PileUpPtRef"
         ]
     }
-    if year == 2018:
-      # two additional sources only relevant in 2018 - from https://twiki.cern.ch/twiki/bin/viewauth/CMS/HiggsToTauTauWorkingLegacyRun2#JES
-      config["jecUncEta0to5Down"]["JetEnergyCorrectionSplitUncertaintyParameterNames"].append("AbsoluteSample")
-      config["jecUncEta0to5Up"]["JetEnergyCorrectionSplitUncertaintyParameterNames"].append("AbsoluteSample")
     
     config["jecUncAbsoluteYearUp"] = {
       "UseGroupedJetEnergyCorrectionUncertainty" : True,
