@@ -26,6 +26,8 @@ void HttTauCorrectionsProducer::Init(setting_type const& settings)
 void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type const& event,
                                                       product_type& product, setting_type const& settings) const
 {
+	bool fes_eta_split = static_cast<HttSettings const&>(settings).GetFESetaSplit(); // todo: move to constr
+
 	TauCorrectionsProducer::AdditionalCorrections(tau, event, product, settings);
 
 	double normalisationFactor = 1.0;
@@ -87,6 +89,10 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 			{
 				tau->p4 = tau->p4 * tauEnergyCorrectionThreeProng;
 			}
+			else if (tau->decayMode == 11 && tauEnergyCorrectionThreeProngPiZeros != 1.0)
+			{
+				tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZeros;
+			}
 		}
 		else if ((genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_MUON_PROMPT) || (genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)) // correct mu->tau fake energy scale
 		{
@@ -108,20 +114,74 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 		}
 		else if ((genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT) || (genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_ELE_FROM_TAU)) // correct e->tau fake energy scale
 		{
-			float tauElectronFakeEnergyCorrectionOneProng = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProng();
-			float tauElectronFakeEnergyCorrectionOneProngPiZeros = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngPiZeros();
-			float tauElectronFakeEnergyCorrectionThreeProng = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionThreeProng();
-			if (tau->decayMode == 0 && tauElectronFakeEnergyCorrectionOneProng != 1.0)
+			if (fes_eta_split)
 			{
-				tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProng;
+				LOG(DEBUG) << "fes_eta_split: split ";
+				float tauElectronFakeEnergyCorrectionOneProngBarrel = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngBarrel();
+				float tauElectronFakeEnergyCorrectionOneProngPiZerosBarrel = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngPiZerosBarrel();
+				float tauElectronFakeEnergyCorrectionThreeProngBarrel = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionThreeProngBarrel();
+				float tauElectronFakeEnergyCorrectionOneProngEndcap = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngEndcap();
+				float tauElectronFakeEnergyCorrectionOneProngPiZerosEndcap = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngPiZerosEndcap();
+				float tauElectronFakeEnergyCorrectionThreeProngEndcap = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionThreeProngEndcap();
+				if (tau->p4.Eta() <= 1.5)
+				{
+					LOG(DEBUG) << "\t fes_eta_split: barrel ";
+					if (tau->decayMode == 0 && tauElectronFakeEnergyCorrectionOneProngBarrel != 1.0)
+					{
+
+						LOG(DEBUG) << "\t\t fes_eta_split: barrel : dm 0 " << tauElectronFakeEnergyCorrectionOneProngBarrel;
+						tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProngBarrel;
+					}
+					else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauElectronFakeEnergyCorrectionOneProngPiZerosBarrel != 1.0)
+					{
+
+						LOG(DEBUG) << "\t\t fes_eta_split: barrel : dm 1 " << tauElectronFakeEnergyCorrectionOneProngPiZerosBarrel;
+						tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProngPiZerosBarrel;
+					}
+					else if (tau->decayMode == 10 && tauElectronFakeEnergyCorrectionThreeProngBarrel != 1.0)
+					{
+
+						LOG(DEBUG) << "\t\t fes_eta_split: barrel : dm 10 " << tauElectronFakeEnergyCorrectionThreeProngBarrel;
+						tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionThreeProngBarrel;
+					}
+				}
+				else
+				{
+					LOG(DEBUG) << "\t fes_eta_split: endcap ";
+					if (tau->decayMode == 0 && tauElectronFakeEnergyCorrectionOneProngEndcap != 1.0)
+					{
+						LOG(DEBUG) << "\t\t fes_eta_split: endcap : dm 0 " << tauElectronFakeEnergyCorrectionOneProngEndcap;
+						tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProngEndcap;
+					}
+					else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauElectronFakeEnergyCorrectionOneProngPiZerosEndcap != 1.0)
+					{
+						LOG(DEBUG) << "\t\t fes_eta_split: endcap : dm 1 " << tauElectronFakeEnergyCorrectionOneProngPiZerosEndcap;
+						tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProngPiZerosEndcap;
+					}
+					else if (tau->decayMode == 10 && tauElectronFakeEnergyCorrectionThreeProngEndcap != 1.0)
+					{
+						LOG(DEBUG) << "\t\t fes_eta_split: endcap : dm 10 " << tauElectronFakeEnergyCorrectionThreeProngEndcap;
+						tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionThreeProngEndcap;
+					}
+				}
 			}
-			else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauElectronFakeEnergyCorrectionOneProngPiZeros != 1.0)
+			else
 			{
-				tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProngPiZeros;
-			}
-			else if (tau->decayMode == 10 && tauElectronFakeEnergyCorrectionThreeProng != 1.0)
-			{
-				tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionThreeProng;
+				float tauElectronFakeEnergyCorrectionOneProng = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProng();
+				float tauElectronFakeEnergyCorrectionOneProngPiZeros = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngPiZeros();
+				float tauElectronFakeEnergyCorrectionThreeProng = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionThreeProng();
+				if (tau->decayMode == 0 && tauElectronFakeEnergyCorrectionOneProng != 1.0)
+				{
+					tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProng;
+				}
+				else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauElectronFakeEnergyCorrectionOneProngPiZeros != 1.0)
+				{
+					tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionOneProngPiZeros;
+				}
+				else if (tau->decayMode == 10 && tauElectronFakeEnergyCorrectionThreeProng != 1.0)
+				{
+					tau->p4 = tau->p4 * tauElectronFakeEnergyCorrectionThreeProng;
+				}
 			}
 		}
 	}

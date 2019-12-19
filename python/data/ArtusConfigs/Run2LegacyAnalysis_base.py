@@ -20,6 +20,7 @@ def build_config(nickname, **kwargs):
   mtau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "mtau-fake-es" else False
   no_svfit = True if "no_svfit" in kwargs and kwargs["no_svfit"] else False
   addlheweights = True if "addlheweights" in kwargs and kwargs["addlheweights"] else False
+  fes_eta_split = True if "fes_eta_split" in kwargs and kwargs["fes_eta_split"] else False
 
   log.debug("%s \n %25s %-30r \n %30s %-25s" % ("    Run2LegacyAnalysis_base::", "btag_eff:", btag_eff, "analysis_channels: ", ' '.join(analysis_channels)))
   config = jsonTools.JsonDict()
@@ -52,6 +53,11 @@ def build_config(nickname, **kwargs):
   config["EventCount"] = -1
   config["Year"] = year
   config["InputIsData"] = isData
+  # temporary hack
+  # config["FESetaSplit"] = config["FESetaSplit"]
+  config["FESetaSplit"] = True
+  kwargs["fes_eta_split"] = config["FESetaSplit"]
+
 
   if isSUSYggH:
     config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
