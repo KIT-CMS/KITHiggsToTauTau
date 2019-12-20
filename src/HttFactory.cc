@@ -59,6 +59,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TaggedJetUncertaintyShiftProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NLOreweightingWeightsProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauTriggerEfficiencyProducer.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SingleTauTriggerEfficiencyProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauIDScaleFactorProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/ImpactParameterCorrectionsProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/MetFilterFlagProducer.h"
@@ -312,6 +313,8 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new NLOreweightingWeightsProducer();
 	else if(id == TauTriggerEfficiencyProducer().GetProducerId())
 		return new TauTriggerEfficiencyProducer();
+	else if(id == SingleTauTriggerEfficiencyProducer().GetProducerId())
+		return new SingleTauTriggerEfficiencyProducer();
 	else if(id == TauIDScaleFactorProducer().GetProducerId())
 		return new TauIDScaleFactorProducer();
         else if(id == ImpactParameterCorrectionsProducer().GetProducerId())

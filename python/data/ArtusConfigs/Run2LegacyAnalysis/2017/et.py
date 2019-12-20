@@ -229,6 +229,37 @@ def build_config(nickname, **kwargs):
         for wp in config["TauTriggerWorkingPoints"]:
           tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
 
+  config["SingleTauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_singletau.root"
+  config["SingleTauTriggerWorkingPoints"] = [
+       # "vvvloose",
+       # "vvloose",
+       "vloose",
+       "loose",
+       "medium",
+       "tight",
+       "vtight",
+       "vvtight",
+  ]
+  config["SingleTauTriggerIDTypes"] = [
+       # "MVAv2",
+       "DeepTau",
+  ]
+  if not isData:
+    config["SingleTauTriggerEfficiencyWeightNames"] = [
+        "1:singleTauTriggerMCEfficiencyWeight",
+        "1:singleTauTriggerDataEfficiencyWeight",
+    ]
+
+  # Define weight names to be written out - only store weights that are actually filled
+  singleTauTriggerWeights = []
+  for WeightName in config["SingleTauTriggerEfficiencyWeightNames"]:
+    for shift in ["","Up","Down"]:
+        if "MC" in WeightName and shift in ["Up", "Down"]:
+            continue
+        for IDType in config["SingleTauTriggerIDTypes"]:
+          for wp in config["SingleTauTriggerWorkingPoints"]:
+            singleTauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+
   config["TauIDSFWorkingPoints"] = [
        "VVVLoose",
        "VVLoose",
@@ -396,6 +427,7 @@ def build_config(nickname, **kwargs):
 
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
   config["Quantities"].extend(tauTriggerWeights)
+  config["Quantities"].extend(singleTauTriggerWeights)
   config["Quantities"].extend([
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
@@ -474,6 +506,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
+  if not isData:                 config["Processors"].append( "producer:SingleTauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")

@@ -16,12 +16,15 @@ def build_list(**kwargs):
         quantities = [
             "trg_singleelectron",
             "trg_singlemuon",
+            "trg_singletau_leading",
             
             "trg_mutaucross",
             "trg_eletaucross",
             "trg_doubletau",
             "trg_muonelectron_mu23ele12",
             "trg_muonelectron_mu8ele23",
+
+            "trg_singletau_trailing",
         ]
     elif year == 2017:
         quantities = [
