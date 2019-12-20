@@ -82,6 +82,7 @@ def build_config(nickname, **kwargs):
   ]
   config["DiTauPairLepton2UpperEtaCuts"] = [
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:2.1",
+          "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:2.1",
   ]
   config["CheckLepton1TriggerMatch"] = [
           "trg_singleelectron",
