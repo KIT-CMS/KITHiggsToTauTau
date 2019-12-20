@@ -243,6 +243,7 @@ def build_config(nickname, **kwargs):
        "MVAv2",
        # "DeepTau",
   ]
+  singleTauTriggerWeights = []
   if not isData:
     config["SingleTauTriggerEfficiencyWeightNames"] = [
         "0:singleTauTriggerMCEfficiencyWeight",
@@ -251,15 +252,14 @@ def build_config(nickname, **kwargs):
         "1:singleTauTriggerDataEfficiencyWeight",
     ]
 
-  # Define weight names to be written out - only store weights that are actually filled
-  singleTauTriggerWeights = []
-  for WeightName in config["SingleTauTriggerEfficiencyWeightNames"]:
-    for shift in ["","Up","Down"]:
-        if "MC" in WeightName and shift in ["Up", "Down"]:
-            continue
-        for IDType in config["SingleTauTriggerIDTypes"]:
-          for wp in config["SingleTauTriggerWorkingPoints"]:
-            singleTauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+    # Define weight names to be written out - only store weights that are actually filled
+    for WeightName in config["SingleTauTriggerEfficiencyWeightNames"]:
+      for shift in ["","Up","Down"]:
+          if "MC" in WeightName and shift in ["Up", "Down"]:
+              continue
+          for IDType in config["SingleTauTriggerIDTypes"]:
+            for wp in config["SingleTauTriggerWorkingPoints"]:
+              singleTauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
 
   config["TauIDSFWorkingPoints"] = [
        "VLoose",
