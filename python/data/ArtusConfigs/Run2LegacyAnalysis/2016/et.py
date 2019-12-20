@@ -202,9 +202,11 @@ def build_config(nickname, **kwargs):
   config["TauIDSFTypes"] = [
        "DeepTau2017v2p1VSjet",
   ]
-  config["TauIDScaleFactorWeightNames"] = [
+  config["TauIDSFWeightNames"] = [
       "1:tauIDScaleFactorWeight",
   ]
+  config["TauIDSFUseEMBSFs"] = isEmbedded
+  config["TauIDSFUseTightVSeSFs"] = True
 
   config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2016.root"
   if isEmbedded:

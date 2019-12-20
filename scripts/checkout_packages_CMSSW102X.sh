@@ -57,7 +57,7 @@ sed '/CombineHarvester/d' ${CMSSW_BASE}/src/HiggsAnalysis/KITHiggsToTauTau/Build
 git clone git@github.com:KIT-CMS/TauTriggerSFs.git  TauAnalysisTools/TauTriggerSFs -b run2_SFs_TriggerFitsForEmbedded_DeepTau  # for 2017 & 2018 triggers
 
 # TauIDSF tool
-git clone git@github.com:mburkart/TauIDSFs.git TauPOG/TauIDSFs -b deeptau_fixes
+git clone git@github.com:mburkart/TauIDSFs.git TauPOG/TauIDSFs -b kit_sfs
 
 # Grid-Control
 git clone git@github.com:KIT-CMS/grid-control.git

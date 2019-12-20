@@ -410,7 +410,9 @@ public:
 	// settings for TauIDScaleFactorProducer
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFWorkingPoints, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFTypes, {});
-	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDScaleFactorWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFWeightNames, {});
+        IMPL_SETTING_DEFAULT(bool, TauIDSFUseEMBSFs, false)
+        IMPL_SETTING_DEFAULT(bool, TauIDSFUseTightVSeSFs, false)
 
 	// settings for the EmbeddingConsumer
 	IMPL_SETTING_DEFAULT(int, DeltaRBinning, 100);

@@ -32,9 +32,9 @@ public:
         {
                 for (std::map<std::string, std::map<std::string, TauIDSFTool*>>::iterator wp_map_it = TauIDSFs.begin(); wp_map_it != TauIDSFs.end(); wp_map_it++)
                 {
-                        for (std::map<std::string, TauIDSFTool*>::iterator trig_map_it = wp_map_it->second.begin(); trig_map_it != wp_map_it->second.end(); trig_map_it++)
+                        for (std::map<std::string, TauIDSFTool*>::iterator sfs_map_it = wp_map_it->second.begin(); sfs_map_it != wp_map_it->second.end(); sfs_map_it++)
                         {
-                                delete trig_map_it->second;
+                                delete sfs_map_it->second;
                         }
                 }
         }
@@ -48,10 +48,10 @@ public:
                 {
                         for(auto t: settings.GetTauIDSFTypes())
                         {
-                                TauIDSFs[wp][t] = new TauIDSFTool(year, t, wp, isTT);
+                                TauIDSFs[wp][t] = new TauIDSFTool(year, t, wp, isTT, settings.GetTauIDSFUseEMBSFs(), settings.GetTauIDSFUseTightVSeSFs());
                         }
                 }
-                m_weightNames = Utility::ParseMapTypes<int,std::string>(Utility::ParseVectorToMap(settings.GetTauIDScaleFactorWeightNames()));
+                m_weightNames = Utility::ParseMapTypes<int,std::string>(Utility::ParseVectorToMap(settings.GetTauIDSFWeightNames()));
 	}
 
 	virtual void Produce(event_type const& event, product_type & product,
