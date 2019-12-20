@@ -406,6 +406,12 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerIDTypes, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerEfficiencyWeightNames, {});
 
+	// settings for SingleTauTriggerEfficiencyProducer
+	IMPL_SETTING_DEFAULT(std::string, SingleTauTriggerInput, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(SingleTauTriggerWorkingPoints, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(SingleTauTriggerIDTypes, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(SingleTauTriggerEfficiencyWeightNames, {});
+
 	// settings for TauIDScaleFactorProducer
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFWorkingPoints, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauIDSFTypes, {});

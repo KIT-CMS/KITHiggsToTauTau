@@ -66,6 +66,7 @@ def build_config(nickname, **kwargs):
           "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg",
           "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg",
           "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg",
+          "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
           "HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v:40.0",
@@ -144,6 +145,8 @@ def build_config(nickname, **kwargs):
             "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
             "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
             "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v:hltDoubleL2IsoTau26eta2p2",
+            "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltPFTau180TrackPt50LooseAbsOrRelMediumHighPtRelaxedIsoIso",
+            "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSelectedPFTau180MediumChargedIsolationL1HLTMatched",
     ]
   else:
     config["TauTriggerFilterNames"] = [
@@ -151,6 +154,8 @@ def build_config(nickname, **kwargs):
             "HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v:hltDoublePFTau40TrackPt1MediumChargedIsolationAndTightOOSCPhotonsDz02Reg",
             "HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v:hltDoublePFTau40TrackPt1TightChargedIsolationDz02Reg",
             "HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v:hltHpsDoublePFTau35TrackPt1MediumChargedIsolationDz02Reg",
+            "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltPFTau180TrackPt50LooseAbsOrRelMediumHighPtRelaxedIsoIso",
+            "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1_v:hltSelectedPFTau180MediumChargedIsolationL1HLTMatched",
     ]
   # TODO: Check if this is still necessary for 2018.
   config["TauTriggerCheckL1Match"] = [
@@ -223,6 +228,39 @@ def build_config(nickname, **kwargs):
         for wp in config["TauTriggerWorkingPoints"]:
           tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
 
+  config["SingleTauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018_singletau.root"
+  config["SingleTauTriggerWorkingPoints"] = [
+       # "vvvloose",
+       # "vvloose",
+       "vloose",
+       "loose",
+       "medium",
+       "tight",
+       "vtight",
+       "vvtight",
+  ]
+  config["SingleTauTriggerIDTypes"] = [
+       "MVAv2",
+       # "DeepTau",
+  ]
+  if not isData:
+    config["SingleTauTriggerEfficiencyWeightNames"] = [
+        "0:singleTauTriggerMCEfficiencyWeight",
+        "0:singleTauTriggerDataEfficiencyWeight",
+        "1:singleTauTriggerMCEfficiencyWeight",
+        "1:singleTauTriggerDataEfficiencyWeight",
+    ]
+
+  # Define weight names to be written out - only store weights that are actually filled
+  singleTauTriggerWeights = []
+  for WeightName in config["SingleTauTriggerEfficiencyWeightNames"]:
+    for shift in ["","Up","Down"]:
+        if "MC" in WeightName and shift in ["Up", "Down"]:
+            continue
+        for IDType in config["SingleTauTriggerIDTypes"]:
+          for wp in config["SingleTauTriggerWorkingPoints"]:
+            singleTauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+
   config["TauIDSFWorkingPoints"] = [
        "VLoose",
        "Loose",
@@ -290,6 +328,7 @@ def build_config(nickname, **kwargs):
   # config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
   config["Quantities"].extend(tauTriggerWeights)
+  config["Quantities"].extend(singleTauTriggerWeights)
   config["Quantities"].extend([
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
@@ -350,6 +389,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
+  # if not isData:                 config["Processors"].append( "producer:SingleTauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
