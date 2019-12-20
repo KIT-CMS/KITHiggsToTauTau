@@ -157,8 +157,8 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedTaus"] = True
 
   ### Efficiencies & weights configuration
-  config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016KIT_deeptau.root"
-  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016KIT_deeptau.root"
+  config["TauTriggerInput"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2016KIT_deeptau.root"
+  config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2016KIT_deeptau.root"
   config["TauTrigger"] = "ditau"
   config["TauTriggerWorkingPoints"] = [
        "vloose",
