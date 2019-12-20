@@ -17,7 +17,6 @@ def build_config(nickname, **kwargs):
   etau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "etau-fake-es" else False
   mtau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "mtau-fake-es" else False
   tau_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "tau-es" else False
-  fes_eta_split = True if "fes_eta_split" in kwargs and kwargs["fes_eta_split"] else False
 
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
@@ -33,6 +32,7 @@ def build_config(nickname, **kwargs):
     config += analysis_config_module.build_config(nickname)
 
   # explicit configuration
+  config["FESetaSplit"] = True
   config["TauEnergyCorrection"] = "smhtt2016"
 
   config["TauEnergyCorrectionOneProng"] = 1.0
@@ -59,37 +59,35 @@ def build_config(nickname, **kwargs):
         config["TauEnergyCorrectionThreeProng"] = 0.988 # down: 0.980, central: 0.988, up: 0.996
 
     if not etau_fake_es:
-      if fes_eta_split:
-        log.info("Fake e->tau Energy Correction applied split in eta")
-        if year == 2016:
-          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00679
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.03389
-          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.965
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.05
+      log.info("Fake e->tau Energy Correction applied split in eta")
+      if year == 2016:
+        config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00679
+        config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.03389
+        config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.965
+        config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.05
 
-        elif year == 2017:
-          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00911
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01154
-          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.97396
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.015
+      elif year == 2017:
+        config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00911
+        config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01154
+        config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.97396
+        config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.015
 
-        elif year == 2018:
-          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.01362
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01945
-          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.96903
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 0.985
+      elif year == 2018:
+        config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.01362
+        config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01945
+        config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.96903
+        config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 0.985
 
-      else:
-        log.info("Fake e->tau Energy Correction applied inclusive in eta")
-        if year == 2016:
-          config["TauElectronFakeEnergyCorrectionOneProng"] = 1.024 # values for 2016 measured by IC; down: 1.019, central: 1.024, up: 1.029
-          config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.076 # values for 2016 measured by IC; down: 1.066, central 1.076, up: 1.086
-        elif year == 2017:
-          config["TauElectronFakeEnergyCorrectionOneProng"] = 1.003 # values for 2017 measured by RWTH/KIT; down: 0.996, central: 1.003, up: 1.01
-          config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.036 # values for 2017 measured by RWTH/KIT; down: 1.029, central 1.036, up: 1.043
-        elif year == 2018:
-          config["TauElectronFakeEnergyCorrectionOneProng"] = 1.003 # values for 2017 measured by RWTH/KIT; down: 0.996, central: 1.003, up: 1.01 #TODO measure for 2018
-          config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.036 # values for 2017 measured by RWTH/KIT; down: 1.029, central 1.036, up: 1.043 #TODO measure for 2018
+      #log.info("Fake e->tau Energy Correction applied inclusive in eta")
+      #if year == 2016:
+      #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.004
+      #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.030
+      #elif year == 2017:
+      #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.000
+      #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.018
+      #elif year == 2018:
+      #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.013
+      #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.017
 
     #TODO measure mu->tau fake ES for all years (1prong & 1prong pi0's)
     if not mtau_fake_es:
