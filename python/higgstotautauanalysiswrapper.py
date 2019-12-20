@@ -233,8 +233,6 @@ class HiggsToTauTauAnalysisWrapper():
 
 		self._parser.add_argument("-c", "--analysis-channels", default=['all'], nargs='+', type=str, choices=['all', 'mt', 'tt', 'et', 'ee', 'em', 'mm'], help="List of channels processed from the analysis. [Default: %(default)s]")
 		self._parser.add_argument("--svfit", default=False, action="store_true", help="Enable SVfit. Default: %(default)s]")
-		self._parser.add_argument("--fes-eta-split", default=None, action="store_true", help="e->tau FES is using eta splitting.")
-
 		self._parser.add_argument("--addlheweights", default=False, action="store_true", help="Enable lheweights. Default: %(default)s]")
 		self._parser.add_argument("--pipelines", default=["nominal"], type=str, nargs='*', action='store',
 			choices=[
