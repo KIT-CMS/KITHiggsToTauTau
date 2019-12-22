@@ -88,6 +88,7 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
       "trg_eletaucross",
+      "trg_singletau_leading",
   ]
   config["CheckLepton2TriggerMatch"] = [
       "trg_mutaucross",
