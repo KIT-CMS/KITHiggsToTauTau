@@ -87,6 +87,8 @@ def build_config(nickname, **kwargs):
       "trg_doubletau",
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
+      "trg_eletaucross",
+      "trg_singletau_leading",
   ]
   config["CheckLepton2TriggerMatch"] = [
       "trg_mutaucross",
@@ -243,8 +245,6 @@ def build_config(nickname, **kwargs):
               singleTauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
 
   config["TauIDSFWorkingPoints"] = [
-       "VVVLoose",
-       "VVLoose",
        "VLoose",
        "Loose",
        "Medium",
