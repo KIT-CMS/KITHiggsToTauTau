@@ -207,8 +207,10 @@ def build_config(nickname, **kwargs):
       allowed_channels = ["mm"]
     elif re.search("(SingleMuon|MuTauFinalState)", nickname):
       allowed_channels = ["mm", "mt"]
-    elif re.search("(^Tau|TauTauFinalState)", nickname):
+    elif re.search("^Tau", nickname):
       allowed_channels = ["et", "mt", "tt"]
+    elif re.search("TauTauFinalState", nickname):
+      allowed_channels = ["tt"]
     else:
       print "Unknown format of nickname %s for type data or embedded!"
       raise Exception
