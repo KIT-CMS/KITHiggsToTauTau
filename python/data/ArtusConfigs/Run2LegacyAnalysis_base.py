@@ -61,7 +61,7 @@ def build_config(nickname, **kwargs):
       "DY.?JetsToLL|EWKZ2Jets|Embedding" : [
         23
       ],
-      "^(GluGlu|GluGluTo|VBF|Wminus|Wplus|Z)(HToTauTau|H2JetsToTauTau|HToWW)" : [
+      "^(GluGlu|GluGluTo|VBF|Wminus|Wplus|Z|ggZH)(HToTauTau|H2JetsToTauTau|HToWW)" : [
         25
       ],
       "NMSSM" : [
@@ -188,7 +188,7 @@ def build_config(nickname, **kwargs):
     config["SimpleEleTauFakeRateWeightVLoose"] = [1.089, 1.189]
     config["SimpleEleTauFakeRateWeightTight"] = [1.78, 1.55]
 
-  if re.search("GluGluHToTauTauM125", nickname):
+  if re.search("(GluGluHToTauTau|ggZHHToTauTauZToQQ).*M125", nickname):
     config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root" # same for all years?
     if "powheg" in nickname:
       config["Generator"] = "powheg"
