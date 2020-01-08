@@ -188,7 +188,7 @@ def build_config(nickname, **kwargs):
   config["TauID"] = "TauIDRecommendation13TeV"
   config["TauUseOldDMs"] = False
   config["TauVeto2ProngDMs"] = True
-  config["ElectronScaleAndSmearUsed"] = False
+  config["ElectronScaleAndSmearUsed"] = True
   config["ElectronScaleAndSmearTag"] = "ecalTrkEnergyPostCorr"
   config["ElectronLowerPtCuts"] = ["25.0"]
   config["ElectronUpperAbsEtaCuts"] = ["2.1"]
