@@ -74,47 +74,47 @@ def build_config(nickname, **kwargs):
   tauEleFakeES_uncertainties = tauEleFakeES_uncertainties['split_eta']
   # explicit configuration
   if re.search("DY.?JetsToLL|EWKZ", nickname):
-    config["tauEleFakeEsOneProngUpBarrel"] = {
+    config["tauEleFakeEsOneProngBarrelUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngUpBarrel"]["TauElectronFakeEnergyCorrectionOneProngBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngBarrel"]["up"]
+    config["tauEleFakeEsOneProngBarrelUp"]["TauElectronFakeEnergyCorrectionOneProngBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngBarrel"]["up"]
 
-    config["tauEleFakeEsOneProngDownBarrel"] = {
+    config["tauEleFakeEsOneProngBarrelDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngDownBarrel"]["TauElectronFakeEnergyCorrectionOneProngBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngBarrel"]["down"]
+    config["tauEleFakeEsOneProngBarrelDown"]["TauElectronFakeEnergyCorrectionOneProngBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngBarrel"]["down"]
 
 
-    config["tauEleFakeEsOneProngPiZerosUpBarrel"] = {
+    config["tauEleFakeEsOneProngPiZerosBarrelUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngPiZerosUpBarrel"]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"]["up"]
+    config["tauEleFakeEsOneProngPiZerosBarrelUp"]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"]["up"]
 
-    config["tauEleFakeEsOneProngPiZerosDownBarrel"] = {
+    config["tauEleFakeEsOneProngPiZerosBarrelDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngPiZerosDownBarrel"]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"]["down"]
+    config["tauEleFakeEsOneProngPiZerosBarrelDown"]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"]["down"]
 
-    config["tauEleFakeEsOneProngUpEndcap"] = {
+    config["tauEleFakeEsOneProngEndcapUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngUpEndcap"]["TauElectronFakeEnergyCorrectionOneProngEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngEndcap"]["up"]
+    config["tauEleFakeEsOneProngEndcapUp"]["TauElectronFakeEnergyCorrectionOneProngEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngEndcap"]["up"]
 
-    config["tauEleFakeEsOneProngDownEndcap"] = {
+    config["tauEleFakeEsOneProngEndcapDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngDownEndcap"]["TauElectronFakeEnergyCorrectionOneProngEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngEndcap"]["down"]
+    config["tauEleFakeEsOneProngEndcapDown"]["TauElectronFakeEnergyCorrectionOneProngEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngEndcap"]["down"]
 
 
-    config["tauEleFakeEsOneProngPiZerosUpEndcap"] = {
+    config["tauEleFakeEsOneProngPiZerosEndcapUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngPiZerosUpEndcap"]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"]["up"]
+    config["tauEleFakeEsOneProngPiZerosEndcapUp"]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"]["up"]
 
-    config["tauEleFakeEsOneProngPiZerosDownEndcap"] = {
+    config["tauEleFakeEsOneProngPiZerosEndcapDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEleFakeEsOneProngPiZerosDownEndcap"]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"]["down"]
+    config["tauEleFakeEsOneProngPiZerosEndcapDown"]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = tauEleFakeES_uncertainties[year]["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"]["down"]
 
   #log.info("Fake e->tau Energy Correction Uncertainties shifts inclusive in eta")
   #tauEleFakeES_uncertainties = tauEleFakeES_uncertainties['inclusive_eta']
