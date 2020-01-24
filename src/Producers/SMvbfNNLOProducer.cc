@@ -48,5 +48,15 @@ void SMvbfNNLOProducer::Produce(event_type const& event, product_type& product,
 
 	// determine uncertainties
         product.m_THU_qqH.resize(10, 1.0);
-        for(int i=0; i<10; i++) product.m_THU_qqH[i] = vbf_uncert_stage_1_1(i, stxs1flag, 1.0);
+        for(int i=0; i<10; i++)
+        {
+            if (stxs1flag >= 200 && stxs1flag < 300)
+            {
+                product.m_THU_qqH[i] = vbf_uncert_stage_1_1(i, stxs1flag, 1.0);
+            }
+            else
+            {
+                product.m_THU_qqH[i] = 1.0;
+            }
+        }
 }
