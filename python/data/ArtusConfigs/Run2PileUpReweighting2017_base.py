@@ -24,6 +24,7 @@ def build_config(nickname, **kwargs):
   isDY = re.search("DY.?JetsToLLM(10to50|50|150)", nickname)
   isWjets = re.search("W.?JetsToLNu", nickname)
   isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
+  isSUSYggH = re.search("SUSYGluGluToHToTauTau", nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
   
   
@@ -63,19 +64,23 @@ def build_config(nickname, **kwargs):
   config["BosonStatuses"] = [62]
   config["TopPtReweightingStrategy"] = "Run1"
   config["OutputPath"] = "output.root"
+  if isSUSYggH:
+    config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
+    config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
   
   config["Processors"] = []
   config["Processors"].append(                                    "producer:NicknameProducer")
   config["Processors"].extend((                                   "producer:CrossSectionWeightProducer",
                                                                   "producer:GeneratorWeightProducer",
                                                                   "producer:NumberGeneratedEventsWeightProducer"))
-  if isWjets or isDY:                config["Processors"].append( "producer:GenBosonFromGenParticlesProducer")
+  if isWjets or isDY or isSUSYggH:   config["Processors"].append( "producer:GenBosonFromGenParticlesProducer")
   if isDY or isEmbedded:             config["Processors"].append( "producer:GenDiLeptonDecayModeProducer")
   config["Processors"].extend((                                   "producer:GenParticleProducer",
                                                                   "producer:GenPartonCounterProducer"))
   if isWjets or isDY or isEmbedded:  config["Processors"].append("producer:GenBosonDiLeptonDecayModeProducer")
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
+  if isSUSYggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root" # same for all years?
   if "powheg" in nickname:
     config["Generator"] = "powheg"
