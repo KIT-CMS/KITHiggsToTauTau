@@ -19,6 +19,7 @@ def build_config(nickname, **kwargs):
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
   isGluonFusion = re.search("GluGluHToTauTau.*M125", nickname)
+  isSUSYggH = re.search("SUSYGluGluToHToTauTau", nickname)
   
   config["Quantities"] = [
     "npu",
@@ -34,11 +35,17 @@ def build_config(nickname, **kwargs):
     "htxs_njets30",
     "htxs_higgsPt",
     "genbosonmass",
+    "genbosonpt",
   ]
   if isGluonFusion:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.ggHNNLOQuantities").build_list())
-  
-  
+  if isSUSYggH:
+    config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
+    config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
+    for boson in ['h','H','A']:
+        for contr in  ['t','b','i']:
+            config["Quantities"].append("gg%s_%s_weight"%(boson,contr))
+
   
   config["Consumers"] = ["KappaLambdaNtupleConsumer"]
   
