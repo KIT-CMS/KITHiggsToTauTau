@@ -41,7 +41,7 @@ def build_config(nickname, **kwargs):
       "TauEnergyCorrectionOneProng" : {"down" : 0.977, "up" : 0.991},
       "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.993, "up" : 1.001},
       "TauEnergyCorrectionThreeProng" : { "down" : 0.984, "up" : 0.994},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.9992, "up" : 1.012},
+      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.992, "up" : 1.012},
     }
   }
 
