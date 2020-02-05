@@ -128,7 +128,7 @@ def build_config(nickname, **kwargs):
     if isSUSYggH:                      config["Processors"].append( "producer:NLOreweightingWeightsProducer")
     if isWjets or isDY or isEmbedded:  config["Processors"].extend(("producer:GenTauDecayProducer",
                                                                     "producer:GenBosonDiLeptonDecayModeProducer"))
-    if isEmbedded:                      config["Processors"].append( "producer:GeneratorWeightProducer")
+    config["Processors"].append(                                    "producer:GeneratorWeightProducer")
     #if isTTbar:                        config["Processors"].append( "producer:TTbarGenDecayModeProducer")
 
   if isData or isEmbedded:                config["PileupWeightFile"] = "not needed"
