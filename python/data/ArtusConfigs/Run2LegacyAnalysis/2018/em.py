@@ -184,6 +184,8 @@ def build_config(nickname, **kwargs):
 
           "0:isoWeight",
           "0:idWeight",
+          "0:isoWeight_ic",
+          "0:idWeight_ic",
           "0:trackWeight",
 
           "0:trigger_23_data_Weight",
@@ -207,6 +209,8 @@ def build_config(nickname, **kwargs):
 
           "0:e_iso_binned_embed_kit_ratio",
           "0:e_id90_embed_kit_ratio",
+          "0:e_iso_binned_ic_embed_ratio",
+          "0:e_id_ic_embed_ratio",
           "0:e_trk_ratio",
 
           "0:e_trg_23_binned_ic_data",
@@ -230,7 +234,10 @@ def build_config(nickname, **kwargs):
 
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
+          "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
@@ -250,6 +257,8 @@ def build_config(nickname, **kwargs):
 
         "0:isoWeight",
         "0:idWeight",
+        "0:isoWeight_ic",
+        "0:idWeight_ic",
         "0:trackWeight",
 
         "0:trigger_23_data_Weight",
@@ -269,6 +278,8 @@ def build_config(nickname, **kwargs):
 
         "0:e_iso_binned_kit_ratio",
         "0:e_id90_kit_ratio",
+        "0:e_iso_binned_ic_ratio",
+        "0:e_id_ic_ratio",
         "0:e_trk_ratio",
         
         "0:e_trg_23_binned_ic_data",
@@ -287,6 +298,8 @@ def build_config(nickname, **kwargs):
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
 
+        "0:e_pt,e_eta,e_iso",
+        "0:e_pt,e_eta",
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
@@ -413,7 +426,9 @@ def build_config(nickname, **kwargs):
       "mtmax",
       "dPhiLep1Met",
       "dPhiLep2Met",
-      "dzeta"
+      "dzeta",
+      "isoWeight_ic_1",
+      "idWeight_ic_1",
   ])
   if isEmbedded:
     config["Quantities"].extend([
