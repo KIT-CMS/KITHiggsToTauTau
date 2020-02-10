@@ -260,8 +260,9 @@ def build_config(nickname, **kwargs):
       pipeline_config["Quantities"] = list(set(pipeline_config["Quantities"]) - set(["m_sv", "pt_sv", "eta_sv", "phi_sv"]))
       while "producer:SvfitProducer" in pipeline_config["Processors"]:
         pipeline_config["Processors"].remove("producer:SvfitProducer")
-        if btag_eff or etau_fake_es or mtau_fake_es:
-            pipeline_config["Processors"].remove("producer:GeneratorWeightProducer")
+
+  if btag_eff or etau_fake_es or mtau_fake_es:  # disable GeneratorWeightProducer for sub-analyses
+    config["Processors"].remove("producer:GeneratorWeightProducer")
 
   if addlheweights:
     for pipeline_name, pipeline_config in config["Pipelines"].iteritems():
