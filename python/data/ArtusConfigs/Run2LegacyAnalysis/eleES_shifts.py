@@ -22,7 +22,7 @@ def build_config(nickname, **kwargs):
   #isTTbar = re.search("TT(To|_|Jets)", nickname)
   #isDY = re.search("DY.?JetsToLL", nickname)
   #isWjets = re.search("W.?JetsToLNu", nickname)
-
+  year = datasetsHelper.base_dict[nickname]["year"]
   ## fill config:
   # includes
   includes = [
@@ -33,14 +33,25 @@ def build_config(nickname, **kwargs):
 
   # explicit configuration
   if isEmbedded:
+    eleEs_shift_EB = 1.0
+    eleEs_shift_EE = 1.0
+    if year==2016:
+      eleEs_shift_EB = 0.99757
+      eleEs_shift_EE = 0.99300
+    elif year==2017:
+      eleEs_shift_EB = 0.99933
+      eleEs_shift_EE = 0.98867    
+    elif year==2018:
+      eleEs_shift_EB = 0.99672
+      eleEs_shift_EE = 0.99443 
     config["eleEsUp"] = {
-      "ElectronEnergyCorrectionShiftEB" : 1.01,
-      "ElectronEnergyCorrectionShiftEE" : 1.025,
+      "ElectronEnergyCorrectionShiftEB" : 1.005*eleEs_shift_EB,
+      "ElectronEnergyCorrectionShiftEE" : 1.0125*eleEs_shift_EE,
       "SvfitCacheFileFolder" : "eleEsUp"
     }
     config["eleEsDown"] = {
-      "ElectronEnergyCorrectionShiftEB" : 0.99,
-      "ElectronEnergyCorrectionShiftEE" : 0.975,
+      "ElectronEnergyCorrectionShiftEB" : 0.995*eleEs_shift_EB,
+      "ElectronEnergyCorrectionShiftEE" : 0.9875*eleEs_shift_EE,
       "SvfitCacheFileFolder" : "eleEsDown"
     }
   if (not isData) and (not isEmbedded):

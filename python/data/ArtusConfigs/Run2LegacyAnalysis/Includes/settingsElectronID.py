@@ -26,6 +26,7 @@ def build_config(nickname, **kwargs):
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
     config += analysis_config_module.build_config(nickname)
+  isEmbedded = datasetsHelper.isEmbedded(nickname)
 
   # explicit configuration
   config["ElectronID_documentation"] = "https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations"
@@ -64,4 +65,17 @@ def build_config(nickname, **kwargs):
   config["ElectronTrackDxyCut"] = 0.045
   config["ElectronTrackDzCut"] = 0.2
 
+  if isEmbedded:
+    if year==2016:
+      config["ElectronEnergyCorrectionShiftEB"] = 0.99757
+      config["ElectronEnergyCorrectionShiftEE"] = 0.99300
+    elif year==2017:
+      config["ElectronEnergyCorrectionShiftEB"] = 0.99933
+      config["ElectronEnergyCorrectionShiftEE"] = 0.98867
+    elif year==2018:
+      config["ElectronEnergyCorrectionShiftEB"] = 0.99672
+      config["ElectronEnergyCorrectionShiftEE"] = 0.99443     
+  else:
+      config["ElectronEnergyCorrectionShiftEB"] = 1.0
+      config["ElectronEnergyCorrectionShiftEE"] = 1.0    
   return config
