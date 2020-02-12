@@ -34,8 +34,6 @@ def build_config(nickname, **kwargs):
 
   # explicit configuration
   config["nominal"] = {
-    "ElectronEnergyCorrectionShiftEB" : 1.0,
-    "ElectronEnergyCorrectionShiftEE" : 1.0,
     "JetEnergyCorrectionUncertaintyShift" : 0.0,
     "MetUncertaintyShift" : False,
     "MetUncertaintyType" : "",
