@@ -43,7 +43,7 @@ def build_config(nickname, **kwargs):
   config["Channel"] = "EE"
   config["MinNLooseElectrons"] = 2
   config["MinNElectrons"] = 2
-  config["Year"] = 2017
+  config["Year"] = 2018
   # HltPaths_comment: The first path must be the single lepton trigger. A corresponding Pt cut is implemented in the Run2DecayChannelProducer..
   if re.search("(Run201|Embedding201|Summer1|Fall1)", nickname): config["HltPaths"] = [
       "HLT_Ele27_WPTight_Gsf",
@@ -113,7 +113,7 @@ def build_config(nickname, **kwargs):
   config["DirectIso"] = True
   config["EventWeight"] = "eventWeight"
 
-  config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesEE").build_list(2017)
+  config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesEE").build_list(2018)
 
   config["Processors"] =   [#"producer:HltProducer",
                             "producer:ValidElectronsProducer",
