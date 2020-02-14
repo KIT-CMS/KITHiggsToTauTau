@@ -42,7 +42,7 @@ def build_config(nickname, **kwargs):
   config["Channel"] = "EE"
   config["MinNLooseElectrons"] = 2
   config["MinNElectrons"] = 2
-  config["Year"] = 2017
+  config["Year"] = 2018
 
   # Electron Requirements
   config["ElectronLowerPtCuts"] = ["10.0"]

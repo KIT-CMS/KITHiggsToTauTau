@@ -69,7 +69,7 @@ def build_config(nickname, **kwargs):
   config["MuonIsoPtSumOverPtUpperThresholdEE"] = 0.15
   config["DiTauPairMinDeltaRCut"] = 1.
 
-  config["Year"] = 2017
+  config["Year"] = 2018
     
   config["MuonTriggerFilterNames"] = [
           "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",

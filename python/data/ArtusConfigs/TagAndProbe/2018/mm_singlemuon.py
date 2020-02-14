@@ -71,7 +71,7 @@ def build_config(nickname, **kwargs):
   config["MuonUpperAbsEtaCuts"] = ["2.4"]
   config["DiTauPairMinDeltaRCut"] = 0.5
 
-  config["Year"] = 2017
+  config["Year"] = 2018
     
   config["MuonTriggerFilterNames"] = [
           "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",
@@ -112,7 +112,7 @@ def build_config(nickname, **kwargs):
   config["DirectIso"] = True
   config["EventWeight"] = "eventWeight"
 
-  config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesMM").build_list(2017)
+  config["Quantities"] = importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.TagAndProbe.Includes.TagAndProbeQuantitiesMM").build_list(2018)
 
   config["Processors"] =   ["producer:ValidMuonsProducer",
                             "filter:ValidMuonsFilter",
