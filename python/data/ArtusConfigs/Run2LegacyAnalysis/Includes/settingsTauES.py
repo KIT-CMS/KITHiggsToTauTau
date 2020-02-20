@@ -41,68 +41,86 @@ def build_config(nickname, **kwargs):
   config["TauElectronFakeEnergyCorrectionOneProng"] = 1.0
   config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.0
 
-  if not re.search("Run201|Embedding", nickname):
-    if not tau_es:
-      log.info("Tau Energy Correction applied")
-      # preliminary numbers from https://ineuteli.web.cern.ch/ineuteli/TauPOG/slides/Izaak_TauPOG_TauES_20191112.pdf
-      if year == 2016:
-        config["TauEnergyCorrectionOneProng"] = 0.990 # down: 0.984, central: 0.990, up: 0.997
-        config["TauEnergyCorrectionOneProngPiZeros"] = 0.999 # down: 0.996, central: 0.999, up: 1.003
-        config["TauEnergyCorrectionThreeProng"] = 1.008 # down: 1.004, central: 1.008, up: 1.015
-        config["TauEnergyCorrectionThreeProngPiZeros"] = 1.001 # down: 0.991, central: 1.001, up: 1.011
-      elif year == 2017:
-        config["TauEnergyCorrectionOneProng"] = 1.007 # down: 0.999, central: 1.007, up: 1.017
-        config["TauEnergyCorrectionOneProngPiZeros"] = 1.002 # down: 0.998, central: 1.002, up: 1.007
-        config["TauEnergyCorrectionThreeProng"] = 1.002 # down: 0.997, central: 1.002, up: 1.007
-        config["TauEnergyCorrectionThreeProngPiZeros"] = 0.995 # down: 0.985, central: 0.995, up: 1.011
-      elif year == 2018:
-        config["TauEnergyCorrectionOneProng"] = 0.984 # down: 0.977, central: 0.984, up: 0.991
-        config["TauEnergyCorrectionOneProngPiZeros"] = 0.997 # down: 0.993, central: 0.997, up: 1.001
-        config["TauEnergyCorrectionThreeProng"] = 0.989 # down: 0.984, central: 0.989, up: 0.994
-        config["TauEnergyCorrectionThreeProngPiZeros"] = 1.001 # down: 0.992, central: 1.001, up: 1.012
+  if not re.search("Run201", nickname):
+    if not re.search("Embedding", nickname):
+      if not tau_es:
+        log.info("Tau Energy Correction applied")
+        # preliminary numbers from https://ineuteli.web.cern.ch/ineuteli/TauPOG/slides/Izaak_TauPOG_TauES_20191112.pdf
+        if year == 2016:
+          config["TauEnergyCorrectionOneProng"] = 0.990 # down: 0.984, central: 0.990, up: 0.997
+          config["TauEnergyCorrectionOneProngPiZeros"] = 0.999 # down: 0.996, central: 0.999, up: 1.003
+          config["TauEnergyCorrectionThreeProng"] = 1.008 # down: 1.004, central: 1.008, up: 1.015
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 1.001 # down: 0.991, central: 1.001, up: 1.011
+        elif year == 2017:
+          config["TauEnergyCorrectionOneProng"] = 1.007 # down: 0.999, central: 1.007, up: 1.017
+          config["TauEnergyCorrectionOneProngPiZeros"] = 1.002 # down: 0.998, central: 1.002, up: 1.007
+          config["TauEnergyCorrectionThreeProng"] = 1.002 # down: 0.997, central: 1.002, up: 1.007
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 0.995 # down: 0.985, central: 0.995, up: 1.011
+        elif year == 2018:
+          config["TauEnergyCorrectionOneProng"] = 0.984 # down: 0.977, central: 0.984, up: 0.991
+          config["TauEnergyCorrectionOneProngPiZeros"] = 0.997 # down: 0.993, central: 0.997, up: 1.001
+          config["TauEnergyCorrectionThreeProng"] = 0.989 # down: 0.984, central: 0.989, up: 0.994
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 1.001 # down: 0.992, central: 1.001, up: 1.012
 
-    if not etau_fake_es:
-      log.info("Fake e->tau Energy Correction applied split in eta")
-      if year == 2016:
-        config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00679
-        config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.03389
-        config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.965
-        config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.05
+      if not etau_fake_es:
+        log.info("Fake e->tau Energy Correction applied split in eta")
+        if year == 2016:
+          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00679
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.03389
+          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.965
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.05
 
-      elif year == 2017:
-        config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00911
-        config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01154
-        config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.97396
-        config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.015
+        elif year == 2017:
+          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00911
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01154
+          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.97396
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.015
 
-      elif year == 2018:
-        config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.01362
-        config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01945
-        config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.96903
-        config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 0.985
-        
-      #log.info("Fake e->tau Energy Correction applied inclusive in eta")
-      #if year == 2016:
-      #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.004
-      #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.030
-      #elif year == 2017:
-      #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.000
-      #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.018
-      #elif year == 2018:
-      #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.013
-      #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.017
+        elif year == 2018:
+          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.01362
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01945
+          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.96903
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 0.985
+          
+        #log.info("Fake e->tau Energy Correction applied inclusive in eta")
+        #if year == 2016:
+        #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.004
+        #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.030
+        #elif year == 2017:
+        #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.000
+        #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.018
+        #elif year == 2018:
+        #  config["TauElectronFakeEnergyCorrectionOneProng"] = 1.013
+        #  config["TauElectronFakeEnergyCorrectionOneProngPiZeros"] = 1.017
 
-    #TODO measure mu->tau fake ES for all years (1prong & 1prong pi0's), current values from AN2019_109_v4
-    if not mtau_fake_es:
-      log.info("Fake m->tau Energy Correction applied")
-      if year == 2016:
-        config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0
-        config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 0.995
-      elif year == 2017:
-        config["TauMuonFakeEnergyCorrectionOneProng"] = 0.998
-        config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 0.992
-      elif year == 2018:
-        config["TauMuonFakeEnergyCorrectionOneProng"] = 0.998
-        config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 0.990
-
+      #TODO measure mu->tau fake ES for all years (1prong & 1prong pi0's), current values from AN2019_109_v4
+      if not mtau_fake_es:
+        log.info("Fake m->tau Energy Correction applied")
+        if year == 2016:
+          config["TauMuonFakeEnergyCorrectionOneProng"] = 1.0
+          config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 0.995
+        elif year == 2017:
+          config["TauMuonFakeEnergyCorrectionOneProng"] = 0.998
+          config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 0.992
+        elif year == 2018:
+          config["TauMuonFakeEnergyCorrectionOneProng"] = 0.998
+          config["TauMuonFakeEnergyCorrectionOneProngPiZeros"] = 0.990
+    else:
+      if not tau_es:
+        log.info("Tau Energy Correction applied")
+        if year == 2016:
+          config["TauEnergyCorrectionOneProng"] = 0.998 
+          config["TauEnergyCorrectionOneProngPiZeros"] = 0.9978 
+          config["TauEnergyCorrectionThreeProng"] = 0.9874
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 0.9874 
+        elif year == 2017:
+          config["TauEnergyCorrectionOneProng"] = 0.9996 
+          config["TauEnergyCorrectionOneProngPiZeros"] = 0.988
+          config["TauEnergyCorrectionThreeProng"] = 0.9925
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 0.9925
+        elif year == 2018:
+          config["TauEnergyCorrectionOneProng"] = 1.0
+          config["TauEnergyCorrectionOneProngPiZeros"] = 1.0
+          config["TauEnergyCorrectionThreeProng"] =1.0 
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 1.0    
   return config
