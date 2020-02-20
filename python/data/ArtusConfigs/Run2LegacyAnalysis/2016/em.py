@@ -156,6 +156,8 @@ def build_config(nickname, **kwargs):
           "1:muonEffIDWeight",
 
           "1:isoWeight", # TODO check if this isolation is the right one
+          "1:looseIsoWeight", # TODO check if this isolation is the right one
+
           "1:idWeight",
 
           #"1:trigger_23_data_Weight",
@@ -177,8 +179,12 @@ def build_config(nickname, **kwargs):
           "0:m_sel_idemb_kit_ratio",
           "1:m_sel_idemb_kit_ratio",
 
-          "1:m_iso_ratio",
-          "1:m_id_ratio",
+          # "1:m_iso_ratio",  # older
+          # "1:m_id_ratio",  # older
+          "1:m_iso_ratio_emb",
+          "1:m_looseiso_ic_embed_ratio",
+
+          "1:m_id_ratio_emb",
 
           #"1:m_trg23_binned_ic_data",
           #"1:m_trg23_binned_ic_embed",
@@ -206,6 +212,12 @@ def build_config(nickname, **kwargs):
           #"1:m_pt,m_eta,m_iso",
           #"1:m_pt,m_eta,m_iso",
           #"1:m_pt,m_eta,m_iso",
+          "1:m_pt,m_eta",
+
+          "1:m_pt,m_eta,m_iso",
+          "1:m_pt,m_eta,m_iso",
+          "1:m_pt,m_eta,m_iso",
+          "1:m_pt,m_eta,m_iso",
 
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
