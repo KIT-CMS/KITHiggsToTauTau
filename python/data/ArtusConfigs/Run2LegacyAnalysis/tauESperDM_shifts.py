@@ -59,10 +59,10 @@ def build_config(nickname, **kwargs):
       "TauEnergyCorrectionThreeProngPiZeros" : { "down" : 0.9879, "up" : 0.9969},
     },
     2018: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.985, "up" : 1.015},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.985, "up" : 1.015},
-      "TauEnergyCorrectionThreeProng" : { "down" : 0.985, "up" : 1.015},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.985, "up" : 1.015},
+      "TauEnergyCorrectionOneProng" : {"down" : 0.9928, "up" : 1.0006},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.9912, "up" : 0.998},
+      "TauEnergyCorrectionThreeProng" : { "down" : 0.9894, "up" : 0.9958},
+      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.9894, "up" : 0.9958},
     }
   }
 

@@ -120,8 +120,8 @@ def build_config(nickname, **kwargs):
           config["TauEnergyCorrectionThreeProng"] = 0.9925
           config["TauEnergyCorrectionThreeProngPiZeros"] = 0.9925
         elif year == 2018:
-          config["TauEnergyCorrectionOneProng"] = 1.0
-          config["TauEnergyCorrectionOneProngPiZeros"] = 1.0
-          config["TauEnergyCorrectionThreeProng"] =1.0
-          config["TauEnergyCorrectionThreeProngPiZeros"] = 1.0
+          config["TauEnergyCorrectionOneProng"] = 0.9967
+          config["TauEnergyCorrectionOneProngPiZeros"] = 0.9943
+          config["TauEnergyCorrectionThreeProng"] = 0.9926
+          config["TauEnergyCorrectionThreeProngPiZeros"] = 0.9926
   return config
