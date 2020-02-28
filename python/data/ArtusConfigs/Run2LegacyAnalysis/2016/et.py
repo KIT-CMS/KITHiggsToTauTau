@@ -65,7 +65,7 @@ def build_config(nickname, **kwargs):
   ### HLT & Trigger Object configuration
   config["HltPaths"] = [
       "HLT_Ele25_eta2p1_WPTight_Gsf",
-      # "HLT_VLooseIsoPFTau140_Trk50_eta2p1",  # single tau trigger
+      "HLT_VLooseIsoPFTau140_Trk50_eta2p1",
       "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1"
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
@@ -104,10 +104,10 @@ def build_config(nickname, **kwargs):
       "trg_singlemuon:HLT_IsoTkMu22_v",
       "trg_singlemuon:HLT_IsoMu22_eta2p1_v",
       "trg_singlemuon:HLT_IsoTkMu22_eta2p1_v",
-      "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
+      #"trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
       "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v",
       "trg_doubletau:HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v",
-      "trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v"
+      "trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v",
       "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v",
       "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v",
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
@@ -116,6 +116,7 @@ def build_config(nickname, **kwargs):
       "trg_singletau_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
       "trg_singletau_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
   ]
+
   config["ElectronTriggerFilterNames"] = [
       "HLT_Ele25_eta2p1_WPTight_Gsf_v:hltEle25erWPTightGsfTrackIsoFilter",
       "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltEle24WPLooseL1SingleIsoEG22erGsfTrackIsoFilter"
@@ -162,8 +163,6 @@ def build_config(nickname, **kwargs):
   config["TauUpperAbsEtaCuts"] = ["2.3"]
   config["TriggerObjectLowerPtCut"] = -1.0
   config["DiTauPairMinDeltaRCut"] = 0.5
-  config["DeltaRTriggerMatchingTaus"] = 0.5
-  config["DeltaRTriggerMatchingElectrons"] = 0.5
   config["DiTauPairIsTauIsoMVA"] = True
   config["TauTauRestFrameReco"] = "collinear_approximation"
   config["InvalidateNonMatchingElectrons"] = False
