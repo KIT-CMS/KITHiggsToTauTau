@@ -28,36 +28,37 @@ def build_config(nickname, **kwargs):
   tauEleFakeES_uncertainties = {
     'inclusive_eta': {
       2016 : {
-      "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 1.019, "up" : 1.029},
-      "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.066, "up" : 1.086},
+      "TauElectronFakeEnergyCorrectionOneProng": {"down": 1.019, "up": 1.029},
+      "TauElectronFakeEnergyCorrectionOneProngPiZeros": {"down": 1.066, "up": 1.086},
       },
       2017: {
-        "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.996, "up" : 1.01},
-        "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.029, "up" : 1.043},
+        "TauElectronFakeEnergyCorrectionOneProng": {"down": 0.996, "up": 1.01},
+        "TauElectronFakeEnergyCorrectionOneProngPiZeros": {"down": 1.029, "up": 1.043},
       },
       2018: {
-        "TauElectronFakeEnergyCorrectionOneProng" : {"down" : 0.996, "up" : 1.01},
-        "TauElectronFakeEnergyCorrectionOneProngPiZeros" : {"down" : 1.029, "up" : 1.043},
+        "TauElectronFakeEnergyCorrectionOneProng": {"down": 0.996, "up": 1.01},
+        "TauElectronFakeEnergyCorrectionOneProngPiZeros": {"down": 1.029, "up": 1.043},
       }
     },
+
     'split_eta': {
       2016 : {
-        "TauElectronFakeEnergyCorrectionOneProngBarrel" : {"down" : 1.0 + (0.679 - 0.982) / 100, "up" : 1.0 + (0.679 + 0.806) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel" : {"down" : 1.0 + (3.389 - 2.475) / 100, "up" : 1.0 + (3.389 +1.168) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngEndcap" : {"down" : 1.0 + (-3.5 - 1.102) / 100, "up" : 1.0 + (-3.5 + 1.808) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap" : {"down" : 1.0 + (5.0 - 5.694) / 100, "up" : 1.0 + (5.0 +6.57) / 100},
+        "TauElectronFakeEnergyCorrectionOneProngBarrel": {"down": 1.0 + (+0.532 - 0.740) / 100.0, "up": 1.0 + (+0.532 + 896) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel": {"down": 1.0 + (+5.818 - 1.203) / 100.0, "up": 1.0 + (+5.818 + 1.172) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngEndcap": {"down": 1.0 + (+4.922 - 3.088) / 100.0, "up": 1.0 + (+4.9220 + 4.085) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap": {"down": 1.0 + (+1.804 - 4.235) / 100.0, "up": 1.0  (+1.804 + 3.420) / 100.0},
       },
       2017: {
-        "TauElectronFakeEnergyCorrectionOneProngBarrel" : {"down" : 1.0 + (0.911 - 0.882) / 100, "up" : 1.0 + (0.911 + 1.343) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel" : {"down" : 1.0 + (1.154 - 0.973) / 100, "up" : 1.0 + (1.154 + 2.162) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngEndcap" : {"down" : 1.0 + (-2.604 - 1.43) / 100, "up" : 1.0 + (-2.604 + 2.249) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap" : {"down" : 1.0 + (1.5 - 4.969) / 100, "up" : 1.0 + (1.5 + 6.461) / 100},
+        "TauElectronFakeEnergyCorrectionOneProngBarrel": {"down": 1.0 + (+0.126 - 0.959) / 100.0, "up": 1.0 + (+0.126 + 1.041) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel": {"down": 1.0 + (+3.354 - 0.987) / 100.0, "up": 1.0 + (+3.3543 + 1.005) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngEndcap": {"down": 1.0 + (-3.440 - 4.048) / 100.0, "up": 1.0 + (-3.440 + 4.055) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap": {"down": 1.0 + (+0.476 - 4.753) / 100.0, "up": 1.0 + (+0.476 + 2.418) / 100.0},
       },
       2018: {
-        "TauElectronFakeEnergyCorrectionOneProngBarrel" : {"down" : 1.0 + (1.362 - 0.474) / 100, "up" : 1.0 + (1.362 + 0.904) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel" : {"down" : 1.0 + (1.945 - 1.598) / 100, "up" : 1.0 + (1.945 + 1.226) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngEndcap" : {"down" : 1.0 + (-3.097 - 1.25) / 100, "up" : 1.0 + (-3.097 + 3.404) / 100},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap" : {"down" : 1.0 + (-1.5 - 4.309) / 100, "up" : 1.0 + (-1.5 + 5.499) / 100},
+        "TauElectronFakeEnergyCorrectionOneProngBarrel": {"down": 1.0 + (+0.25 - 0.252) / 100.0, "up": 1.0 + (+0.25 + 0.438) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel": {"down": 1.0 + (+3.610 - 0.706) / 100.0, "up": 1.0 + (+3.610 + 0.896) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngEndcap": {"down": 1.0 + (-1.708 - 1.733) / 100.0, "up": 1.0 + (-1.708 + 2.350) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap": {"down": 1.0 + (-1.8 - 2.3) / 100.0, "up": 1.0 + (-1.8 + 2.3) / 100.0},
       }
     },
   }

@@ -65,22 +65,22 @@ def build_config(nickname, **kwargs):
       if not etau_fake_es:
         log.info("Fake e->tau Energy Correction applied split in eta")
         if year == 2016:
-          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00679
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.03389
-          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.965
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.05
+          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.0 + (0.532) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.0 + (5.8) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 1.0 + (+4.922) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.0 + (+1.804) / 100.0
 
         elif year == 2017:
-          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.00911
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01154
-          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.97396
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.015
+          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.0 + (0.126) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.0 + (+3.354) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 1.0 + (-3.440) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.0 + (+0.476) / 100.0
 
         elif year == 2018:
-          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.01362
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.01945
-          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 0.96903
-          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 0.985
+          config["TauElectronFakeEnergyCorrectionOneProngBarrel"] = 1.0 + (+0.25) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel"] = 1.0 + (+3.610) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngEndcap"] = 1.0 + (-1.708) / 100.0
+          config["TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap"] = 1.0 + (-1.8) / 100.0
 
         #log.info("Fake e->tau Energy Correction applied inclusive in eta")
         #if year == 2016:

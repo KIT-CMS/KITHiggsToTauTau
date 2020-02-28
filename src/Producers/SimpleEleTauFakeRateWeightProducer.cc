@@ -35,16 +35,17 @@ void SimpleEleTauFakeRateWeightProducer::Produce(event_type const& event, produc
 {
 	// 04.11.2016: numbers taken from https://indico.cern.ch/event/563239/contributions/2279020/attachments/1325496/1989607/lepTauFR_tauIDmeeting_20160822.pdf
 	//             as recommended in https://twiki.cern.ch/twiki/bin/viewauth/CMS/SMTauTau2016#e_tau_fake_rate
-	
+
 	float eTauFakeRateWeight = 1.0;
 
 	assert(SimpleEleTauFakeRateWeightVLoose.size() == 2);
-	assert(SimpleEleTauFakeRateWeightTight.size() == 2);
+	assert(SimpleEleTauFakeRateWeightTight.size() == 2 || (SimpleEleTauFakeRateWeightTight.size() == 4 && product.m_decayChannel == HttEnumTypes::DecayChannel::ET));
 
 	if (product.m_decayChannel == HttEnumTypes::DecayChannel::ET)
 	{
 		KappaEnumTypes::GenMatchingCode genMatchingCode = KappaEnumTypes::GenMatchingCode::NONE;
 		KLepton* lepton = product.m_flavourOrderedLeptons[1];
+		int dm = static_cast<KTau*>(product.m_flavourOrderedLeptons[1])->decayMode;
 		KLepton* originalLepton = const_cast<KLepton*>(SafeMap::GetWithDefault(product.m_originalLeptons, const_cast<const KLepton*>(lepton), const_cast<const KLepton*>(lepton)));
 		if (settings.GetUseUWGenMatching())
 		{
@@ -62,11 +63,27 @@ void SimpleEleTauFakeRateWeightProducer::Produce(event_type const& event, produc
 		{
 			if(std::abs(lepton->p4.Eta()) < 1.460)
 			{
-				eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(0);
+				if (SimpleEleTauFakeRateWeightTight.size() == 2)
+					eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(0);
+				else
+				{
+					if (dm == 0)
+						eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(0);
+					else if (dm == 1)
+						eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(1);
+				}
 			}
 			else if(std::abs(lepton->p4.Eta()) > 1.558)
 			{
-				eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(1);
+				if (SimpleEleTauFakeRateWeightTight.size() == 2)
+					eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(1);
+				else
+				{
+					if (dm == 0)
+						eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(2);
+					else if (dm == 1)
+						eTauFakeRateWeight = SimpleEleTauFakeRateWeightTight.at(3);
+				}
 			}
 		}
 	}
@@ -132,5 +149,5 @@ void SimpleEleTauFakeRateWeightProducer::Produce(event_type const& event, produc
 		}
 	}
 	product.m_weights["eleTauFakeRateWeight"] = eTauFakeRateWeight;
-	
+
 }

@@ -172,21 +172,31 @@ def build_config(nickname, **kwargs):
       print "Luminosity GOLDEN JSON not defined"
       exit(1)
 
+  # pog: TAUPOG/TauIDSFs/data/TauID_SF_eta_antiEleMVA6_201*.root
   if year == 2016:
     config["SimpleMuTauFakeRateWeightLoose"] = [1.22, 1.12, 1.26, 1.22, 2.39]
     config["SimpleMuTauFakeRateWeightTight"] = [1.47, 1.55, 1.33, 1.72, 2.50]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [1.21, 1.38]
-    config["SimpleEleTauFakeRateWeightTight"] = [1.40, 1.90]
+
+    config["SimpleEleTauFakeRateWeightVLoose"] = [1.175, 1.288]  # error=0.003, error=0.006
+    # config["SimpleEleTauFakeRateWeightTight"] = [2.16, 0.91]  # error=0.1, error=0.2
+    # barel-dm0, barel-dm1, endcap-dm0, endcap-dm1
+    config["SimpleEleTauFakeRateWeightTight"] = [1.089, 1.936, 0.901, 0.877]
   elif year == 2017:
     config["SimpleMuTauFakeRateWeightLoose"] = [1.06, 1.02, 1.10, 1.03, 1.94]
     config["SimpleMuTauFakeRateWeightTight"] = [1.17, 1.29, 1.14, 0.93, 1.61]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [1.09, 1.19]
-    config["SimpleEleTauFakeRateWeightTight"] = [1.80, 1.53]
+
+    config["SimpleEleTauFakeRateWeightVLoose"] = [1.09, 1.19]  # error=0.01, error=0.01
+    # config["SimpleEleTauFakeRateWeightTight"] = [1.80, 1.53]  # error=0.2, error=0.6
+    # barel-dm0, barel-dm1, endcap-dm0, endcap-dm1
+    config["SimpleEleTauFakeRateWeightTight"] = [1.185, 1.680, 0.793, 1.133]
   elif year == 2018:
     config["SimpleMuTauFakeRateWeightLoose"] = [1.05, 0.96, 1.06, 1.45, 1.75]
     config["SimpleMuTauFakeRateWeightTight"] = [1.23, 1.37, 1.12, 1.84, 2.01]
-    config["SimpleEleTauFakeRateWeightVLoose"] = [1.089, 1.189]
-    config["SimpleEleTauFakeRateWeightTight"] = [1.78, 1.55]
+
+    config["SimpleEleTauFakeRateWeightVLoose"] = [1.13, 1.003]  # error=0.005, error=0.005
+    # config["SimpleEleTauFakeRateWeightTight"] = [1.46, 1.02]  # error=0.008, error=0.14
+    # barel-dm0, barel-dm1, endcap-dm0, endcap-dm1
+    config["SimpleEleTauFakeRateWeightTight"] = [1.273, 1.779, 0.909, 0.717]
 
   if re.search("(GluGluHToTauTau|ggZHHToTauTauZToQQ).*M125", nickname):
     config["ggHNNLOweightsRootfile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NNLOWeights/NNLOPS_reweight.root" # same for all years?

@@ -31,12 +31,12 @@ def build_config(nickname, **kwargs):
       "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.985, "up" : 1.015},
     },
     2017: {
-      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.98, "up" : 1.02},
-      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.98, "up" : 1.02},
+      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.985, "up" : 1.015},
+      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.985, "up" : 1.015},
     },
     2018: {
-      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.98, "up" : 1.02},
-      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.98, "up" : 1.02},
+      "TauMuonFakeEnergyCorrectionOneProng" : {"down" : 0.985, "up" : 1.015},
+      "TauMuonFakeEnergyCorrectionOneProngPiZeros" : {"down" : 0.985, "up" : 1.015},
     }
   }
 
