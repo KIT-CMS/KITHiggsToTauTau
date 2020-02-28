@@ -17,8 +17,9 @@ def build_list(**kwargs):
             "trg_singleelectron",
             "trg_singlemuon",
             "trg_singletau_leading",
-            
+
             "trg_mutaucross",
+             "trg_eletaucross",
             "trg_doubletau",
             "trg_muonelectron_mu23ele12",
             "trg_muonelectron_mu8ele23",
