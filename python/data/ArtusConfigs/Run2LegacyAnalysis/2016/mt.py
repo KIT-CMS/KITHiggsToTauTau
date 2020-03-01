@@ -106,7 +106,7 @@ def build_config(nickname, **kwargs):
           "trg_singlemuon:HLT_IsoTkMu22_v",
           "trg_singlemuon:HLT_IsoMu22_eta2p1_v",
           "trg_singlemuon:HLT_IsoTkMu22_eta2p1_v",
-          "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
+          # "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
           "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v",
           "trg_doubletau:HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v",
           "trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v"
@@ -299,6 +299,8 @@ def build_config(nickname, **kwargs):
   elif not isData:
     config["SaveRooWorkspaceTriggerWeightAsOptionalOnly"] = "true"
     config["RooWorkspaceWeightNames"] = [
+        "0:crossTriggerMCEfficiencyWeightKIT",
+        "0:crossTriggerDataEfficiencyWeightKIT",
         "0:crossTriggerMCEfficiencyWeight",
         "0:crossTriggerDataEfficiencyWeight",
         "0:singleTriggerMCEfficiencyWeightKIT",
@@ -309,6 +311,8 @@ def build_config(nickname, **kwargs):
 #        "0:trackWeight", # new recommendation for full run2 data/MC is to remove it (will result in SF = 1.0).
     ]
     config["RooWorkspaceObjectNames"] = [
+        "0:m_trg_MuTau_Mu19Leg_kit_mc",
+        "0:m_trg_MuTau_Mu19Leg_kit_data",
         "0:m_trgMu19leg_eta2p1_desy_mc",
         "0:m_trgMu19leg_eta2p1_desy_data",
         "0:m_trg_mc",
@@ -319,6 +323,8 @@ def build_config(nickname, **kwargs):
 #        "0:m_trk_ratio",
     ]
     config["RooWorkspaceObjectArguments"] = [
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
