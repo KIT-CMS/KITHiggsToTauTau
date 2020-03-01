@@ -63,22 +63,6 @@ def build_list(**kwargs):
             "byTightCombinedIsolationDeltaBetaCorr3Hits_1",
             "byTightCombinedIsolationDeltaBetaCorr3Hits_2",
 
-            "byIsolationMVArun2017v1DBoldDMwLTraw2017_1",
-            "byIsolationMVArun2017v1DBoldDMwLTraw2017_2",
-            "byVVLooseIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byVVLooseIsolationMVArun2017v1DBoldDMwLT2017_2",
-            "byVLooseIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byVLooseIsolationMVArun2017v1DBoldDMwLT2017_2",
-            "byLooseIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byLooseIsolationMVArun2017v1DBoldDMwLT2017_2",
-            "byMediumIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byMediumIsolationMVArun2017v1DBoldDMwLT2017_2",
-            "byTightIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byTightIsolationMVArun2017v1DBoldDMwLT2017_2",
-            "byVTightIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byVTightIsolationMVArun2017v1DBoldDMwLT2017_2",
-            "byVVTightIsolationMVArun2017v1DBoldDMwLT2017_1",
-            "byVVTightIsolationMVArun2017v1DBoldDMwLT2017_2",
 
             "byIsolationMVArun2017v2DBoldDMwLTraw2017_1",
             "byIsolationMVArun2017v2DBoldDMwLTraw2017_2",
@@ -96,6 +80,7 @@ def build_list(**kwargs):
             "byVTightIsolationMVArun2017v2DBoldDMwLT2017_2",
             "byVVTightIsolationMVArun2017v2DBoldDMwLT2017_1",
             "byVVTightIsolationMVArun2017v2DBoldDMwLT2017_2",
+
 
             "byIsolationMVArun2v1DBoldDMwLTraw_1",
             "byIsolationMVArun2v1DBoldDMwLTraw_2",
