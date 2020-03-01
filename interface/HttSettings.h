@@ -194,7 +194,7 @@ public:
 	IMPL_SETTING_DEFAULT(float, ElectronEnergyCorrectionShiftEB, 1.0);
 	IMPL_SETTING_DEFAULT(float, ElectronEnergyCorrectionShiftEE, 1.0);
 	IMPL_SETTING_DEFAULT(bool, ElectronScaleAndSmearUsed, false);
-        IMPL_SETTING_DEFAULT(std::string, ElectronScaleAndSmearTag, "ecalTrkEnergyPostCorr");
+	IMPL_SETTING_DEFAULT(std::string, ElectronScaleAndSmearTag, "ecalTrkEnergyPostCorr");
 	IMPL_SETTING_DEFAULT(float, MuonEnergyCorrectionShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, RandomMuonEnergySmearing, 0.0);
 	IMPL_SETTING_DEFAULT(float, RandomTauEnergySmearing, 0.0);

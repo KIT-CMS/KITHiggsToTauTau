@@ -26,22 +26,22 @@ def build_config(nickname, **kwargs):
 
   tauES_uncertainties = {
     2016 : {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.984, "up" : 1.004},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.986, "up" : 1.004},
-      "TauEnergyCorrectionThreeProng" : {"down" : 0.989, "up" : 1.011},
-      # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.991, "up" : 1.011},
+      "TauEnergyCorrectionOneProng" : {"down" : 0.994 - 0.01, "up" : 0.994 + 0.01},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.995 - 0.009, "up" : 0.995 + 0.009},
+      "TauEnergyCorrectionThreeProng" : {"down" : 1.0 - 0.011, "up" : 1.0 + 0.011},
+      # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 1.0 - 0.011, "up" : 1.0 + 0.011},
     },
     2017: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.999, "up" : 1.015},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.990, "up" : 1.006},
-      "TauEnergyCorrectionThreeProng" : { "down" : 0.992, "up" : 1.010},
-      # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.991, "up" : 1.011},
+      "TauEnergyCorrectionOneProng" : {"down" : 1.007 - 0.008, "up" : 1.007 + 0.008},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.998 - 0.008, "up" : 0.998 + 0.008},
+      "TauEnergyCorrectionThreeProng" : { "down" : 1.001 - 0.009, "up" : 1.001 + 0.009},
+      # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.999 - 0.01, "up" : 0.999 + 0.01},
     },
     2018: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.976, "up" : 0.998},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.986, "up" : 1.004},
-      "TauEnergyCorrectionThreeProng" : { "down" : 0.980, "up" : 0.996},
-      # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.991, "up" : 1.011},
+      "TauEnergyCorrectionOneProng" : {"down" : 0.987 - 0.011, "up" : 0.987 + 0.011},
+      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.995 - 0.009, "up" : 0.995 + 0.009},
+      "TauEnergyCorrectionThreeProng" : { "down" : 0.988 - 0.008, "up" : 0.988 + 0.008},
+      # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.988 - 0.008, "up" : 0.988 + 0.008},
     }
   }
 
