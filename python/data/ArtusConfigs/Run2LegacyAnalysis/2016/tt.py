@@ -68,13 +68,13 @@ def build_config(nickname, **kwargs):
     "trg_singlemuon:HLT_IsoTkMu22_v",
     "trg_singlemuon:HLT_IsoMu22_eta2p1_v",
     "trg_singlemuon:HLT_IsoTkMu22_eta2p1_v",
-    "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
+    # "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v",
     "trg_mutaucross:HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v",
     "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v",
     "trg_muonelectron_mu23ele12:HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v",
     "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
     "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
-    "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v"
+    "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v",
     "trg_singletau_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
     "trg_singletau_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
   ]
@@ -383,13 +383,11 @@ def build_config(nickname, **kwargs):
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               "producer:DiJetQuantitiesProducer",
                                                               "producer:DiBJetQuantitiesProducer"))
-  if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   # if not isData:                 config["Processors"].append( "producer:SingleTauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
-  # if not isData:                 config["Processors"].append( "producer:TauTauTriggerWeightProducer")  # deprecated
   config["Processors"].append(                                "producer:EventWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if isVBF:                      config["Processors"].append( "producer:SMvbfNNLOProducer")
