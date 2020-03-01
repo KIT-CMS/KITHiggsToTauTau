@@ -39,7 +39,7 @@ void SimpleEleTauFakeRateWeightProducer::Produce(event_type const& event, produc
 	float eTauFakeRateWeight = 1.0;
 
 	assert(SimpleEleTauFakeRateWeightVLoose.size() == 2);
-	assert(SimpleEleTauFakeRateWeightTight.size() == 2 || (SimpleEleTauFakeRateWeightTight.size() == 4 && product.m_decayChannel == HttEnumTypes::DecayChannel::ET));
+	assert(SimpleEleTauFakeRateWeightTight.size() == 2 || (SimpleEleTauFakeRateWeightTight.size() == 4 ));
 
 	if (product.m_decayChannel == HttEnumTypes::DecayChannel::ET)
 	{
