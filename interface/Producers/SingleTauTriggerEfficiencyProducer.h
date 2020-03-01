@@ -9,7 +9,10 @@
 /**
    \brief TauTriggerEfficiencyProducer
    Config tags:
-   - Fill me with something meaningful
+   - SingleTauTriggerInput
+   - SingleTauTriggerEfficiencyWeightNames
+   - SingleTauTriggerWorkingPoints
+   - SingleTauTriggerIDTypes
 
 */
 

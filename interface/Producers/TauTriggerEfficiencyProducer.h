@@ -10,7 +10,12 @@
 /**
    \brief TauTriggerEfficiencyProducer
    Config tags:
-   - Fill me with something meaningful
+   - TauTriggerInput
+   - TauTriggerInputKIT  <- actually only for EMB
+   - TauTrigger
+   - TauTriggerWorkingPoints
+   - TauTriggerIDTypes
+   - TauTriggerEfficiencyWeightNames
 
 */
 
@@ -52,7 +57,7 @@ public:
                 for(auto weightNames: m_weightNames)
                 {
                         for(size_t index = 0; index < weightNames.second.size(); index++)
-                        {                               
+                        {
                                 MCWeight[weightNames.first].resize(weightNames.second.size());
                                 MCWeight[weightNames.first].at(index) = (weightNames.second.at(index).find("MC") != std::string::npos);
                                 EMBWeight[weightNames.first].resize(weightNames.second.size());
@@ -63,7 +68,7 @@ public:
                 }
 	}
 
-	virtual void Produce(event_type const& event, product_type & product, 
+	virtual void Produce(event_type const& event, product_type & product,
 	                     setting_type const& settings) const override;
 private:
         std::map<std::string,std::map<std::string,TauTriggerSFs2017*>> TauSFs;
