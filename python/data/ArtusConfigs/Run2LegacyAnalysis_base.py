@@ -52,6 +52,7 @@ def build_config(nickname, **kwargs):
   config["EventCount"] = -1
   config["Year"] = year
   config["InputIsData"] = isData
+  config["TauUseOldDMs"] = True
 
   if isSUSYggH:
     config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
