@@ -8,7 +8,7 @@
 
 /**
    \brief Producer for tau energy scale corrections (Htt version).
-   
+
    Required config tags
    - TauEnergyCorrection (possible value: summer2013)
 */
@@ -40,7 +40,13 @@ public:
 		else if (tauEnergyCorrection == "mssmhtt2016") return TauEnergyCorrection::MSSMHTT2016;
 		else return TauEnergyCorrection::NONE;
 	}
-	
+
+	template<typename T, typename C >
+	static bool areEqual(T x, C y)
+	{
+	    return std::abs(x - y) < std::numeric_limits<T>::epsilon();
+	}
+
 	virtual void Init(setting_type const& settings) override;
 
 

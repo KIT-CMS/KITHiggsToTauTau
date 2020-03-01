@@ -27,21 +27,33 @@ def build_config(nickname, **kwargs):
   tauES_uncertainties = {
     2016 : {
       "TauEnergyCorrectionOneProng" : {"down" : 0.994 - 0.01, "up" : 0.994 + 0.01},
+      "TauEnergyCorrectionOneProngPtGt100" : {"down" : 0.991 - 0.03, "up" : 0.991 + 0.03},
       "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.995 - 0.009, "up" : 0.995 + 0.009},
+      "TauEnergyCorrectionOneProngPiZerosPtGt100" : {"down" : 0.995 - 0.03, "up" : 0.995 + 0.03},
       "TauEnergyCorrectionThreeProng" : {"down" : 1.0 - 0.011, "up" : 1.0 + 0.011},
+      "TauEnergyCorrectionThreeProngPtGt100" : {"down" : 1.0 - 0.03, "up" : 1.0 + 0.03},
       # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 1.0 - 0.011, "up" : 1.0 + 0.011},
+      # "TauEnergyCorrectionThreeProngPiZerosPtGt100" : {"down" : 1.0 - 0.011, "up" : 1.0 + 0.011},
     },
     2017: {
       "TauEnergyCorrectionOneProng" : {"down" : 1.007 - 0.008, "up" : 1.007 + 0.008},
+      "TauEnergyCorrectionOneProngPtGt100" : {"down" : 1.004 - 0.03, "up" : 1.004 + 0.03},
       "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.998 - 0.008, "up" : 0.998 + 0.008},
+      "TauEnergyCorrectionOneProngPiZerosPtGt100" : {"down" : 0.998 - 0.03, "up" : 0.998 + 0.03},
       "TauEnergyCorrectionThreeProng" : { "down" : 1.001 - 0.009, "up" : 1.001 + 0.009},
+      "TauEnergyCorrectionThreeProngPtGt100" : { "down" : 1.001 - 0.03, "up" : 1.001 + 0.03},
       # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.999 - 0.01, "up" : 0.999 + 0.01},
+      # "TauEnergyCorrectionThreeProngPiZerosPtGt100" : {"down" : 0.999 - 0.01, "up" : 0.999 + 0.01},
     },
     2018: {
       "TauEnergyCorrectionOneProng" : {"down" : 0.987 - 0.011, "up" : 0.987 + 0.011},
+      "TauEnergyCorrectionOneProngPtGt100" : {"down" : 0.984 - 0.03, "up" : 0.984 + 0.03},
       "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.995 - 0.009, "up" : 0.995 + 0.009},
+      "TauEnergyCorrectionOneProngPiZerosPtGt100" : {"down" : 0.995 - 0.03, "up" : 0.995 + 0.03},
       "TauEnergyCorrectionThreeProng" : { "down" : 0.988 - 0.008, "up" : 0.988 + 0.008},
+      "TauEnergyCorrectionThreeProngPtGt100" : { "down" : 0.988 - 0.03, "up" : 0.988 + 0.03},
       # "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.988 - 0.008, "up" : 0.988 + 0.008},
+      # "TauEnergyCorrectionThreeProngPiZerosPtGt100" : {"down" : 0.988 - 0.008, "up" : 0.988 + 0.008},
     }
   }
 

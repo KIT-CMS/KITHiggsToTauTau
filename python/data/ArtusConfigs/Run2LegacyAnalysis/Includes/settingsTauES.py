@@ -48,19 +48,31 @@ def build_config(nickname, **kwargs):
         # preliminary numbers from https://ineuteli.web.cern.ch/ineuteli/TauPOG/slides/Izaak_TauPOG_TauES_20191112.pdf
         if year == 2016:
           config["TauEnergyCorrectionOneProng"] = 0.994  # error=0.01
+          config["TauEnergyCorrectionOneProngPtGt100"] = 0.991  # error=0.03
           config["TauEnergyCorrectionOneProngPiZeros"] = 0.995  # error=0.009
+          config["TauEnergyCorrectionOneProngPiZerosPtGt100"] = 0.995  # error=0.03
           config["TauEnergyCorrectionThreeProng"] = 1  # error=0.011  #  1.000 down: 0.989, central: 1.000, up: 1.011
+          config["TauEnergyCorrectionThreeProngPtGt100"] = 1.0  # error=0.03
           # config["TauEnergyCorrectionThreeProngPiZeros"] = 1  # error=0.011  #  1.001 down: 0.991, central: 1.001, up: 1.011
+          # config["TauEnergyCorrectionThreeProngPiZerosPtGt100"] = 1.0  # error=0.011  #  1.001 down: 0.991, central: 1.001, up: 1.011
         elif year == 2017:
           config["TauEnergyCorrectionOneProng"] = 1.007  # error=0.008
+          config["TauEnergyCorrectionOneProngPtGt100"] = 1.004  # error=0.03
           config["TauEnergyCorrectionOneProngPiZeros"] = 0.998  # error=0.008
+          config["TauEnergyCorrectionOneProngPiZerosPtGt100"] = 0.998  # error=0.03
           config["TauEnergyCorrectionThreeProng"] = 1.001  # error=0.009
+          config["TauEnergyCorrectionThreeProngPtGt100"] = 1.001  # error=0.03
           # config["TauEnergyCorrectionThreeProngPiZeros"] = 0.999, x=11.5, error=0.01 #  0.995 down: 0.985, central: 0.995, up: 1.011
+          # config["TauEnergyCorrectionThreeProngPiZerosPtGt100"] = 0.999, x=11.5, error=0.01 #  0.995 down: 0.985, central: 0.995, up: 1.011
         elif year == 2018:
           config["TauEnergyCorrectionOneProng"] = 0.987  # error=0.011
+          config["TauEnergyCorrectionOneProngPtGt100"] = 0.984  # error=0.03
           config["TauEnergyCorrectionOneProngPiZeros"] = 0.995  # error=0.009
+          config["TauEnergyCorrectionOneProngPiZerosPtGt100"] = 0.995  # error=0.03
           config["TauEnergyCorrectionThreeProng"] = 0.988  # error=0.008
+          config["TauEnergyCorrectionThreeProngPtGt100"] = 0.988  # error=0.03
           # config["TauEnergyCorrectionThreeProngPiZeros"] = 0.988  # error=0.008 # 1.001 # down: 0.992, central: 1.001, up: 1.012
+          # config["TauEnergyCorrectionThreeProngPiZerosPtGt100"] = 0.988  # error=0.008 # 1.001 # down: 0.992, central: 1.001, up: 1.012
 
       if not etau_fake_es:
         log.info("Fake e->tau Energy Correction applied split in eta")

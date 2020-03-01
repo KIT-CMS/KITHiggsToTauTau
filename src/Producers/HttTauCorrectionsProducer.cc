@@ -78,21 +78,53 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 			float tauEnergyCorrectionOneProngPiZeros = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZeros();
 			float tauEnergyCorrectionThreeProng = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProng();
 			float tauEnergyCorrectionThreeProngPiZeros = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZeros();
-			if (tau->decayMode == 0 && tauEnergyCorrectionOneProng != 1.0)
+			float tauEnergyCorrectionOneProngPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProng();
+			float tauEnergyCorrectionOneProngPiZerosPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZeros();
+			float tauEnergyCorrectionThreeProngPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProng();
+			float tauEnergyCorrectionThreeProngPiZerosPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZeros();
+
+			bool setPtGt100 = ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtGt100, 1.0) ||
+			                  ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtGt100, 1.0) ||
+			                  ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtGt100, 1.0) ||
+			                  ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtGt100, 1.0);
+
+			if (tau->p4.Pt() <= 100.0 || ! setPtGt100)
 			{
-				tau->p4 = tau->p4 * tauEnergyCorrectionOneProng;
+				if (tau->decayMode == 0 && tauEnergyCorrectionOneProng != 1.0)
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionOneProng;
+				}
+				else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauEnergyCorrectionOneProngPiZeros != 1.0)
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZeros;
+				}
+				else if (tau->decayMode == 10 && tauEnergyCorrectionThreeProng != 1.0)
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProng;
+				}
+				else if (tau->decayMode == 11 && tauEnergyCorrectionThreeProngPiZeros != 1.0)
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZeros;
+				}
 			}
-			else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauEnergyCorrectionOneProngPiZeros != 1.0)
+			else if (tau->p4.Pt() > 100.0 && setPtGt100)
 			{
-				tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZeros;
-			}
-			else if (tau->decayMode == 10 && tauEnergyCorrectionThreeProng != 1.0)
-			{
-				tau->p4 = tau->p4 * tauEnergyCorrectionThreeProng;
-			}
-			else if (tau->decayMode == 11 && tauEnergyCorrectionThreeProngPiZeros != 1.0)
-			{
-				tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZeros;
+				if (tau->decayMode == 0 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtGt100, 1.0))
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtGt100;
+				}
+				else if ((tau->decayMode == 1 || tau->decayMode == 2) && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtGt100, 1.0))
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtGt100;
+				}
+				else if (tau->decayMode == 10 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtGt100, 1.0))
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtGt100;
+				}
+				else if (tau->decayMode == 11 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtGt100, 1.0))
+				{
+					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtGt100;
+				}
 			}
 		}
 		else if ((genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_MUON_PROMPT) || (genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)) // correct mu->tau fake energy scale

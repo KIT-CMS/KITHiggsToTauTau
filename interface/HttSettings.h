@@ -203,12 +203,20 @@ public:
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZeros, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProng, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngPiZeros, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPtGt100, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosPtGt100, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngPtGt100, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngPiZerosPtGt100, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosCHShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosNTShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngShift, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPtGt100Shift, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosPtGt100Shift, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngPtGt100Shift, 1.0);
+	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionThreeProngPiZerosPtGt100Shift, 1.0);
 
 	// FES analysis correction
 	/// detemine whether e->tau FES should be split in eta
