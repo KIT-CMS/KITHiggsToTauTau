@@ -39,6 +39,9 @@ class HiggsToTauTauAnalysisWrapper():
 		self._initArgumentParser(userArgParsers)
 		#Parse command line arguments and return dict
 		self._args = self._parser.parse_args()
+		if self._args.output_file is not None and not self._args.output_file.endswith('.root'):
+			self._args.output_file += '.root'
+
 		logger.initLogger(self._args)
 
 		if self._args.hashed_rootfiles_info_path is None:
