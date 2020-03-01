@@ -176,6 +176,8 @@ def build_config(nickname, **kwargs):
   config["AddGenMatchedTauJets"] = True
   config["BranchGenMatchedElectrons"] = True
   config["BranchGenMatchedTaus"] = True
+  config["EventWeight"] = "eventWeight"
+  config["TopPtReweightingStrategy"] = "Run1"
 
   ### Efficiencies & weights configuration
   config["TauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016.root"
@@ -299,24 +301,31 @@ def build_config(nickname, **kwargs):
       "0:isoWeight",
       "0:idWeight",
       "0:singleTriggerMCEfficiencyWeightKIT",
-      "0:singleTriggerDataEfficiencyWeightKIT"
+      "0:singleTriggerDataEfficiencyWeightKIT",
+
+      "0:crossTriggerMCEfficiencyWeightKIT",
+      "0:crossTriggerDataEfficiencyWeightKIT"
     ]
     config["RooWorkspaceObjectNames"] = [
       "0:e_trk_ratio",
       "0:e_iso_ratio",
       "0:e_id_ratio",
       "0:e_trg_mc",
-      "0:e_trg_data"
+      "0:e_trg_data",
+
+      "0:e_trg_EleTau_Ele24Leg_kit_mc",
+      "0:e_trg_EleTau_Ele24Leg_kit_data"
     ]
     config["RooWorkspaceObjectArguments"] = [
       "0:e_pt,e_eta",
       "0:e_pt,e_eta",
       "0:e_pt,e_eta",
       "0:e_pt,e_eta",
+      "0:e_pt,e_eta",
+
+      "0:e_pt,e_eta",
       "0:e_pt,e_eta"
     ]
-  config["EventWeight"] = "eventWeight"
-  config["TopPtReweightingStrategy"] = "Run1"
 
   ### Ntuple output quantities configuration
   config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(minimal_setup=minimal_setup, isMC = (not isData) and (not isEmbedded), nickname = nickname)
@@ -331,7 +340,7 @@ def build_config(nickname, **kwargs):
       "nDiTauPairCandidates",
       "nAllDiTauPairCandidates",
       "trg_singleelectron",
-      "triggerWeight_singleEl_1",
+      # "triggerWeight_singleEl_1",
       "lep1ErrD0",
       "lep1ErrDz",
       "lep2ErrD0",
@@ -440,4 +449,5 @@ def build_config(nickname, **kwargs):
           log.warning("Warning: pipeline NOT in the list of needed pipelines. Still adding it.")
       log.info('Add pipeline: %s' %(pipeline))
       return_conf += ACU.apply_uncertainty_shift_configs('et', config, importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis." + pipeline).build_config(nickname, **kwargs))
+
   return return_conf
