@@ -78,17 +78,23 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 			float tauEnergyCorrectionOneProngPiZeros = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZeros();
 			float tauEnergyCorrectionThreeProng = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProng();
 			float tauEnergyCorrectionThreeProngPiZeros = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZeros();
-			float tauEnergyCorrectionOneProngPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProng();
-			float tauEnergyCorrectionOneProngPiZerosPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZeros();
-			float tauEnergyCorrectionThreeProngPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProng();
-			float tauEnergyCorrectionThreeProngPiZerosPtGt100 = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZeros();
+			std::vector<float> tauEnergyCorrectionOneProngPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPtDependant();
+			std::vector<float> tauEnergyCorrectionOneProngPiZerosPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZerosPtDependant();
+			std::vector<float> tauEnergyCorrectionThreeProngPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPtDependant();
+			std::vector<float> tauEnergyCorrectionThreeProngPiZerosPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZerosPtDependant();
 
-			bool setPtGt100 = ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtGt100, 1.0) ||
-			                  ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtGt100, 1.0) ||
-			                  ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtGt100, 1.0) ||
-			                  ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtGt100, 1.0);
+			std::vector<float> tauEnergyCorrectionOneProngPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPtDependantUncShift();
+			std::vector<float> tauEnergyCorrectionOneProngPiZerosPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZerosPtDependantUncShift();
+			std::vector<float> tauEnergyCorrectionThreeProngPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPtDependantUncShift();
+			std::vector<float> tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZerosPtDependantUncShift();
 
-			if (tau->p4.Pt() <= 100.0 || ! setPtGt100)
+			bool use_interpolation = 0 < (tauEnergyCorrectionOneProngPtDependant.size() + tauEnergyCorrectionOneProngPiZerosPtDependant.size() + tauEnergyCorrectionThreeProngPtDependant.size() + tauEnergyCorrectionThreeProngPiZerosPtDependant.size());
+			bool is_nominal = HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[1], 0.0) &&
+				HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1], 0.0) &&
+				HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[1], 0.0) &&
+				HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1], 0.0);
+
+			if (! use_interpolation)
 			{
 				if (tau->decayMode == 0 && tauEnergyCorrectionOneProng != 1.0)
 				{
@@ -107,23 +113,87 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZeros;
 				}
 			}
-			else if (tau->p4.Pt() > 100.0 && setPtGt100)
+			else
 			{
-				if (tau->decayMode == 0 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtGt100, 1.0))
+				assert(tauEnergyCorrectionOneProngPtDependant.size() == 2);
+				assert(tauEnergyCorrectionOneProngPiZerosPtDependant.size() == 2);
+				assert(tauEnergyCorrectionThreeProngPtDependant.size() == 2);
+				assert(tauEnergyCorrectionOneProngPtDependantUncShift.size() == 2);
+				assert(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift.size() == 2);
+				assert(tauEnergyCorrectionThreeProngPtDependantUncShift.size() == 2);
+
+				if (tau->p4.Pt() < 34.0)
 				{
-					tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtGt100;
+					if (tau->decayMode == 0 && tauEnergyCorrectionOneProngPtDependant[0] != 1.0)
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtDependant[0];
+					}
+					else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauEnergyCorrectionOneProngPiZerosPtDependant[0] != 1.0)
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtDependant[0];
+					}
+					else if (tau->decayMode == 10 && tauEnergyCorrectionThreeProngPtDependant[0] != 1.0)
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtDependant[0];
+					}
+					else if (tau->decayMode == 11 && tauEnergyCorrectionThreeProngPiZerosPtDependant[0] != 1.0)
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtDependant[0];
+					}
 				}
-				else if ((tau->decayMode == 1 || tau->decayMode == 2) && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtGt100, 1.0))
+				else if (tau->p4.Pt() >= 170.0 || is_nominal)
 				{
-					tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtGt100;
+
+					if (tau->decayMode == 0 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependant[1], 1.0))
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtDependant[1];
+					}
+					else if ((tau->decayMode == 1 || tau->decayMode == 2) && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependant[1], 1.0))
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtDependant[1];
+					}
+					else if (tau->decayMode == 10 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependant[1], 1.0))
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtDependant[1];
+					}
+					else if (tau->decayMode == 11 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependant[1], 1.0))
+					{
+						assert(tauEnergyCorrectionThreeProngPiZerosPtDependant.size() == 2);
+						assert(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift.size() == 2);
+						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtDependant[1];
+					}
+
 				}
-				else if (tau->decayMode == 10 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtGt100, 1.0))
+				else if (tau->p4.Pt() >= 34.0)
 				{
-					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtGt100;
-				}
-				else if (tau->decayMode == 11 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtGt100, 1.0))
-				{
-					tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtGt100;
+					float mixing_fraction = (tau->p4.Pt() - 34) / (170 - 34);
+
+					if (tau->decayMode == 0 && (
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[1], 0.0) &&
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[0], 0.0) ))
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtDependant[1] * ( 1 + tauEnergyCorrectionOneProngPtDependantUncShift[0] + (tauEnergyCorrectionOneProngPtDependantUncShift[1] - tauEnergyCorrectionOneProngPtDependantUncShift[0]) * mixing_fraction);
+					}
+					else if ((tau->decayMode == 1 || tau->decayMode == 2) && (
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1], 0.0) ||
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0], 0.0) ))
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtDependant[1] * ( 1 + tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0] + (tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1] - tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0]) * mixing_fraction);
+					}
+					else if (tau->decayMode == 10 && (
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[1], 0.0) ||
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[0], 0.0) ))
+					{
+						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtDependant[1] * ( 1 + tauEnergyCorrectionThreeProngPtDependantUncShift[0] + (tauEnergyCorrectionThreeProngPtDependantUncShift[1] - tauEnergyCorrectionThreeProngPtDependantUncShift[0]) * mixing_fraction);
+					}
+					else if (tau->decayMode == 11 && (
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1], 0.0) ||
+						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0], 0.0) ))
+					{
+						assert(tauEnergyCorrectionThreeProngPiZerosPtDependant.size() == 2);
+						assert(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift.size() == 2);
+						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtDependant[1] * ( 1 + tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0] + (tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1] - tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0]) * mixing_fraction);
+					}
 				}
 			}
 		}

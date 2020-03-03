@@ -45,6 +45,12 @@ def build_config(nickname, **kwargs):
     if not re.search("Embedding", nickname):
       if not tau_es:
         log.info("Tau Energy Correction applied")
+
+        config["TauEnergyCorrectionOneProngPtDependantUncShift"] = [0.0, 0.0]
+        config["TauEnergyCorrectionOneProngPiZerosPtDependantUncShift"] = [0.0, 0.0]
+        config["TauEnergyCorrectionThreeProngPtDependantUncShift"] = [0.0, 0.0]
+        config["TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift"] = [0.0, 0.0]
+
         # preliminary numbers from https://ineuteli.web.cern.ch/ineuteli/TauPOG/slides/Izaak_TauPOG_TauES_20191112.pdf
         if year == 2016:
           config["TauEnergyCorrectionOneProng"] = 0.990 # down: 0.984, central: 0.990, up: 0.997

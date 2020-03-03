@@ -26,34 +26,22 @@ def build_config(nickname, **kwargs):
 
   tauES_uncertainties = {
     2016 : {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.984, "up" : 0.997},
-      "TauEnergyCorrectionOneProngPtGt100" : {"down" : 0.991 - 0.03, "up" : 0.991 + 0.03},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.996, "up" : 1.003},
-      "TauEnergyCorrectionOneProngPiZerosPtGt100" : {"down" : 1.042 - 0.02, "up" : 1.042 + 0.02},
-      "TauEnergyCorrectionThreeProng" : {"down" : 1.004, "up" : 1.015},
-      "TauEnergyCorrectionThreeProngPtGt100" : {"down" : 1.004 - 0.012, "up" : 1.004 + 0.012},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.991, "up" : 1.011},
-      "TauEnergyCorrectionThreeProngPiZerosPtGt100" : {"down" : 0.97 - 0.027, "up" : 0.97 + 0.027},
+      "TauEnergyCorrectionOneProngPtDependantUncShift": {"down": [0.984 - 0.990, -0.03], "up": [0.997 - 0.990, 0.03]},
+      "TauEnergyCorrectionOneProngPiZerosPtDependantUncShift": {"down": [0.996 - 0.999, -0.02], "up": [1.003 - 0.999, 0.02]},
+      "TauEnergyCorrectionThreeProngPtDependantUncShift": {"down": [1.004 - 1.008, -0.012], "up": [1.015 - 1.008, 0.012]},
+      "TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift": {"down": [0.991 - 1.001, -0.027], "up": [1.011 - 1.001, 0.027]},
     },
     2017: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.999, "up" : 1.017},
-      "TauEnergyCorrectionOneProngPtGt100" : {"down" : 1.004 - 0.03, "up" : 1.004 + 0.03},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.998, "up" : 1.007},
-      "TauEnergyCorrectionOneProngPiZerosPtGt100" : {"down" : 1.014 - 0.027, "up" : 1.014 + 0.027},
-      "TauEnergyCorrectionThreeProng" : {"down" : 0.997, "up" : 1.007},
-      "TauEnergyCorrectionThreeProngPtGt100" : { "down" : 0.978 - 0.017, "up" : 0.978 + 0.017},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.985, "up" : 1.011},
-      "TauEnergyCorrectionThreeProngPiZerosPtGt100" : {"down" : 0.944 - 0.04, "up" : 0.944 + 0.04},
+      "TauEnergyCorrectionOneProngPtDependantUncShift": {"down": [0.999 - 1.007, -0.03], "up": [1.017 - 1.007, 0.03]},
+      "TauEnergyCorrectionOneProngPiZerosPtDependantUncShift": {"down": [0.998 - 1.002, -0.027], "up": [1.007 - 1.002, 0.027]},
+      "TauEnergyCorrectionThreeProngPtDependantUncShift": {"down": [0.997 - 1.002, -0.017], "up": [1.007 - 1.002, 0.017]},
+      "TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift": {"down": [0.985 - 0.995, -0.04], "up": [1.011 - 0.995, 0.04]},
     },
     2018: {
-      "TauEnergyCorrectionOneProng" : {"down" : 0.977, "up" : 0.991},
-      "TauEnergyCorrectionOneProngPtGt100" : {"down" : 0.984 - 0.03, "up" : 0.984 + 0.03},
-      "TauEnergyCorrectionOneProngPiZeros" : {"down" : 0.993, "up" : 1.001},
-      "TauEnergyCorrectionOneProngPiZerosPtGt100" : {"down" : 1.004 - 0.02, "up" : 1.004 + 0.02},
-      "TauEnergyCorrectionThreeProng" : {"down" : 0.984, "up" : 0.994},
-      "TauEnergyCorrectionThreeProngPtGt100" : { "down" : 1.006 - 0.011, "up" : 1.006 + 0.011},
-      "TauEnergyCorrectionThreeProngPiZeros" : {"down" : 0.992, "up" : 1.012},
-      "TauEnergyCorrectionThreeProngPiZerosPtGt100" : {"down" : 0.955 - 0.039, "up" : 0.955 + 0.039},
+      "TauEnergyCorrectionOneProngPtDependantUncShift": {"down": [0.977 - 0.984, -0.03], "up": [0.991 - 0.984, 0.03]},
+      "TauEnergyCorrectionOneProngPiZerosPtDependantUncShift": {"down": [0.993 - 0.997, -0.02], "up": [1.001 - 0.997, 0.02]},
+      "TauEnergyCorrectionThreeProngPtDependantUncShift": {"down": [0.984 - 0.989, -0.011], "up": [0.994 - 0.989, 0.011]},
+      "TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift": {"down": [0.992 - 1.001, -0.039], "up": [1.012 - 1.001, 0.039]},
     }
   }
 
@@ -91,45 +79,45 @@ def build_config(nickname, **kwargs):
     config["tauEsOneProngUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsOneProngUp"]["TauEnergyCorrectionOneProng"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProng"]["up"]
+    config["tauEsOneProngUp"]["TauEnergyCorrectionOneProngPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProngPtDependantUncShift"]["up"]
 
     config["tauEsOneProngDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsOneProngDown"]["TauEnergyCorrectionOneProng"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProng"]["down"]
-
+    config["tauEsOneProngDown"]["TauEnergyCorrectionOneProngPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProngPtDependantUncShift"]["down"]
 
     config["tauEsOneProngOnePiZeroUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsOneProngOnePiZeroUp"]["TauEnergyCorrectionOneProngPiZeros"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProngPiZeros"]["up"]
+    config["tauEsOneProngOnePiZeroUp"]["TauEnergyCorrectionOneProngPiZerosPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProngPiZerosPtDependantUncShift"]["up"]
 
     config["tauEsOneProngOnePiZeroDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsOneProngOnePiZeroDown"]["TauEnergyCorrectionOneProngPiZeros"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProngPiZeros"]["down"]
+    config["tauEsOneProngOnePiZeroDown"]["TauEnergyCorrectionOneProngPiZerosPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionOneProngPiZerosPtDependantUncShift"]["down"]
 
 
     config["tauEsThreeProngUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsThreeProngUp"]["TauEnergyCorrectionThreeProng"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProng"]["up"]
+    config["tauEsThreeProngUp"]["TauEnergyCorrectionThreeProngPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProngPtDependantUncShift"]["up"]
 
     config["tauEsThreeProngDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsThreeProngDown"]["TauEnergyCorrectionThreeProng"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProng"]["down"]
+    config["tauEsThreeProngDown"]["TauEnergyCorrectionThreeProngPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProngPtDependantUncShift"]["down"]
 
 
     config["tauEsThreeProngOnePiZeroUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsThreeProngOnePiZeroUp"]["TauEnergyCorrectionThreeProngPiZeros"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProngPiZeros"]["up"]
+    config["tauEsThreeProngOnePiZeroUp"]["TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift"]["up"]
 
     config["tauEsThreeProngOnePiZeroDown"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
     }
-    config["tauEsThreeProngOnePiZeroDown"]["TauEnergyCorrectionThreeProngPiZeros"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProngPiZeros"]["down"]
+    config["tauEsThreeProngOnePiZeroDown"]["TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift"] = tauES_uncertainties[year]["TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift"]["down"]
+
   elif isEmbedded:
     config["tauEsOneProngUp"] = {
       "JetEnergyCorrectionUncertaintyShift" : [0.0]
