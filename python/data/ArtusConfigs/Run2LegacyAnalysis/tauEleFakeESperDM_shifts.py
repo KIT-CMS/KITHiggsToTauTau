@@ -46,7 +46,7 @@ def build_config(nickname, **kwargs):
         "TauElectronFakeEnergyCorrectionOneProngBarrel": {"down": 1.0 + (+0.532 - 0.740) / 100.0, "up": 1.0 + (+0.532 + 896) / 100.0},
         "TauElectronFakeEnergyCorrectionOneProngPiZerosBarrel": {"down": 1.0 + (+5.818 - 1.203) / 100.0, "up": 1.0 + (+5.818 + 1.172) / 100.0},
         "TauElectronFakeEnergyCorrectionOneProngEndcap": {"down": 1.0 + (+4.922 - 3.088) / 100.0, "up": 1.0 + (+4.9220 + 4.085) / 100.0},
-        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap": {"down": 1.0 + (+1.804 - 4.235) / 100.0, "up": 1.0  (+1.804 + 3.420) / 100.0},
+        "TauElectronFakeEnergyCorrectionOneProngPiZerosEndcap": {"down": 1.0 + (+1.804 - 4.235) / 100.0, "up": 1.0 + (+1.804 + 3.420) / 100.0},
       },
       2017: {
         "TauElectronFakeEnergyCorrectionOneProngBarrel": {"down": 1.0 + (+0.126 - 0.959) / 100.0, "up": 1.0 + (+0.126 + 1.041) / 100.0},
