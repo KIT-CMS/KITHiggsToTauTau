@@ -207,6 +207,10 @@ public:
 	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionOneProngPiZerosPtDependant, {});
 	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionThreeProngPtDependant, {});
 	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionThreeProngPiZerosPtDependant, {});
+	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionOneProngPtDependantUncShift, {});
+	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionOneProngPiZerosPtDependantUncShift, {});
+	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionThreeProngPtDependantUncShift, {});
+	IMPL_SETTING_FLOATLIST_DEFAULT(TauEnergyCorrectionThreeProngPiZerosPtDependantUncShift, {});
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngShift, 1.0);
 	IMPL_SETTING_DEFAULT(float, TauEnergyCorrectionOneProngPiZerosShift, 1.0);
