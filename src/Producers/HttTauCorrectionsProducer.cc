@@ -123,79 +123,38 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 				assert(tauEnergyCorrectionOneProngPtDependantUncShift.size() == 2);
 				assert(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift.size() == 2);
 				assert(tauEnergyCorrectionThreeProngPtDependantUncShift.size() == 2);
-
-				if (tau->p4.Pt() < 34.0)
+				if (!oldTauDMs)
 				{
-					if (tau->decayMode == 0 && tauEnergyCorrectionOneProngPtDependant[0] != 1.0)
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtDependant[0];
-					}
-					else if ((tau->decayMode == 1 || tau->decayMode == 2) && tauEnergyCorrectionOneProngPiZerosPtDependant[0] != 1.0)
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtDependant[0];
-					}
-					else if (tau->decayMode == 10 && tauEnergyCorrectionThreeProngPtDependant[0] != 1.0)
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtDependant[0];
-					}
-					else if (!oldTauDMs && tau->decayMode == 11 && tauEnergyCorrectionThreeProngPiZerosPtDependant[0] != 1.0)
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtDependant[0];
-					}
+					assert(tauEnergyCorrectionThreeProngPiZerosPtDependant.size() == 2);
+					assert(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift.size() == 2);
 				}
-				else if (tau->p4.Pt() >= 170.0 || is_nominal)
-				{
-					if (tau->decayMode == 0 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependant[1], 1.0))
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtDependant[1];
-					}
-					else if ((tau->decayMode == 1 || tau->decayMode == 2) && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependant[1], 1.0))
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtDependant[1];
-					}
-					else if (tau->decayMode == 10 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependant[1], 1.0))
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtDependant[1];
-					}
-					else if (!oldTauDMs && tau->decayMode == 11 && ! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependant[1], 1.0))
-					{
-						assert(tauEnergyCorrectionThreeProngPiZerosPtDependant.size() == 2);
-						assert(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift.size() == 2);
-						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtDependant[1];
-					}
 
-				}
-				else if (tau->p4.Pt() >= 34.0)
-				{
-					float mixing_fraction = (tau->p4.Pt() - 34) / (170 - 34);
+				float m = 1.0;
+				float mixing_fraction = (tau->p4.Pt() - 34.0) / (170.0 - 34.0);
+				mixing_fraction = (mixing_fraction < 0) ? 0.0 : mixing_fraction;
+				mixing_fraction = (mixing_fraction > 1) ? 1.0 : mixing_fraction;
 
-					if (tau->decayMode == 0 && (
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[1], 0.0) &&
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[0], 0.0) ))
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPtDependant[1] * ( 1 + tauEnergyCorrectionOneProngPtDependantUncShift[0] + (tauEnergyCorrectionOneProngPtDependantUncShift[1] - tauEnergyCorrectionOneProngPtDependantUncShift[0]) * mixing_fraction);
-					}
-					else if ((tau->decayMode == 1 || tau->decayMode == 2) && (
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1], 0.0) ||
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0], 0.0) ))
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionOneProngPiZerosPtDependant[1] * ( 1 + tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0] + (tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1] - tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0]) * mixing_fraction);
-					}
-					else if (tau->decayMode == 10 && (
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[1], 0.0) ||
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[0], 0.0) ))
-					{
-						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPtDependant[1] * ( 1 + tauEnergyCorrectionThreeProngPtDependantUncShift[0] + (tauEnergyCorrectionThreeProngPtDependantUncShift[1] - tauEnergyCorrectionThreeProngPtDependantUncShift[0]) * mixing_fraction);
-					}
-					else if (!oldTauDMs && tau->decayMode == 11 && (
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1], 0.0) ||
-						! HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0], 0.0) ))
-					{
-						assert(tauEnergyCorrectionThreeProngPiZerosPtDependant.size() == 2);
-						assert(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift.size() == 2);
-						tau->p4 = tau->p4 * tauEnergyCorrectionThreeProngPiZerosPtDependant[1] * ( 1 + tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0] + (tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1] - tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0]) * mixing_fraction);
-					}
+				if (tau->decayMode == 0)
+				{
+					m = tauEnergyCorrectionOneProngPtDependant[0] * ( 1.0 +
+						(!is_nominal) * (tauEnergyCorrectionOneProngPtDependantUncShift[0] + (tauEnergyCorrectionOneProngPtDependantUncShift[1] - tauEnergyCorrectionOneProngPtDependantUncShift[0]) * mixing_fraction));
 				}
+				else if (tau->decayMode == 1 || tau->decayMode == 2)
+				{
+					m = tauEnergyCorrectionOneProngPiZerosPtDependant[0] * ( 1.0 +
+						(!is_nominal) * (tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0] + (tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1] - tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0]) * mixing_fraction));
+				}
+				else if (tau->decayMode == 10)
+				{
+					m = tauEnergyCorrectionThreeProngPtDependant[0] * ( 1.0 +
+						(!is_nominal) * (tauEnergyCorrectionThreeProngPtDependantUncShift[0] + (tauEnergyCorrectionThreeProngPtDependantUncShift[1] - tauEnergyCorrectionThreeProngPtDependantUncShift[0]) * mixing_fraction));
+				}
+				else if (!oldTauDMs && tau->decayMode == 11)
+				{
+					m = tauEnergyCorrectionThreeProngPiZerosPtDependant[0] * ( 1.0 +
+						(!is_nominal) * (tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0] + (tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1] - tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0]) * mixing_fraction));
+				}
+				if (! HttTauCorrectionsProducer::areEqual(m, 1.0)) tau->p4 = tau->p4 * m;
 			}
 		}
 		else if ((genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_MUON_PROMPT) || (genMatchingCode == KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)) // correct mu->tau fake energy scale
