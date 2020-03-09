@@ -8,7 +8,7 @@
 
 /**
    \brief GlobalProducer, for valid electrons.
-   
+
    Required config tags in addtion to the ones of the base class:
    - ElectronIDType
    - ElectronIDName (default given)
@@ -83,7 +83,7 @@ public:
 			LOG(FATAL) << "Could not find ElectronID " << electronIDType << "! If you want the HttValidElectronsProducer to use no special ID, use \"none\" as argument."<< std::endl;
 		return ElectronIDType::INVALID;
 	}
-	
+
 	HttValidElectronsProducer(
 			std::vector<KElectron*> product_type::*validElectrons=&product_type::m_validElectrons,
 			std::vector<KElectron*> product_type::*invalidElectrons=&product_type::m_invalidElectrons,
@@ -160,7 +160,7 @@ private:
 	std::vector<std::string>& (setting_type::*GetElectronIDList)(void) const;
 
 	ElectronIDType electronIDType;
-	
+
 	mutable bool electronIDListInMetadata;
 	mutable bool electronIDInMetadata;
 
@@ -203,17 +203,17 @@ public:
 	virtual std::string GetProducerId() const override {
 		return "HttValidLooseElectronsProducer";
 	}
-	
+
 	virtual void Init(setting_type const& settings) override {
-	
+
 		HttValidElectronsProducer::Init(settings);
-	
+
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nLooseElectrons", [this](event_type const& event, product_type const& product) {
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nLooseElectrons", [this](event_type const& event, product_type const& product, setting_type const& settings) {
 			return product.m_validLooseElectrons.size();
 		});
 	}
-	
+
 	HttValidLooseElectronsProducer(
 			std::vector<KElectron*> product_type::*validElectrons=&product_type::m_validLooseElectrons,
 			std::vector<KElectron*> product_type::*invalidElectrons=&product_type::m_invalidLooseElectrons,
@@ -269,15 +269,15 @@ public:
 	}
 
 	virtual void Init(setting_type const& settings) override {
-	
+
 		HttValidElectronsProducer::Init(settings);
-	
+
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nVetoElectrons", [this](event_type const& event, product_type const& product) {
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nVetoElectrons", [this](event_type const& event, product_type const& product, setting_type const& settings) {
 			return product.m_validVetoElectrons.size();
 		});
 	}
-	
+
 	HttValidVetoElectronsProducer(
 			std::vector<KElectron*> product_type::*validElectrons=&product_type::m_validVetoElectrons,
 			std::vector<KElectron*> product_type::*invalidElectrons=&product_type::m_invalidVetoElectrons,

@@ -6,9 +6,9 @@
 
 void MaxLooseElectronsCountFilter::Init(setting_type const& settings) {
 	CutRangeFilterBase<HttTypes>::Init(settings);
-	
+
 	this->m_cuts.push_back(std::pair<double_extractor_lambda, CutRange>(
-			[](KappaEvent const& event, KappaProduct const& product) {
+			[](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings) {
 				return (static_cast<HttProduct const&>(product)).m_validLooseElectrons.size();
 			},
 			CutRange::UpperThresholdCut(double(settings.GetMaxNLooseElectrons()))
@@ -17,9 +17,9 @@ void MaxLooseElectronsCountFilter::Init(setting_type const& settings) {
 
 void MaxLooseMuonsCountFilter::Init(setting_type const& settings) {
 	CutRangeFilterBase<HttTypes>::Init(settings);
-	
+
 	this->m_cuts.push_back(std::pair<double_extractor_lambda, CutRange>(
-			[](KappaEvent const& event, KappaProduct const& product) {
+			[](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings) {
 				return (static_cast<HttProduct const&>(product)).m_validLooseMuons.size();
 			},
 			CutRange::UpperThresholdCut(double(settings.GetMaxNLooseMuons()))

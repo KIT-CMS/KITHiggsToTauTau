@@ -16,62 +16,62 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	// add possible quantities for the lambda ntuples consumers
 
 	// settings for synch ntuples
-	LambdaNtupleConsumer<KappaTypes>::AddUInt64Quantity("evt", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddUInt64Quantity("evt", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return event.m_eventInfo->nEvent;
 	});
 
 	bool bInpData = settings.GetInputIsData();
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("npu", [bInpData](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("npu", [bInpData](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		if (bInpData)
 			return DefaultValues::UndefinedFloat;
 		return static_cast<KGenEventInfo*>(event.m_eventInfo)->nPUMean;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puweight", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("puweight", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, std::string("puWeight"), 1.0);
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("trigweight_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("trigweight_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, std::string("triggerWeight_1"), 1.0);
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("trigweight_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("trigweight_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, std::string("triggerWeight_2"), 1.0);
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("idisoweight_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("idisoweight_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, std::string("identificationWeight_1"), 1.0);
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("idisoweight_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("idisoweight_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, std::string("identificationWeight_2"), 1.0);
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("weight", [settings](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("weight", [settings](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, settings.GetEventWeight(), 1.0);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nDiLeptonVetoPairsOS", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nDiLeptonVetoPairsOS", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_nDiElectronVetoPairsOS + product.m_nDiMuonVetoPairsOS;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nDiLeptonVetoPairsSS", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nDiLeptonVetoPairsSS", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_nDiElectronVetoPairsSS + product.m_nDiMuonVetoPairsSS;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("dilepton_veto", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("dilepton_veto", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_nDiElectronVetoPairsOS + product.m_nDiMuonVetoPairsOS) >= 1) ? 1 : 0;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_tot", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_tot", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
-		return sqrt(pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("mt_tt"))(event,product),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep1MetMt"))(event,product),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep2MetMt"))(event,product),2));
+		return sqrt(pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("mt_tt"))(event, product, settings),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep1MetMt"))(event, product, settings),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep2MetMt"))(event, product, settings),2));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_tot_puppi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_tot_puppi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
-		return sqrt(pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("mt_tt"))(event,product),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep1PuppiMetMt"))(event,product),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep2PuppiMetMt"))(event,product),2));
+		return sqrt(pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("mt_tt"))(event, product, settings),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep1PuppiMetMt"))(event, product, settings),2)+pow(SafeMap::Get(LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities(),std::string("lep2PuppiMetMt"))(event, product, settings),2));
 	});
 
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("m_vis", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["diLepMass"]);
@@ -148,7 +148,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("pzetamissvis", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["pZetaMissVis"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("pzetamiss_puppi", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["pZetaPuppiMiss"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("pzetamissvis_puppi", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["pZetaPuppiMissVis"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddRMFLVQuantity("jlv_1", LambdaNtupleConsumer<KappaTypes>::GetRMFLVQuantities()["leadingJetLV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpt_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetPt"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jeta_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetEta"]);
@@ -166,25 +166,25 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jeta_3", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["thirdJetEta"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jphi_3", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["thirdJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jm_3", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["thirdJetMass"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddRMFLVQuantity("jlv_4", LambdaNtupleConsumer<KappaTypes>::GetRMFLVQuantities()["fourthJetLV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpt_4", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fourthJetPt"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jeta_4", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fourthJetEta"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jphi_4", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fourthJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jm_4", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fourthJetMass"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddRMFLVQuantity("jlv_5", LambdaNtupleConsumer<KappaTypes>::GetRMFLVQuantities()["fifthJetLV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpt_5", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fifthJetPt"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jeta_5", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fifthJetEta"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jphi_5", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fifthJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jm_5", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fifthJetMass"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddRMFLVQuantity("jlv_6", LambdaNtupleConsumer<KappaTypes>::GetRMFLVQuantities()["sixthJetLV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpt_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetPt"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jeta_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetEta"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jphi_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jm_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetMass"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jmva_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetCSV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpt_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetPt"]);
@@ -192,7 +192,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bphi_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bmva_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingBJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bcsv_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingBJetCSV"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jmva_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingJetCSV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpt_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Pt"]);
@@ -200,7 +200,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bphi_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Phi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bmva_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingBJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bcsv_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingBJetCSV"]);
-	
+
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_3", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["thirdJetCSV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_4", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fourthJetCSV"]);
 
@@ -227,125 +227,125 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("mt_sv", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["svfitTransverseMass"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("met_sv", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["svfitMet"]);
 
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("npartons", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("npartons", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return event.m_genEventInfo ? event.m_genEventInfo->lheNOutPartons : DefaultValues::UndefinedInt;
 	});
 	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("NUP", LambdaNtupleConsumer<KappaTypes>::GetIntQuantities()["npartons"]);
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosonmass", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosonmass", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
-		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonMass") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonMass"](event, product) : DefaultValues::UndefinedFloat;
+		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonMass") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonMass"](event, product, settings) : DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosonpt", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosonpt", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
-		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonPt") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonPt"](event, product) : DefaultValues::UndefinedFloat;
+		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonPt") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonPt"](event, product, settings) : DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosoneta", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosoneta", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
-		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonEta") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonEta"](event, product) : DefaultValues::UndefinedFloat;
+		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonEta") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonEta"](event, product, settings) : DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosonphi", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("genbosonphi", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
-		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonPhi") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonPhi"](event, product) : DefaultValues::UndefinedFloat;
+		return LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities().count("genBosonPhi") >= 1 ? LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["genBosonPhi"](event, product, settings) : DefaultValues::UndefinedFloat;
 	});
 
 
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("isFake", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("isFake", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedInt;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("visjeteta", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("visjeteta", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-// 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("ptvis", [](KappaEvent const& event, KappaProduct const& product)
+// 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("ptvis", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 // 	{
 // 		return DefaultValues::UndefinedFloat;
 // 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jrawf_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jrawf_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jrawf_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jrawf_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpfid_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpfid_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpfid_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpfid_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpuid_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpuid_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpuid_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpuid_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("brawf_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("brawf_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpfid_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpfid_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpuid_1", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpuid_1", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("brawf_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("brawf_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpfid_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpfid_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpuid_2", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpuid_2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return DefaultValues::UndefinedFloat;
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("PVnDOF", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("PVnDOF", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_vertexSummary->pv.nDOF;
         });
-        LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("PVchi2", [](KappaEvent const& event, KappaProduct const& product)
+        LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("PVchi2", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_vertexSummary->pv.chi2;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_stage0cat", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_stage0cat", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->htxs_stage0cat;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_stage1p1cat", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_stage1p1cat", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->htxs_stage1p1cat;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_stage1p1finecat", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_stage1p1finecat", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->htxs_stage1p1finecat;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_njets30", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_njets30", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->htxs_njets30;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_higgsPt", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddIntQuantity("htxs_higgsPt", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->htxs_higgsPt;
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
-                return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat; 
+                return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
         });
 	// di b-jet quantities. If >= 2 b jets are found, calculate using two leading b jets
 	// The following di-b jet functions are also filled if only 1 b jet is present
-	// In this case, leading non-b jet is used 
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_bb", [](event_type const& event, product_type const& product)
+	// In this case, leading non-b jet is used
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_bb", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diBJetSystem).Pt();
@@ -357,7 +357,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedDouble;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mbb", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mbb", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diBJetSystem).mass();
@@ -369,7 +369,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedDouble;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diLeptonSystem + product.m_diBJetSystem).Pt();
@@ -381,7 +381,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem).Pt();
@@ -393,7 +393,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_puppi", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_puppi", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem).Pt();
@@ -405,7 +405,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttvisbb", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttvisbb", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diLeptonSystem + product.m_diBJetSystem).mass();
@@ -417,7 +417,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem).mass();
@@ -429,7 +429,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_puppi", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_puppi", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
 		if (product.m_diBJetSystemAvailable) {
 			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem).mass();
@@ -441,19 +441,19 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj_puppi", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj_puppi", [](event_type const& event, product_type const& product, setting_type const& settings)
         {
                 return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusPuppiMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("prefiringweight", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("prefiringweight", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->_prefiringweight;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("prefiringweightup", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("prefiringweightup", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->_prefiringweightup;
         });
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("prefiringweightdown", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("prefiringweightdown", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
         {
                 return event.m_genEventInfo->_prefiringweightdown;
         });

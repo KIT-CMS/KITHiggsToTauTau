@@ -31,7 +31,7 @@ public:
 	typedef typename HttTypes::event_type event_type;
 	typedef typename HttTypes::product_type product_type;
 	typedef typename HttTypes::setting_type setting_type;
-	typedef std::function<float(event_type const&, product_type const&)> float_extractor_lambda;
+	typedef std::function<float(event_type const&, product_type const&, setting_type const&)> float_extractor_lambda;
 	MinimalPlotlevelFilter(){}
 	virtual std::string GetFilterId() const override {
 			return "MinimalPlotlevelFilter";
@@ -142,7 +142,7 @@ public:
 				LOG(FATAL) << "expression " << expression << " was evaluated to " << true;
 				return true;
 			}
-			double variable = (m_ExpressionQuantities[position])(event, product);
+			double variable = (m_ExpressionQuantities[position])(event, product, settings);
 			float static_value = boost::lexical_cast<float>(substrings[2]);
 			LOG_N_TIMES(1,DEBUG) << expression << " variable: " << m_ExpressionNames[position] << " = " << variable;
 			std::string relation = substrings[1];

@@ -8,7 +8,7 @@
 void SMggHNNLOProducer::Init(setting_type const& settings)
 {
 	ProducerBase<HttTypes>::Init(settings);
-	
+
         // set variables
 	std::string filename = settings.GetggHNNLOweightsRootfile();
 	std::string generator = settings.GetGenerator();
@@ -32,43 +32,43 @@ void SMggHNNLOProducer::Init(setting_type const& settings)
         rootFile.Close();
         gDirectory = savedir;
         gFile = savefile;
-        
-        
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("ggh_NNLO_weight", [](event_type const& event, product_type const& product) {
+
+
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("ggh_NNLO_weight", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_ggh_NNLO_weight;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Mu", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Mu", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[0];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Res", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Res", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[1];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Mig01", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Mig01", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[2];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Mig12", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_Mig12", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[3];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_VBF2j", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_VBF2j", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[4];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_VBF3j", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_VBF3j", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[5];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_PT60", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_PT60", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[6];
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_PT120", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_PT120", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[7];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_qmtop", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("THU_ggH_qmtop", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_THU_ggH[8];
 	});
 }
 
 void SMggHNNLOProducer::Produce(event_type const& event, product_type& product,
                                       setting_type const& settings) const
-{   
+{
 	// get inputs
 	int stxs1flag = event.m_genEventInfo->htxs_stage1p1cat;
 	int njets = event.m_genEventInfo->htxs_njets30;

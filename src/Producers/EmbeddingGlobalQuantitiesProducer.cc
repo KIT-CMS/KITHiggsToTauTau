@@ -3,19 +3,19 @@
 void EmbeddingGlobalQuantitiesProducer::Init(setting_type const& settings)
 {
 	ProducerBase<HttTypes>::Init(settings);
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumHt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumHt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_pfSumHt;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumPt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumPt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_pfSumP4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumHtWithoutZMuMu", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumHtWithoutZMuMu", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_pfSumHtWithoutZMuMu;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumPtWithoutZMuMu", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("PFSumPtWithoutZMuMu", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_pfSumP4WithoutZMuMu.Pt();
 	});

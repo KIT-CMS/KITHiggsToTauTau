@@ -38,15 +38,15 @@ public:
 		RootFileHelper::SafeCd(settings.GetRootOutFile(),
 		                       settings.GetRootFileFolder());
 		m_tree = new TTree(m_treeName.c_str(), m_treeName.c_str());
-		
+
 		m_tree->Branch("tag", &m_currentTagObject);
 		m_tree->Branch("tagMatched", &m_currentTagObjectMatched, "tagMatched/O");
 		m_tree->Branch("probe", &m_currentProbeObject);
 		m_tree->Branch("probeMatched", &m_currentProbeObjectMatched, "probeMatched/O");
 		m_tree->Branch("tagProbeSystem", &m_tagProbeSystem);
-		
 
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagPt", [this](event_type const& event, product_type const& product)
+
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagPt", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> tagPt;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -56,7 +56,7 @@ public:
 			}
 			return tagPt;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("probePt", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("probePt", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> probePt;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -66,7 +66,7 @@ public:
 			}
 			return probePt;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("probeEta", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("probeEta", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> probeEta;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -76,7 +76,7 @@ public:
 			}
 			return probeEta;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagProbeDeltaR", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagProbeDeltaR", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> tagProbeDeltaR;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -86,7 +86,7 @@ public:
 			}
 			return tagProbeDeltaR;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagProbeMass", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagProbeMass", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> tagProbeMass;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -96,7 +96,7 @@ public:
 			}
 			return tagProbeMass;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("probeMatched", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("probeMatched", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<int> probeMatched;
 			for (typename std::vector<std::pair<bool, bool> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectMatchedPairsMember)).begin();
@@ -106,7 +106,7 @@ public:
 			}
 			return probeMatched;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("tagMatched", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("tagMatched", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<int> tagMatched;
 			for (typename std::vector<std::pair<bool, bool> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectMatchedPairsMember)).begin();
@@ -116,7 +116,7 @@ public:
 			}
 			return tagMatched;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("tagCharge", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("tagCharge", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<int> tagCharge;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -126,7 +126,7 @@ public:
 			}
 			return tagCharge;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("probeCharge", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("probeCharge", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<int> probeCharge;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -136,7 +136,7 @@ public:
 			}
 			return probeCharge;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("isOS", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("isOS", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<int> isOS;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -146,7 +146,7 @@ public:
 			}
 			return isOS;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagIsoOverPt", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagIsoOverPt", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> tagIsoOverPt;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -156,7 +156,7 @@ public:
 			}
 			return tagIsoOverPt;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagIso", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("tagIso", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			std::vector<float> tagIso;
 			for (typename std::vector<std::pair<TTag*, TProbe*> >::const_iterator tagProbePair = (product.*(this->m_triggerTagProbeObjectPairsMember)).begin();
@@ -177,22 +177,22 @@ public:
 		{
 			m_currentTagObject = *(tagProbePair->first);
 			m_currentProbeObject = *(tagProbePair->second);
-			
+
 			m_currentTagObjectMatched = (product.*m_triggerTagProbeObjectMatchedPairsMember).at(index).first;
 			m_currentProbeObjectMatched = (product.*m_triggerTagProbeObjectMatchedPairsMember).at(index).second;
-			
+
 			m_tagProbeSystem = tagProbePair->first->p4 + tagProbePair->second->p4;
-			
+
 			m_tree->Fill();
 			++index;
 		}
 	}
-	
+
 	virtual void Finish(setting_type const& settings) override
 	{
 		RootFileHelper::SafeCd(settings.GetRootOutFile(),
 		                       settings.GetRootFileFolder());
-		
+
 		m_tree->Write(m_tree->GetName());
 	}
 
@@ -201,9 +201,9 @@ private:
 	std::string m_treeName;
 	std::vector<std::pair<TTag*, TProbe*> > product_type::*m_triggerTagProbeObjectPairsMember;
 	std::vector<std::pair<bool, bool> > product_type::*m_triggerTagProbeObjectMatchedPairsMember;
-	
+
 	TTree* m_tree = nullptr;
-	
+
 	TTag m_currentTagObject;
 	bool m_currentTagObjectMatched;
 	TProbe m_currentProbeObject;
