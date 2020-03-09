@@ -234,6 +234,8 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 							// TODO
 						}
 					}
+					//check again non-btag related jet selection criteria as promote/demote scaling ignores them
+					validBJet = validBJet && (std::abs(tjet->p4.eta()) <= settings.GetBTaggedJetAbsEtaCut());
 
 					if (validBJet)
 					{
