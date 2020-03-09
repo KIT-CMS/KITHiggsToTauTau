@@ -8,52 +8,52 @@
 void ImpactParameterCorrectionsProducer::Init(setting_type const& settings)
 {
 	ProducerBase<HttTypes>::Init(settings);
-	
+
 	// add possible quantities for the lambda ntuples consumers
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_1", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return (product.m_flavourOrderedLeptons.at(0)->dxy / product.m_flavourOrderedLeptons.at(0)->track.errDxy);
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_1", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return (product.m_flavourOrderedLeptons.at(0)->dz / product.m_flavourOrderedLeptons.at(0)->track.errDz);
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_2", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return (product.m_flavourOrderedLeptons.at(1)->dxy / product.m_flavourOrderedLeptons.at(1)->track.errDxy);
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_2", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return (product.m_flavourOrderedLeptons.at(1)->dz / product.m_flavourOrderedLeptons.at(1)->track.errDz);
 	});
-        
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("d0_1_calib", [](event_type const& event, product_type const& product) {
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("d0_1_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[d0][abs][0];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dZ_1_calib", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dZ_1_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[dZ][abs][0];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("d0_2_calib", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("d0_2_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[d0][abs][1];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dZ_2_calib", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("dZ_2_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[dZ][abs][1];
 	});
-        
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_1_calib", [](event_type const& event, product_type const& product) {
+
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_1_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[d0][rel][0];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_1_calib", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_1_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[dZ][rel][0];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_2_calib", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drel0_2_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[d0][rel][1];
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_2_calib", [](event_type const& event, product_type const& product) {
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("drelZ_2_calib", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_DCAcalib[dZ][rel][1];
 	});
-        
-        
-	
+
+
+
 	// book quantile shifters
-	
-	
+
+
 	if (settings.GetQuantileMappingRootfile()!="none"){
 		std::string rootfile = settings.GetQuantileMappingRootfile();
 		// read config
@@ -68,7 +68,7 @@ void ImpactParameterCorrectionsProducer::Init(setting_type const& settings)
 		config[d0][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)][target] = settings.GetNonprompt_m_d0_target();
 		config[d0][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][source] = settings.GetTauh_d0_source();
 		config[d0][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][target] = settings.GetTauh_d0_target();
-		
+
 		config[d0][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT)][source] = settings.GetPrompt_e_drel0_source();
 		config[d0][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT)][target] = settings.GetPrompt_e_drel0_target();
 		config[d0][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_PROMPT)][source] = settings.GetPrompt_m_drel0_source();
@@ -79,7 +79,7 @@ void ImpactParameterCorrectionsProducer::Init(setting_type const& settings)
 		config[d0][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)][target] = settings.GetNonprompt_m_drel0_target();
 		config[d0][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][source] = settings.GetTauh_drel0_source();
 		config[d0][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][target] = settings.GetTauh_drel0_target();
-		
+
 		config[dZ][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT)][source] = settings.GetPrompt_e_dZ_source();
 		config[dZ][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT)][target] = settings.GetPrompt_e_dZ_target();
 		config[dZ][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_PROMPT)][source] = settings.GetPrompt_m_dZ_source();
@@ -90,7 +90,7 @@ void ImpactParameterCorrectionsProducer::Init(setting_type const& settings)
 		config[dZ][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)][target] = settings.GetNonprompt_m_dZ_target();
 		config[dZ][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][source] = settings.GetTauh_dZ_source();
 		config[dZ][abs][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][target] = settings.GetTauh_dZ_target();
-		
+
 		config[dZ][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT)][source] = settings.GetPrompt_e_drelZ_source();
 		config[dZ][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_ELE_PROMPT)][target] = settings.GetPrompt_e_drelZ_target();
 		config[dZ][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_PROMPT)][source] = settings.GetPrompt_m_drelZ_source();
@@ -101,7 +101,7 @@ void ImpactParameterCorrectionsProducer::Init(setting_type const& settings)
 		config[dZ][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_MUON_FROM_TAU)][target] = settings.GetNonprompt_m_drelZ_target();
 		config[dZ][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][source] = settings.GetTauh_drelZ_source();
 		config[dZ][rel][Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_TAU_HAD_DECAY)][target] = settings.GetTauh_drelZ_target();
-		
+
 		for (int dca_direction = 0; dca_direction < 2; dca_direction++){
 			for (int dca_reference = 0; dca_reference < 2; dca_reference++){
 				for (int gen_match = 1; gen_match < 6; gen_match++){
@@ -126,7 +126,7 @@ void ImpactParameterCorrectionsProducer::Produce(event_type const& event, produc
 			}
 		}
 	}
-	
+
 	if (settings.GetQuantileMappingRootfile()!="none"){
 		// get uncalibrated impact parameters
 		double DCA[2][2][2]; //[d0/dZ][abs/rel][0/1]
@@ -136,7 +136,7 @@ void ImpactParameterCorrectionsProducer::Produce(event_type const& event, produc
 			DCA[d0][rel][leptonIndex] = product.m_flavourOrderedLeptons.at(leptonIndex)->dxy / product.m_flavourOrderedLeptons.at(0)->track.errDxy;
 			DCA[dZ][rel][leptonIndex] = product.m_flavourOrderedLeptons.at(leptonIndex)->dz / product.m_flavourOrderedLeptons.at(0)->track.errDz;
 		}
-		
+
 		// gen matching
 		for(int leptonIndex=0; leptonIndex<2; leptonIndex++){
 			int gen_match=0;
@@ -150,7 +150,7 @@ void ImpactParameterCorrectionsProducer::Produce(event_type const& event, produc
 				if (genParticle) gen_match = Utility::ToUnderlyingValue(GeneratorInfo::GetGenMatchingCode(genParticle));
 				else gen_match = Utility::ToUnderlyingValue(KappaEnumTypes::GenMatchingCode::IS_FAKE);
 			}
-			
+
 			// calculate calibrated impact parameters
 			for (int dca_direction = 0; dca_direction < 2; dca_direction++){
 				for (int dca_reference = 0; dca_reference < 2; dca_reference++){

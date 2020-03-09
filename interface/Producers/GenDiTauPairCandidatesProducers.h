@@ -24,7 +24,7 @@ public:
 	typedef typename HttTypes::event_type event_type;
 	typedef typename HttTypes::product_type product_type;
 	typedef typename HttTypes::setting_type setting_type;
-	
+
 	GenDiTauPairCandidatesProducerBase(std::vector<TGenLepton1*> product_type::*genLeptonsMember1,
 	                                        std::vector<TGenLepton2*> product_type::*genLeptonsMember2) :
 		ProducerBase<HttTypes>(),
@@ -36,19 +36,19 @@ public:
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);
-		
+
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nGenDiTauPairCandidates", [](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nGenDiTauPairCandidates", [](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return static_cast<int>(product.m_genDiTauPairCandidates.size());
 		});
 	}
-	
-	virtual void Produce(event_type const& event, product_type & product, 
+
+	virtual void Produce(event_type const& event, product_type & product,
 	                     setting_type const& settings) const override
 	{
 		product.m_genDiTauPairCandidates.clear();
-		
+
 		// build pairs for all combinations
 		for (typename std::vector<TGenLepton1*>::iterator lepton1 = (product.*m_genLeptonsMember1).begin();
 		     lepton1 != (product.*m_genLeptonsMember1).end(); ++lepton1)
@@ -57,7 +57,7 @@ public:
 			     lepton2 != (product.*m_genLeptonsMember2).end(); ++lepton2)
 			{
 				DiGenTauPair diGenTauPair(*lepton1, *lepton2);
-				
+
 				// avoid self-pairs and combinatorics (pair 1-2 = pair 2-1)
 				bool pairInVector = false;
 				for (std::vector<DiGenTauPair>::iterator pair = product.m_genDiTauPairCandidates.begin();

@@ -19,590 +19,590 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	m_decayChannel = HttEnumTypes::ToDecayChannel(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy(settings.GetChannel())));
 
 	// add possible quantities for the lambda ntuples consumers
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("decayChannelIndex", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("decayChannelIndex", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return Utility::ToUnderlyingValue(product.m_decayChannel);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingLepLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->p4;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep1LV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep1LV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posLepLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_chargeOrderedLeptons.at(0)->p4;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingLepSumChargedHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingLepSumChargedHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_ptOrderedLeptons.at(0))->sumChargedHadronCandidates() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep1SumChargedHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep1SumChargedHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(0))->sumChargedHadronCandidates() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posLepSumChargedHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posLepSumChargedHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_chargeOrderedLeptons.at(0))->sumChargedHadronCandidates() : DefaultValues::UndefinedRMFLV);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_ptOrderedLeptons.at(0))->piZeroMomentum() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep1SumNeutralHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep1SumNeutralHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(0))->piZeroMomentum() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_chargeOrderedLeptons.at(0))->piZeroMomentum() : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingLepLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->p4;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep2LV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep2LV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negLepLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_chargeOrderedLeptons.at(1)->p4;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingLepSumChargedHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingLepSumChargedHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_ptOrderedLeptons.at(1))->sumChargedHadronCandidates() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep2SumChargedHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep2SumChargedHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(1))->sumChargedHadronCandidates() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negLepSumChargedHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negLepSumChargedHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_chargeOrderedLeptons.at(1))->sumChargedHadronCandidates() : DefaultValues::UndefinedRMFLV);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_ptOrderedLeptons.at(1))->piZeroMomentum() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep2SumNeutralHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("lep2SumNeutralHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(1))->piZeroMomentum() : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negLepSumNeutralHadronsLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_chargeOrderedLeptons.at(1))->piZeroMomentum() : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingGenMatchedLepLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingGenMatchedLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedGenLeptonVisibleLVs.at(0) ? *(product.m_ptOrderedGenLeptonVisibleLVs.at(0)) : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedLep1LV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedLep1LV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? *(product.m_flavourOrderedGenLeptonVisibleLVs.at(0)) : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posGenMatchedLepLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posGenMatchedLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedGenLeptonVisibleLVs.at(0) ? *(product.m_chargeOrderedGenLeptonVisibleLVs.at(0)) : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("leadingGenMatchedLepFound", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("leadingGenMatchedLepFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedGenLeptons.at(0) != nullptr);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedLep1Found", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedLep1Found", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptons.at(0) != nullptr);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("posGenMatchedLepFound", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("posGenMatchedLepFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedGenLeptons.at(0) != nullptr);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingGenMatchedTauLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingGenMatchedTauLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau1LV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau1LV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posGenMatchedTauLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posGenMatchedTauLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->p4 : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("leadingGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->visible.p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau1VisibleLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau1VisibleLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->visible.p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("posGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->visible.p4 : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("leadingGenMatchedTauFound", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("leadingGenMatchedTauFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Utility::Contains(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(0));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedTau1Found", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedTau1Found", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Utility::Contains(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(0));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("posGenMatchedTauFound", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("posGenMatchedTauFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Utility::Contains(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(0));
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingGenMatchedLepLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingGenMatchedLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedGenLeptonVisibleLVs.at(1) ? *(product.m_ptOrderedGenLeptonVisibleLVs.at(1)) : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedLep2LV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedLep2LV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? *(product.m_flavourOrderedGenLeptonVisibleLVs.at(1)) : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negGenMatchedLepLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negGenMatchedLepLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedGenLeptonVisibleLVs.at(1) ? *(product.m_chargeOrderedGenLeptonVisibleLVs.at(1)) : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("trailingGenMatchedLepFound", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("trailingGenMatchedLepFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_ptOrderedGenLeptons.at(1) != nullptr);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedLep2Found", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedLep2Found", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptons.at(1) != nullptr);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("negGenMatchedLepFound", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("negGenMatchedLepFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_chargeOrderedGenLeptons.at(1) != nullptr);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingGenMatchedTauLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingGenMatchedTauLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau2LV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau2LV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negGenMatchedTauLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negGenMatchedTauLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->p4 : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("trailingGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->visible.p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau2VisibleLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("genMatchedTau2VisibleLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->visible.p4 : DefaultValues::UndefinedRMFLV);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("negGenMatchedTauVisibleLV", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->visible.p4 : DefaultValues::UndefinedRMFLV);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("trailingGenMatchedTauFound", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("trailingGenMatchedTauFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Utility::Contains(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(1));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedTau2Found", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("genMatchedTau2Found", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Utility::Contains(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(1));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("negGenMatchedTauFound", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("negGenMatchedTauFound", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Utility::Contains(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(1));
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepCharge", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepCharge", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->charge();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepPt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepPt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->p4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepEta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepEta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->p4.Eta();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepPhi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepPhi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->p4.Phi();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepMass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepMass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->p4.mass();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepMt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepMt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(0)->p4.Mt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepIso", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepIso", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return SafeMap::GetWithDefault(product.m_leptonIsolation, product.m_ptOrderedLeptons.at(0), DefaultValues::UndefinedDouble);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepIsoOverPt", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingLepIsoOverPt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, product.m_ptOrderedLeptons.at(0), DefaultValues::UndefinedDouble);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Charge", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Charge", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->charge();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Dz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Dz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->dz;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ErrDz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ErrDz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->track.errDz;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1D0", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1D0", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->dxy;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ErrD0", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ErrD0", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->track.errDxy;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ChargedPt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ChargedPt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(0))->sumChargedHadronCandidates().Pt()  : product.m_flavourOrderedLeptons.at(0)->p4.Pt());
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Pt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Pt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1E", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1E", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.E();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Eta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Eta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.Eta();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Phi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Phi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.Phi();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ChargedPhi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1ChargedPhi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(0))->sumChargedHadronCandidates().Phi()  : product.m_flavourOrderedLeptons.at(0)->p4.Phi());
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Mass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Mass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->p4.mass();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Mt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Mt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Quantities::CalculateMtH2Tau(product.m_flavourOrderedLeptons.at(0)->p4, product.m_met.p4);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Iso", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Iso", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return SafeMap::GetWithDefault(product.m_leptonIsolation, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1IsoOverPt", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1IsoOverPt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		float iso = SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, product.m_flavourOrderedLeptons.at(0), std::numeric_limits<double>::max());
 		return (product.m_flavourOrderedLeptons.at(0)->flavour() == KLeptonFlavour::TAU ? (iso * product.m_flavourOrderedLeptons.at(0)->p4.Pt()) : iso);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetPt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetPt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->p4 + product.m_met.p4).Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetEta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetEta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->p4 + product.m_met.p4).Eta();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetPhi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetPhi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->p4 + product.m_met.p4).Phi();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetMass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetMass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(0)->p4 + product.m_met.p4).mass();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetMt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1MetMt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(0)->p4, product.m_met.p4);
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1PuppiMetMt", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1PuppiMetMt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(0)->p4, product.m_puppimet.p4);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Pt", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Pt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(0)->Pt() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Eta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Eta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(0)->Eta() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Phi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Phi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(0)->Phi() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Mass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Mass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(0)->mass() : DefaultValues::UndefinedFloat);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("leadingGenMatchedTauDecayMode", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("leadingGenMatchedTauDecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->decayMode : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau1DecayMode", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau1DecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->decayMode : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("posGenMatchedTauDecayMode", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("posGenMatchedTauDecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->decayMode : DefaultValues::UndefinedInt);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("leadingGenMatchedTauNProngs", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("leadingGenMatchedTauNProngs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nProngs : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau1NProngs", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau1NProngs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nProngs : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("posGenMatchedTauNProngs", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("posGenMatchedTauNProngs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nProngs : DefaultValues::UndefinedInt);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("leadingGenMatchedTauNPi0s", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("leadingGenMatchedTauNPi0s", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nPi0s : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau1NPi0s", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau1NPi0s", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nPi0s : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("posGenMatchedTauNPi0s", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("posGenMatchedTauNPi0s", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(0), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nPi0s : DefaultValues::UndefinedInt);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepCharge", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepCharge", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->charge();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepPt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepPt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->p4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepEta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepEta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->p4.Eta();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepPhi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepPhi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->p4.Phi();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepMass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepMass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->p4.mass();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepMt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepMt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_ptOrderedLeptons.at(1)->p4.Mt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepIso", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepIso", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return SafeMap::GetWithDefault(product.m_leptonIsolation, product.m_ptOrderedLeptons.at(1), DefaultValues::UndefinedDouble);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepIsoOverPt", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("trailingLepIsoOverPt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, product.m_ptOrderedLeptons.at(1), DefaultValues::UndefinedDouble);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Charge", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Charge", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->charge();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Dz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Dz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->dz;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ErrDz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ErrDz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->track.errDz;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2D0", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2D0", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->dxy;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ErrD0", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ErrD0", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->track.errDxy;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Pt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Pt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ChargedPt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ChargedPt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(1))->sumChargedHadronCandidates().Pt()  : product.m_flavourOrderedLeptons.at(1)->p4.Pt());
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2E", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2E", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4.E();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Eta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Eta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4.Eta();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Phi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Phi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4.Phi();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ChargedPhi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2ChargedPhi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? static_cast<KTau*>(product.m_flavourOrderedLeptons.at(1))->sumChargedHadronCandidates().Phi()  : product.m_flavourOrderedLeptons.at(1)->p4.Phi());
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Mass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Mass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->p4.mass();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Mt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Mt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Quantities::CalculateMtH2Tau(product.m_flavourOrderedLeptons.at(1)->p4, product.m_met.p4);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Iso", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Iso", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return SafeMap::GetWithDefault(product.m_leptonIsolation, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2IsoOverPt", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2IsoOverPt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		float iso = SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, product.m_flavourOrderedLeptons.at(1), std::numeric_limits<double>::max());
 		return (product.m_flavourOrderedLeptons.at(1)->flavour() == KLeptonFlavour::TAU ? (iso * product.m_flavourOrderedLeptons.at(1)->p4.Pt()) : iso);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2MetMt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2MetMt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(1)->p4, product.m_met.p4);
 	});
-        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2PuppiMetMt", [](event_type const& event, product_type const& product)
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2PuppiMetMt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(1)->p4, product.m_puppimet.p4);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_max", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mt_max", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(0)->p4, product.m_met.p4)>Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(1)->p4, product.m_met.p4)) ? Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(0)->p4, product.m_met.p4) : Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(1)->p4, product.m_met.p4);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mtmax", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mtmax", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(0)->p4, product.m_met.p4)>Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(1)->p4, product.m_met.p4)) ? Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(0)->p4, product.m_met.p4) : Quantities::CalculateMt(product.m_flavourOrderedLeptons.at(1)->p4, product.m_met.p4);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Pt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Pt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(1)->Pt() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Eta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Eta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(1)->Eta() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Phi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Phi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(1)->Phi() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Mass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Mass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(1)->mass() : DefaultValues::UndefinedFloat);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("trailingGenMatchedTauDecayMode", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("trailingGenMatchedTauDecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->decayMode : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau2DecayMode", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau2DecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->decayMode : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("negGenMatchedTauDecayMode", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("negGenMatchedTauDecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->decayMode : DefaultValues::UndefinedInt);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("trailingGenMatchedTauNProngs", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("trailingGenMatchedTauNProngs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nProngs : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau2NProngs", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau2NProngs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nProngs : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("negGenMatchedTauNProngs", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("negGenMatchedTauNProngs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nProngs : DefaultValues::UndefinedInt);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("trailingGenMatchedTauNPi0s", [](event_type const& event, product_type const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("trailingGenMatchedTauNPi0s", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_ptOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nPi0s : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau2NPi0s", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genMatchedTau2NPi0s", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_flavourOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nPi0s : DefaultValues::UndefinedInt);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("negGenMatchedTauNPi0s", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("negGenMatchedTauNPi0s", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		KGenTau* genTau = SafeMap::GetWithDefault(product.m_genTauMatchedLeptons, product.m_chargeOrderedLeptons.at(1), static_cast<KGenTau*>(nullptr));
 		return (genTau ? genTau->nPi0s : DefaultValues::UndefinedInt);
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("extraelec_veto", [](KappaEvent const& event, KappaProduct const& product)
+
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("extraelec_veto", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return static_cast<HttProduct const&>(product).m_extraElecVeto;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("extramuon_veto", [](KappaEvent const& event, KappaProduct const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("extramuon_veto", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return static_cast<HttProduct const&>(product).m_extraMuonVeto;
 	});
-	
+
 
 	std::vector<std::string> tauDiscriminators;
 	tauDiscriminators.push_back("byCombinedIsolationDeltaBetaCorrRaw3Hits");
@@ -658,8 +658,8 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	tauDiscriminators.push_back("ptWeightedDrIsolation");
 	tauDiscriminators.push_back("leadingTrackChi2");
 	tauDiscriminators.push_back("eRatio");
-	
-	
+
+
 	std::vector<std::string> electronDiscriminators;
         electronDiscriminators.push_back("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17NoIsoV1Values");
         electronDiscriminators.push_back("electronMVAValueMapProducer:ElectronMVAEstimatorRun2Fall17IsoV1Values");
@@ -672,7 +672,7 @@ void DecayChannelProducer::Init(setting_type const& settings)
 		for (std::string tauDiscriminator : tauDiscriminators)
 		{
 			std::string quantity = tauDiscriminator + "_" + std::to_string(leptonIndex+1);
-			LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(quantity, [tauDiscriminator, leptonIndex](event_type const& event, product_type const& product)
+			LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(quantity, [tauDiscriminator, leptonIndex](event_type const& event, product_type const& product, setting_type const& settings)
 			{
 				KLepton* lepton = product.m_flavourOrderedLeptons.at(leptonIndex);
 				if (lepton->flavour() == KLeptonFlavour::TAU)
@@ -691,7 +691,7 @@ void DecayChannelProducer::Init(setting_type const& settings)
                         std::vector<std::string> split;
                         boost::split(split, electronDiscriminator, [](char c){return c == ':';});
 			std::string quantity = split[1] + "_" + std::to_string(leptonIndex+1);
-			LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(quantity, [electronDiscriminator, leptonIndex](event_type const& event, product_type const& product)
+			LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(quantity, [electronDiscriminator, leptonIndex](event_type const& event, product_type const& product, setting_type const& settings)
 			{
 				KLepton* lepton = product.m_flavourOrderedLeptons.at(leptonIndex);
 				if (lepton->flavour() == KLeptonFlavour::ELECTRON)
@@ -704,9 +704,9 @@ void DecayChannelProducer::Init(setting_type const& settings)
 				}
 			});
 		}
-		
+
 		std::string decayModeQuantity = "decayMode_" + std::to_string(leptonIndex+1);
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(decayModeQuantity, [leptonIndex](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(decayModeQuantity, [leptonIndex](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			KLepton* lepton = product.m_flavourOrderedLeptons.at(leptonIndex);
 			if (lepton->flavour() == KLeptonFlavour::TAU)
@@ -718,10 +718,10 @@ void DecayChannelProducer::Init(setting_type const& settings)
 				return DefaultValues::UndefinedInt;
 			}
 		});
-		
+
 		std::string genMatchQuantity = "gen_match_" + std::to_string(leptonIndex+1);
 		bool useUWGenMatching = settings.GetUseUWGenMatching();
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(genMatchQuantity, [leptonIndex, useUWGenMatching](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(genMatchQuantity, [leptonIndex, useUWGenMatching](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			if (useUWGenMatching)
 			{
@@ -742,9 +742,9 @@ void DecayChannelProducer::Init(setting_type const& settings)
 				}
 			}
 		});
-		
+
 		std::string hadGenMatchPtQuantity = "had_gen_match_pT_" + std::to_string(leptonIndex+1);
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(hadGenMatchPtQuantity, [leptonIndex](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(hadGenMatchPtQuantity, [leptonIndex](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			KGenParticle* genParticle = product.m_flavourOrderedGenLeptons.at(leptonIndex);
 
@@ -868,7 +868,7 @@ void DecayChannelProducer::Produce(event_type const& event, product_type& produc
 			product.m_chargeOrderedLeptons.push_back(lepton1);
 		}
 	}
-	
+
 	FillGenLeptonCollections(product);
 }
 
@@ -884,7 +884,7 @@ void DecayChannelProducer::FillGenLeptonCollections(product_type& product) const
 		));
 		product.m_ptOrderedGenLeptonVisibleLVs.push_back(GeneratorInfo::GetVisibleLV(product.m_ptOrderedGenLeptons.back()));
 	}
-	
+
 	product.m_flavourOrderedGenLeptons.clear();
 	for (std::vector<KLepton*>::iterator lepton = product.m_flavourOrderedLeptons.begin();
 	     lepton != product.m_flavourOrderedLeptons.end(); ++lepton)
@@ -895,7 +895,7 @@ void DecayChannelProducer::FillGenLeptonCollections(product_type& product) const
 		));
 		product.m_flavourOrderedGenLeptonVisibleLVs.push_back(GeneratorInfo::GetVisibleLV(product.m_flavourOrderedGenLeptons.back()));
 	}
-	
+
 	product.m_chargeOrderedGenLeptons.clear();
 	for (std::vector<KLepton*>::iterator lepton = product.m_chargeOrderedLeptons.begin();
 	     lepton != product.m_chargeOrderedLeptons.end(); ++lepton)
@@ -980,7 +980,7 @@ void TTHDecayChannelProducer::Produce(event_type const& event, product_type& pro
 	          [](KLepton const* lepton1, KLepton const* lepton2) -> bool
 	          { return lepton1->charge() > lepton2->charge(); });
 	}
-	
+
 	FillGenLeptonCollections(product);
 }
 
@@ -989,16 +989,16 @@ void Run2DecayChannelProducer::Init(setting_type const& settings)
 	DecayChannelProducer::Init(settings);
 
 	// For taus in Run2 we use dz saved in the KTau
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Dz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep1Dz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(0)->dz;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Dz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("lep2Dz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedLeptons.at(1)->dz;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("DiTauDeltaR", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("DiTauDeltaR", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
                 DiTauPair diTauPair = product.m_validDiTauPairCandidates.at(0);
 		return diTauPair.GetDeltaR();

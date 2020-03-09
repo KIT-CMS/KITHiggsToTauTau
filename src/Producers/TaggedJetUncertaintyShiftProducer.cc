@@ -79,7 +79,7 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 
 		// Add quantities to event
 		std::string njetsQuantity = "njetspt30_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(njetsQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(njetsQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			int nJetsPt30 = 0;
 			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
@@ -90,7 +90,7 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		});
 
 		std::string mjjQuantity = "mjj_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mjjQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mjjQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
 			{
@@ -101,7 +101,7 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		});
 
 		std::string jdetaQuantity = "jdeta_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(jdetaQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(jdetaQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			float jdeta = -1;
 			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
@@ -113,7 +113,7 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		});
 
 		std::string nbjetsQuantity = "nbtag_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(nbjetsQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(nbjetsQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			int nbtag = 0;
 			if ((product.m_correctedBTaggedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())

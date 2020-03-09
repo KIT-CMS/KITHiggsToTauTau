@@ -7,52 +7,52 @@ void MetFilterFlagProducer::Init(setting_type const& settings)
     ProducerBase<HttTypes>::Init(settings);
     //FilterBase<HttTypes>::Init(settings);
 
-    LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("flagMETFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("flagMETFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         return product.m_MetFilter;
     });
 
     // Single filters: DO NOT SUPPORT '!' SYNTAX!
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_goodVertices", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_goodVertices", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_goodVertices");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_globalSuperTightHalo2016Filter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_globalSuperTightHalo2016Filter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_globalSuperTightHalo2016Filter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_HBHENoiseFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_HBHENoiseFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_HBHENoiseFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_HBHENoiseIsoFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_HBHENoiseIsoFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_HBHENoiseIsoFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_EcalDeadCellTriggerPrimitiveFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_EcalDeadCellTriggerPrimitiveFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_EcalDeadCellTriggerPrimitiveFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_BadPFMuonFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_BadPFMuonFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_BadPFMuonFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_BadChargedCandidateFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_BadChargedCandidateFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_BadChargedCandidateFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_eeBadScFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("Flag_eeBadScFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("Flag_eeBadScFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
     });
-    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("ecalBadCalibReducedMINIAODFilter", [](event_type const& event, product_type const& product) {
+    LambdaNtupleConsumer<HttTypes>::AddBoolQuantity("ecalBadCalibReducedMINIAODFilter", [](event_type const& event, product_type const& product, setting_type const& settings) {
         int filterid = event.m_triggerObjectMetadata->metFilterPos("ecalBadCalibReducedMINIAODFilter");
         bool result = event.m_triggerObjects->passesMetFilter(filterid);
         return result;
