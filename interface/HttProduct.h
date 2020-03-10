@@ -188,8 +188,8 @@ public:
 	bool m_diGenJetSystemAvailable = false;
 
 	// filled by TaggedJetUncertaintyShiftProducer
-	std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, std::vector<KJet*>> m_correctedJetsBySplitUncertainty;
-	std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, std::vector<KJet*>> m_correctedBTaggedJetsBySplitUncertainty;
+	std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, std::vector<std::shared_ptr<KJet>>> m_correctedJetsBySplitUncertainty;
+	std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, std::vector<std::shared_ptr<KJet>>> m_correctedBTaggedJetsBySplitUncertainty;
 
 	KMET* m_metUncorr = 0;
 	KMET* m_puppimetUncorr = 0;
@@ -199,7 +199,7 @@ public:
 	// filled by the MetCorrectors
 	std::vector<float> m_mvametCorrections;
 	std::vector<float> m_pfmetCorrections;
-	std::vector<float> m_puppimetCorrections;        
+	std::vector<float> m_puppimetCorrections;
 	KMET m_met;
 	KMET m_pfmet;
 	KMET m_puppimet;
@@ -431,7 +431,7 @@ public:
         //filled by SMggHNNLOProducer
         double m_ggh_NNLO_weight = 1.0;
         std::vector<double> m_THU_ggH;
-        
+
         //filled by SMvbfNNLOProducer
         std::vector<double> m_THU_qqH;
 
