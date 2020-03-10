@@ -70,11 +70,8 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		// Create uncertainty map (only if shifts are to be applied)
 		if (jec_shifts_applied && individualUncertainty != HttEnumTypes::JetEnergyUncertaintyShiftName::Closure)
 		{
-			JetCorrectorParameters const * jetCorPar = new JetCorrectorParameters(uncertaintyFile, uncertainty);
-			JetCorParMap[individualUncertainty] = jetCorPar;
-
-			JetCorrectionUncertainty * jecUnc(new JetCorrectionUncertainty(*JetCorParMap[individualUncertainty]));
-			JetUncMap[individualUncertainty] = jecUnc;
+			JetCorrectorParameters jetCorPar(uncertaintyFile, uncertainty);
+			JetUncMap[individualUncertainty] = std::make_unique<JetCorrectionUncertainty>(jetCorPar);
 		}
 
 		// Add quantities to event
