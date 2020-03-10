@@ -30,11 +30,7 @@ class TaggedJetUncertaintyShiftProducer: public ProducerBase<HttTypes>
 
 		~TaggedJetUncertaintyShiftProducer()
 		{
-			for (auto const& [key, val]: JetCorParMap)
-			   delete val;
-
-			for (auto const& [key, val]: JetUncMap)
-			   delete val;
+			JetUncMap.clear();
 		}
 
 	private:
@@ -42,8 +38,7 @@ class TaggedJetUncertaintyShiftProducer: public ProducerBase<HttTypes>
 		std::vector<std::string> individualUncertainties;
 		std::vector<HttEnumTypes::JetEnergyUncertaintyShiftName> individualUncertaintyEnums;
 
-		std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, JetCorrectorParameters const*> JetCorParMap;
-		std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, JetCorrectionUncertainty *> JetUncMap;
+		std::map<HttEnumTypes::JetEnergyUncertaintyShiftName, std::unique_ptr<JetCorrectionUncertainty>> JetUncMap;
 		bool jec_shifts_applied;
 
 		KappaEnumTypes::JetIDVersion jetIDVersion;
