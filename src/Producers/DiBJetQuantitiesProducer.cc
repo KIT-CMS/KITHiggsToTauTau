@@ -97,7 +97,7 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
 		                                        DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("jetUsedFordiBJetSystemIsTrueBJet", [settings](event_type const& event, product_type const& product, setting_type const& settings) {
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("jetUsedFordiBJetSystemIsTrueBJet", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if (settings.GetInputIsData()) return DefaultValues::UndefinedInt;
 		if (product.m_JetPlusBJetSystemAvailable) {
 			if (product.m_leadJetIsBJet) {
