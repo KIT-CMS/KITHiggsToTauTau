@@ -48,7 +48,7 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, std::string("identificationWeight_2"), 1.0);
 	});
-	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("weight", [settings](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("weight", [](KappaEvent const& event, KappaProduct const& product, KappaSettings const& settings)
 	{
 		return SafeMap::GetWithDefault(product.m_weights, settings.GetEventWeight(), 1.0);
 	});
