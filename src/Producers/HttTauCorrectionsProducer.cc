@@ -83,18 +83,11 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 			std::vector<float> tauEnergyCorrectionOneProngPiZerosPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZerosPtDependant();
 			std::vector<float> tauEnergyCorrectionThreeProngPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPtDependant();
 			std::vector<float> tauEnergyCorrectionThreeProngPiZerosPtDependant = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZerosPtDependant();
-
 			std::vector<float> tauEnergyCorrectionOneProngPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPtDependantUncShift();
 			std::vector<float> tauEnergyCorrectionOneProngPiZerosPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionOneProngPiZerosPtDependantUncShift();
 			std::vector<float> tauEnergyCorrectionThreeProngPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPtDependantUncShift();
 			std::vector<float> tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift = static_cast<HttSettings const&>(settings).GetTauEnergyCorrectionThreeProngPiZerosPtDependantUncShift();
-
 			bool use_interpolation = 0 < (tauEnergyCorrectionOneProngPtDependant.size() + tauEnergyCorrectionOneProngPiZerosPtDependant.size() + tauEnergyCorrectionThreeProngPtDependant.size() + tauEnergyCorrectionThreeProngPiZerosPtDependant.size());
-			bool is_nominal = HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[1], 0.0) &&
-				HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1], 0.0) &&
-				HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[1], 0.0) &&
-				HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1], 0.0);
-
 
 			if (! use_interpolation)
 			{
@@ -117,6 +110,11 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 			}
 			else
 			{
+				bool is_nominal = HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPtDependantUncShift[1], 0.0) &&
+					HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionOneProngPiZerosPtDependantUncShift[1], 0.0) &&
+					HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPtDependantUncShift[1], 0.0) &&
+					HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[0], 0.0) && HttTauCorrectionsProducer::areEqual(tauEnergyCorrectionThreeProngPiZerosPtDependantUncShift[1], 0.0);
+
 				assert(tauEnergyCorrectionOneProngPtDependant.size() == 2);
 				assert(tauEnergyCorrectionOneProngPiZerosPtDependant.size() == 2);
 				assert(tauEnergyCorrectionThreeProngPtDependant.size() == 2);
