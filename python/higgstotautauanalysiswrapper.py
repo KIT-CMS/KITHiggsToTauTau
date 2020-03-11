@@ -320,6 +320,8 @@ class HiggsToTauTauAnalysisWrapper():
 		                                 help="Wall time of batch jobs. [Default: %(default)s]")
 		runningOptionsGroup.add_argument("--memory", type=int, default=1990,
 		                                 help="Memory (in MB) for batch jobs. [Default: %(default)s]")
+		runningOptionsGroup.add_argument("--cores", type=int, default=1,
+		                                 help="Cores for batch jobs. [Default: %(default)s]")
 		runningOptionsGroup.add_argument("--cmdargs", type=str, default="-cG -m 3",
 		                                 help="Command line arguments for go.py. Pass in form of '--cmdargs=\"-cG -m 3\"'. [Default: %(default)s]")
 		runningOptionsGroup.add_argument("--se-path",
@@ -840,6 +842,7 @@ class HiggsToTauTauAnalysisWrapper():
 				memory = "memory = " + str(self._args.memory),
 				cmdargs = "cmdargs = " + self._args.cmdargs.replace("m 3", "m 3" if self._args.pilot_job_files is None else "m 0"),
 				dataset = "dataset = \n\t:ListProvider:" + dbsFileBasepath,
+				cpus="cpus = %d" % (self._args.cores),
 				epilogarguments = epilogArguments,
 				seoutputfiles = seoutputfiles,
 				backend = backend,
