@@ -239,6 +239,10 @@ def build_config(nickname, **kwargs):
         "0:idWeight",
         "0:isoWeight",
         "0:trackWeight",
+
+        "1:idWeight",
+        "1:isoWeight",
+        "1:trackWeight",
     ]
     config["RooWorkspaceObjectNames"] = [
         "0:e_trg27_trg32_trg35_kit_mc",
@@ -256,6 +260,10 @@ def build_config(nickname, **kwargs):
         "0:e_iso_kit_ratio",
         "0:e_id90_kit_ratio",
         "0:e_trk_ratio",
+
+        "1:e_iso_kit_ratio",
+        "1:e_id90_kit_ratio",
+        "1:e_trk_ratio",
     ]
     config["RooWorkspaceObjectArguments"] = [
         "0:e_pt,e_eta",
@@ -273,6 +281,10 @@ def build_config(nickname, **kwargs):
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_eta,e_pt",
+
+        "1:e_pt,e_eta",
+        "1:e_pt,e_eta",
+        "1:e_eta,e_pt",
     ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
