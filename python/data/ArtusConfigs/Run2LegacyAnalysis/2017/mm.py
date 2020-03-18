@@ -143,6 +143,8 @@ def build_config(nickname, **kwargs):
 
       "0:isoWeight",
       "0:idWeight",
+      "1:isoWeight",
+      "1:idWeight",
   ]
   config["RooWorkspaceObjectNames"] = [
       "0:m_trg24_27_kit_mc",
@@ -150,6 +152,8 @@ def build_config(nickname, **kwargs):
 
       "0:m_iso_kit_ratio",
       "0:m_id_kit_ratio",
+      "1:m_iso_kit_ratio",
+      "1:m_id_kit_ratio",
   ]
   config["RooWorkspaceObjectArguments"] = [
       "0:m_pt,m_eta",
@@ -157,6 +161,8 @@ def build_config(nickname, **kwargs):
 
       "0:m_pt,m_eta",
       "0:m_pt,m_eta",
+      "1:m_pt,m_eta",
+      "1:m_pt,m_eta",
   ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
