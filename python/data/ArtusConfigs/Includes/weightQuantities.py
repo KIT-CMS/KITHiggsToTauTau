@@ -47,6 +47,7 @@ def build_list():
     "topPtReweightWeight",
     "topPtReweightWeightRun1",
     "topPtReweightWeightRun2",
+    "topPtReweightWeightTTH",
     "zPtReweightWeight",
     "eleTauFakeRateWeight",
     "muTauFakeRateWeight"
