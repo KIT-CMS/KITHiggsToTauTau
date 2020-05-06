@@ -243,6 +243,7 @@ class HiggsToTauTauAnalysisWrapper():
 			],
 			help="Pipelines to activate. Default: %(default)s]")
 		self._parser.add_argument("--minimal-setup", default=False, action="store_true", help="Disable SVfit. Default: %(default)s]")
+		self._parser.add_argument("--nmssm", default=False, action="store_true", help="Produce ntuples for NMSSM analysis: Add nbtag>0 cut and write out variables related to bbtautau system. Default: %(default)s]")
 
 		fileOptionsGroup = self._parser.add_argument_group("File options")
 		fileOptionsGroup.add_argument("-i", "--input-files", nargs="+", required=True,
@@ -384,6 +385,7 @@ class HiggsToTauTauAnalysisWrapper():
 			tau_es_neutral=self._args.tau_es_neutral,
 			tau_es_method=self._args.tau_es_method,
 			minimal_setup=self._args.minimal_setup,
+			nmssm=self._args.nmssm,
 			btager=self._args.btager,
 			btager_wp=self._args.btager_wp,
 		)
