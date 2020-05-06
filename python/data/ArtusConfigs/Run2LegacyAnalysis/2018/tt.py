@@ -20,6 +20,7 @@ def build_config(nickname, **kwargs):
   etau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "etau-fake-es" else False
   pipelines = kwargs["pipelines"] if "pipelines" in kwargs else None
   minimal_setup = True if "minimal_setup" in kwargs and kwargs["minimal_setup"] else False
+  nmssm = True if ("nmssm" in kwargs and kwargs["nmssm"]) else False
 
   config = jsonTools.JsonDict()
   datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
@@ -332,7 +333,7 @@ def build_config(nickname, **kwargs):
   config["TopPtReweightingStrategy"] = "Run1"
 
   ### Ntuple output quantities configuration
-  config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(minimal_setup=minimal_setup, isMC = (not isData) and (not isEmbedded), nickname = nickname)
+  config["Quantities"] =      importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.syncQuantities").build_list(minimal_setup=minimal_setup, isMC = (not isData) and (not isEmbedded), nickname = nickname, nmssm=nmssm)
   # config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.zptQuantities").build_list())
   config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Includes.weightQuantities").build_list())
   config["Quantities"].extend(tauTriggerWeights)
@@ -379,10 +380,10 @@ def build_config(nickname, **kwargs):
                                                               "producer:NewValidTTPairCandidatesProducer",
                                                               "filter:ValidDiTauPairCandidatesFilter",
                                                               "producer:Run2DecayChannelProducer"))
-  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if not (isData or isEmbedded): config["Processors"].append( "producer:TaggedJetCorrectionsProducer")
   config["Processors"].extend((                               "producer:ValidTaggedJetsProducer",
                                                               "producer:ValidBTaggedJetsProducer"))
+  config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   config["Processors"].extend((                               "producer:MetCorrector",
                                                               "producer:PuppiMetCorrector",

@@ -12,7 +12,7 @@ def build_config(nickname, **kwargs):
     tau_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "tau-es" else False
     mtau_fake_es = True if "sub_analysis" in kwargs and kwargs["sub_analysis"] == "mtau-fake-es" else False
     tau_es_method = kwargs["tau_es_method"] if "tau_es_method" in kwargs else 'classical'  # classical, gamma
-
+    nmssm = True if ("nmssm" in kwargs and kwargs["nmssm"]) else False
     config = jsonTools.JsonDict()
     # datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
 
@@ -23,6 +23,11 @@ def build_config(nickname, **kwargs):
         "byVVVLooseDeepTau2017v2p1VSjet_2",
     ]
     config["PlotlevelFilterExpression"] = "(flagMETFilter > 0.5)*(byTightDeepTau2017v2p1VSmu_2 > 0.5)*(byVVLooseDeepTau2017v2p1VSe_2 > 0.5)*(byVVVLooseDeepTau2017v2p1VSjet_2 > 0.5)"
+
+    # remove events with no b jets for nmssm analysis
+    if nmssm:
+        config["PlotlevelFilterExpressionQuantities"].append('nBJets20')
+        config["PlotlevelFilterExpression"] += '*(nBJets20 > 0.5)'
 
     # as for the TES version of 2016
     if not tau_es and not mtau_fake_es:
