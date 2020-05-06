@@ -10,9 +10,9 @@
  */
 class GenDiTauPairCandidatesFilter: public CutRangeFilterBase<KappaTypes> {
 public:
-	
-	typedef typename std::function<double(KappaEvent const&, KappaProduct const&)> double_extractor_lambda;
-	
+
+	typedef typename std::function<double(KappaEvent const&, KappaProduct const&, KappaSettings const&)> double_extractor_lambda;
+
 	virtual std::string GetFilterId() const override;
 	virtual void Init(KappaSettings const& settings) override;
 };
@@ -22,9 +22,9 @@ public:
  */
 class GenDiTauPairAcceptanceFilter: public CutRangeFilterBase<KappaTypes> {
 public:
-	
-	typedef typename std::function<double(KappaEvent const&, KappaProduct const&)> double_extractor_lambda;
-	
+
+	typedef typename std::function<double(KappaEvent const&, KappaProduct const&, KappaSettings const&)> double_extractor_lambda;
+
 	virtual std::string GetFilterId() const override;
 	virtual void Init(KappaSettings const& settings) override;
 };

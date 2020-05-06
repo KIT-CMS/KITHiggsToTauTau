@@ -39,7 +39,7 @@ void MadGraphReweightingProducer::Init(setting_type const& settings)
 	{
 		m_madGraphProcessDirectories[HttEnumTypes::ToMadGraphProductionModeGGH(processDirectories->first)] = processDirectories->second;
 	}*/
-	
+
 	// preparations of MadGraphTools objects
 	for (std::map<std::string, std::vector<std::string> >::const_iterator processDirectories = m_madGraphProcessDirectoriesByName.begin();
 	     processDirectories != m_madGraphProcessDirectoriesByName.end(); ++processDirectories)
@@ -63,25 +63,25 @@ void MadGraphReweightingProducer::Init(setting_type const& settings)
 	{
 		float mixingAngleOverPiHalf = *mixingAngleOverPiHalfIt;
 		std::string mixingAngleOverPiHalfLabel = GetLabelForWeightsMap(mixingAngleOverPiHalf);
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mixingAngleOverPiHalfLabel, [mixingAngleOverPiHalfLabel](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mixingAngleOverPiHalfLabel, [mixingAngleOverPiHalfLabel](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return SafeMap::GetWithDefault(product.m_optionalWeights, mixingAngleOverPiHalfLabel, 0.0);
 		});
 	}
-	
+
 	if (settings.GetMadGraphMixingAnglesOverPiHalfSample() >= 0.0)
 	{
 		float mixingAngleOverPiHalfSample = settings.GetMadGraphMixingAnglesOverPiHalfSample();
-		
+
 		// if mixing angle for curent sample is defined, it has to be in the list MadGraphMixingAnglesOverPiHalf
 		assert(Utility::Contains(settings.GetMadGraphMixingAnglesOverPiHalf(), mixingAngleOverPiHalfSample));
-		
+
 		std::string mixingAngleOverPiHalfSampleLabel = GetLabelForWeightsMap(mixingAngleOverPiHalfSample);
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(std::string("madGraphWeightSample"), [mixingAngleOverPiHalfSampleLabel](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(std::string("madGraphWeightSample"), [mixingAngleOverPiHalfSampleLabel](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return SafeMap::GetWithDefault(product.m_optionalWeights, std::string("madGraphWeightSample"), 0.0);
 		});
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(std::string("madGraphWeightInvSample"), [mixingAngleOverPiHalfSampleLabel](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(std::string("madGraphWeightInvSample"), [mixingAngleOverPiHalfSampleLabel](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			double weight = SafeMap::GetWithDefault(product.m_optionalWeights, std::string("madGraphWeightSample"), 0.0);
 			//return std::min(((weight > 0.0) ? (1.0 / weight) : 0.0), 10.0);   // no physics reason for this
@@ -89,7 +89,7 @@ void MadGraphReweightingProducer::Init(setting_type const& settings)
 		});
 	}
 
-	
+
 	std::string pdgDatabaseFilename = settings.GetDatabasePDG();
  	if (! pdgDatabaseFilename.empty())
 	{
@@ -113,11 +113,11 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 	if (event.m_lheParticles != nullptr)
 	{
 		//HttEnumTypes::MadGraphProductionModeGGH productionMode = HttEnumTypes::MadGraphProductionModeGGH::NONE;
-		
+
 		int numberGluons=0;
 		int numberBottomQuarks=0;
 		int numberOtherQuarks=0;
-		
+
 		/*std::vector<const KGenParticle*> selectedLheParticles;
 		for (KGenParticles::const_iterator lheParticle1 = event.m_lheParticles->begin(); lheParticle1 != event.m_lheParticles->end(); ++lheParticle1)
 		{
@@ -143,7 +143,7 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 				}
 			}
 		}*/
-		
+
 		struct ParticlesGroup
 		{
 			std::vector<const KLHEParticle*> momenta;
@@ -152,21 +152,21 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 			int nGluons = 0;
 			int nHiggsBosons = 0;
 		} initialParticles, higgsParticles, jetParticles;
-		
+
 		std::vector<const CartesianRMFLV*> particleFourMomenta;
 		std::string directoryname = "";
 		std::string initialname = "";
 		std::string jetname = "";
 		std::string higgsname = "";
 		//std::map(<int>,<>);
-		//Array to carry Directory Name consists of 
+		//Array to carry Directory Name consists of
 		//"incoming particle" "incoming particle" "higgs" "outgoing particle" "outgoing particle" "outgoing particle"
 		std::string Names [6] = {"", "", "", "", "", ""};
 		int Name_Index = 0;
 		for (std::vector<KLHEParticle>::const_iterator lheParticle = event.m_lheParticles->particles.begin(); lheParticle != event.m_lheParticles->particles.end(); ++lheParticle)
 		{
 			ParticlesGroup* selectedParticles = nullptr;
-			//construct name of events 
+			//construct name of events
 			TParticlePDG* pdgParticle = m_databasePDG->GetParticle(lheParticle->pdgId);
 			if (pdgParticle)
 			{
@@ -181,7 +181,7 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 	                                //LOG(WARNING) << "HiggsParticle: " << pdgParticle->GetName();
 					selectedParticles = &higgsParticles;
 	                                selectedParticles->nHiggsBosons += 1;
-	
+
                                 	if ((lheParticle->pdgId) == 25)
 	                                {
 	                                        selectedParticles = &higgsParticles;
@@ -244,14 +244,14 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 		//swapping four momenta
 		//jet correction
 
-		//pdgParticle->GetName() has no specific order 
+		//pdgParticle->GetName() has no specific order
 		//madgraph sorts particle before antiparticle in event names (exception uxb?)
 		//puts gluons first
 		//up type quarks second
 		//downtype quarks third => gucdsb
 		if ((jetname=="u_baru") || (jetname=="b_barb") || (jetname=="c_barc") || (jetname=="d_bard") || (jetname=="s_bars") ||
 			(jetname=="bs") || (jetname=="bd") || (jetname=="bc") || (jetname=="bu") ||
-			(jetname=="sd") || (jetname=="sc") || (jetname=="su") || 
+			(jetname=="sd") || (jetname=="sc") || (jetname=="su") ||
 			(jetname=="dc") || (jetname=="du") ||
 			(jetname=="cu") ||
 			(jetname=="b_bars_bar") || (jetname=="b_bard_bar") || (jetname=="b_barc_bar") || (jetname=="b_baru_bar") ||
@@ -318,7 +318,7 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 
 		directoryname = initialname+higgsname+jetname;
 		//std::cout << "Directory Name: " << directoryname << std::endl;
-		
+
 		//LOG(INFO) << productionMode << directoryname;
 		//LOG(INFO) << event.m_lheParticles->particles->size() << ": " << numberGluons << ", " << numberBottomQuarks << ", " << numberOtherQuarks << ", " << Utility::ToUnderlyingValue(productionMode);
 
@@ -334,11 +334,11 @@ void MadGraphReweightingProducer::Produce(event_type const& event, product_type&
 		if ((jetParticles.nGluons + jetParticles.nLightQuarks + jetParticles.nHeavyQuarks ==2) &&
 		    (!(Utility::Contains(m_madGraphProcessDirectoriesByName, directoryname))))
 		{
-		
+
 		}
 		//if ((initialParticles.nLightQuarks==2) &&
 		//    (jetParticles.nGluons==0))
-		
+
 		//this uses the reweighting json file
 		if (Utility::Contains(m_madGraphProcessDirectoriesByName, directoryname))
 		{

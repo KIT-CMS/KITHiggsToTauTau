@@ -8,7 +8,7 @@
 
 /**
    \brief GlobalProducer, for valid muons.
-   
+
    Required config tags in addtion to the ones of the base class:
    - MuonChargedIsoVetoConeSize (default given)
    - MuonNeutralIsoVetoConeSize (default given)
@@ -51,7 +51,7 @@ public:
 		else if (muonIsoTypeUserMode == "calculated") return MuonIsoTypeUserMode::CALCULATED;
 		else return MuonIsoTypeUserMode::NONE;
 	}
-	
+
 	HttValidMuonsProducer(
 			std::vector<KMuon*> product_type::*validMuons=&product_type::m_validMuons,
 			std::vector<KMuon*> product_type::*invalidMuons=&product_type::m_invalidMuons,
@@ -78,33 +78,33 @@ public:
 			float (setting_type::*GetMuonTrackDxyCut)(void) const=&setting_type::GetMuonTrackDxyCut,
 			float (setting_type::*GetMuonTrackDzCut)(void) const=&setting_type::GetMuonTrackDzCut
 	);
-	
+
 	virtual void Init(setting_type const& settings) {
 
 		ValidMuonsProducer<HttTypes>::Init(settings);
-		
+
 		muonIsoTypeUserMode = ToMuonIsoTypeUserMode(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy((settings.*GetMuonIsoTypeUserMode)())));
 
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingMuonIso", [this](event_type const& event, product_type const& product) {
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingMuonIso", [this](event_type const& event, product_type const& product, setting_type const& settings) {
 			return product.m_validMuons.size() >= 1 ? SafeMap::GetWithDefault(product.m_muonIsolation, product.m_validMuons[0], DefaultValues::UndefinedDouble) : DefaultValues::UndefinedDouble;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingMuonIsoOverPt", [this](event_type const& event, product_type const& product) {
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("leadingMuonIsoOverPt", [this](event_type const& event, product_type const& product, setting_type const& settings) {
 			return product.m_validMuons.size() >= 1 ? SafeMap::GetWithDefault(product.m_muonIsolationOverPt, product.m_validMuons[0], DefaultValues::UndefinedDouble) : DefaultValues::UndefinedDouble;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_loose_1", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_loose_1", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return product.m_validMuons.size() >= 1 ? product.m_validMuons[0]->idLoose() : DefaultValues::UndefinedFloat;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_medium_1", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_medium_1", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return product.m_validMuons.size() >= 1 ? product.m_validMuons[0]->idMedium() : DefaultValues::UndefinedFloat;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_tight_1", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_tight_1", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return product.m_validMuons.size() >= 1 ? product.m_validMuons[0]->idTight() : DefaultValues::UndefinedFloat;
 		});
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_highpt_1", [this](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("id_m_highpt_1", [this](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return product.m_validMuons.size() >= 1 ? product.m_validMuons[0]->idHighPt() : DefaultValues::UndefinedFloat;
 		});
@@ -137,12 +137,12 @@ private:
 	float (setting_type::*GetMuonIsoPtSumOverPtUpperThresholdEB)(void) const;
 	float (setting_type::*GetMuonIsoPtSumOverPtUpperThresholdEE)(void) const;
 	float (setting_type::*GetMuonTrackDxyCut)(void) const;
-	float (setting_type::*GetMuonTrackDzCut)(void) const;	
+	float (setting_type::*GetMuonTrackDzCut)(void) const;
 };
 
 
 /**
-   \brief 
+   \brief
 */
 
 class HttValidLooseMuonsProducer: public HttValidMuonsProducer
@@ -157,17 +157,17 @@ public:
 	virtual std::string GetProducerId() const override {
 		return "HttValidLooseMuonsProducer";
 	}
-	
+
 	virtual void Init(setting_type const& settings) override {
-	
+
 		HttValidMuonsProducer::Init(settings);
-	
+
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nLooseMuons", [this](event_type const& event, product_type const& product) {
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nLooseMuons", [this](event_type const& event, product_type const& product, setting_type const& settings) {
 			return product.m_validLooseMuons.size();
 		});
 	}
-	
+
 	HttValidLooseMuonsProducer(
 			std::vector<KMuon*> product_type::*validMuons=&product_type::m_validLooseMuons,
 			std::vector<KMuon*> product_type::*invalidMuons=&product_type::m_invalidLooseMuons,
@@ -199,7 +199,7 @@ public:
 
 
 /**
-   \brief 
+   \brief
 */
 
 class HttValidVetoMuonsProducer: public HttValidMuonsProducer
@@ -216,14 +216,14 @@ public:
 	}
 
 	virtual void Init(setting_type const& settings) override {
-	
+
 		HttValidMuonsProducer::Init(settings);
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nVetoMuons", [this](event_type const& event, product_type const& product) {
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nVetoMuons", [this](event_type const& event, product_type const& product, setting_type const& settings) {
 			return product.m_validVetoMuons.size();
 		});
 	}
-	
+
 	HttValidVetoMuonsProducer(
 			std::vector<KMuon*> product_type::*validMuons=&product_type::m_validVetoMuons,
 			std::vector<KMuon*> product_type::*invalidMuons=&product_type::m_invalidVetoMuons,

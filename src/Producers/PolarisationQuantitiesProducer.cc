@@ -20,61 +20,61 @@ std::string PolarisationQuantitiesProducer::GetProducerId() const
 void PolarisationQuantitiesProducer::Init(setting_type const& settings)
 {
 	ProducerBase<HttTypes>::Init(settings);
-	
+
 	// add possible quantities for the lambda ntuples consumers
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaHHKinFit_1", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaHHKinFit_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_a1OmegaHHKinFit, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaHHKinFit_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaHHKinFit_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_a1OmegaHHKinFit, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaSvfit_1", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaSvfit_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_a1OmegaSvfit, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaSvfit_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("a1OmegaSvfit_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_a1OmegaSvfit, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("rhoNeutralChargedAsymmetry_1", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("rhoNeutralChargedAsymmetry_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_rhoNeutralChargedAsymmetry, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("rhoNeutralChargedAsymmetry_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("rhoNeutralChargedAsymmetry_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_rhoNeutralChargedAsymmetry, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergyHHKinFit_1", [](event_type const& event, product_type const& product) {
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergyHHKinFit_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleOverFullEnergyHHKinFit, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergyHHKinFit_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergyHHKinFit_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleOverFullEnergyHHKinFit, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergySvfit_1", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergySvfit_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleOverFullEnergySvfit, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergySvfit_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleOverFullEnergySvfit_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleOverFullEnergySvfit, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleHHKinFit_1", [](event_type const& event, product_type const& product) {
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleHHKinFit_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleToFullAngleHHKinFit, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleHHKinFit_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleHHKinFit_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleToFullAngleHHKinFit, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleSvfit_1", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleSvfit_1", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleToFullAngleSvfit, product.m_flavourOrderedLeptons.at(0), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleSvfit_2", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("visibleToFullAngleSvfit_2", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(SafeMap::GetWithDefault(product.m_visibleToFullAngleSvfit, product.m_flavourOrderedLeptons.at(1), DefaultValues::UndefinedDouble));
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("tauPolarisationDiscriminatorHHKinFit", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("tauPolarisationDiscriminatorHHKinFit", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(product.m_tauPolarisationDiscriminatorHHKinFit);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("tauPolarisationDiscriminatorSvfit", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("tauPolarisationDiscriminatorSvfit", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(product.m_tauPolarisationDiscriminatorSvfit);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("tauPolarisationDiscriminatorSimpleFit", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("tauPolarisationDiscriminatorSimpleFit", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return static_cast<float>(product.m_tauPolarisationDiscriminatorSimpleFit);
 	});
 }
@@ -99,7 +99,7 @@ void PolarisationQuantitiesProducer::Produce(
 				product.m_visibleOverFullEnergyHHKinFit[*lepton] = (fittedTauHHKinFit->E() != 0.0 ? (*lepton)->p4.E() / fittedTauHHKinFit->E() : DefaultValues::UndefinedDouble);
 				product.m_visibleToFullAngleHHKinFit[*lepton] = ROOT::Math::VectorUtil::Angle((*lepton)->p4, *fittedTauHHKinFit);
 			}
-		
+
 			// SVfit version
 			RMFLV* fittedTauSvfit = (indexLepton == 0 ? product.m_svfitResults.fittedTau1LV : product.m_svfitResults.fittedTau2LV);
 			if (fittedTauSvfit != nullptr)
@@ -107,11 +107,11 @@ void PolarisationQuantitiesProducer::Produce(
 				product.m_visibleOverFullEnergySvfit[*lepton] = (indexLepton == 0 ? (*lepton)->p4.E() / fittedTauSvfit->E() : product.m_svfitResults.fittedTau2ERatio);
 				product.m_visibleToFullAngleSvfit[*lepton] = ROOT::Math::VectorUtil::Angle((*lepton)->p4, *fittedTauSvfit);
 			}
-			
+
 			++indexLepton;
 		}
 	} // limit scope of indexLepton
-	
+
 	size_t indexLepton = 0;
 	for (std::vector<KTau*>::iterator tau = product.m_validTaus.begin(); tau != product.m_validTaus.end(); ++tau)
 	{
@@ -142,7 +142,7 @@ void PolarisationQuantitiesProducer::Produce(
 				piDoubleChargeSign2 = &((*tau)->chargedHadronCandidates.at(2).p4);
 			}
 			std::vector<RMFLV*> pions = { piDoubleChargeSign1, piDoubleChargeSign2, piSingleChargeSign };
-			
+
 			// HHKinFit version
 			if (Utility::Contains(product.m_hhKinFitTaus, static_cast<KLepton*>(*tau)))
 			{
@@ -154,7 +154,7 @@ void PolarisationQuantitiesProducer::Produce(
 				a1Helper a1QuantitiesHHKinFit(a1HelperInputsHHKinFit, Utility::ConvertPtEtaPhiMLorentzVector<RMFLV, TLorentzVector>((*tau)->p4));
 				product.m_a1OmegaHHKinFit[*tau] = a1QuantitiesHHKinFit.getA1omega();
 			}
-		
+
 			// SVfit version
 			RMFLV* fittedTauSvfit = (indexLepton == 0 ? product.m_svfitResults.fittedTau1LV : product.m_svfitResults.fittedTau2LV);
 			if (fittedTauSvfit != nullptr)
@@ -167,7 +167,7 @@ void PolarisationQuantitiesProducer::Produce(
 				a1Helper a1QuantitiesSvfit(a1HelperInputsSvfit, Utility::ConvertPtEtaPhiMLorentzVector<RMFLV, TLorentzVector>((*tau)->p4));
 				product.m_a1OmegaSvfit[*tau] = a1QuantitiesSvfit.getA1omega();
 			}
-		
+
 			if (! tauPolarisationDiscriminatorChosen)
 			{
 				product.m_tauPolarisationDiscriminatorHHKinFit = SafeMap::GetWithDefault(product.m_a1OmegaHHKinFit, static_cast<KLepton*>(*tau), DefaultValues::UndefinedDouble);
@@ -175,7 +175,7 @@ void PolarisationQuantitiesProducer::Produce(
 				tauPolarisationDiscriminatorChosen = true;
 			}
 		}
-		
+
 		// 1-prong + pi0 method
 		if (((*tau)->decayMode == reco::PFTau::hadronicDecayMode::kOneProng1PiZero) &&
 		    ((*tau)->chargedHadronCandidates.size() > 0) &&
@@ -184,7 +184,7 @@ void PolarisationQuantitiesProducer::Produce(
 			double energyChargedPi = (*tau)->sumChargedHadronCandidates().E();
 			double energyNeutralPi = (*tau)->piZeroMomentum().E();
 			product.m_rhoNeutralChargedAsymmetry[*tau] = (((energyNeutralPi + energyChargedPi) != 0.0) ? (energyChargedPi - energyNeutralPi) / (energyChargedPi + energyNeutralPi) : 0.0);
-			
+
 			if (! tauPolarisationDiscriminatorChosen)
 			{
 				product.m_tauPolarisationDiscriminatorHHKinFit = SafeMap::Get(product.m_rhoNeutralChargedAsymmetry, static_cast<KLepton*>(*tau));
@@ -192,10 +192,10 @@ void PolarisationQuantitiesProducer::Produce(
 				tauPolarisationDiscriminatorChosen = true;
 			}
 		}
-		
+
 		++indexLepton;
 	}
-	
+
 	// combination
 	bool tauFound = false;
 	bool muonFound = false;
@@ -236,5 +236,5 @@ void PolarisationQuantitiesProducer::Produce(
 		}
 	}
 	tauPolarisationDiscriminatorChosen = (tauPolarisationDiscriminatorChosen || (product.m_flavourOrderedLeptons.size() > 0));
-	
+
 }

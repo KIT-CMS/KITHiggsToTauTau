@@ -16,9 +16,9 @@ std::string HHKinFitProducer::GetProducerId() const
 void HHKinFitProducer::Init(setting_type const& settings)
 {
 	ProducerBase<HttTypes>::Init(settings);
-	
+
 	// add possible quantities for the lambda ntuples consumers
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("hhKinFitTau1LV", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("hhKinFitTau1LV", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 0) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]);
@@ -28,8 +28,8 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedRMFLV;
 		}
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Pt", [](event_type const& event, product_type const& product) {
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Pt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 0) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]).Pt();
@@ -39,7 +39,7 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Eta", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Eta", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 0) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]).Eta();
@@ -49,7 +49,7 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Phi", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Phi", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 0) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]).Phi();
@@ -59,7 +59,7 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Mass", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau1Mass", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 0) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[0]).mass();
@@ -69,8 +69,8 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-		
-	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("hhKinFitTau2LV", [](event_type const& event, product_type const& product) {
+
+	LambdaNtupleConsumer<HttTypes>::AddRMFLVQuantity("hhKinFitTau2LV", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 1) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]);
@@ -80,8 +80,8 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedRMFLV;
 		}
 	});
-	
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Pt", [](event_type const& event, product_type const& product) {
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Pt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 1) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]).Pt();
@@ -91,7 +91,7 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Eta", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Eta", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 1) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]).Eta();
@@ -101,7 +101,7 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Phi", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Phi", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 1) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]).Phi();
@@ -111,7 +111,7 @@ void HHKinFitProducer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Mass", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("hhKinFitTau2Mass", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		if ((product.m_flavourOrderedLeptons.size() > 1) && Utility::Contains(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]))
 		{
 			return SafeMap::Get(product.m_hhKinFitTaus, product.m_flavourOrderedLeptons[1]).mass();
@@ -128,20 +128,20 @@ void HHKinFitProducer::Produce(event_type const& event, product_type& product,
 {
 	// consider only the first two leptons
 	assert(product.m_flavourOrderedLeptons.size() >= 2);
-	
+
 	TLorentzVector visibleTau1 = Utility::ConvertPtEtaPhiMLorentzVector<RMFLV, TLorentzVector>(product.m_flavourOrderedLeptons[0]->p4);
 	TLorentzVector visibleTau2 = Utility::ConvertPtEtaPhiMLorentzVector<RMFLV, TLorentzVector>(product.m_flavourOrderedLeptons[1]->p4);
 	TVector2 met = Utility::ConvertPxPyVector<RMFLV, TVector2>(product.m_met.p4);
 	TMatrixD metCov = Utility::ConvertMatrixSym<ROOT::Math::SMatrix<double, 2, 2, ROOT::Math::MatRepSym<double, 2> >>(product.m_met.significance, 2, 4);
-	
+
 	HHKinFit2::HHKinFitMasterSingleHiggs hhKinFit(visibleTau1, visibleTau2, met, metCov);
 	hhKinFit.addHypo(90); // TODO: make configurable
-	
+
 	try
 	{
 		hhKinFit.fit();
 		HHKinFit2::HHFitHypothesisSingleHiggs hhKinFitHypothesis = hhKinFit.getBestHypothesis();
-	
+
 		product.m_hhKinFitTaus[product.m_flavourOrderedLeptons[0]] = Utility::ConvertPtEtaPhiMLorentzVector<TLorentzVector>(hhKinFit.getFittedTau1(hhKinFitHypothesis));
 		product.m_hhKinFitTaus[product.m_flavourOrderedLeptons[1]] = Utility::ConvertPtEtaPhiMLorentzVector<TLorentzVector>(hhKinFit.getFittedTau2(hhKinFitHypothesis));
 	}

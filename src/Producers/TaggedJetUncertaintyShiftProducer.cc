@@ -70,16 +70,13 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		// Create uncertainty map (only if shifts are to be applied)
 		if (jec_shifts_applied && individualUncertainty != HttEnumTypes::JetEnergyUncertaintyShiftName::Closure)
 		{
-			JetCorrectorParameters const * jetCorPar = new JetCorrectorParameters(uncertaintyFile, uncertainty);
-			JetCorParMap[individualUncertainty] = jetCorPar;
-
-			JetCorrectionUncertainty * jecUnc(new JetCorrectionUncertainty(*JetCorParMap[individualUncertainty]));
-			JetUncMap[individualUncertainty] = jecUnc;
+			JetCorrectorParameters jetCorPar(uncertaintyFile, uncertainty);
+			JetUncMap[individualUncertainty] = std::make_unique<JetCorrectionUncertainty>(jetCorPar);
 		}
 
 		// Add quantities to event
 		std::string njetsQuantity = "njetspt30_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(njetsQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(njetsQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			int nJetsPt30 = 0;
 			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
@@ -90,30 +87,30 @@ void TaggedJetUncertaintyShiftProducer::Init(setting_type const& settings)
 		});
 
 		std::string mjjQuantity = "mjj_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mjjQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(mjjQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
 			{
-				std::vector<KJet*> shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second;
+				std::vector<std::shared_ptr<KJet> > const shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second;
 				return shiftedJets.size() > 1 ? (shiftedJets.at(0)->p4 + shiftedJets.at(1)->p4).mass() : -11.f;
 			}
 			return -11.f;
 		});
 
 		std::string jdetaQuantity = "jdeta_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(jdetaQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity(jdetaQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			float jdeta = -1;
 			if ((product.m_correctedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
 			{
-				std::vector<KJet*> shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second;
+				std::vector<std::shared_ptr<KJet> > const shiftedJets = (product.m_correctedJetsBySplitUncertainty).find(individualUncertainty)->second;
 				return shiftedJets.size() > 1 ? std::abs(shiftedJets.at(0)->p4.Eta() - shiftedJets.at(1)->p4.Eta()) : -1;
 			}
 			return jdeta;
 		});
 
 		std::string nbjetsQuantity = "nbtag_" + uncertainty;
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(nbjetsQuantity, [individualUncertainty](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity(nbjetsQuantity, [individualUncertainty](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			int nbtag = 0;
 			if ((product.m_correctedBTaggedJetsBySplitUncertainty).find(individualUncertainty) != (product.m_correctedJetsBySplitUncertainty).end())
@@ -133,15 +130,19 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 	{
 		// Shifting copies of previously corrected jets
 		std::vector<double> closureUncertainty((product.m_correctedTaggedJets).size(), 0.);
+
+		(product.m_correctedJetsBySplitUncertainty).clear();
+		(product.m_correctedBTaggedJetsBySplitUncertainty).clear();
+
 		for (auto const& uncertainty : individualUncertaintyEnums)
 		{
 			// Construct copies of jets in order not to modify actual (corrected) jets by the uncertainty
-			std::vector<KJet*> shifted_copied_jets;
+			std::vector<std::shared_ptr<KJet>> shifted_copied_jets;
 			for (typename std::vector<std::shared_ptr<KJet> >::iterator jet = (product.m_correctedTaggedJets).begin(); jet != (product.m_correctedTaggedJets).end(); ++jet)
-				shifted_copied_jets.push_back(new KJet(*(jet->get())));
+				shifted_copied_jets.push_back(std::make_shared<KJet>(*(jet->get())));
 
 			unsigned iJet = 0;
-			for (std::vector<KJet*>::iterator jet = shifted_copied_jets.begin(); jet != shifted_copied_jets.end(); ++jet, ++iJet)
+			for (std::vector<std::shared_ptr<KJet>>::iterator jet = shifted_copied_jets.begin(); jet != shifted_copied_jets.end(); ++jet, ++iJet)
 			{
 				double unc = 0;
 				if (std::abs((*jet)->p4.Eta()) < 5.2 && (*jet)->p4.Pt() > 9. && uncertainty != HttEnumTypes::JetEnergyUncertaintyShiftName::Closure)
@@ -162,19 +163,19 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 
 			// Sort vectors of shifted jets (shifted_copied_jets holds jets varied maximum by one uncertainty) by pt
 			std::sort(shifted_copied_jets.begin(), shifted_copied_jets.end(),
-					  [](KJet* jet1, KJet* jet2) -> bool
+					  [](std::shared_ptr<KJet> const jet1, std::shared_ptr<KJet> const jet2) -> bool
 					  { return jet1->p4.Pt() > jet2->p4.Pt(); }
 			);
 
 			// Create new vector from shifted jets that pass ID as in ValidJetsProducer
-			std::vector<KJet*> shiftedJets;
-			std::vector<KJet*> shiftedBTaggedJets;
-			for (std::vector<KJet*>::iterator jet = shifted_copied_jets.begin(); jet != shifted_copied_jets.end(); ++jet)
+			std::vector<std::shared_ptr<KJet>> shiftedJets;
+			std::vector<std::shared_ptr<KJet>> shiftedBTaggedJets;
+			for (std::vector<std::shared_ptr<KJet>>::iterator jet = shifted_copied_jets.begin(); jet != shifted_copied_jets.end(); ++jet)
 			{
 				bool validJet = true;
 
 				// Passing jet ID
-				validJet = validJet && ValidJetsProducer::passesJetID(*jet, jetIDVersion, jetID);
+				validJet = validJet && ValidJetsProducer::passesJetID((*jet).get(), jetIDVersion, jetID);
 
 				// Kinematical cuts
 				for (std::map<std::string, std::vector<float> >::const_iterator lowerPtCut = lowerPtCuts.begin(); lowerPtCut != lowerPtCuts.end() && validJet; ++lowerPtCut)
@@ -194,7 +195,7 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 
 				if (settings.GetUseJECShiftsForBJets())
 				{
-					KJet* tjet = static_cast<KJet*>(*jet);
+					auto tjet = static_cast<std::shared_ptr<KJet>>(*jet);
 
 					// Determine if jet is btagged
 					bool validBJet = true;
@@ -245,7 +246,7 @@ void TaggedJetUncertaintyShiftProducer::Produce(event_type const& event, product
 				}
 
 				// Delete non valid (b)jets
-				if (!validJet) delete *jet;
+				// if (!validJet) delete *jet;
 			}
 
 			(product.m_correctedJetsBySplitUncertainty)[uncertainty] = shiftedJets;

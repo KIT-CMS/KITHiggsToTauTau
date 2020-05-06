@@ -15,221 +15,221 @@ void GenTauCPProducerBase::Init(setting_type const& settings)
 	// add possible quantities for the lambda ntuples consumers
 
 	// MC-truth PV coordinates
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPVx", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPVx", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genPV != nullptr) ? (product.m_genPV)->x() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPVy", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPVy", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genPV != nullptr) ? (product.m_genPV)->y() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPVz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPVz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genPV != nullptr) ? (product.m_genPV)->z() : DefaultValues::UndefinedFloat);
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStarCP", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStarCP", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiStarCP;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStarCP_rho", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStarCP_rho", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiStarCP_rho;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("gen_posyTauL", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("gen_posyTauL", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_gen_posyTauL;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("gen_negyTauL", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("gen_negyTauL", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_gen_negyTauL;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("gen_yTau", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("gen_yTau", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_gen_yTau;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiCP", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiCP", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiCP;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiCPLab", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiCPLab", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiCPLab;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiCP_rho", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiCP_rho", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiCP_rho;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStar", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStar", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiStar;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genOStarCP", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genOStarCP", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOStarCP;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStar_rho", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhiStar_rho", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhiStar_rho;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhi;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genOCP", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genOCP", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOCP;
 	});
 
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhi_rho", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genPhi_rho", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genPhi_rho;
 	});
 
 	// energy of the charged prong particles in the tau rest frame
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("TauMProngEnergy", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("TauMProngEnergy", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genChargedProngEnergies.first;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("TauPProngEnergy", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("TauPProngEnergy", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genChargedProngEnergies.second;
 	});
 
 	// charged particles of a one-prong tau
 	// FIXME these two variables could be removed ???
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau1OneProngsSize", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau1OneProngsSize", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genTau1ProngsSize;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau2OneProngsSize", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau2OneProngsSize", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genTau2ProngsSize;
 	});
 
 	// decay mode of the taus
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau1DecayMode", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau1DecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genTau1DecayMode;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau2DecayMode", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("Tau2DecayMode", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genTau2DecayMode;
 	});
-	
+
 	// MC-truth IP vectors
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP1x", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP1x", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((&product.m_genIP1 != nullptr) ? (product.m_genIP1).x() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP1y", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP1y", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((&product.m_genIP1 != nullptr) ? (product.m_genIP1).y() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP1z", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP1z", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((&product.m_genIP1 != nullptr) ? (product.m_genIP1).z() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP2x", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP2x", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((&product.m_genIP2 != nullptr) ? (product.m_genIP2).x() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP2y", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP2y", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((&product.m_genIP2 != nullptr) ? (product.m_genIP2).y() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP2z", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genIP2z", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((&product.m_genIP2 != nullptr) ? (product.m_genIP2).z() : DefaultValues::UndefinedFloat);
 	});
 
 	// cosPsi
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genCosPsiPlus", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genCosPsiPlus", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genCosPsiPlus;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genCosPsiMinus", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genCosPsiMinus", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genCosPsiMinus;
 	});
 
 	// properties of the charged particles from tau decays
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1PdgId", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1PdgId", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->pdgId : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Pt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Pt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->p4.Pt() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Pz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Pz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->p4.Pz() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Eta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Eta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->p4.Eta() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Phi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Phi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->p4.Phi() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Mass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Mass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->p4.mass() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Energy", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart1Energy", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged1 != nullptr ? product.m_genOneProngCharged1->p4.E() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2PdgId", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2PdgId", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->pdgId : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Pt", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Pt", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->p4.Pt() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Pz", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Pz", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->p4.Pz() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Eta", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Eta", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->p4.Eta() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Phi", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Phi", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->p4.Phi() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Mass", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Mass", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->p4.mass() : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Energy", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("OneProngChargedPart2Energy", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genOneProngCharged2 != nullptr ? product.m_genOneProngCharged2->p4.E() : DefaultValues::UndefinedDouble;
 	});
 
 	// longitudinal spin correlations
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genZPlus", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genZPlus", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genZPlus;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genZMinus", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genZMinus", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genZMinus;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genZs", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genZs", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_genZs;
 	});
@@ -251,7 +251,7 @@ void GenTauCPProducerBase::Produce(event_type const& event, product_type& produc
 				product.m_genPV = &event.m_genParticles->at(i).vertex;
 			}
 		}
-	
+
 
 		// initialization of TVector3 objects
 		product.m_genIP1.SetXYZ(-999,-999,-999);
@@ -377,7 +377,7 @@ void GenTauCPProducerBase::Produce(event_type const& event, product_type& produc
 			product.m_genPhiCP = cpq.CalculatePhiCP(product.m_genBosonLV, selectedTau1->m_genParticle->p4, selectedTau2->m_genParticle->p4, chargedPart1->p4, chargedPart2->p4);
 			product.m_genPhi = cpq.GetGenPhi();
 			product.m_genOCP = cpq.GetGenOCP();
-	
+
 			// Calculate phiCP in the lab frame
 			product.m_genPhiCPLab = cpq.CalculatePhiCPLab(selectedTau1->m_genParticle->p4, selectedTau2->m_genParticle->p4, chargedPart1->p4, chargedPart2->p4);
 
@@ -429,43 +429,43 @@ void GenMatchedTauCPProducer::Init(setting_type const& settings)
 	// add possible quantities for the lambda ntuples consumers
 
 	// MC-truth SV vertex, obtained by tau daughter 1
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV1x", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV1x", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genSV1 != nullptr) ? (product.m_genSV1)->x() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV1y", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV1y", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genSV1 != nullptr) ? (product.m_genSV1)->y() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV1z", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV1z", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genSV1 != nullptr) ? (product.m_genSV1)->z() : DefaultValues::UndefinedFloat);
 	});
 
 	// MC-truth SV vertex, obtained by tau daughter 2
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV2x", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV2x", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genSV2 != nullptr) ? (product.m_genSV2)->x() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV2y", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV2y", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genSV2 != nullptr) ? (product.m_genSV2)->y() : DefaultValues::UndefinedFloat);
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV2z", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genSV2z", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return ((product.m_genSV2 != nullptr) ? (product.m_genSV2)->z() : DefaultValues::UndefinedFloat);
 	});
 
 	// charge of leptons
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genQ_1", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genQ_1", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedGenLeptons.at(0) ? static_cast<int>(product.m_flavourOrderedGenLeptons.at(0)->charge()) : DefaultValues::UndefinedDouble;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genQ_2", [](event_type const& event, product_type const& product)
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("genQ_2", [](event_type const& event, product_type const& product, setting_type const& settings)
 	{
 		return product.m_flavourOrderedGenLeptons.at(1) ? static_cast<int>(product.m_flavourOrderedGenLeptons.at(1)->charge()) : DefaultValues::UndefinedDouble;
 	});
-	
+
 
 }
 
@@ -479,26 +479,26 @@ void GenMatchedTauCPProducer::Produce(event_type const& event, product_type& pro
 		GenParticleDecayTree* genTau2;
 		genTau1 = &(product.m_genBosonTree.m_daughters.at(0));
 		genTau2 = &(product.m_genBosonTree.m_daughters.at(1));
-		
+
 		// get the full decay tree and decay mode of the genTaus
 		genTau1->CreateFinalStateProngs(genTau1);
 		genTau2->CreateFinalStateProngs(genTau2);
 		genTau1->DetermineDecayMode(genTau1);
 		genTau2->DetermineDecayMode(genTau2);
-	
+
 		// initialization of TVector3 objects
 		product.m_genIP1.SetXYZ(-999,-999,-999);
 		product.m_genIP2.SetXYZ(-999,-999,-999);
-	
-	
+
+
 		if (product.m_chargeOrderedGenLeptons.at(0) and product.m_chargeOrderedGenLeptons.at(1)){
-			
+
 			KGenParticle* genParticle1 = product.m_flavourOrderedGenLeptons.at(0);
 			KGenParticle* genParticle2 = product.m_flavourOrderedGenLeptons.at(1);
 
 			// Defining CPQuantities object to use variables and functions of this class
 			CPQuantities cpq;
-				
+
 
 			// if the genLepton is a hadronic tau, we want to take its hadronic daughter
 			// for the calculation of the IP vector
@@ -507,7 +507,7 @@ void GenMatchedTauCPProducer::Produce(event_type const& event, product_type& pro
 				GenParticleDecayTree* genTauTree;
 				if (genParticle1->pdgId == genTau1->m_genParticle->pdgId) genTauTree = genTau1;
 				else genTauTree = genTau2;
-			
+
 				std::vector<GenParticleDecayTree*> prongs = genTauTree->m_finalStates;
 				int decayMode = (int)genTauTree->m_decayMode;
 
@@ -519,7 +519,7 @@ void GenMatchedTauCPProducer::Produce(event_type const& event, product_type& pro
 						}
 					}  // loop over the prongs
 				}  // if 1-prong decay mode
-				
+
 			}  // if genParticle1 is a tau
 
 			if (std::abs(genParticle2->pdgId) == DefaultValues::pdgIdTau){
@@ -527,7 +527,7 @@ void GenMatchedTauCPProducer::Produce(event_type const& event, product_type& pro
 				GenParticleDecayTree* genTauTree;
 				if (genParticle2->pdgId == genTau1->m_genParticle->pdgId) genTauTree = genTau1;
 				else genTauTree = genTau2;
-			
+
 				std::vector<GenParticleDecayTree*> prongs = genTauTree->m_finalStates;
 				int decayMode = (int)genTauTree->m_decayMode;
 
@@ -539,18 +539,18 @@ void GenMatchedTauCPProducer::Produce(event_type const& event, product_type& pro
 						}
 					}  // loop over the prongs
 				}  // if 1-prong decay mode
-				
+
 			}  // if genParticle2 is a tau
 
 
 			product.m_genSV1 = &genParticle1->vertex;
 			product.m_genSV2 = &genParticle2->vertex;
-	
+
 			if (product.m_genPV != nullptr){
 
 				product.m_genIP1 = cpq.CalculateIPVector(genParticle1, product.m_genPV);
 				product.m_genIP2 = cpq.CalculateIPVector(genParticle2, product.m_genPV);
-				
+
 				// calculate phi*cp
 				if (genParticle1->charge() > 0){
 					product.m_genCosPsiPlus  = cpq.CalculateCosPsi(genParticle1->p4, product.m_genIP1);
@@ -561,9 +561,9 @@ void GenMatchedTauCPProducer::Produce(event_type const& event, product_type& pro
 					product.m_genCosPsiMinus = cpq.CalculateCosPsi(genParticle1->p4, product.m_genIP1);
 					product.m_genPhiStarCP = cpq.CalculatePhiStarCP(genParticle2->p4, genParticle1->p4, product.m_genIP2, product.m_genIP1);
 				}
-					
+
 			}
-	
+
 		} // if chargeOrderedGenLeptons is a non-empty vector
 
 

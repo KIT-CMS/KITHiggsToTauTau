@@ -16,7 +16,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 	std::string weightName = settings.GetEventWeight();
 	MuonIDshortTerm = (settings.GetMuonID() == "medium2016");
 	bool IsData = settings.GetInputIsData();
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("wt", [weightName](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("wt", [weightName](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> weight;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -25,7 +25,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return weight;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("n_vtx", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("n_vtx", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> nvtx;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -34,7 +34,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return nvtx;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("run", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("run", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> Run;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -43,7 +43,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return Run;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("pt_t", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("pt_t", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> pt_tag;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -52,7 +52,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return pt_tag;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("eta_t", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("eta_t", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> eta_tag;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -61,7 +61,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return eta_tag;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("phi_t", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("phi_t", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> phi_tag;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -70,7 +70,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return phi_tag;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("id_t", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("id_t", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> id_tag;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -79,7 +79,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return id_tag;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("iso_t", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("iso_t", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> iso_tag;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -88,7 +88,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return iso_tag;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("muon_p", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("muon_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> muon_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -97,7 +97,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return muon_probe;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trk_p", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trk_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trk_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -105,8 +105,8 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			trk_probe.push_back(TagAndProbePair->second->isTrackerMuon());
 		}
 		return trk_probe;
-	});	
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("pt_p", [](event_type const& event, product_type const& product){
+	});
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("pt_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> pt_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -115,7 +115,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return pt_probe;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("eta_p", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("eta_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> eta_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -124,7 +124,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return eta_probe;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("phi_p", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("phi_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> phi_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -133,7 +133,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return phi_probe;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("id_p", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("id_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> id_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -142,7 +142,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return id_probe;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("iso_p", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("iso_p", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> iso_probe;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -151,7 +151,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return iso_probe;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("m_ll", [](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVFloatQuantity("m_ll", [](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<float> mll;
 		for (std::vector<std::pair<KMuon*, KMuon*>>::const_iterator TagAndProbePair = product.m_TagAndProbeMuonPairs.begin();
 	       TagAndProbePair != product.m_TagAndProbeMuonPairs.end(); ++TagAndProbePair)
@@ -161,7 +161,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		return mll;
 	});
 	//Trigger info
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_t_IsoMu22", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_t_IsoMu22", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -174,7 +174,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->first);
 				bool Hltfired = false;
-				for (auto hlts: trigger)         
+				for (auto hlts: trigger)
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_IsoMu22_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -183,17 +183,17 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
 					trg.push_back(false);
-				}                                                                                                                                                                                                                                              
+				}
 			}
 		}
 		return trg;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_t_IsoMu19Tau", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_t_IsoMu19Tau", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -206,7 +206,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->first);
 				bool Hltfired = false;
-				for (auto hlts: (trigger))         
+				for (auto hlts: (trigger))
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -215,17 +215,17 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
 					trg.push_back(false);
-				}                                                                                                                                                                                                                                               
+				}
 			}
 		}
 		return trg;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoMu22", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoMu22", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -238,7 +238,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->second);
 				bool Hltfired = false;
-				for (auto hlts: (trigger))         
+				for (auto hlts: (trigger))
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_IsoMu22_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -247,17 +247,17 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
 					trg.push_back(false);
-				}                                                                                                                                                                                                                                               
+				}
 			}
 		}
 		return trg;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoTkMu22", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoTkMu22", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -270,7 +270,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->second);
 				bool Hltfired = false;
-				for (auto hlts: (trigger))         
+				for (auto hlts: (trigger))
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_IsoTkMu22_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -279,17 +279,17 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
 					trg.push_back(false);
-				}                                                                                                                                                                                                                                               
+				}
 			}
 		}
 		return trg;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_PFTau120", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_PFTau120", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -302,7 +302,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->second);
 				bool Hltfired = false;
-				for (auto hlts: (trigger))         
+				for (auto hlts: (trigger))
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_VLooseIsoPFTau120_Trk50_eta2p1_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -311,17 +311,17 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
 					trg.push_back(false);
-				}                                                                                                                                                                                                                                            
+				}
 			}
 		}
 		return trg;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoMu19TauL1", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoMu19TauL1", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -334,7 +334,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->second);
 				bool Hltfired = false;
-				for (auto hlts: (trigger))         
+				for (auto hlts: (trigger))
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -343,7 +343,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
@@ -353,7 +353,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 		}
 		return trg;
 	});
-	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoMu19Tau", [IsData](event_type const& event, product_type const& product){
+	LambdaNtupleConsumer<HttTypes>::AddVIntQuantity("trg_p_IsoMu19Tau", [IsData](event_type const& event, product_type const& product, setting_type const& settings){
 		std::vector<int> trg;
 		bool noHlt = false;
 		if (product.m_selectedHltNames.empty()) noHlt = true;
@@ -366,7 +366,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 			}else{
 				auto trigger = product.m_detailedTriggerMatchedMuons.at(TagAndProbePair->second);
 				bool Hltfired = false;
-				for (auto hlts: (trigger))         
+				for (auto hlts: (trigger))
 				{
 					if (boost::regex_search(hlts.first, boost::regex("HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v", boost::regex::icase | boost::regex::extended)))
 					{
@@ -375,7 +375,7 @@ void TagAndProbeMuonPairProducer::Init(setting_type const& settings)
 							Hltfired = true;
 							trg.push_back(true);
 						}
-					}                                                                                                                                                                                                                                                
+					}
 				}
 				if (!Hltfired)
 				{
@@ -420,7 +420,7 @@ void TagAndProbeMuonPairProducer::Produce(event_type const& event, product_type&
 	for (std::vector<KMuon*>::iterator muon = muons.begin(); muon != muons.end(); ++muon)
 	{
 		product.m_validMuons.push_back(*muon);  //needed for ValidMuonsFilter
-		
+
 		//probe filter
 		if (
 			(*muon)->p4.Pt() > 10.0 &&
@@ -532,7 +532,7 @@ void TagAndProbeElectronPairProducer::Produce(event_type const& event, product_t
 	for (std::vector<KElectron*>::iterator electron = electrons.begin(); electron != electrons.end(); ++electron)
 	{
 		product.m_validElectrons.push_back(*electron); //needed for ValidElectronsFilter
-		
+
 		//probe filter
 		if (
 			(*electron)->p4.Pt() > 10.0 &&
@@ -599,7 +599,7 @@ TagAndProbeGenElectronProducer::TagAndProbeGenElectronProducer() :
 void TagAndProbeGenElectronProducer::Init(setting_type const& settings)
 {
 	TagAndProbeGenLeptonProducer<KElectron>::Init(settings);
-	
+
 	validLeptonsInput = ToValidLeptonsInput(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy(settings.GetValidElectronsInput())));
 }
 std::string TagAndProbeGenElectronProducer::GetProducerId() const
@@ -617,7 +617,7 @@ TagAndProbeGenMuonProducer::TagAndProbeGenMuonProducer() :
 void TagAndProbeGenMuonProducer::Init(setting_type const& settings)
 {
 	TagAndProbeGenLeptonProducer<KMuon>::Init(settings);
-	
+
 	validLeptonsInput = ToValidLeptonsInput(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy(settings.GetValidMuonsInput())));
 }
 std::string TagAndProbeGenMuonProducer::GetProducerId() const
@@ -635,7 +635,7 @@ TagAndProbeGenTauProducer::TagAndProbeGenTauProducer() :
 void TagAndProbeGenTauProducer::Init(setting_type const& settings)
 {
 	TagAndProbeGenLeptonProducer<KTau>::Init(settings);
-	
+
 	validLeptonsInput = ToValidLeptonsInput(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy(settings.GetValidTausInput())));
 }
 std::string TagAndProbeGenTauProducer::GetProducerId() const

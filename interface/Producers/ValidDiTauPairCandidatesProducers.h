@@ -24,7 +24,7 @@ public:
 	typedef typename HttTypes::event_type event_type;
 	typedef typename HttTypes::product_type product_type;
 	typedef typename HttTypes::setting_type setting_type;
-	
+
 	ValidDiTauPairCandidatesProducerBase(std::vector<TLepton1*> product_type::*validLeptonsMember1,
 	                                     std::vector<TLepton2*> product_type::*validLeptonsMember2) :
 		ProducerBase<HttTypes>(),
@@ -36,7 +36,7 @@ public:
 	virtual void Init(setting_type const& settings) override
 	{
 		ProducerBase<HttTypes>::Init(settings);
-		
+
 		// configurations possible:
 		// "cut" --> applied to all pairs
 		// "<index in setting HltPaths>:<cut>" --> applied to pairs that fired and matched ONLY the indexed HLT path
@@ -49,13 +49,13 @@ public:
 		);
 		m_hltFiredBranchNames = Utility::ParseVectorToMap(settings.GetHLTBranchNames());
 		std::map<std::string, std::vector<std::string> > hltUsingOnlyFirstLeptonPerBranchNames = Utility::ParseVectorToMap(settings.GetUsingOnlyFirstLeptonPerHLTBranchNames());
-		
+
 		// add possible quantities for the lambda ntuples consumers
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nDiTauPairCandidates", [](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nDiTauPairCandidates", [](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return static_cast<int>(product.m_validDiTauPairCandidates.size());
 		});
-		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nAllDiTauPairCandidates", [](event_type const& event, product_type const& product)
+		LambdaNtupleConsumer<HttTypes>::AddIntQuantity("nAllDiTauPairCandidates", [](event_type const& event, product_type const& product, setting_type const& settings)
 		{
 			return static_cast<int>(product.m_validDiTauPairCandidates.size()+product.m_invalidDiTauPairCandidates.size());
 		});
@@ -83,7 +83,7 @@ public:
 		{
 			std::map<std::string, std::vector<float>> lepton1LowerPtCutsByHltName = m_lepton1LowerPtCutsByHltName;
 			std::map<std::string, std::vector<float>> lepton2LowerPtCutsByHltName = m_lepton2LowerPtCutsByHltName;
-			LambdaNtupleConsumer<HttTypes>::AddBoolQuantity(hltNames.first, [hltUsingOnlyFirstLeptonPerBranchNames , hltNames, hltPathsWithoutCommonMatch, lepton1LowerPtCutsByHltName, lepton2LowerPtCutsByHltName](event_type const& event, product_type const& product)
+			LambdaNtupleConsumer<HttTypes>::AddBoolQuantity(hltNames.first, [hltUsingOnlyFirstLeptonPerBranchNames , hltNames, hltPathsWithoutCommonMatch, lepton1LowerPtCutsByHltName, lepton2LowerPtCutsByHltName](event_type const& event, product_type const& product, setting_type const& settings)
 			{
 				bool diTauPairFiredTrigger = false;
 				//LOG(DEBUG) << "Beginning of lambda function for " << hltNames.first << std::endl;
@@ -123,7 +123,7 @@ public:
 							}
 							//LOG(DEBUG) << "Found trigger for the lepton 2? " << hltFired1 << std::endl;
 							bool hltFired = hltFired1 && hltFired2;
-							// passing kinematic cuts for trigger 
+							// passing kinematic cuts for trigger
 							if (lepton1LowerPtCutsByHltName.find(hltName) != lepton1LowerPtCutsByHltName.end())
 							{
 								hltFired = hltFired &&
@@ -226,13 +226,13 @@ public:
 			});
 		}
 	}
-	
-	virtual void Produce(event_type const& event, product_type & product, 
+
+	virtual void Produce(event_type const& event, product_type & product,
 	                     setting_type const& settings) const override
 	{
 		product.m_validDiTauPairCandidates.clear();
-		//LOG(DEBUG) << "ValidDiTauPairCandidatesProducer processing run:lumi:event " << event.m_eventInfo->nRun << ":" << event.m_eventInfo->nLumi << ":" << event.m_eventInfo->nEvent << std::endl; 
-		
+		//LOG(DEBUG) << "ValidDiTauPairCandidatesProducer processing run:lumi:event " << event.m_eventInfo->nRun << ":" << event.m_eventInfo->nLumi << ":" << event.m_eventInfo->nEvent << std::endl;
+
 		// build pairs for all combinations
 		for (typename std::vector<TLepton1*>::iterator lepton1 = (product.*m_validLeptonsMember1).begin();
 		     lepton1 != (product.*m_validLeptonsMember1).end(); ++lepton1)
@@ -241,7 +241,7 @@ public:
 			     lepton2 != (product.*m_validLeptonsMember2).end(); ++lepton2)
 			{
 				DiTauPair diTauPair(*lepton1, *lepton2);
-				
+
 				// pair selections
 				bool validDiTauPair = true;
 

@@ -11,23 +11,23 @@
 void TauTauRestFrameSelector::Init(setting_type const& settings)
 {
 	ProducerBase<HttTypes>::Init(settings);
-	
+
 	tauTauRestFrameReco = HttEnumTypes::ToTauTauRestFrameReco(boost::algorithm::to_lower_copy(boost::algorithm::trim_copy(settings.GetTauTauRestFrameReco())));
-	
+
 	// add possible quantities for the lambda ntuples consumers
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauPt", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauPt", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_diTauSystem.Pt();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauEta", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauEta", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_diTauSystem.Eta();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauPhi", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauPhi", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_diTauSystem.Phi();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauMass", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauMass", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return product.m_diTauSystem.mass();
 	});
-	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauSystemReconstructed", [](event_type const& event, product_type const& product) {
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diTauSystemReconstructed", [](event_type const& event, product_type const& product, setting_type const& settings) {
 		return (product.m_diTauSystemReconstructed ? 1.0 : 0.0);
 	});
 }
@@ -46,21 +46,21 @@ void TauTauRestFrameSelector::Produce(event_type const& event, product_type& pro
 		product.m_flavourOrderedTauMomenta.push_back(product.m_flavourOrderedLeptons[0]->p4);
 		product.m_flavourOrderedTauMomenta.push_back(product.m_flavourOrderedLeptons[1]->p4);
 		product.m_tauMomentaReconstructed = false;
-		
+
 		product.m_diTauSystem = product.m_diLeptonSystem;
 		product.m_diTauSystemReconstructed = false;
 	}
 	if (tauTauRestFrameReco == HttEnumTypes::TauTauRestFrameReco::VISIBLE_LEPTONS_MET)
 	{
 		product.m_tauMomentaReconstructed = false;
-		
+
 		product.m_diTauSystem = product.m_diLeptonPlusMetSystem;
 		product.m_diTauSystemReconstructed = false;
 	}
 	else if (tauTauRestFrameReco == HttEnumTypes::TauTauRestFrameReco::COLLINEAR_APPROXIMATION)
 	{
 		product.m_flavourOrderedTauMomenta = product.m_flavourOrderedTauMomentaCA;
-		
+
 		// fall back to VISIBLE_LEPTONS_MET system in case of non-physical CA solutions
 		product.m_diTauSystem = (product.m_validCollinearApproximation ? product.m_diTauSystemCA : product.m_diLeptonPlusMetSystem);
 		product.m_diTauSystemReconstructed = product.m_validCollinearApproximation;
@@ -75,16 +75,16 @@ void TauTauRestFrameSelector::Produce(event_type const& event, product_type& pro
 	{
 		LOG(FATAL) << "TauTau restframe reconstruction of type " << Utility::ToUnderlyingValue(tauTauRestFrameReco) << " not yet implemented!";
 	}
-	
+
 	// calculate boosts
 	for (std::vector<RMFLV>::const_iterator tauMomentum = product.m_flavourOrderedTauMomenta.begin();
 	     tauMomentum != product.m_flavourOrderedTauMomenta.end(); ++tauMomentum)
 	{
 		product.m_boostsToTauRestFrames.push_back(ROOT::Math::Boost(tauMomentum->BoostToCM()));
 	}
-	
+
 	product.m_boostToDiTauRestFrame = ROOT::Math::Boost(product.m_diTauSystem.BoostToCM());
-	
+
 	product.m_tauTauRestFrameReco = tauTauRestFrameReco;
 }
 
