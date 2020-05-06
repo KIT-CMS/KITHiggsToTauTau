@@ -19,6 +19,19 @@ public:
 	static double GetJetPlusBJetQuantity(product_type const& product,
 	                               dibjet_extractor_lambda dibjetQuantity);
 
+	static double GetHighCSVJetPlusBJetQuantity(product_type const& product,
+	                               dibjet_extractor_lambda dibjetQuantity);
+
+	static double GetDiBJetQuantity_bReg(product_type const& product,
+	                               dibjet_extractor_lambda dibjetQuantity);
+
+	static double GetJetPlusBJetQuantity_bReg(product_type const& product,
+	                               dibjet_extractor_lambda dibjetQuantity);
+
+	static double GetHighCSVJetPlusBJetQuantity_bReg(product_type const& product,
+	                               dibjet_extractor_lambda dibjetQuantity);
+
+
 	virtual std::string GetProducerId() const override {
 		return "DiBJetQuantitiesProducer";
 	}
