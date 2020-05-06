@@ -192,7 +192,12 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bphi_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bmva_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingBJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bcsv_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingBJetCSV"]);
-	
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bm_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetMass"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpt_bReg_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetPt_bReg"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("beta_bReg_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetEta_bReg"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bphi_bReg_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetPhi_bReg"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bm_bReg_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJetMass_bReg"]);
+
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jmva_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingJetCSV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpt_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Pt"]);
@@ -200,7 +205,12 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bphi_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Phi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bmva_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingBJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bcsv_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["trailingBJetCSV"]);
-	
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bm_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Mass"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bpt_bReg_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Pt_bReg"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("beta_bReg_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Eta_bReg"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bphi_bReg_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Phi_bReg"]);
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("bm_bReg_2", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["bJet2Mass_bReg"]);
+
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_3", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["thirdJetCSV"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_4", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["fourthJetCSV"]);
 
@@ -441,6 +451,309 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 			return DefaultValues::UndefinedFloat;
 		}
         });
+
+
+	// di b-jet quantities. If >= 2 b jets are found, calculate using two leading b jets
+	// The following di-b jet functions are also filled if only 1 b jet is present
+	// In this case, leading non-b jet is used 
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_bb_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_JetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedDouble;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mbb_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_JetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedDouble;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_JetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_JetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_puppi_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_JetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttvisbb_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_JetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_JetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_puppi_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_JetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+
+
+
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_bb_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diBJetSystem).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_highCSVJetPlusBJetSystem).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedDouble;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mbb_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diBJetSystem).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_highCSVJetPlusBJetSystem).mass();
+		}
+		else {
+			return DefaultValues::UndefinedDouble;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_diBJetSystem).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_highCSVJetPlusBJetSystem).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_highCSVJetPlusBJetSystem).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_puppi_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_highCSVJetPlusBJetSystem).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttvisbb_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_diBJetSystem).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_highCSVJetPlusBJetSystem).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_highCSVJetPlusBJetSystem).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_puppi_highCSV", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_highCSVJetPlusBJetSystem).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+
+
+	// di b-jet quantities. If >= 2 b jets are found, calculate using two leading b jets
+	// The following di-b jet functions are also filled if only 1 b jet is present
+	// In this case, leading non-b jet is used 
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_bb_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_highCSVJetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedDouble;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("mbb_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_highCSVJetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedDouble;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttvisbb_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_highCSVJetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_highCSVJetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttbb_puppi_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem_bReg).Pt();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_highCSVJetPlusBJetSystem_bReg).Pt();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttvisbb_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonSystem + product.m_highCSVJetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusMetSystem + product.m_highCSVJetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("m_ttbb_puppi_highCSV_bReg", [](event_type const& event, product_type const& product)
+        {
+		if (product.m_diBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_diBJetSystem_bReg).mass();
+		}
+		else if (product.m_JetPlusBJetSystemAvailable) {
+			return (product.m_diLeptonPlusPuppiMetSystem + product.m_highCSVJetPlusBJetSystem_bReg).mass();
+		}
+		else {
+			return DefaultValues::UndefinedFloat;
+		}
+        });
+
+
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("pt_ttjj_puppi", [](event_type const& event, product_type const& product)
         {
                 return product.m_diJetSystemAvailable ? (product.m_diLeptonPlusPuppiMetSystem + product.m_diJetSystem).Pt() : DefaultValues::UndefinedFloat;
