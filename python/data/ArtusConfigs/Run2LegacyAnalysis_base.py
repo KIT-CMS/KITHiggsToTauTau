@@ -265,7 +265,6 @@ def build_config(nickname, **kwargs):
 
   if btag_eff or etau_fake_es or mtau_fake_es:  # disable GeneratorWeightProducer for sub-analyses
     config["Processors"].remove("producer:GeneratorWeightProducer")
-
   if addlheweights:
     for pipeline_name, pipeline_config in config["Pipelines"].iteritems():
       if 'nominal' in pipeline_name:  # no need to store lhe for shifts

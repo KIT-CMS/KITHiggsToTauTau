@@ -41,6 +41,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TopPtReweightingProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/ZPtReweightProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/ScaleVariationProducer.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NMSSMVariationProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SimpleEleTauFakeRateWeightProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SimpleMuTauFakeRateWeightProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/JetToTauFakesProducer.h"
@@ -267,6 +268,8 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 //		return new SimpleFitProducer();
 	else if(id == ScaleVariationProducer().GetProducerId())
 		return new ScaleVariationProducer();
+	else if(id == NMSSMVariationProducer().GetProducerId())
+		return new NMSSMVariationProducer();
 	else if(id == EmuQcdWeightProducer().GetProducerId())
 		return new EmuQcdWeightProducer();
 	else if(id == RooWorkspaceWeightProducer().GetProducerId())
