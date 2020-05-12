@@ -813,6 +813,9 @@ class HiggsToTauTauAnalysisWrapper():
 
 		if self._args.minimal_setup:
 			epilogArguments += (" --minimal-setup ")
+                if self._args.nmssm:
+                        epilogArguments += (" --nmssm ")
+
 
 		epilogArguments += (" --btager %s " % self._args.btager)
 		epilogArguments += (" --btager-wp %s " % ' '.join(self._args.btager_wp))
