@@ -210,7 +210,42 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
 		}
 		else return DefaultValues::UndefinedFloat;
 	});
-
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemPt", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4.Pt();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemEta", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4.Eta();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemPhi", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4.Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemPt_bReg", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr).Pt();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemEta_bReg", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr).Eta();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemPhi_bReg", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr).Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetPlusBJetdiLepPhi", [](event_type const& event, product_type const& product) {
 			return product.m_JetPlusBJetSystemAvailable ? (product.m_highCSVJetPlusBJetSystem + product.m_diLeptonSystem).Phi() : DefaultValues::UndefinedFloat;
 	});	
