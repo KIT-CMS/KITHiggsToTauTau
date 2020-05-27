@@ -228,6 +228,12 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
                 }
                 else return DefaultValues::UndefinedFloat;
         });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemMass", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4.mass();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemPt_bReg", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
                 if (product.m_JetPlusBJetSystemAvailable) {
                         return (static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr).Pt();
@@ -243,6 +249,12 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemPhi_bReg", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
                 if (product.m_JetPlusBJetSystemAvailable) {
                         return (static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr).Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystemMass_bReg", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystemAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_highCSVJetIndex])->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr).mass();
                 }
                 else return DefaultValues::UndefinedFloat;
         });
