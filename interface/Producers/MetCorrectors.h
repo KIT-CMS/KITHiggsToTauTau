@@ -40,7 +40,8 @@ public:
 			 std::string (setting_type::*GetRecoilCorrectorFile)(void) const,
 			 std::string (setting_type::*GetMetShiftCorrectorFile)(void) const,
 			 bool (setting_type::*GetUpdateMetWithCorrectedLeptons)(void) const,
-			 bool (setting_type::*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)(void) const
+			 bool (setting_type::*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)(void) const,
+			 bool (setting_type::*GetUpdateMetWithBJetRegression)(void) const
 	) :
 		ProducerBase<HttTypes>(),
 		m_metMemberUncorrected(metMemberUncorrected),
@@ -49,7 +50,8 @@ public:
 		GetRecoilCorrectorFile(GetRecoilCorrectorFile),
 		GetMetShiftCorrectorFile(GetMetShiftCorrectorFile),
 		GetUpdateMetWithCorrectedLeptons(GetUpdateMetWithCorrectedLeptons),
-		GetUpdateMetWithCorrectedLeptonsFromSignalOnly(GetUpdateMetWithCorrectedLeptonsFromSignalOnly)
+		GetUpdateMetWithCorrectedLeptonsFromSignalOnly(GetUpdateMetWithCorrectedLeptonsFromSignalOnly),
+		GetUpdateMetWithBJetRegression(GetUpdateMetWithBJetRegression)
 	{
 	}
 
@@ -262,6 +264,21 @@ public:
 				metY -= eY;
 			}
 		}
+		if ((settings.*GetUpdateMetWithBJetRegression)())
+		{
+			// b-jet regression
+			if (product.m_bTaggedJets.size() > 0) LOG(DEBUG) << "Correcting MET for b-jet regression";
+			for (uint ibjet=0; ibjet < product.m_bTaggedJets.size(); ibjet++)
+				 {
+					float eX = (product.m_bTaggedJets.at(ibjet)->p4.Px())*(product.m_bTaggedJets.at(ibjet)->bjetRegCorr) - (product.m_bTaggedJets.at(ibjet)->p4.Px());
+					float eY = (product.m_bTaggedJets.at(ibjet)->p4.Py())*(product.m_bTaggedJets.at(ibjet)->bjetRegCorr) - (product.m_bTaggedJets.at(ibjet)->p4.Py());
+					LOG(DEBUG) << "\tCorrecting met with (px,py) " << eX << "," << eY << " for b-jet: " << product.m_bTaggedJets.at(ibjet)->p4;
+					metX -= eX;
+					metY -= eY;
+				 }
+
+
+		}
 		
 		// Recoil corrections follow
 		int nJets30 = product_type::GetNJetsAbovePtThreshold(product.m_validJets, 30.0);
@@ -359,9 +376,9 @@ public:
 				product.m_met = product.*m_metMemberCorrected;
 			}
 		}
-		else if ((settings.*GetUpdateMetWithCorrectedLeptons)()) // Apply at least corrections from lepton adjustments
+		else if ((settings.*GetUpdateMetWithCorrectedLeptons)() || (settings.*GetUpdateMetWithBJetRegression)()) // Apply at least corrections from lepton adjustments or b-jet regression
 		{
-                        LOG(DEBUG) << "Applying lepton corrections";
+			LOG(DEBUG) << "Applying lepton corrections";
 			(product.*m_metMemberCorrected).p4.SetPxPyPzE(
 				metX,
 				metY,
@@ -440,6 +457,8 @@ protected:
 	bool m_correctGlobalMet;
 	bool (setting_type::*GetUpdateMetWithCorrectedLeptons)(void) const;
 	bool (setting_type::*GetUpdateMetWithCorrectedLeptonsFromSignalOnly)(void) const;
+	bool (setting_type::*GetUpdateMetWithBJetRegression)(void) const;
+
 	KMETUncertainty::Type m_metUncertaintyType;
         bool checkFirstElectron = false;
         bool checkSecondElectron = false;

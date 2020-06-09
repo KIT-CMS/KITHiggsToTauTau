@@ -11,7 +11,8 @@ MetCorrector::MetCorrector() :
 			 &HttTypes::setting_type::GetMetRecoilCorrectorFile,
 			 &HttTypes::setting_type::GetMetShiftCorrectorFile,
 			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons,
-			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly,
+			 &HttTypes::setting_type::GetUpdateMetWithBJetRegression
 	)
 {
 }
@@ -55,7 +56,8 @@ MvaMetCorrector::MvaMetCorrector() :
 			 &HttTypes::setting_type::GetMvaMetRecoilCorrectorFile,
 			 &HttTypes::setting_type::GetMvaMetShiftCorrectorFile,
 			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons,
-			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly,
+			 &HttTypes::setting_type::GetUpdateMetWithBJetRegression
 	)
 {
 }
@@ -115,7 +117,8 @@ PuppiMetCorrector::PuppiMetCorrector() :
 			 &HttTypes::setting_type::GetPuppiMetRecoilCorrectorFile,
 			 &HttTypes::setting_type::GetPuppiMetShiftCorrectorFile,
 			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptons,
-			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly
+			 &HttTypes::setting_type::GetUpdateMetWithCorrectedLeptonsFromSignalOnly,
+			 &HttTypes::setting_type::GetUpdateMetWithBJetRegression
 	)
 {
 }
