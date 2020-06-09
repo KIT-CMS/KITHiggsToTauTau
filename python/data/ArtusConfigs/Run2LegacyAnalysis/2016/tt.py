@@ -381,16 +381,17 @@ def build_config(nickname, **kwargs):
                                                               "producer:ValidBTaggedJetsProducer"))
   config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
-  config["Processors"].extend((                               "producer:MetCorrector",
+  config["Processors"].extend((                               "producer:DiJetQuantitiesProducer",
+                                                              "producer:DiBJetQuantitiesProducer",
+                                                              "producer:MetCorrector",
                                                               "producer:PuppiMetCorrector",
                                                               "producer:SimpleEleTauFakeRateWeightProducer",
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY or isEmbedded:        config["Processors"].append( "producer:ZPtReweightProducer")
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
-                                                              "producer:DiLeptonQuantitiesProducer",
-                                                              "producer:DiJetQuantitiesProducer",
-                                                              "producer:DiBJetQuantitiesProducer"))
+                                                              "producer:DiLeptonQuantitiesProducer"
+                                                              ))
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")

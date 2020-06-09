@@ -508,12 +508,13 @@ def build_config(nickname, **kwargs):
   config["Processors"].append(                                "filter:MinimalPlotlevelFilter")
   if btag_eff: config["ProcessorsBtagEff"] = copy.deepcopy(config["Processors"])
   if not isData:                 config["Processors"].append( "producer:HttValidGenTausProducer")
-  config["Processors"].extend((                               "producer:MetCorrector",
+  config["Processors"].extend((                               "producer:DiJetQuantitiesProducer",
+                                                              "producer:DiBJetQuantitiesProducer",
+                                                              "producer:MetCorrector",
                                                               "producer:PuppiMetCorrector",
                                                               "producer:TauTauRestFrameSelector",
-                                                              "producer:DiLeptonQuantitiesProducer",
-                                                              "producer:DiJetQuantitiesProducer",
-                                                              "producer:DiBJetQuantitiesProducer"))
+                                                              "producer:DiLeptonQuantitiesProducer"
+                                                              ))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")

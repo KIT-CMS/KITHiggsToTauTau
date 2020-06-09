@@ -267,6 +267,7 @@ public:
 		if ((settings.*GetUpdateMetWithBJetRegression)())
 		{
 			// b-jet regression
+			// Should only be done if b-jet regressed b-quantities are used
 			if (product.m_bTaggedJets.size() > 0) LOG(DEBUG) << "Correcting MET for b-jet regression";
 			for (uint ibjet=0; ibjet < product.m_bTaggedJets.size(); ibjet++)
 				 {
@@ -276,6 +277,17 @@ public:
 					metX -= eX;
 					metY -= eY;
 				 }
+		 	// NMSSM analysis-specific: B-jet regression is applied also on non-bjets if only one jet is present in the event
+			// In this case also correct the MET for this
+			if(product.m_JetPlusBJetSystemAvailable) 
+			{
+				float eX = (product.m_validJets[product.m_highCSVJetIndex]->p4.Px())*(product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr) - (product.m_validJets[product.m_highCSVJetIndex]->p4.Px());
+				float eY = (product.m_validJets[product.m_highCSVJetIndex]->p4.Py())*(product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr) - (product.m_validJets[product.m_highCSVJetIndex]->p4.Py());
+				LOG(DEBUG) << "\tCorrecting met with (px,py) " << eX << "," << eY << " for high-csv jet: " << product.m_validJets[product.m_highCSVJetIndex]->p4;
+
+				metX -= eX;
+			    metY -= eY;
+			}
 
 
 		}
