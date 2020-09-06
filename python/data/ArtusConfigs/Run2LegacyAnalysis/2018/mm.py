@@ -144,35 +144,83 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedMuons"] = True
   config["BranchGenMatchedTaus"] = True
 
-  ### Efficiencies & weights configuration
-  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1.root"
-  config["RooWorkspaceWeightNames"] = [
-      "0:singleTriggerMCEfficiencyWeightKIT",
-      "0:singleTriggerDataEfficiencyWeightKIT",
+  if isEmbedded:
+    config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    config["EmbeddedWeightWorkspaceWeightNames"] = [
+          "0:muonEffTrgWeight",
+          "0:muonEffIDWeight",
+          "1:muonEffIDWeight",
 
-      "0:isoWeight",
-      "0:idWeight",
-      "1:isoWeight",
-      "1:idWeight",
-  ]
-  config["RooWorkspaceObjectNames"] = [
-      "0:m_trg24_27_kit_mc",
-      "0:m_trg24_27_kit_data",
+          "0:isoWeight",
+          "0:idWeight",
 
-      "0:m_iso_kit_ratio",
-      "0:m_id_kit_ratio",
-      "1:m_iso_kit_ratio",
-      "1:m_id_kit_ratio",
-  ]
-  config["RooWorkspaceObjectArguments"] = [
-      "0:m_pt,m_eta",
-      "0:m_pt,m_eta",
+          "1:isoWeight",
+          "1:idWeight",
 
-      "0:m_pt,m_eta",
-      "0:m_pt,m_eta",
-      "1:m_pt,m_eta",
-      "1:m_pt,m_eta",
-  ]
+          "0:trigger_24_Weight",
+          "0:trigger_27_Weight",
+          "0:trigger_24_27_Weight"
+          ]
+    config["EmbeddedWeightWorkspaceObjectNames"] = [
+          "0:m_sel_trg_ratio",
+          "0:m_sel_idEmb_ratio",
+          "1:m_sel_idEmb_ratio",
+
+          "0:m_iso_binned_embed_kit_ratio",
+          "0:m_id_embed_kit_ratio",
+
+          "1:m_iso_binned_embed_kit_ratio",
+          "1:m_id_embed_kit_ratio",
+
+          "0:m_trg24_embed_kit_ratio",
+          "0:m_trg27_embed_kit_ratio",
+          "0:m_trg24_27_embed_kit_ratio"
+          ]
+    config["EmbeddedWeightWorkspaceObjectArguments"] = [
+          "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
+          "0:gt_pt,gt_eta",
+          "1:gt_pt,gt_eta",
+
+          "0:m_pt,m_eta,m_iso",
+          "0:m_pt,m_eta",
+
+          "1:m_pt,m_eta,m_iso",
+          "1:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta"
+          ]
+  elif not isData:
+    ### Efficiencies & weights configuration
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_v18_1.root"
+    config["RooWorkspaceWeightNames"] = [
+        "0:singleTriggerMCEfficiencyWeightKIT",
+        "0:singleTriggerDataEfficiencyWeightKIT",
+
+        "0:isoWeight",
+        "0:idWeight",
+        "1:isoWeight",
+        "1:idWeight",
+    ]
+    config["RooWorkspaceObjectNames"] = [
+        "0:m_trg24_27_kit_mc",
+        "0:m_trg24_27_kit_data",
+
+        "0:m_iso_kit_ratio",
+        "0:m_id_kit_ratio",
+        "1:m_iso_kit_ratio",
+        "1:m_id_kit_ratio",
+    ]
+    config["RooWorkspaceObjectArguments"] = [
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+    ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
@@ -189,17 +237,8 @@ def build_config(nickname, **kwargs):
       "puppimetPerpToZ", "puppimetParToZ",
       "recoilPerpToZ", "recoilParToZ",
       "puppirecoilPerpToZ", "puppirecoilParToZ",
+      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1"
   ])
-  config["Quantities"].pop(config["Quantities"].index("diBJetAbsDeltaEta"))
-  config["Quantities"].pop(config["Quantities"].index("diBJetDeltaPhi"))
-  config["Quantities"].pop(config["Quantities"].index("diBJetEta"))
-  config["Quantities"].pop(config["Quantities"].index("diBJetMass"))
-  config["Quantities"].pop(config["Quantities"].index("diBJetPhi"))
-  config["Quantities"].pop(config["Quantities"].index("diBJetPt"))
-  config["Quantities"].pop(config["Quantities"].index("diBJetdiLepPhi"))
-  config["Quantities"].pop(config["Quantities"].index("jetPlusBJetMass"))
-  config["Quantities"].pop(config["Quantities"].index("jetPlusBJetPt"))
-  config["Quantities"].pop(config["Quantities"].index("jetUsedFordiBJetSystemIsTrueBJet"))
 
   ### Processors & consumers configuration
   config["Processors"] =   []
@@ -228,6 +267,7 @@ def build_config(nickname, **kwargs):
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",
                          "cutflow_histogram"]
