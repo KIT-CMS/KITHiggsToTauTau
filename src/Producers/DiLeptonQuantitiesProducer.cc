@@ -150,8 +150,19 @@ void DiLeptonQuantitiesProducer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("puppirecoilParToZ", [](event_type const& event, product_type const& product) {
 		return product.puppirecoilParToZ;
 	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("taujet_pt_1", [](event_type const& event, product_type const& product) {
+		return ((product.m_LeptonJets.at(0) != static_cast<KBasicJet*>(nullptr)) ? product.m_LeptonJets.at(0)->p4.Pt() : DefaultValues::UndefinedFloat);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("taujet_eta_1", [](event_type const& event, product_type const& product) {
+		return ((product.m_LeptonJets.at(0) != static_cast<KBasicJet*>(nullptr)) ? product.m_LeptonJets.at(0)->p4.Eta() : DefaultValues::UndefinedFloat);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("taujet_pt_2", [](event_type const& event, product_type const& product) {
+		return ((product.m_LeptonJets.at(1) != static_cast<KBasicJet*>(nullptr)) ? product.m_LeptonJets.at(1)->p4.Pt() : DefaultValues::UndefinedFloat);
+	});
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("taujet_eta_2", [](event_type const& event, product_type const& product) {
+		return ((product.m_LeptonJets.at(1) != static_cast<KBasicJet*>(nullptr)) ? product.m_LeptonJets.at(1)->p4.Eta() : DefaultValues::UndefinedFloat);
+	});
 }
-
 void DiLeptonQuantitiesProducer::Produce(event_type const& event, product_type& product,
 	                                     setting_type const& settings) const
 {
@@ -246,4 +257,10 @@ void DiLeptonQuantitiesProducer::Produce(event_type const& event, product_type& 
 	                                                - product.m_puppimet.p4 - product.m_flavourOrderedLeptons[0]->p4 - product.m_flavourOrderedLeptons[1]->p4);
 	product.puppirecoilParToZ = Quantities::MetParToZ(product.m_flavourOrderedLeptons[0]->p4, product.m_flavourOrderedLeptons[1]->p4,
 	                                                - product.m_puppimet.p4 - product.m_flavourOrderedLeptons[0]->p4 - product.m_flavourOrderedLeptons[1]->p4);
+
+	for (auto lepton: product.m_flavourOrderedLeptons)
+    {
+		auto matchingjet = product.m_leptonJetsMap.find(lepton);
+		product.m_LeptonJets.push_back(matchingjet->second);
+    }
 }
