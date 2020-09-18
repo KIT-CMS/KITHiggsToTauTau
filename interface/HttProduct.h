@@ -107,6 +107,7 @@ public:
 	bool m_diLeptonGenSystemFound = false;
 	RMFLV m_diTauGenSystem;
 	bool m_diTauGenSystemFound = false;
+	std::vector<KBasicJet*> m_LeptonJets;
 
 	// filled by the TauSpinnerProducer
 	double m_tauSpinnerPolarisation = DefaultValues::UndefinedDouble;
