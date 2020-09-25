@@ -1,0 +1,3 @@
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_bjetRegression/AnalysisCollections/2018_DATA.txt
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_bjetRegression/AnalysisCollections/2018_EMB.txt
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_bjetRegression/AnalysisCollections/2018_MC.txt
