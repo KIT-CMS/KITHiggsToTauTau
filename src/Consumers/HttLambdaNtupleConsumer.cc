@@ -184,6 +184,8 @@ void HttLambdaNtupleConsumer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jeta_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetEta"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jphi_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetPhi"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jm_6", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["sixthJetMass"]);
+
+	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jpt_test", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetPt"]);
 	
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jmva_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetPuID"]);
 	LambdaNtupleConsumer<KappaTypes>::AddFloatQuantity("jcsv_1", LambdaNtupleConsumer<KappaTypes>::GetFloatQuantities()["leadingJetCSV"]);

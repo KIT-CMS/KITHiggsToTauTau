@@ -42,6 +42,7 @@ def build_list(**kwargs):
         "jphi_2",
         "jpt_1",
         "jpt_2",
+        "jpt_test",
         "mjj",
         "mt_1",
         "mt_1_puppi",
