@@ -76,8 +76,10 @@ def build_config(nickname, **kwargs):
     "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
     "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
     "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v",
-    "trg_singletau_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
-    "trg_singletau_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
+    "trg_singletau120_leading:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
+    "trg_singletau120_trailing:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
+    "trg_singletau140_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
+    "trg_singletau140_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
   ]
   config["CheckLepton1TriggerMatch"] = [
     "trg_singleelectron",
@@ -87,28 +89,34 @@ def build_config(nickname, **kwargs):
     "trg_doubletau",
     "trg_muonelectron_mu23ele12",
     "trg_muonelectron_mu8ele23",
-    "trg_singletau_leading"
+    "trg_singletau120_leading",
+    "trg_singletau140_leading"
   ]
   config["CheckLepton2TriggerMatch"] = [
     "trg_mutaucross",
     "trg_doubletau",
     "trg_muonelectron_mu23ele12",
     "trg_muonelectron_mu8ele23",
-    "trg_singletau_trailing"
+    "trg_singletau120_trailing",
+    "trg_singletau140_trailing"
   ]
   # split by run for data as the doubletau trigger path changes
   if re.search("Run2016(B|C|D|E|F|G)", nickname):
     config["TauTriggerFilterNames"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumIsolationDz02Reg",
+                                       "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:hltPFTau120TrackPt50LooseAbsOrRelVLooseIso",
                                        "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:hltPFTau140TrackPt50LooseAbsOrRelVLooseIso"]
     config["HltPaths"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg",
+                          "HLT_VLooseIsoPFTau120_Trk50_eta2p1",
                           "HLT_VLooseIsoPFTau140_Trk50_eta2p1"]
     config["HLTBranchNames"].append("trg_doubletau:HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v")
     config["DiTauPairLepton1LowerPtCuts"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
     config["DiTauPairLepton2LowerPtCuts"] = ["HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
   elif re.search("Run2016H", nickname):
     config["TauTriggerFilterNames"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumCombinedIsolationDz02Reg",
+                                       "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:hltPFTau120TrackPt50LooseAbsOrRelVLooseIso",
                                        "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:hltPFTau140TrackPt50LooseAbsOrRelVLooseIso"]
     config["HltPaths"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg",
+                          "HLT_VLooseIsoPFTau120_Trk50_eta2p1",
                           "HLT_VLooseIsoPFTau140_Trk50_eta2p1"]
     config["HLTBranchNames"].append("trg_doubletau:HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v")
     config["DiTauPairLepton1LowerPtCuts"] = ["HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg:40.0"]
@@ -117,10 +125,12 @@ def build_config(nickname, **kwargs):
     config["TauTriggerFilterNames"] = [
     "HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumIsolationDz02Reg",
     "HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v:hltDoublePFTau35TrackPt1MediumCombinedIsolationDz02Reg",
+    "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:hltPFTau120TrackPt50LooseAbsOrRelVLooseIso",
     "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:hltPFTau140TrackPt50LooseAbsOrRelVLooseIso"]
     config["HltPaths"] = [
     "HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg",
     "HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg",
+    "HLT_VLooseIsoPFTau120_Trk50_eta2p1",
     "HLT_VLooseIsoPFTau140_Trk50_eta2p1"]
     config["HLTBranchNames"].extend((
     "trg_doubletau:HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v",
