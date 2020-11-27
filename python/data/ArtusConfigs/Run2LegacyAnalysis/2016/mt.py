@@ -71,6 +71,7 @@ def build_config(nickname, **kwargs):
           "HLT_IsoTkMu22_eta2p1",
          # "HLT_IsoMu19_eta2p1_LooseIsoPFTau20",
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1",
+          "HLT_VLooseIsoPFTau120_Trk50_eta2p1",
           "HLT_VLooseIsoPFTau140_Trk50_eta2p1",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
@@ -90,6 +91,7 @@ def build_config(nickname, **kwargs):
   ]
   config["DiTauPairLepton2UpperEtaCuts"] = [
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:2.1",
+          "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:2.1",
           "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:2.1",
   ]
   config["CheckLepton1TriggerMatch"] = [
@@ -106,7 +108,8 @@ def build_config(nickname, **kwargs):
           "trg_doubletau",
           "trg_muonelectron_mu23ele12",
           "trg_muonelectron_mu8ele23",
-          "trg_singletau_trailing",
+          "trg_singletau120_trailing",
+          "trg_singletau140_trailing",
   ]
   config["HLTBranchNames"] = [
           "trg_singleelectron:HLT_Ele25_eta2p1_WPTight_Gsf_v",
@@ -123,8 +126,10 @@ def build_config(nickname, **kwargs):
           "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
           "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
           "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v",
-          "trg_singletau_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
-          "trg_singletau_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
+          "trg_singletau120_leading:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
+          "trg_singletau120_trailing:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
+          "trg_singletau140_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
+          "trg_singletau140_trailing:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
   ]
   config["MuonTriggerFilterNames"] = [
           "HLT_IsoMu22_v:hltL3crIsoL1sMu20L1f0L2f10QL3f22QL3trkIsoFiltered0p09",
@@ -141,6 +146,7 @@ def build_config(nickname, **kwargs):
          # "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_v:hltOverlapFilterIsoMu19LooseIsoPFTau20",
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:hltPFTau20TrackLooseIsoAgainstMuon",
           "HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v:hltOverlapFilterSingleIsoMu19LooseIsoPFTau20",
+          "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:hltPFTau120TrackPt50LooseAbsOrRelVLooseIso",
           "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:hltPFTau140TrackPt50LooseAbsOrRelVLooseIso",
   ]
 
