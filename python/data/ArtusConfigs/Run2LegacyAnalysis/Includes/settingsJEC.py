@@ -25,13 +25,20 @@ def build_config(nickname, **kwargs):
   for include_file in includes:
     analysis_config_module = importlib.import_module(include_file)
     config += analysis_config_module.build_config(nickname)
-
+  # Select the JER correction method  - Possibilities are:
+  # 1. stochasic method only
+  # config["JetEnergyResolutionMethod"] = "stochastic"
+  # 2. hybrid method = stochastic + scaling method
+  # config["JetEnergyResolutionMethod"] = "hybrid"
+	# Details: https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetResolution#Smearing_procedures
+  config["JetEnergyResolutionMethod"] = "hybrid"
   # explicit configuration
   if year == 2016:
     config["JetEnergyCorrectionSplitUncertaintyParameters"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_07Aug2017GH_V11_L1fix_DATA_UncertaintySources_AK4PFchs.txt"
     config["JetEnergyResolutionSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_25nsV1_MC_PtResolution_AK4PFchs.txt"
     config["JetEnergyResolutionSFSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Summer16/Summer16_25nsV1_MC_SF_AK4PFchs.txt"
   elif year == 2017:
+    # v3 is the same as v3b for ak4chs jets
     config["JetEnergyCorrectionSplitUncertaintyParameters"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Fall17/Fall17_17Nov2017F_V32_DATA_UncertaintySources_AK4PFchs.txt"
     config["JetEnergyResolutionSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Fall17/Fall17_V3_MC_PtResolution_AK4PFchs.txt"
     config["JetEnergyResolutionSFSource"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/jec/Fall17/Fall17_V3_MC_SF_AK4PFchs.txt"
