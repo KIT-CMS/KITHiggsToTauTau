@@ -9,17 +9,18 @@ import re
 import json
 import copy
 import Artus.Utility.jsonTools as jsonTools
-#import Kappa.Skimming.datasetsHelperTwopz as datasetsHelperTwopz
+import Kappa.Skimming.datasetsHelperTwopz as datasetsHelperTwopz
 import importlib
-#import os
+import os
 
 def build_config(nickname):
   config = jsonTools.JsonDict()
-  #datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
+  datasetsHelper = datasetsHelperTwopz.datasetsHelperTwopz(os.path.expandvars("$CMSSW_BASE/src/Kappa/Skimming/data/datasets.json"))
   
   # define frequently used conditions
   isMC = not re.search("(?<!PFembedded).Run201", nickname)
-  
+  isEmbedded = datasetsHelper.isEmbedded(nickname)
+  isData = datasetsHelper.isData(nickname) and (not isEmbedded)
   ## fill config:
   # includes
   includes = [
@@ -33,7 +34,8 @@ def build_config(nickname):
   config["GenTaus"] = "genTaus" if isMC else ""
   config["GenTauJets"] = "tauGenJets" if isMC else ""
   config["GenMet"] = "" "genmetTrue" if isMC else ""
-  config["GenJets"] = ""
+  if not isData and not isEmbedded:
+    config["GenJets"] = "genJets"
   config["Electrons"] = "electrons"
   config["ElectronMetadata"] = "electronMetadata"
   config["Muons"] = "muons"
