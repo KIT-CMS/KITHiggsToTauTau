@@ -235,8 +235,8 @@ def build_config(nickname, **kwargs):
 
   config["SingleTauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_singletau.root"
   config["SingleTauTriggerWorkingPoints"] = [
-       # "vvvloose",
-       # "vvloose",
+       "vvvloose",
+       "vvloose",
        "vloose",
        "loose",
        "medium",
