@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <boost/algorithm/string.hpp>
 #include "Artus/Core/interface/ProducerBase.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/HttTypes.h"
 #include "TFile.h"
@@ -45,7 +46,7 @@ public:
                 {
                         for(auto t: settings.GetTauTriggerIDTypes())
                         {
-                                TauSFs[wp][t] = new TauTriggerSFs2017(input, inputEMB, trigger, year, wp, t);
+                                TauSFs[wp][t] = new TauTriggerSFs2017(input, inputEMB, trigger, year, boost::algorithm::to_lower_copy(wp), t);
                         }
                 }
                 m_weightNames = Utility::ParseMapTypes<int,std::string>(Utility::ParseVectorToMap(settings.GetTauTriggerEfficiencyWeightNames()));
