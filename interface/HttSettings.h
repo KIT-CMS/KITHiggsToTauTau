@@ -420,6 +420,10 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerIDTypes, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerEfficiencyWeightNames, {});
 
+        // settings for TauTriggerSFProviderProducer
+	IMPL_SETTING_DEFAULT(std::string, TauTriggerSFProviderInput, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerSFProviderWeightNames, {});
+
 	// settings for SingleTauTriggerEfficiencyProducer
 	IMPL_SETTING_DEFAULT(std::string, SingleTauTriggerInput, "");
 	IMPL_SETTING_STRINGLIST_DEFAULT(SingleTauTriggerWorkingPoints, {});
