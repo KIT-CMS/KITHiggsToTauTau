@@ -198,9 +198,11 @@ def build_config(nickname, **kwargs):
         "0:crossTriggerDataEfficiencyWeight",
         "0:crossTriggerKITDataEfficiencyWeight",
         "0:crossTriggerEMBEfficiencyWeight",
+        "0:crossTriggerMCEfficiencyWeight",
         "1:crossTriggerDataEfficiencyWeight",
         "1:crossTriggerKITDataEfficiencyWeight",
         "1:crossTriggerEMBEfficiencyWeight",
+        "1:crossTriggerMCEfficiencyWeight",
     ]
   else:
     config["TauTriggerEfficiencyWeightNames"] = [
