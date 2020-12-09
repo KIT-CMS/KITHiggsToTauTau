@@ -305,6 +305,13 @@ def build_config(nickname, **kwargs):
           "0:singleTriggerDataEfficiencyWeightKIT",
           "0:singleTriggerEmbeddedEfficiencyWeightKIT",
 
+          "0:singleTriggerDataEfficiencyWeightKIT_27",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_27",
+          "0:singleTriggerDataEfficiencyWeightKIT_27or32",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_27or32",
+          "0:singleTriggerDataEfficiencyWeightKIT_27or32or35",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_27or32or35",
+
           "0:crossTriggerEmbeddedWeight",
           "1:crossTriggerEmbeddedWeight",
 
@@ -332,6 +339,14 @@ def build_config(nickname, **kwargs):
           "0:e_trg27_trg32_trg35_kit_data",
           "0:e_trg27_trg32_trg35_kit_embed",
 
+
+          "0:e_trg27_kit_data",
+          "0:e_trg27_kit_embed",
+          "0:e_trg27_trg32_kit_data",
+          "0:e_trg27_trg32_kit_embed",
+          "0:e_trg27_trg32_trg35_kit_data",
+          "0:e_trg27_trg32_trg35_kit_embed",
+
           "0:e_trg_EleTau_Ele24Leg_embed_kit_ratio",
           "1:et_emb_LooseChargedIsoPFTau30_kit_ratio",
 
@@ -355,6 +370,14 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
 
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+
+
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
@@ -388,6 +411,12 @@ def build_config(nickname, **kwargs):
         "0:singleTriggerDataEfficiencyWeightKIT_35",
         "0:singleTriggerMCEfficiencyWeightKIT_27or35",
         "0:singleTriggerDataEfficiencyWeightKIT_27or35",
+        "0:singleTriggerMCEfficiencyWeightKIT_27",
+        "0:singleTriggerDataEfficiencyWeightKIT_27",
+        "0:singleTriggerMCEfficiencyWeightKIT_27or32",
+        "0:singleTriggerDataEfficiencyWeightKIT_27or32",
+        "0:singleTriggerMCEfficiencyWeightKIT_27or32or35",
+        "0:singleTriggerDataEfficiencyWeightKIT_27or32or35",
 
         "0:idWeight",
         "0:isoWeight",
@@ -406,6 +435,12 @@ def build_config(nickname, **kwargs):
         "0:e_trg35_kit_data",
         "0:e_trg27_trg35_kit_mc",
         "0:e_trg27_trg35_kit_data",
+        "0:e_trg27_kit_mc",
+        "0:e_trg27_kit_data",
+        "0:e_trg27_trg32_kit_mc",
+        "0:e_trg27_trg32_kit_data",
+        "0:e_trg27_trg32_trg35_kit_mc",
+        "0:e_trg27_trg32_trg35_kit_data",
 
         "0:e_iso_kit_ratio",
         "0:e_id90_kit_ratio",
@@ -420,6 +455,12 @@ def build_config(nickname, **kwargs):
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
 
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
@@ -448,6 +489,9 @@ def build_config(nickname, **kwargs):
       "singleTriggerDataEfficiencyWeightKIT_35_1",
       "singleTriggerMCEfficiencyWeightKIT_27or35_1",
       "singleTriggerDataEfficiencyWeightKIT_27or35_1",
+      "singleTriggerDataEfficiencyWeightKIT_27_1",
+      "singleTriggerDataEfficiencyWeightKIT_27or32_1",
+      "singleTriggerDataEfficiencyWeightKIT_27or32or35_1",
       "trigger_27_35_Weight_1","trigger_27_32_32fb_Weight_1","trigger_27_32_Weight_1",
       "trigger_27_35_Weight_1",
       "trigger_27_32_Weight_1",
@@ -461,7 +505,14 @@ def build_config(nickname, **kwargs):
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2"
+          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_27_1", "singleTriggerEmbeddedEfficiencyWeightKIT_27or32_1", "singleTriggerEmbeddedEfficiencyWeightKIT_27or32or35_1",
+    ])
+  else:
+    config["Quantities"].extend([
+      "singleTriggerMCEfficiencyWeightKIT_27_1",
+      "singleTriggerMCEfficiencyWeightKIT_27or32_1",
+      "singleTriggerMCEfficiencyWeightKIT_27or32or35_1",
     ])
   if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([

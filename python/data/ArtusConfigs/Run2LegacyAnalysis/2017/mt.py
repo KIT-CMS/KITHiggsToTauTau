@@ -308,7 +308,12 @@ def build_config(nickname, **kwargs):
 
           "0:trigger_24_Weight",
           "0:trigger_27_Weight",
-          "0:trigger_24_27_Weight"
+          "0:trigger_24_27_Weight",
+
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_24",
+          "0:singleTriggerDataEfficiencyWeightKIT_24",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_24or27",
+          "0:singleTriggerDataEfficiencyWeightKIT_24or27",
           ]
     config["EmbeddedWeightWorkspaceObjectNames"] = [
           "0:m_sel_trg_ratio",
@@ -334,7 +339,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",
-          "0:m_trg24_27_embed_kit_ratio"
+          "0:m_trg24_27_embed_kit_ratio",
+
+          "0:m_trg24_kit_embed",
+          "0:m_trg24_kit_data",
+          "0:m_trg24_27_kit_embed",
+          "0:m_trg24_27_kit_data"
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -360,7 +370,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
-          "0:m_pt,m_eta"
+          "0:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
           ]
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
@@ -375,6 +390,10 @@ def build_config(nickname, **kwargs):
 
         "0:singleTriggerMCEfficiencyWeightKIT",
         "0:singleTriggerDataEfficiencyWeightKIT",
+        "0:singleTriggerMCEfficiencyWeightKIT_24or27",
+        "0:singleTriggerDataEfficiencyWeightKIT_24or27",
+        "0:singleTriggerMCEfficiencyWeightKIT_24",
+        "0:singleTriggerDataEfficiencyWeightKIT_24",
 
         "0:isoWeight",
         "0:idWeight",
@@ -392,6 +411,10 @@ def build_config(nickname, **kwargs):
 
         "0:m_trg24_27_kit_mc",
         "0:m_trg24_27_kit_data",
+        "0:m_trg24_27_kit_mc",
+        "0:m_trg24_27_kit_data",
+        "0:m_trg24_kit_mc",
+        "0:m_trg24_kit_data",
 
         "0:m_iso_kit_ratio",
         "0:m_id_kit_ratio",
@@ -407,6 +430,10 @@ def build_config(nickname, **kwargs):
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
 
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
 
@@ -429,13 +456,17 @@ def build_config(nickname, **kwargs):
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
       "flagMETFilter",
-      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1","singleTriggerDataEfficiencyWeightDESY_1","singleTriggerMCEfficiencyWeightDESY_1"
+      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1","singleTriggerDataEfficiencyWeightDESY_1","singleTriggerMCEfficiencyWeightDESY_1",
+      "singleTriggerDataEfficiencyWeightKIT_24or27_1", "singleTriggerDataEfficiencyWeightKIT_24_1",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2"
+          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_24or27_1", "singleTriggerEmbeddedEfficiencyWeightKIT_24_1",
           ])
+  else:
+    config["Quantities"].extend(["singleTriggerMCEfficiencyWeightKIT_24or27_1", "singleTriggerMCEfficiencyWeightKIT_24_1"])
   if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",

@@ -331,7 +331,12 @@ def build_config(nickname, **kwargs):
           "0:trigger_27_Weight",
           "0:trigger_32_Weight",
           "0:trigger_32fb_Weight",
-          "0:trigger_35_Weight"
+          "0:trigger_35_Weight",
+
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_32",
+          "0:singleTriggerDataEfficiencyWeightKIT_32",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_32or35",
+          "0:singleTriggerDataEfficiencyWeightKIT_32or35",
           ]
     config["EmbeddedWeightWorkspaceObjectNames"] = [
           "0:m_sel_trg_ratio",
@@ -351,7 +356,12 @@ def build_config(nickname, **kwargs):
           "0:e_trg27_embed_kit_ratio",
           "0:e_trg32_embed_kit_ratio",
           "0:e_trg32fb_embed_kit_ratio",
-          "0:e_trg35_embed_kit_ratio"
+          "0:e_trg35_embed_kit_ratio",
+
+          "0:e_trg32_kit_embed",
+          "0:e_trg32_kit_data",
+          "0:e_trg32_trg35_kit_embed",
+          "0:e_trg32_trg35_kit_data",
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -368,6 +378,11 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
@@ -390,7 +405,12 @@ def build_config(nickname, **kwargs):
           "0:trigger_27_Weight",
           "0:trigger_32_Weight",
           "0:trigger_32fb_Weight",
-          "0:trigger_35_Weight"
+          "0:trigger_35_Weight",
+
+          "0:singleTriggerMCEfficiencyWeightKIT_32",
+          "0:singleTriggerDataEfficiencyWeightKIT_32",
+          "0:singleTriggerMCEfficiencyWeightKIT_32or35",
+          "0:singleTriggerDataEfficiencyWeightKIT_32or35",
           ]
     config["RooWorkspaceObjectNames"] = [
           "0:e_trg_EleTau_Ele24Leg_desy_mc",
@@ -408,7 +428,12 @@ def build_config(nickname, **kwargs):
           "0:e_trg27_kit_ratio",
           "0:e_trg32_kit_ratio",
           "0:e_trg32fb_kit_ratio",
-          "0:e_trg35_kit_ratio"
+          "0:e_trg35_kit_ratio",
+
+          "0:e_trg32_kit_mc",
+          "0:e_trg32_kit_data",
+          "0:e_trg32_trg35_kit_mc",
+          "0:e_trg32_trg35_kit_data",
           ]
     config["RooWorkspaceObjectArguments"] = [
           "0:e_pt,e_eta",
@@ -426,7 +451,12 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
-          "0:e_pt,e_eta"
+          "0:e_pt,e_eta",
+
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
           ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
@@ -451,12 +481,19 @@ def build_config(nickname, **kwargs):
       "trigger_32_Weight_1",
       "trigger_32fb_Weight_1",
       "crossTriggerMCWeight_1",
-      "trigger_35_Weight_1"
+      "trigger_35_Weight_1",
+      "singleTriggerDataEfficiencyWeightKIT_32_1",
+      "singleTriggerDataEfficiencyWeightKIT_32or35_1",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "muon_crossTriggerEmbeddedWeight_2"
+          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "muon_crossTriggerEmbeddedWeight_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_32_1", "singleTriggerEmbeddedEfficiencyWeightKIT_32or35_1",
+    ])
+  else:
+    config["Quantities"].extend([
+          "singleTriggerMCEfficiencyWeightKIT_32_1", "singleTriggerMCEfficiencyWeightKIT_32or35_1",
     ])
   if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
