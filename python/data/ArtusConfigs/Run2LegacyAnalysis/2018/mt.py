@@ -323,7 +323,13 @@ def build_config(nickname, **kwargs):
 
           "0:trigger_24_Weight",
           "0:trigger_27_Weight",
-          "0:trigger_24_27_Weight"
+          "0:trigger_24_27_Weight",
+
+
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_24",
+          "0:singleTriggerDataEfficiencyWeightKIT_24",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_24or27",
+          "0:singleTriggerDataEfficiencyWeightKIT_24or27",
           ]
     config["EmbeddedWeightWorkspaceObjectNames"] = [
           "0:m_sel_trg_ratio",
@@ -344,7 +350,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",
-          "0:m_trg24_27_embed_kit_ratio"
+          "0:m_trg24_27_embed_kit_ratio",
+
+          "0:m_trg24_kit_embed",
+          "0:m_trg24_kit_data",
+          "0:m_trg24_27_kit_embed",
+          "0:m_trg24_27_kit_data"
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -365,7 +376,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
-          "0:m_pt,m_eta"
+          "0:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
           ]
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
@@ -382,7 +398,12 @@ def build_config(nickname, **kwargs):
 
           "0:trigger_24_Weight",
           "0:trigger_27_Weight",
-          "0:trigger_24_27_Weight"
+          "0:trigger_24_27_Weight",
+
+          "0:singleTriggerMCEfficiencyWeightKIT_24",
+          "0:singleTriggerDataEfficiencyWeightKIT_24",
+          "0:singleTriggerMCEfficiencyWeightKIT_24or27",
+          "0:singleTriggerDataEfficiencyWeightKIT_24or27",
           ]
     config["RooWorkspaceObjectNames"] = [
           "0:m_trg_MuTau_Mu20Leg_kit_mc",
@@ -397,7 +418,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_trg24_kit_ratio",
           "0:m_trg27_kit_ratio",
-          "0:m_trg24_27_kit_ratio"
+          "0:m_trg24_27_kit_ratio",
+
+          "0:m_trg24_kit_mc",
+          "0:m_trg24_kit_data",
+          "0:m_trg24_27_kit_mc",
+          "0:m_trg24_27_kit_data",
           ]
     config["RooWorkspaceObjectArguments"] = [
           "0:m_pt,m_eta",
@@ -413,7 +439,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
-          "0:m_pt,m_eta"
+          "0:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
           ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
@@ -430,12 +461,18 @@ def build_config(nickname, **kwargs):
       "had_gen_match_pT_2",
       "flagMETFilter",
       "crossTriggerMCWeight_1",
-      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1", "crosstrigger_20_data_eff_Weight_1", "crosstrigger_20_mc_eff_Weight_1", "crosstrigger_20_mc_Weight_1"
+      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1", "crosstrigger_20_data_eff_Weight_1", "crosstrigger_20_mc_eff_Weight_1", "crosstrigger_20_mc_Weight_1",
+      "singleTriggerDataEfficiencyWeightKIT_24_1", "singleTriggerDataEfficiencyWeightKIT_24or27_1",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "crossTriggerDataEfficiencyWeight_1","crossTriggerEmbeddedEfficiencyWeight_1", "crossTriggerMCEfficiencyWeight_1", "crosstrigger_20_data_eff_Weight_1", "crosstrigger_20_embed_eff_Weight_1", "crosstrigger_20_embed_Weight_1"
+           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "crossTriggerDataEfficiencyWeight_1","crossTriggerEmbeddedEfficiencyWeight_1", "crossTriggerMCEfficiencyWeight_1", "crosstrigger_20_data_eff_Weight_1", "crosstrigger_20_embed_eff_Weight_1", "crosstrigger_20_embed_Weight_1",
+           "singleTriggerEmbeddedEfficiencyWeightKIT_24_1", "singleTriggerEmbeddedEfficiencyWeightKIT_24or27_1",
+          ])
+  else:
+    config["Quantities"].extend([
+           "singleTriggerMCEfficiencyWeightKIT_24_1", "singleTriggerMCEfficiencyWeightKIT_24or27_1",
           ])
   if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
