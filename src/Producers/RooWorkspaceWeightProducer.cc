@@ -269,7 +269,7 @@ void QCDFactorProducer::Produce( event_type const& event, product_type & product
 				}
 				if(arg=="njets")
 				{
-					int njets = product.m_validJets.size();
+					int njets = KappaProduct::GetNJetsAbovePtThreshold(product.m_validJets, 30.0);
 					args.push_back(njets);
 				}
 			}
