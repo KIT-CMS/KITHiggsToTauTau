@@ -65,24 +65,32 @@ def build_config(nickname, **kwargs):
 
   ### HLT & Trigger Object configuration
   config["HltPaths"] = [
+          "HLT_IsoMu24",
+          "HLT_IsoMu27",
+          "HLT_Ele27_WPTight_Gsf",
+          "HLT_Ele32_WPTight_Gsf",
+          "HLT_Ele32_WPTight_Gsf_DoubleL1EG",
+          "HLT_Ele35_WPTight_Gsf",
           "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
           "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
+          "HLT_IsoMu24_v:25.0",
+          "HLT_IsoMu27_v:28.0",
           "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:13.0"]
   config["DiTauPairLepton2LowerPtCuts"] = [
+          "HLT_Ele27_WPTight_Gsf_v:28.0",
+          "HLT_Ele32_WPTight_Gsf_v:33.0",
+          "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:33.0",
+          "HLT_Ele35_WPTight_Gsf_v:36.0",
           "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0"]
   config["CheckLepton1TriggerMatch"] = [
       "trg_singlemuon_24",
       "trg_singlemuon_27",
       "trg_singletau_leading",
-      "trg_singleelectron_27",
-      "trg_singleelectron_32",
-      "trg_singleelectron_32_fallback",
-      "trg_singleelectron_35",
 
       "trg_crossmuon_mu20tau27",
       "trg_crossele_ele24tau30",
@@ -94,6 +102,10 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu8ele23",
   ]
   config["CheckLepton2TriggerMatch"] = [
+      "trg_singleelectron_27",
+      "trg_singleelectron_32",
+      "trg_singleelectron_32_fallback",
+      "trg_singleelectron_35",
       "trg_singletau_trailing",
 
       "trg_crossmuon_mu20tau27",
@@ -124,6 +136,11 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
   ]
   config["ElectronTriggerFilterNames"] = [
+        "HLT_Ele27_WPTight_Gsf_v:hltEle27WPTightGsfTrackIsoFilter",
+        "HLT_Ele32_WPTight_Gsf_v:hltEle32WPTightGsfTrackIsoFilter",
+        "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:hltEle32L1DoubleEGWPTightGsfTrackIsoFilter",
+        "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:hltEGL1SingleEGOrFilter",
+        "HLT_Ele35_WPTight_Gsf_v:hltEle35noerWPTightGsfTrackIsoFilter",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
@@ -132,6 +149,8 @@ def build_config(nickname, **kwargs):
         "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZFilter"
   ]
   config["MuonTriggerFilterNames"] = [
+        "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",
+        "HLT_IsoMu27_v:hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMuon8Ele23RelTrkIsoFiltered0p4MuonLeg,hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered8",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered12",
