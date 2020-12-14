@@ -236,6 +236,7 @@ def build_list(**kwargs):
             "njetingap20",
             "njetspt20",
             "njetspt20eta2p4",
+            "njetspt20eta2p5",
             "njetspt30",
             "npu",
             "npv",
