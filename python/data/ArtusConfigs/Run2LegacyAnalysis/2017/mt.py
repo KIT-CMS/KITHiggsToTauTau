@@ -377,6 +377,31 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
           ]
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2017.root"
+    config["HighPtTauWeightWorkspaceWeightNames"] = [
+            "1:tauIDScaleFactorWeight_highpt_deeptauid",
+
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectNames"] = [
+            "1:t_deeptauid_highpt_embed",
+
+            "1:t_deeptauid_highpt_embed_bin5_up",
+            "1:t_deeptauid_highpt_embed_bin5_down",
+            "1:t_deeptauid_highpt_embed_bin6_up",
+            "1:t_deeptauid_highpt_embed_bin6_down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectArguments"] = [
+            "1:t_pt",
+
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            ]
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
         "0:crossTriggerMCEfficiencyWeight",
@@ -441,6 +466,31 @@ def build_config(nickname, **kwargs):
         "0:m_pt,m_eta",
         # "0:m_eta",
     ]
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2017.root"
+    config["HighPtTauWeightWorkspaceWeightNames"] = [
+            "1:tauIDScaleFactorWeight_highpt_deeptauid",
+
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectNames"] = [
+            "1:t_deeptauid_highpt",
+
+            "1:t_deeptauid_highpt_bin5_up",
+            "1:t_deeptauid_highpt_bin5_down",
+            "1:t_deeptauid_highpt_bin6_up",
+            "1:t_deeptauid_highpt_bin6_down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectArguments"] = [
+            "1:t_pt",
+
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
@@ -458,6 +508,11 @@ def build_config(nickname, **kwargs):
       "flagMETFilter",
       "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1","singleTriggerDataEfficiencyWeightDESY_1","singleTriggerMCEfficiencyWeightDESY_1",
       "singleTriggerDataEfficiencyWeightKIT_24or27_1", "singleTriggerDataEfficiencyWeightKIT_24_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
@@ -524,6 +579,7 @@ def build_config(nickname, **kwargs):
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
+  if not isData:                 config["Processors"].append( "producer:HighPtTauWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerSFProviderProducer")
   if not isData:                 config["Processors"].append( "producer:SingleTauTriggerEfficiencyProducer")

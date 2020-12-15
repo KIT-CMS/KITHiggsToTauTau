@@ -405,6 +405,13 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTauTriggerWeightWorkspaceObjectNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTauTriggerWeightWorkspaceObjectArguments, {});
 
+	// settings for HighPtTauWeightProducer
+	IMPL_SETTING_DEFAULT(bool, SaveHighPtTauWeightAsOptionalOnly, false);
+	IMPL_SETTING_DEFAULT(std::string, HighPtTauWeightWorkspace, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(HighPtTauWeightWorkspaceWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(HighPtTauWeightWorkspaceObjectNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(HighPtTauWeightWorkspaceObjectArguments, {});
+
 	// settings for MuTauTriggerWeightProducer
 	IMPL_SETTING_DEFAULT(bool, SaveMuTauTriggerWeightAsOptionalOnly, false);
 	IMPL_SETTING_DEFAULT(std::string, MuTauTriggerWeightWorkspace, "");

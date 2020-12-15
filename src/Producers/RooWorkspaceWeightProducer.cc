@@ -460,6 +460,40 @@ void TauTauTriggerWeightProducer::Produce( event_type const& event, product_type
 
 // ==========================================================================================
 
+HighPtTauWeightProducer::HighPtTauWeightProducer() :
+		RooWorkspaceWeightProducer(&setting_type::GetSaveHighPtTauWeightAsOptionalOnly,
+								   &setting_type::GetHighPtTauWeightWorkspace,
+								   &setting_type::GetHighPtTauWeightWorkspaceWeightNames,
+								   &setting_type::GetHighPtTauWeightWorkspaceObjectNames,
+								   &setting_type::GetHighPtTauWeightWorkspaceObjectArguments)
+{
+}
+
+void HighPtTauWeightProducer::Produce( event_type const& event, product_type & product,
+						   setting_type const& settings) const
+{
+	for(auto weightNames:m_weightNames)
+	{
+		KLepton* lepton = product.m_flavourOrderedLeptons[weightNames.first];
+		for(size_t index = 0; index < weightNames.second.size(); index++)
+		{
+			auto args = std::vector<double>{};
+			std::vector<std::string> arguments;
+			boost::split(arguments,  m_functorArgs.at(weightNames.first).at(index) , boost::is_any_of(","));
+			for(auto arg:arguments)
+			{
+				if(arg=="t_pt")
+				{
+					args.push_back(lepton->p4.Pt());
+				}
+			}
+                        product.m_weights[weightNames.second.at(index)+"_"+std::to_string(weightNames.first+1)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+		}
+	}
+}
+
+// ==========================================================================================
+
 MuTauTriggerWeightProducer::MuTauTriggerWeightProducer() :
 		RooWorkspaceWeightProducer(&setting_type::GetSaveMuTauTriggerWeightAsOptionalOnly,
 								   &setting_type::GetMuTauTriggerWeightWorkspace,
