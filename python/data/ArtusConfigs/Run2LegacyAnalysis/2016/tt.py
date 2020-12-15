@@ -320,6 +320,93 @@ def build_config(nickname, **kwargs):
           #"1:t_pt,t_dm",
           #~ "0:dR"
           ]
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2016.root"
+    config["HighPtTauWeightWorkspaceWeightNames"] = [
+            "0:tauIDScaleFactorWeight_highpt_deeptauid",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid",
+
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectNames"] = [
+            "0:t_deeptauid_highpt_embed",
+            "1:t_deeptauid_highpt_embed",
+
+            "0:t_deeptauid_highpt_embed_bin5_up",
+            "0:t_deeptauid_highpt_embed_bin5_down",
+            "0:t_deeptauid_highpt_embed_bin6_up",
+            "0:t_deeptauid_highpt_embed_bin6_down",
+
+            "1:t_deeptauid_highpt_embed_bin5_up",
+            "1:t_deeptauid_highpt_embed_bin5_down",
+            "1:t_deeptauid_highpt_embed_bin6_up",
+            "1:t_deeptauid_highpt_embed_bin6_down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectArguments"] = [
+            "0:t_pt",
+            "1:t_pt",
+
+            "0:t_pt",
+            "0:t_pt",
+            "0:t_pt",
+            "0:t_pt",
+
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            ]
+  elif not isData:
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2016.root"
+    config["HighPtTauWeightWorkspaceWeightNames"] = [
+            "0:tauIDScaleFactorWeight_highpt_deeptauid",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid",
+
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "0:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectNames"] = [
+            "0:t_deeptauid_highpt",
+            "1:t_deeptauid_highpt",
+
+            "0:t_deeptauid_highpt_bin5_up",
+            "0:t_deeptauid_highpt_bin5_down",
+            "0:t_deeptauid_highpt_bin6_up",
+            "0:t_deeptauid_highpt_bin6_down",
+
+            "1:t_deeptauid_highpt_bin5_up",
+            "1:t_deeptauid_highpt_bin5_down",
+            "1:t_deeptauid_highpt_bin6_up",
+            "1:t_deeptauid_highpt_bin6_down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectArguments"] = [
+            "0:t_pt",
+            "1:t_pt",
+
+            "0:t_pt",
+            "0:t_pt",
+            "0:t_pt",
+            "0:t_pt",
+
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            ]
   # elif not isData:
   #   ### Efficiencies & weights configuration
   #   config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_v16_2.root"
@@ -358,7 +445,17 @@ def build_config(nickname, **kwargs):
       #"drel0_2",
       #"drelZ_1",
       #"drelZ_2",
-      "flagMETFilter"
+      "flagMETFilter",
+      "tauIDScaleFactorWeight_highpt_deeptauid_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_1", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_1", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_1", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_1", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
@@ -423,6 +520,7 @@ def build_config(nickname, **kwargs):
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
+  if not isData:                 config["Processors"].append( "producer:HighPtTauWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerSFProviderProducer")
   if not isData:                 config["Processors"].append( "producer:SingleTauTriggerEfficiencyProducer")
