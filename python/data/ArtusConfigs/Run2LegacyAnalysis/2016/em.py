@@ -194,6 +194,8 @@ def build_config(nickname, **kwargs):
           "1:looseIsoWeight", # TODO check if this isolation is the right one
 
           "1:idWeight",
+          "1:singleTriggerEmbeddedEfficiencyWeightKIT",
+          "1:singleTriggerDataEfficiencyWeightKIT",
 
           "1:trigger_23_data_Weight",
           "1:trigger_23_embed_Weight",
@@ -203,6 +205,8 @@ def build_config(nickname, **kwargs):
           "0:isoWeight", # TODO check if this isolation is the right one
           "0:idWeight",
           "0:eleRecoWeight",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT",
+          "0:singleTriggerDataEfficiencyWeightKIT",
 
           "0:trigger_23_data_Weight",
           "0:trigger_23_embed_Weight",
@@ -218,6 +222,8 @@ def build_config(nickname, **kwargs):
           "1:m_looseiso_ic_embed_ratio",
 
           "1:m_id_ratio_emb",
+          "1:m_trg_emb",
+          "1:m_trg_data",
 
           "1:m_trg_23_binned_ic_data",
           "1:m_trg_23_binned_ic_embed",
@@ -227,6 +233,8 @@ def build_config(nickname, **kwargs):
           "0:e_iso_ratio_emb",
           "0:e_id_ratio_emb",
           "0:e_trk_embed_ratio",
+          "0:e_trg_emb",
+          "0:e_trg_data",
 
           "0:e_trg_23_binned_ic_data",
           "0:e_trg_23_binned_ic_embed",
@@ -242,12 +250,16 @@ def build_config(nickname, **kwargs):
           "1:m_pt,m_eta",
 
           "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
 
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
 
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
@@ -261,6 +273,8 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceWeightNames"] = [
         "1:isoWeight", # TODO check if this isolation is the right one
         "1:idWeight",
+        "1:singleTriggerMCEfficiencyWeightKIT",
+        "1:singleTriggerDataEfficiencyWeightKIT",
 
         "1:trigger_23_data_Weight",
         "1:trigger_23_mc_Weight",
@@ -270,6 +284,8 @@ def build_config(nickname, **kwargs):
         "0:isoWeight", # TODO check if this isolation is the right one
         "0:idWeight",
         "0:eleRecoWeight",
+        "0:singleTriggerMCEfficiencyWeightKIT",
+        "0:singleTriggerDataEfficiencyWeightKIT",
 
         "0:trigger_23_data_Weight",
         "0:trigger_23_mc_Weight",
@@ -279,6 +295,8 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceObjectNames"] = [
         "1:m_iso_ratio",
         "1:m_id_ratio",
+        "1:m_trg_mc",
+        "1:m_trg_data",
 
         "1:m_trg_23_binned_ic_data",
         "1:m_trg_23_binned_ic_mc",
@@ -288,6 +306,8 @@ def build_config(nickname, **kwargs):
         "0:e_iso_ratio",
         "0:e_id_ratio",
         "0:e_trk_ratio",
+        "0:e_trg_mc",
+        "0:e_trg_data",
 
         "0:e_trg_23_binned_ic_data",
         "0:e_trg_23_binned_ic_mc",
@@ -298,12 +318,16 @@ def build_config(nickname, **kwargs):
     config["RooWorkspaceObjectArguments"] = [
         "1:m_pt,m_eta",
         "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
 
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
 
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta",
@@ -562,12 +586,14 @@ def build_config(nickname, **kwargs):
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2",
           "trigger_23_data_Weight_2","trigger_23_embed_Weight_2","trigger_8_embed_Weight_2" ,"trigger_8_data_Weight_2",
           "trigger_23_data_Weight_1","trigger_23_embed_Weight_1","trigger_12_embed_Weight_1" ,"trigger_12_data_Weight_1",
-          "looseIsoWeight_2","idisoWeight_1","idisoWeight_2"
+          "looseIsoWeight_2","idisoWeight_1","idisoWeight_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_2"
            ])
   elif not isData:
     config["Quantities"].extend([
           "trigger_23_data_Weight_2","trigger_23_mc_Weight_2","trigger_8_mc_Weight_2" ,"trigger_8_data_Weight_2",
-          "trigger_23_data_Weight_1","trigger_23_mc_Weight_1","trigger_12_mc_Weight_1" ,"trigger_12_data_Weight_1"
+          "trigger_23_data_Weight_1","trigger_23_mc_Weight_1","trigger_12_mc_Weight_1" ,"trigger_12_data_Weight_1",
+          "singleTriggerMCEfficiencyWeightKIT_2"
            ])
     config["Quantities"].extend([
     "trigger_12_Weight_1","trigger_23_Weight_1","trigger_8_Weight_2","trigger_23_Weight_2"

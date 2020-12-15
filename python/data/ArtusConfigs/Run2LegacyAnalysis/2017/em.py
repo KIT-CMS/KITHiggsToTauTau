@@ -200,14 +200,45 @@ def build_config(nickname, **kwargs):
           "1:trigger_8_data_Weight",
           "1:trigger_8_embed_Weight",
 
+          "1:singleTriggerMCEfficiencyWeightKIT",
+          "1:singleTriggerDataEfficiencyWeightKIT",
+          "1:singleTriggerEmbeddedEfficiencyWeightKIT",
+
+          "1:trigger_24_Weight",
+          "1:trigger_27_Weight",
+          "1:trigger_24_27_Weight",
+
+          "1:singleTriggerEmbeddedEfficiencyWeightKIT_24",
+          "1:singleTriggerDataEfficiencyWeightKIT_24",
+          "1:singleTriggerEmbeddedEfficiencyWeightKIT_24or27",
+          "1:singleTriggerDataEfficiencyWeightKIT_24or27",
+
           "0:isoWeight",
           "0:idWeight",
           "0:trackWeight",
+          "0:singleTriggerDataEfficiencyWeightKIT",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT",
+
+          "0:singleTriggerDataEfficiencyWeightKIT_27",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_27",
+          "0:singleTriggerDataEfficiencyWeightKIT_27or32",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_27or32",
+          "0:singleTriggerDataEfficiencyWeightKIT_27or32or35",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_27or32or35",
 
           "0:trigger_23_data_Weight",
           "0:trigger_23_embed_Weight",
           "0:trigger_12_data_Weight",
           "0:trigger_12_embed_Weight",
+
+          "0:trigger_27_35_Weight",
+          "0:trigger_27_32_Weight",
+          "0:trigger_32_35_Weight",
+          "0:trigger_27_32_35_Weight",
+          "0:trigger_27_Weight",
+          "0:trigger_32_Weight",
+          "0:trigger_32fb_Weight",
+          "0:trigger_35_Weight"
     ]
     config["EmbeddedWeightWorkspaceObjectNames"] = [
           "0:m_sel_trg_ratio",
@@ -224,14 +255,45 @@ def build_config(nickname, **kwargs):
           "1:m_trg_8_binned_ic_data",
           "1:m_trg_8_binned_ic_embed",
 
+          "1:m_trg24_27_kit_mc",
+          "1:m_trg24_27_kit_data",
+          "1:m_trg24_27_kit_embed",
+
+          "1:m_trg24_embed_kit_ratio",
+          "1:m_trg27_embed_kit_ratio",
+          "1:m_trg24_27_embed_kit_ratio",
+
+          "1:m_trg24_kit_embed",
+          "1:m_trg24_kit_data",
+          "1:m_trg24_27_kit_embed",
+          "1:m_trg24_27_kit_data",
+
           "0:e_iso_binned_embed_kit_ratio",
           "0:e_id90_embed_kit_ratio",
           "0:e_trk_ratio",
+          "0:e_trg27_trg32_trg35_kit_data",
+          "0:e_trg27_trg32_trg35_kit_embed",
+
+          "0:e_trg27_kit_data",
+          "0:e_trg27_kit_embed",
+          "0:e_trg27_trg32_kit_data",
+          "0:e_trg27_trg32_kit_embed",
+          "0:e_trg27_trg32_trg35_kit_data",
+          "0:e_trg27_trg32_trg35_kit_embed",
 
           "0:e_trg_23_binned_ic_data",
           "0:e_trg_23_binned_ic_embed",
           "0:e_trg_12_binned_ic_data",
           "0:e_trg_12_binned_ic_embed",
+
+          "0:e_trg27_trg35_embed_kit_ratio",
+          "0:e_trg27_trg32_embed_kit_ratio",
+          "0:e_trg32_trg35_embed_kit_ratio",
+          "0:e_trg27_trg32_trg35_embed_kit_ratio",
+          "0:e_trg27_embed_kit_ratio",
+          "0:e_trg32_embed_kit_ratio",
+          "0:e_trg32fb_embed_kit_ratio",
+          "0:e_trg35_embed_kit_ratio"
     ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -248,14 +310,45 @@ def build_config(nickname, **kwargs):
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
 
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+
           "0:e_pt,e_eta,e_iso",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta",
           
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
+
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta"
     ]
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
@@ -270,6 +363,13 @@ def build_config(nickname, **kwargs):
         "1:trigger_8_data_Weight",
         "1:trigger_8_mc_Weight",
 
+        "1:singleTriggerMCEfficiencyWeightKIT",
+        "1:singleTriggerDataEfficiencyWeightKIT",
+        "1:singleTriggerMCEfficiencyWeightKIT_24or27",
+        "1:singleTriggerDataEfficiencyWeightKIT_24or27",
+        "1:singleTriggerMCEfficiencyWeightKIT_24",
+        "1:singleTriggerDataEfficiencyWeightKIT_24",
+
         "0:isoWeight",
         "0:idWeight",
         "0:idisoWeight",
@@ -279,6 +379,20 @@ def build_config(nickname, **kwargs):
         "0:trigger_23_mc_Weight",
         "0:trigger_12_data_Weight",
         "0:trigger_12_mc_Weight",
+
+        "0:singleTriggerMCEfficiencyWeightKIT",
+        "0:singleTriggerDataEfficiencyWeightKIT",
+
+        "0:singleTriggerMCEfficiencyWeightKIT_35",
+        "0:singleTriggerDataEfficiencyWeightKIT_35",
+        "0:singleTriggerMCEfficiencyWeightKIT_27or35",
+        "0:singleTriggerDataEfficiencyWeightKIT_27or35",
+        "0:singleTriggerMCEfficiencyWeightKIT_27",
+        "0:singleTriggerDataEfficiencyWeightKIT_27",
+        "0:singleTriggerMCEfficiencyWeightKIT_27or32",
+        "0:singleTriggerDataEfficiencyWeightKIT_27or32",
+        "0:singleTriggerMCEfficiencyWeightKIT_27or32or35",
+        "0:singleTriggerDataEfficiencyWeightKIT_27or32or35",
     ]
     config["RooWorkspaceObjectNames"] = [
         "1:m_iso_binned_kit_ratio",
@@ -287,10 +401,17 @@ def build_config(nickname, **kwargs):
         "1:m_idiso_binned_kit_ratio",
         "1:m_trk_ratio",
         
-	    "1:m_trg_23_binned_ic_data",
-	    "1:m_trg_23_binned_ic_mc",
-	    "1:m_trg_8_binned_ic_data",
-	    "1:m_trg_8_binned_ic_mc",
+	"1:m_trg_23_binned_ic_data",
+	"1:m_trg_23_binned_ic_mc",
+	"1:m_trg_8_binned_ic_data",
+	"1:m_trg_8_binned_ic_mc",
+
+        "1:m_trg24_27_kit_mc",
+        "1:m_trg24_27_kit_data",
+        "1:m_trg24_27_kit_mc",
+        "1:m_trg24_27_kit_data",
+        "1:m_trg24_kit_mc",
+        "1:m_trg24_kit_data",
 
         "0:e_iso_binned_kit_ratio",
         "0:e_id90_kit_ratio",
@@ -301,6 +422,20 @@ def build_config(nickname, **kwargs):
         "0:e_trg_23_binned_ic_mc",
         "0:e_trg_12_binned_ic_data",
         "0:e_trg_12_binned_ic_mc",
+
+        "0:e_trg27_trg32_trg35_kit_mc",
+        "0:e_trg27_trg32_trg35_kit_data",
+
+        "0:e_trg35_kit_mc",
+        "0:e_trg35_kit_data",
+        "0:e_trg27_trg35_kit_mc",
+        "0:e_trg27_trg35_kit_data",
+        "0:e_trg27_kit_mc",
+        "0:e_trg27_kit_data",
+        "0:e_trg27_trg32_kit_mc",
+        "0:e_trg27_trg32_kit_data",
+        "0:e_trg27_trg32_trg35_kit_mc",
+        "0:e_trg27_trg32_trg35_kit_data",
     ]
     config["RooWorkspaceObjectArguments"] = [
         "1:m_pt,m_eta,m_iso",
@@ -313,6 +448,14 @@ def build_config(nickname, **kwargs):
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
+
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta,e_iso",
@@ -321,6 +464,20 @@ def build_config(nickname, **kwargs):
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta,e_iso",
+
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
     ]
 
   config["QCDFactorWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_qcd_legacy_2017.root"
@@ -497,12 +654,38 @@ def build_config(nickname, **kwargs):
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2",
           "trigger_23_data_Weight_2","trigger_23_embed_Weight_2","trigger_8_embed_Weight_2" ,"trigger_8_data_Weight_2",
           "trigger_23_data_Weight_1","trigger_23_embed_Weight_1","trigger_12_embed_Weight_1" ,"trigger_12_data_Weight_1",
-          "looseIsoWeight_2","idisoWeight_1","idisoWeight_2"
+          "looseIsoWeight_2","idisoWeight_1","idisoWeight_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_35_1", "singleTriggerDataEfficiencyWeightKIT_35_1",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_27or35_1", "singleTriggerDataEfficiencyWeightKIT_27or35_1",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_27_1", "singleTriggerDataEfficiencyWeightKIT_27_1",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_27or32_1", "singleTriggerDataEfficiencyWeightKIT_27or32_1",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_27or32or35_1", "singleTriggerDataEfficiencyWeightKIT_27or32or35_1",
+          "trigger_27_35_Weight_1","trigger_27_32_32fb_Weight_1","trigger_27_32_Weight_1",
+          "trigger_27_35_Weight_1",
+          "trigger_27_32_Weight_1",
+          "trigger_32_35_Weight_1",
+          "trigger_27_32_35_Weight_1",
+          "trigger_27_Weight_1",
+          "trigger_32_Weight_1",
+          "trigger_32fb_Weight_1",
+          "trigger_35_Weight_1",
+          "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_24or27_2", "singleTriggerDataEfficiencyWeightKIT_24or27_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_24_2", "singleTriggerDataEfficiencyWeightKIT_24_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_2", "singleTriggerDataEfficiencyWeightKIT_2",
            ])
   elif not isData:
     config["Quantities"].extend([
           "trigger_23_data_Weight_2","trigger_23_mc_Weight_2","trigger_8_mc_Weight_2" ,"trigger_8_data_Weight_2",
-          "trigger_23_data_Weight_1","trigger_23_mc_Weight_1","trigger_12_mc_Weight_1" ,"trigger_12_data_Weight_1"
+          "trigger_23_data_Weight_1","trigger_23_mc_Weight_1","trigger_12_mc_Weight_1" ,"trigger_12_data_Weight_1",
+          "singleTriggerMCEfficiencyWeightKIT_35_1", "singleTriggerDataEfficiencyWeightKIT_35_1",
+          "singleTriggerMCEfficiencyWeightKIT_27or35_1", "singleTriggerDataEfficiencyWeightKIT_27or35_1",
+          "singleTriggerMCEfficiencyWeightKIT_27_1", "singleTriggerDataEfficiencyWeightKIT_27_1",
+          "singleTriggerMCEfficiencyWeightKIT_27or32_1", "singleTriggerDataEfficiencyWeightKIT_27or32_1",
+          "singleTriggerMCEfficiencyWeightKIT_27or32or35_1", "singleTriggerDataEfficiencyWeightKIT_27or32or35_1",
+          "singleTriggerMCEfficiencyWeightKIT_24or27_2", "singleTriggerDataEfficiencyWeightKIT_24or27_2",
+          "singleTriggerMCEfficiencyWeightKIT_24_2", "singleTriggerDataEfficiencyWeightKIT_24_2",
+          "singleTriggerMCEfficiencyWeightKIT_2", "singleTriggerDataEfficiencyWeightKIT_2",
            ])
     config["Quantities"].extend([
     "trigger_12_Weight_1","trigger_23_Weight_1","trigger_8_Weight_2","trigger_23_Weight_2"
