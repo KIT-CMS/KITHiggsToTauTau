@@ -486,8 +486,29 @@ void HighPtTauWeightProducer::Produce( event_type const& event, product_type & p
 				{
 					args.push_back(lepton->p4.Pt());
 				}
+				if(arg=="t_pt_2")
+				{
+                                        KLepton* lepton2 = product.m_flavourOrderedLeptons[1];
+					args.push_back(lepton2->p4.Pt());
+				}
+				if(arg=="t_dm")
+				{
+					KTau* tau = static_cast<KTau*>(lepton);
+					args.push_back(tau->decayMode);
+				}
+				if(arg=="t_dm_2")
+				{
+					KTau* tau2 = static_cast<KTau*>(product.m_flavourOrderedLeptons[1]);
+					args.push_back(tau2->decayMode);
+				}
 			}
-                        product.m_weights[weightNames.second.at(index)+"_"+std::to_string(weightNames.first+1)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+			if(weightNames.second.at(index).find("tautau_triggerweight_ic") != std::string::npos){
+				product.m_weights[weightNames.second.at(index)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+			}
+			else
+			{
+                                product.m_weights[weightNames.second.at(index)+"_"+std::to_string(weightNames.first+1)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+			}
 		}
 	}
 }

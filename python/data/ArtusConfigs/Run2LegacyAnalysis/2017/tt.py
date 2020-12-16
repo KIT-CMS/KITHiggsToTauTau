@@ -368,6 +368,29 @@ def build_config(nickname, **kwargs):
             "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
             "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
             "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+
+            "0:tautau_triggerweight_ic",
+
+            "0:tautau_triggerweight_ic_singletau_up",
+            "0:tautau_triggerweight_ic_singletau_down",
+
+            "0:tautau_triggerweight_ic_dm0_up",
+            "0:tautau_triggerweight_ic_dm0_down",
+            "0:tautau_triggerweight_ic_dm1_up",
+            "0:tautau_triggerweight_ic_dm1_down",
+            "0:tautau_triggerweight_ic_dm10_up",
+            "0:tautau_triggerweight_ic_dm10_down",
+            "0:tautau_triggerweight_ic_dm11_up",
+            "0:tautau_triggerweight_ic_dm11_down",
+
+            "0:tautau_triggerweight_ic_highpt_dm0_up",
+            "0:tautau_triggerweight_ic_highpt_dm0_down",
+            "0:tautau_triggerweight_ic_highpt_dm1_up",
+            "0:tautau_triggerweight_ic_highpt_dm1_down",
+            "0:tautau_triggerweight_ic_highpt_dm10_up",
+            "0:tautau_triggerweight_ic_highpt_dm10_down",
+            "0:tautau_triggerweight_ic_highpt_dm11_up",
+            "0:tautau_triggerweight_ic_highpt_dm11_down",
             ]
     config["HighPtTauWeightWorkspaceObjectNames"] = [
             "0:t_deeptauid_highpt",
@@ -382,6 +405,29 @@ def build_config(nickname, **kwargs):
             "1:t_deeptauid_highpt_bin5_down",
             "1:t_deeptauid_highpt_bin6_up",
             "1:t_deeptauid_highpt_bin6_down",
+
+            "0:t_trg_2d_ratio",
+
+            "0:t_trg_2d_ratio_singletau_up",
+            "0:t_trg_2d_ratio_singletau_down",
+
+            "0:t_trg_2d_ratio_dm0_up",
+            "0:t_trg_2d_ratio_dm0_down",
+            "0:t_trg_2d_ratio_dm1_up",
+            "0:t_trg_2d_ratio_dm1_down",
+            "0:t_trg_2d_ratio_dm10_up",
+            "0:t_trg_2d_ratio_dm10_down",
+            "0:t_trg_2d_ratio_dm11_up",
+            "0:t_trg_2d_ratio_dm11_down",
+
+            "0:t_trg_2d_ratio_highpt_dm0_up",
+            "0:t_trg_2d_ratio_highpt_dm0_down",
+            "0:t_trg_2d_ratio_highpt_dm1_up",
+            "0:t_trg_2d_ratio_highpt_dm1_down",
+            "0:t_trg_2d_ratio_highpt_dm10_up",
+            "0:t_trg_2d_ratio_highpt_dm10_down",
+            "0:t_trg_2d_ratio_highpt_dm11_up",
+            "0:t_trg_2d_ratio_highpt_dm11_down",
             ]
     config["HighPtTauWeightWorkspaceObjectArguments"] = [
             "0:t_pt",
@@ -396,6 +442,29 @@ def build_config(nickname, **kwargs):
             "1:t_pt",
             "1:t_pt",
             "1:t_pt",
+
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",  # Zero in front of line necessary to ensure correct readout of pt_1.
+
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
             ]
   # MISSING:
   # elif not isData:
@@ -437,6 +506,10 @@ def build_config(nickname, **kwargs):
       "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
       "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
       "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
+      "tautau_triggerweight_ic",
+      "tautau_triggerweight_ic_singletau_up", "tautau_triggerweight_ic_singletau_down",
+      "tautau_triggerweight_ic_dm0_up", "tautau_triggerweight_ic_dm0_down", "tautau_triggerweight_ic_dm1_up", "tautau_triggerweight_ic_dm1_down", "tautau_triggerweight_ic_dm10_up", "tautau_triggerweight_ic_dm10_down", "tautau_triggerweight_ic_dm11_up", "tautau_triggerweight_ic_dm11_down",
+      "tautau_triggerweight_ic_highpt_dm0_up", "tautau_triggerweight_ic_highpt_dm0_down", "tautau_triggerweight_ic_highpt_dm1_up", "tautau_triggerweight_ic_highpt_dm1_down", "tautau_triggerweight_ic_highpt_dm10_up", "tautau_triggerweight_ic_highpt_dm10_down", "tautau_triggerweight_ic_highpt_dm11_up", "tautau_triggerweight_ic_highpt_dm11_down",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
