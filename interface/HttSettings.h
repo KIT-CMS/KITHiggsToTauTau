@@ -419,6 +419,13 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceObjectNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceObjectArguments, {});
 
+	// settings for LeptonTauTriggerWeightProducer
+	IMPL_SETTING_DEFAULT(bool, SaveLeptonTauTriggerWeightAsOptionalOnly, false);
+	IMPL_SETTING_DEFAULT(std::string, LeptonTauTriggerWeightWorkspace, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(LeptonTauTriggerWeightWorkspaceWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(LeptonTauTriggerWeightWorkspaceObjectNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(LeptonTauTriggerWeightWorkspaceObjectArguments, {});
+
 	// settings for TauTriggerEfficiencyProducer
 	IMPL_SETTING_DEFAULT(std::string, TauTriggerInput, "");
         IMPL_SETTING_DEFAULT(std::string, TauTriggerInputKIT, "");
