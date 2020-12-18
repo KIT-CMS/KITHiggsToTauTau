@@ -339,6 +339,15 @@ def build_config(nickname, **kwargs):
             "0:tautau_triggerweight_ic_dm11_up",
             "0:tautau_triggerweight_ic_dm11_down",
 
+            "0:tautau_triggerweight_ic_lowpt_dm0_up",
+            "0:tautau_triggerweight_ic_lowpt_dm0_down",
+            "0:tautau_triggerweight_ic_lowpt_dm1_up",
+            "0:tautau_triggerweight_ic_lowpt_dm1_down",
+            "0:tautau_triggerweight_ic_lowpt_dm10_up",
+            "0:tautau_triggerweight_ic_lowpt_dm10_down",
+            "0:tautau_triggerweight_ic_lowpt_dm11_up",
+            "0:tautau_triggerweight_ic_lowpt_dm11_down",
+
             "0:tautau_triggerweight_ic_highpt_dm0_up",
             "0:tautau_triggerweight_ic_highpt_dm0_down",
             "0:tautau_triggerweight_ic_highpt_dm1_up",
@@ -376,6 +385,15 @@ def build_config(nickname, **kwargs):
             "0:t_trg_2d_embed_ratio_dm11_up",
             "0:t_trg_2d_embed_ratio_dm11_down",
 
+            "0:t_trg_2d_embed_ratio_lowpt_dm0_up",
+            "0:t_trg_2d_embed_ratio_lowpt_dm0_down",
+            "0:t_trg_2d_embed_ratio_lowpt_dm1_up",
+            "0:t_trg_2d_embed_ratio_lowpt_dm1_down",
+            "0:t_trg_2d_embed_ratio_lowpt_dm10_up",
+            "0:t_trg_2d_embed_ratio_lowpt_dm10_down",
+            "0:t_trg_2d_embed_ratio_lowpt_dm11_up",
+            "0:t_trg_2d_embed_ratio_lowpt_dm11_down",
+
             "0:t_trg_2d_embed_ratio_highpt_dm0_up",
             "0:t_trg_2d_embed_ratio_highpt_dm0_down",
             "0:t_trg_2d_embed_ratio_highpt_dm1_up",
@@ -401,6 +419,15 @@ def build_config(nickname, **kwargs):
 
             "0:t_pt,t_dm,t_pt_2,t_dm_2",  # Zero in front of line necessary to ensure correct readout of pt_1.
 
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
 
@@ -452,6 +479,15 @@ def build_config(nickname, **kwargs):
             "0:tautau_triggerweight_ic_dm11_up",
             "0:tautau_triggerweight_ic_dm11_down",
 
+            "0:tautau_triggerweight_ic_lowpt_dm0_up",
+            "0:tautau_triggerweight_ic_lowpt_dm0_down",
+            "0:tautau_triggerweight_ic_lowpt_dm1_up",
+            "0:tautau_triggerweight_ic_lowpt_dm1_down",
+            "0:tautau_triggerweight_ic_lowpt_dm10_up",
+            "0:tautau_triggerweight_ic_lowpt_dm10_down",
+            "0:tautau_triggerweight_ic_lowpt_dm11_up",
+            "0:tautau_triggerweight_ic_lowpt_dm11_down",
+
             "0:tautau_triggerweight_ic_highpt_dm0_up",
             "0:tautau_triggerweight_ic_highpt_dm0_down",
             "0:tautau_triggerweight_ic_highpt_dm1_up",
@@ -489,6 +525,15 @@ def build_config(nickname, **kwargs):
             "0:t_trg_2d_ratio_dm11_up",
             "0:t_trg_2d_ratio_dm11_down",
 
+            "0:t_trg_2d_ratio_lowpt_dm0_up",
+            "0:t_trg_2d_ratio_lowpt_dm0_down",
+            "0:t_trg_2d_ratio_lowpt_dm1_up",
+            "0:t_trg_2d_ratio_lowpt_dm1_down",
+            "0:t_trg_2d_ratio_lowpt_dm10_up",
+            "0:t_trg_2d_ratio_lowpt_dm10_down",
+            "0:t_trg_2d_ratio_lowpt_dm11_up",
+            "0:t_trg_2d_ratio_lowpt_dm11_down",
+
             "0:t_trg_2d_ratio_highpt_dm0_up",
             "0:t_trg_2d_ratio_highpt_dm0_down",
             "0:t_trg_2d_ratio_highpt_dm1_up",
@@ -514,6 +559,15 @@ def build_config(nickname, **kwargs):
 
             "0:t_pt,t_dm,t_pt_2,t_dm_2",  # Zero in front of line necessary to ensure correct readout of pt_1.
 
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
+            "0:t_pt,t_dm,t_pt_2,t_dm_2",
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
 
@@ -579,6 +633,7 @@ def build_config(nickname, **kwargs):
       "tautau_triggerweight_ic_singletau_up", "tautau_triggerweight_ic_singletau_down",
       "tautau_triggerweight_ic_dm0_up", "tautau_triggerweight_ic_dm0_down", "tautau_triggerweight_ic_dm1_up", "tautau_triggerweight_ic_dm1_down", "tautau_triggerweight_ic_dm10_up", "tautau_triggerweight_ic_dm10_down", "tautau_triggerweight_ic_dm11_up", "tautau_triggerweight_ic_dm11_down",
       "tautau_triggerweight_ic_highpt_dm0_up", "tautau_triggerweight_ic_highpt_dm0_down", "tautau_triggerweight_ic_highpt_dm1_up", "tautau_triggerweight_ic_highpt_dm1_down", "tautau_triggerweight_ic_highpt_dm10_up", "tautau_triggerweight_ic_highpt_dm10_down", "tautau_triggerweight_ic_highpt_dm11_up", "tautau_triggerweight_ic_highpt_dm11_down",
+      "tautau_triggerweight_ic_lowpt_dm0_up", "tautau_triggerweight_ic_lowpt_dm0_down", "tautau_triggerweight_ic_lowpt_dm1_up", "tautau_triggerweight_ic_lowpt_dm1_down", "tautau_triggerweight_ic_lowpt_dm10_up", "tautau_triggerweight_ic_lowpt_dm10_down", "tautau_triggerweight_ic_lowpt_dm11_up", "tautau_triggerweight_ic_lowpt_dm11_down",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
