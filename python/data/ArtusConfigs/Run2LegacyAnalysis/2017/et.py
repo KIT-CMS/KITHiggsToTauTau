@@ -290,7 +290,7 @@ def build_config(nickname, **kwargs):
   config["TauIDSFUseEMBSFs"] = isEmbedded
   config["TauIDSFUseTightVSeSFs"] = True
 
-  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_2017.root"
   if isEmbedded:
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspaceWeightNames"] = [
@@ -397,7 +397,7 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta",
           "0:e_pt,e_eta"
           ]
-    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2017.root"
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_2017.root"
     config["HighPtTauWeightWorkspaceWeightNames"] = [
             "1:tauIDScaleFactorWeight_highpt_deeptauid",
 
@@ -422,7 +422,7 @@ def build_config(nickname, **kwargs):
             "1:t_pt",
             "1:t_pt",
     ]
-    config["LeptonTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2017.root"
+    config["LeptonTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_singletau_ic_2017.root"
     config["LeptonTauTriggerWeightWorkspaceWeightNames"] = [
             "0:etau_triggerweight_ic",
 
@@ -487,6 +487,7 @@ def build_config(nickname, **kwargs):
             "0:e_pt,e_eta,e_iso,t_pt,t_eta,t_dm,t_phi",
     ]
   elif not isData:
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_2017.root"
     config["RooWorkspaceWeightNames"] = [
         "0:crossTriggerMCEfficiencyWeight",
         "0:crossTriggerDataEfficiencyWeight",
@@ -559,7 +560,7 @@ def build_config(nickname, **kwargs):
         "0:e_pt,e_eta",
         "0:e_eta,e_pt",
     ]
-    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2017.root"
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_2017.root"
     config["HighPtTauWeightWorkspaceWeightNames"] = [
             "1:tauIDScaleFactorWeight_highpt_deeptauid",
 
@@ -584,7 +585,7 @@ def build_config(nickname, **kwargs):
             "1:t_pt",
             "1:t_pt",
     ]
-    config["LeptonTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2017.root"
+    config["LeptonTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_singletau_ic_2017.root"
     config["LeptonTauTriggerWeightWorkspaceWeightNames"] = [
             "0:etau_triggerweight_ic",
 
