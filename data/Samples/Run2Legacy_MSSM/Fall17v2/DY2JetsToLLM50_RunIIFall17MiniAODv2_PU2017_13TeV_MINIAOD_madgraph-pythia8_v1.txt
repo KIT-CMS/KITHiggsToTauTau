@@ -1,0 +1,2 @@
+root://cmsxrootd-kit.gridka.de:1094//store/user/mburkart/higgs-kit/skimming/kappa_skim_workdir/GC_SKIM/201209_152823//DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1/1/kappa_DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1_0.root
+root://cmsxrootd-kit.gridka.de:1094//store/user/mburkart/higgs-kit/skimming/kappa_skim_workdir/GC_SKIM/201209_152823//DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1/2/kappa_DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1_1.root
