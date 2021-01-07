@@ -377,7 +377,7 @@ def build_config(nickname, **kwargs):
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
           ]
-    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_trimmed_highpttau_2017.root"
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_2017.root"
     config["HighPtTauWeightWorkspaceWeightNames"] = [
             "1:tauIDScaleFactorWeight_highpt_deeptauid",
 
