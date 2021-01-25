@@ -1213,7 +1213,7 @@ void Run2DecayChannelProducer::Produce(event_type const& event, product_type& pr
 						{
 							double tauDR = ROOT::Math::VectorUtil::DeltaR((*tau)->p4, genTau->p4);
 							double muonDR = ROOT::Math::VectorUtil::DeltaR((*muon)->p4, genTau->p4);
-							double pt_ratio = (*muon)->p4.Pt()/genTau->p4;
+							double pt_ratio = (*muon)->p4.Pt()/genTau->p4.Pt();
 							if (muonDR < tauDR && pt_ratio > 0.5 && pt_ratio < 1.5 && tauDR < 0.2){
 								std::cout << "TauDR: " << tauDR << " / MuonDR: " << muonDR << std::endl;
 								std::cout << "Candidate run:lumi:event " << event.m_eventInfo->nRun << ":" << event.m_eventInfo->nLumi << ":" << event.m_eventInfo->nEvent << std::endl;
@@ -1224,7 +1224,7 @@ void Run2DecayChannelProducer::Produce(event_type const& event, product_type& pr
 						{
 							double tauDR = ROOT::Math::VectorUtil::DeltaR((*tau)->p4, genTau->p4);
 							double muonDR = ROOT::Math::VectorUtil::DeltaR((*muon)->p4, genTau->p4);
-							double pt_ratio = (*muon)->p4.Pt()/genTau->p4;
+							double pt_ratio = (*muon)->p4.Pt()/genTau->p4.Pt();
 							if (muonDR < tauDR && pt_ratio > 0.5 && pt_ratio < 1.5 && tauDR < 0.2){
 								std::cout << "TauDR: " << tauDR << " / MuonDR: " << muonDR << std::endl;
 								std::cout << "Candidate run:lumi:event " << event.m_eventInfo->nRun << ":" << event.m_eventInfo->nLumi << ":" << event.m_eventInfo->nEvent << std::endl;
