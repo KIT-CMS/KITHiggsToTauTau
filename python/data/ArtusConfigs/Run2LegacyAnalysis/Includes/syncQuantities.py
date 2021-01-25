@@ -28,6 +28,7 @@ def build_list(**kwargs):
         "eta_2",
         "extraelec_veto",
         "extramuon_veto",
+        "highmetemb_veto",
         "flagMETFilter",
         "gen_match_1",
         "gen_match_2",

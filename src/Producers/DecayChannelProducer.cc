@@ -602,6 +602,10 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	{
 		return static_cast<HttProduct const&>(product).m_extraMuonVeto;
 	});
+	LambdaNtupleConsumer<HttTypes>::AddIntQuantity("highmetemb_veto", [](KappaEvent const& event, KappaProduct const& product)
+	{
+		return static_cast<HttProduct const&>(product).m_highmetembveto;
+	});
 	
 
 	std::vector<std::string> tauDiscriminators;
@@ -1190,6 +1194,7 @@ void Run2DecayChannelProducer::Produce(event_type const& event, product_type& pr
 	// set boolean veto variables
 	product.m_extraElecVeto = (looseElectrons.size() > 0);
 	product.m_extraMuonVeto = (looseMuons.size() > 0);
+	product.m_highmetembveto = 0;
 	if ((m_decayChannel == HttEnumTypes::DecayChannel::TT) || (m_decayChannel == HttEnumTypes::DecayChannel::ET) || (m_decayChannel == HttEnumTypes::DecayChannel::EE))
 	{
 		product.m_extraMuonVeto = (product.m_validLooseMuons.size() > 0);
@@ -1198,5 +1203,38 @@ void Run2DecayChannelProducer::Produce(event_type const& event, product_type& pr
 	{
 		product.m_extraElecVeto = (product.m_validLooseElectrons.size() > 0);
 	}
+	if ((m_decayChannel == HttEnumTypes::DecayChannel::TT) || (m_decayChannel == HttEnumTypes::DecayChannel::MT) || (m_decayChannel == HttEnumTypes::DecayChannel::ET))
+	{
+		for (std::vector<KGenTau>::iterator genTau = event.m_genTaus->begin(); genTau != event.m_genTaus->end(); ++genTau) {
+			for (std::vector<KTau*>::iterator tau = product.m_validTaus.begin(); tau != product.m_validTaus.end(); ++tau)
+			{
+					// std::cout << "Number of Muons: " << product.m_validMuons.size() + product.m_invalidMuons.size() << std::endl;
+					for (std::vector<KMuon*>::iterator muon = product.m_validMuons.begin(); muon != product.m_validMuons.end(); ++muon)
+						{
+							double tauDR = ROOT::Math::VectorUtil::DeltaR((*tau)->p4, genTau->p4);
+							double muonDR = ROOT::Math::VectorUtil::DeltaR((*muon)->p4, genTau->p4);
+							double pt_ratio = (*muon)->p4.Pt()/genTau->p4;
+							if (muonDR < tauDR && pt_ratio > 0.5 && pt_ratio < 1.5 && tauDR < 0.2){
+								std::cout << "TauDR: " << tauDR << " / MuonDR: " << muonDR << std::endl;
+								std::cout << "Candidate run:lumi:event " << event.m_eventInfo->nRun << ":" << event.m_eventInfo->nLumi << ":" << event.m_eventInfo->nEvent << std::endl;
+								product.m_highmetembveto = 1;
+							}
+						}
+					for (std::vector<KMuon*>::iterator muon = product.m_invalidMuons.begin(); muon != product.m_invalidMuons.end(); ++muon)
+						{
+							double tauDR = ROOT::Math::VectorUtil::DeltaR((*tau)->p4, genTau->p4);
+							double muonDR = ROOT::Math::VectorUtil::DeltaR((*muon)->p4, genTau->p4);
+							double pt_ratio = (*muon)->p4.Pt()/genTau->p4;
+							if (muonDR < tauDR && pt_ratio > 0.5 && pt_ratio < 1.5 && tauDR < 0.2){
+								std::cout << "TauDR: " << tauDR << " / MuonDR: " << muonDR << std::endl;
+								std::cout << "Candidate run:lumi:event " << event.m_eventInfo->nRun << ":" << event.m_eventInfo->nLumi << ":" << event.m_eventInfo->nEvent << std::endl;
+								product.m_highmetembveto = 1;
+							}
+						}
+			}
+		}
+
+	}
+	
 	FillGenLeptonCollections(product);
 }

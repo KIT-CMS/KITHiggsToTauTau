@@ -45,6 +45,7 @@ public:
 	// filled by DecayChannelProducer
 	bool m_extraElecVeto = false;
 	bool m_extraMuonVeto = false;
+	bool m_highmetembveto = false;
 
 	// filled by DiLeptonVetoProducers
 	int m_nDiElectronVetoPairsOS = 0;
