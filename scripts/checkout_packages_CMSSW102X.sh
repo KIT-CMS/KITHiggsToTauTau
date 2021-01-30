@@ -8,7 +8,7 @@ fi
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 
 # set up CMSSW release area
-scramv1 project CMSSW_10_2_18; pushd CMSSW_10_2_18/src
+scramv1 project CMSSW_10_2_25; pushd CMSSW_10_2_25/src
 eval `scramv1 runtime -sh`
 
 # JEC
