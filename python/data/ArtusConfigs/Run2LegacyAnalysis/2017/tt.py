@@ -632,6 +632,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:PuppiMetCorrector",
                                                               "producer:SimpleEleTauFakeRateWeightProducer",
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")                                                            
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY or isEmbedded:        config["Processors"].append( "producer:ZPtReweightProducer")
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
