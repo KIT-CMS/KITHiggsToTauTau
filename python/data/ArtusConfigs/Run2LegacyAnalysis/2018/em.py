@@ -184,6 +184,10 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedElectrons"] = True
   config["BranchGenMatchedMuons"] = True
 
+  ### Met correction SF for embedding
+  if isEmbedded:
+    config["EmbedddingFakeMETCorrection"] = 0.957
+
   ### Efficiencies & weights configuration
   config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
   if isEmbedded:

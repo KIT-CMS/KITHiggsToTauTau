@@ -189,6 +189,10 @@ def build_config(nickname, **kwargs):
   config["AddGenMatchedTauJets"] = True
   config["BranchGenMatchedTaus"] = True
 
+  ### Met correction SF for embedding
+  if isEmbedded:
+    config["EmbedddingFakeMETCorrection"] = 0.900
+
   ### Efficiencies & weights configuration
   config["TauTriggerInput"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2018KIT_deeptau.root"
   config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2018KIT_deeptau.root"
@@ -644,6 +648,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:PuppiMetCorrector",
                                                               "producer:SimpleEleTauFakeRateWeightProducer",
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY or isEmbedded:        config["Processors"].append( "producer:ZPtReweightProducer")
   config["Processors"].extend((                               "producer:TauTauRestFrameSelector",
@@ -664,7 +669,6 @@ def build_config(nickname, **kwargs):
   config["Processors"].append(                                "producer:SvfitProducer")
   config["Consumers"] = ["KappaLambdaNtupleConsumer",
                          "cutflow_histogram"]
-
   # Subanalyses settings
   if btag_eff:
     config["Processors"] = copy.deepcopy(config["ProcessorsBtagEff"])
