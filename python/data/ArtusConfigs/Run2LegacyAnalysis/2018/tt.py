@@ -333,7 +333,7 @@ def build_config(nickname, **kwargs):
             #"0:t_pt,t_dm",
             #"1:t_pt,t_dm",
             ]
-    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2018.root"
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_tt_2018.root"
     config["HighPtTauWeightWorkspaceWeightNames"] = [
             "0:tauIDScaleFactorWeight_highpt_deeptauid",
             "1:tauIDScaleFactorWeight_highpt_deeptauid",
@@ -446,20 +446,7 @@ def build_config(nickname, **kwargs):
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             ]
   elif not isData:
-    config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
-    config["TauTauTriggerWeightWorkspaceWeightNames"] = [
-        "0:triggerWeight",
-        "1:triggerWeight"
-    ]
-    config["TauTauTriggerWeightWorkspaceObjectNames"] = [
-        "0:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio",
-        "1:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio"
-    ]
-    config["TauTauTriggerWeightWorkspaceObjectArguments"] = [
-        "0:t_pt,t_dm",
-        "1:t_pt,t_dm"
-    ]
-    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2018.root"
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_tt_2018.root"
     config["HighPtTauWeightWorkspaceWeightNames"] = [
             "0:tauIDScaleFactorWeight_highpt_deeptauid",
             "1:tauIDScaleFactorWeight_highpt_deeptauid",
@@ -571,6 +558,19 @@ def build_config(nickname, **kwargs):
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             ]
+    # config["TauTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+    # config["TauTauTriggerWeightWorkspaceWeightNames"] = [
+    #     "0:triggerWeight",
+    #     "1:triggerWeight"
+    # ]
+    # config["TauTauTriggerWeightWorkspaceObjectNames"] = [
+    #     "0:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio",
+    #     "1:t_genuine_MediumIso_tt_ratio,t_fake_MediumIso_tt_ratio"
+    # ]
+    # config["TauTauTriggerWeightWorkspaceObjectArguments"] = [
+    #     "0:t_pt,t_dm",
+    #     "1:t_pt,t_dm"
+    # ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
 
