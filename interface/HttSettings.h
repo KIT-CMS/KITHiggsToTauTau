@@ -259,6 +259,8 @@ public:
 	IMPL_SETTING(float, MetLowerPtCuts);
 	IMPL_SETTING(float, MetUpperPtCuts);
 
+	IMPL_SETTING_DEFAULT(float, EmbedddingFakeMETCorrection, 1.0);
+
 	IMPL_SETTING_DEFAULT(std::string, TauDiscriminatorIsolationName, "hpsPFTauDiscriminationByRawCombinedIsolationDBSumPtCorr3Hits");
 	IMPL_SETTING_DEFAULT(float, TauDiscriminatorIsolationCut, std::numeric_limits<float>::max());
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauDiscriminatorMvaIsolation, {});
@@ -405,12 +407,26 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTauTriggerWeightWorkspaceObjectNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTauTriggerWeightWorkspaceObjectArguments, {});
 
+	// settings for HighPtTauWeightProducer
+	IMPL_SETTING_DEFAULT(bool, SaveHighPtTauWeightAsOptionalOnly, false);
+	IMPL_SETTING_DEFAULT(std::string, HighPtTauWeightWorkspace, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(HighPtTauWeightWorkspaceWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(HighPtTauWeightWorkspaceObjectNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(HighPtTauWeightWorkspaceObjectArguments, {});
+
 	// settings for MuTauTriggerWeightProducer
 	IMPL_SETTING_DEFAULT(bool, SaveMuTauTriggerWeightAsOptionalOnly, false);
 	IMPL_SETTING_DEFAULT(std::string, MuTauTriggerWeightWorkspace, "");
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceWeightNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceObjectNames, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(MuTauTriggerWeightWorkspaceObjectArguments, {});
+
+	// settings for LeptonTauTriggerWeightProducer
+	IMPL_SETTING_DEFAULT(bool, SaveLeptonTauTriggerWeightAsOptionalOnly, false);
+	IMPL_SETTING_DEFAULT(std::string, LeptonTauTriggerWeightWorkspace, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(LeptonTauTriggerWeightWorkspaceWeightNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(LeptonTauTriggerWeightWorkspaceObjectNames, {});
+	IMPL_SETTING_STRINGLIST_DEFAULT(LeptonTauTriggerWeightWorkspaceObjectArguments, {});
 
 	// settings for TauTriggerEfficiencyProducer
 	IMPL_SETTING_DEFAULT(std::string, TauTriggerInput, "");
@@ -419,6 +435,10 @@ public:
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerWorkingPoints, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerIDTypes, {});
 	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerEfficiencyWeightNames, {});
+
+        // settings for TauTriggerSFProviderProducer
+	IMPL_SETTING_DEFAULT(std::string, TauTriggerSFProviderInput, "");
+	IMPL_SETTING_STRINGLIST_DEFAULT(TauTriggerSFProviderWeightNames, {});
 
 	// settings for SingleTauTriggerEfficiencyProducer
 	IMPL_SETTING_DEFAULT(std::string, SingleTauTriggerInput, "");

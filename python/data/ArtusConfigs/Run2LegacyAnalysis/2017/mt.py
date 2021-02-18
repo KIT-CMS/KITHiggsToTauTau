@@ -183,19 +183,23 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedMuons"] = True
   config["BranchGenMatchedTaus"] = True
 
+  ### Met correction SF for embedding
+  if isEmbedded:
+    config["EmbedddingFakeMETCorrection"] = 0.952
+
   ### Efficiencies & weights configuration
   config["TauTriggerInput"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2017KIT_deeptau.root"
   config["TauTriggerInputKIT"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2017KIT_deeptau.root"
   config["TauTrigger"] = "mutau"
   config["TauTriggerWorkingPoints"] = [
-       # "vvvloose",
-       # "vvloose",
-       "vloose",
-       "loose",
-       "medium",
-       "tight",
-       "vtight",
-       "vvtight",
+       "VVVLoose",
+       "VVLoose",
+       "VLoose",
+       "Loose",
+       "Medium",
+       "Tight",
+       "VTight",
+       "VVTight",
   ]
   config["TauTriggerIDTypes"] = [
        # "MVAv2",
@@ -206,13 +210,19 @@ def build_config(nickname, **kwargs):
         "1:crossTriggerDataEfficiencyWeight",
         "1:crossTriggerKITDataEfficiencyWeight",
         "1:crossTriggerEMBEfficiencyWeight",
+        "1:crossTriggerMCEfficiencyWeight",
     ]
   else:
     config["TauTriggerEfficiencyWeightNames"] = [
         "1:crossTriggerMCEfficiencyWeight",
         "1:crossTriggerDataEfficiencyWeight",
     ]
-
+  config["TauTriggerSFProviderInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/2017_tauTriggerEff_DeepTau2017v2p1.root"
+  config["TauTriggerSFProviderWeightNames"] = [
+        "1:crossTriggerDataEfficiencyWeight_POG",
+        "1:crossTriggerMCEfficiencyWeight_POG",
+        "1:crossTriggerSFWeight_POG",
+    ]
    # Define weight names to be written out - only store weights that are actually filled
   tauTriggerWeights = []
   for WeightName in config["TauTriggerEfficiencyWeightNames"]:
@@ -220,12 +230,16 @@ def build_config(nickname, **kwargs):
       for IDType in config["TauTriggerIDTypes"]:
         for wp in config["TauTriggerWorkingPoints"]:
           tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+IDType+"_"+str(int(WeightName.split(":")[0])+1))
+  for WeightName in config["TauTriggerSFProviderWeightNames"]:
+    for shift in ["","Up","Down"]:
+        for wp in config["TauTriggerWorkingPoints"]:
+          tauTriggerWeights.append(WeightName.split(":")[1]+shift+"_"+wp+"_"+str(int(WeightName.split(":")[0])+1))
 
 
   config["SingleTauTriggerInput"] = "$CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017_singletau.root"
   config["SingleTauTriggerWorkingPoints"] = [
-       # "vvvloose",
-       # "vvloose",
+       "vvvloose",
+       "vvloose",
        "vloose",
        "loose",
        "medium",
@@ -271,7 +285,7 @@ def build_config(nickname, **kwargs):
   ]
   config["TauIDSFUseEMBSFs"] = isEmbedded
   config["TauIDSFUseTightVSeSFs"] = False
-  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
+  config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_2017.root"
   if isEmbedded:
     config["EmbeddedWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2017.root"
     config["EmbeddedWeightWorkspaceWeightNames"] = [
@@ -298,7 +312,12 @@ def build_config(nickname, **kwargs):
 
           "0:trigger_24_Weight",
           "0:trigger_27_Weight",
-          "0:trigger_24_27_Weight"
+          "0:trigger_24_27_Weight",
+
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_24",
+          "0:singleTriggerDataEfficiencyWeightKIT_24",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_24or27",
+          "0:singleTriggerDataEfficiencyWeightKIT_24or27",
           ]
     config["EmbeddedWeightWorkspaceObjectNames"] = [
           "0:m_sel_trg_ratio",
@@ -324,7 +343,12 @@ def build_config(nickname, **kwargs):
 
           "0:m_trg24_embed_kit_ratio",
           "0:m_trg27_embed_kit_ratio",
-          "0:m_trg24_27_embed_kit_ratio"
+          "0:m_trg24_27_embed_kit_ratio",
+
+          "0:m_trg24_kit_embed",
+          "0:m_trg24_kit_data",
+          "0:m_trg24_27_kit_embed",
+          "0:m_trg24_27_kit_data"
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -350,9 +374,104 @@ def build_config(nickname, **kwargs):
 
           "0:m_pt,m_eta",
           "0:m_pt,m_eta",
-          "0:m_pt,m_eta"
+          "0:m_pt,m_eta",
+
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
+          "0:m_pt,m_eta",
           ]
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_2017.root"
+    config["HighPtTauWeightWorkspaceWeightNames"] = [
+            "1:tauIDScaleFactorWeight_highpt_deeptauid",
+
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectNames"] = [
+            "1:t_deeptauid_highpt_embed",
+
+            "1:t_deeptauid_highpt_embed_bin5_up",
+            "1:t_deeptauid_highpt_embed_bin5_down",
+            "1:t_deeptauid_highpt_embed_bin6_up",
+            "1:t_deeptauid_highpt_embed_bin6_down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectArguments"] = [
+            "1:t_pt",
+
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            ]
+    config["LeptonTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_singletau_ic_2017.root"
+    config["LeptonTauTriggerWeightWorkspaceWeightNames"] = [
+            "0:mtau_triggerweight_ic",
+
+            "0:mtau_triggerweight_ic_crosslep_up",
+            "0:mtau_triggerweight_ic_crosslep_down",
+
+            "0:mtau_triggerweight_ic_singlelep_up",
+            "0:mtau_triggerweight_ic_singlelep_down",
+
+            "0:mtau_triggerweight_ic_dm0_up",
+            "0:mtau_triggerweight_ic_dm0_down",
+            "0:mtau_triggerweight_ic_dm1_up",
+            "0:mtau_triggerweight_ic_dm1_down",
+            "0:mtau_triggerweight_ic_dm10_up",
+            "0:mtau_triggerweight_ic_dm10_down",
+            "0:mtau_triggerweight_ic_dm11_up",
+            "0:mtau_triggerweight_ic_dm11_down",
+
+            "0:mtau_triggerweight_ic_singletau_up",
+            "0:mtau_triggerweight_ic_singletau_down",
+            ]
+    config["LeptonTauTriggerWeightWorkspaceObjectNames"] = [
+            "0:mt_trg_embed_ratio",
+
+            "0:mt_trg_embed_ratio_crosslep_up",
+            "0:mt_trg_embed_ratio_crosslep_down",
+
+            "0:mt_trg_embed_ratio_singlelep_up",
+            "0:mt_trg_embed_ratio_singlelep_down",
+
+            "0:mt_trg_embed_ratio_dm0_up",
+            "0:mt_trg_embed_ratio_dm0_down",
+            "0:mt_trg_embed_ratio_dm1_up",
+            "0:mt_trg_embed_ratio_dm1_down",
+            "0:mt_trg_embed_ratio_dm10_up",
+            "0:mt_trg_embed_ratio_dm10_down",
+            "0:mt_trg_embed_ratio_dm11_up",
+            "0:mt_trg_embed_ratio_dm11_down",
+
+            "0:mt_trg_embed_ratio_singletau_up",
+            "0:mt_trg_embed_ratio_singletau_down",
+            ]
+    config["LeptonTauTriggerWeightWorkspaceObjectArguments"] = [
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm,t_phi",
+    ]
   elif not isData:
+    config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_2017.root"
     config["RooWorkspaceWeightNames"] = [
         "0:crossTriggerMCEfficiencyWeight",
         "0:crossTriggerDataEfficiencyWeight",
@@ -365,6 +484,10 @@ def build_config(nickname, **kwargs):
 
         "0:singleTriggerMCEfficiencyWeightKIT",
         "0:singleTriggerDataEfficiencyWeightKIT",
+        "0:singleTriggerMCEfficiencyWeightKIT_24or27",
+        "0:singleTriggerDataEfficiencyWeightKIT_24or27",
+        "0:singleTriggerMCEfficiencyWeightKIT_24",
+        "0:singleTriggerDataEfficiencyWeightKIT_24",
 
         "0:isoWeight",
         "0:idWeight",
@@ -382,6 +505,10 @@ def build_config(nickname, **kwargs):
 
         "0:m_trg24_27_kit_mc",
         "0:m_trg24_27_kit_data",
+        "0:m_trg24_27_kit_mc",
+        "0:m_trg24_27_kit_data",
+        "0:m_trg24_kit_mc",
+        "0:m_trg24_kit_data",
 
         "0:m_iso_kit_ratio",
         "0:m_id_kit_ratio",
@@ -399,10 +526,103 @@ def build_config(nickname, **kwargs):
 
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
+        "0:m_pt,m_eta",
 
         "0:m_pt,m_eta",
         "0:m_pt,m_eta",
         # "0:m_eta",
+    ]
+    config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_highpttau_2017.root"
+    config["HighPtTauWeightWorkspaceWeightNames"] = [
+            "1:tauIDScaleFactorWeight_highpt_deeptauid",
+
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_100To500Down",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up",
+            "1:tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectNames"] = [
+            "1:t_deeptauid_highpt",
+
+            "1:t_deeptauid_highpt_bin5_up",
+            "1:t_deeptauid_highpt_bin5_down",
+            "1:t_deeptauid_highpt_bin6_up",
+            "1:t_deeptauid_highpt_bin6_down",
+            ]
+    config["HighPtTauWeightWorkspaceObjectArguments"] = [
+            "1:t_pt",
+
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            "1:t_pt",
+            ]
+    config["LeptonTauTriggerWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_trimmed_singletau_ic_2017.root"
+    config["LeptonTauTriggerWeightWorkspaceWeightNames"] = [
+            "0:mtau_triggerweight_ic",
+
+            "0:mtau_triggerweight_ic_crosslep_up",
+            "0:mtau_triggerweight_ic_crosslep_down",
+
+            "0:mtau_triggerweight_ic_singlelep_up",
+            "0:mtau_triggerweight_ic_singlelep_down",
+
+            "0:mtau_triggerweight_ic_dm0_up",
+            "0:mtau_triggerweight_ic_dm0_down",
+            "0:mtau_triggerweight_ic_dm1_up",
+            "0:mtau_triggerweight_ic_dm1_down",
+            "0:mtau_triggerweight_ic_dm10_up",
+            "0:mtau_triggerweight_ic_dm10_down",
+            "0:mtau_triggerweight_ic_dm11_up",
+            "0:mtau_triggerweight_ic_dm11_down",
+
+            "0:mtau_triggerweight_ic_singletau_up",
+            "0:mtau_triggerweight_ic_singletau_down",
+            ]
+    config["LeptonTauTriggerWeightWorkspaceObjectNames"] = [
+            "0:mt_trg_ratio",
+
+            "0:mt_trg_ratio_crosslep_up",
+            "0:mt_trg_ratio_crosslep_down",
+
+            "0:mt_trg_ratio_singlelep_up",
+            "0:mt_trg_ratio_singlelep_down",
+
+            "0:mt_trg_ratio_dm0_up",
+            "0:mt_trg_ratio_dm0_down",
+            "0:mt_trg_ratio_dm1_up",
+            "0:mt_trg_ratio_dm1_down",
+            "0:mt_trg_ratio_dm10_up",
+            "0:mt_trg_ratio_dm10_down",
+            "0:mt_trg_ratio_dm11_up",
+            "0:mt_trg_ratio_dm11_down",
+
+            "0:mt_trg_ratio_singletau_up",
+            "0:mt_trg_ratio_singletau_down",
+            ]
+    config["LeptonTauTriggerWeightWorkspaceObjectArguments"] = [
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
+            "0:m_pt,m_eta,m_iso,t_pt,t_eta,t_dm",
     ]
   config["EventWeight"] = "eventWeight"
   config["TopPtReweightingStrategy"] = "Run1"
@@ -419,13 +639,27 @@ def build_config(nickname, **kwargs):
       "had_gen_match_pT_1",
       "had_gen_match_pT_2",
       "flagMETFilter",
-      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1","singleTriggerDataEfficiencyWeightDESY_1","singleTriggerMCEfficiencyWeightDESY_1"
+      "trigger_24_Weight_1", "trigger_27_Weight_1", "trigger_24_27_Weight_1","singleTriggerDataEfficiencyWeightDESY_1","singleTriggerMCEfficiencyWeightDESY_1",
+      "singleTriggerDataEfficiencyWeightKIT_24or27_1", "singleTriggerDataEfficiencyWeightKIT_24_1",
+      "tauIDScaleFactorWeight_highpt_deeptauid_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_100To500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_100To500Down_2",
+      "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Up_2", "tauIDScaleFactorWeight_highpt_deeptauid_Gt500Down_2",
+      "mtau_triggerweight_ic",
+      "mtau_triggerweight_ic_crosslep_up", "mtau_triggerweight_ic_crosslep_down",
+      "mtau_triggerweight_ic_singlelep_up", "mtau_triggerweight_ic_singlelep_down",
+      "mtau_triggerweight_ic_dm0_up", "mtau_triggerweight_ic_dm0_down", "mtau_triggerweight_ic_dm1_up", "mtau_triggerweight_ic_dm1_down", "mtau_triggerweight_ic_dm10_up", "mtau_triggerweight_ic_dm10_down", "mtau_triggerweight_ic_dm11_up", "mtau_triggerweight_ic_dm11_down",
+      "mtau_triggerweight_ic_singletau_up", "mtau_triggerweight_ic_singletau_down",
   ])
   if isEmbedded:
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.embeddedDecayModeWeightQuantities").build_list())
     config["Quantities"].extend([
-          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2"
+          "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_24or27_1", "singleTriggerEmbeddedEfficiencyWeightKIT_24_1",
           ])
+  else:
+    config["Quantities"].extend(["singleTriggerMCEfficiencyWeightKIT_24or27_1", "singleTriggerMCEfficiencyWeightKIT_24_1"])
   if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
@@ -475,6 +709,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer"
                                                               ))
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")
   if not isEmbedded:             config["Processors"].extend(("producer:SimpleEleTauFakeRateWeightProducer",
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
@@ -483,7 +718,10 @@ def build_config(nickname, **kwargs):
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
+  if not isData:                 config["Processors"].append( "producer:HighPtTauWeightProducer")
+  if not isData:                 config["Processors"].append( "producer:LeptonTauTriggerWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
+  if not isData:                 config["Processors"].append( "producer:TauTriggerSFProviderProducer")
   if not isData:                 config["Processors"].append( "producer:SingleTauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauIDScaleFactorProducer")
   config["Processors"].append(                                "producer:EventWeightProducer")

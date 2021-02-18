@@ -65,24 +65,32 @@ def build_config(nickname, **kwargs):
 
   ### HLT & Trigger Object configuration
   config["HltPaths"] = [
+          "HLT_IsoMu24",
+          "HLT_IsoMu27",
+          "HLT_Ele27_WPTight_Gsf",
+          "HLT_Ele32_WPTight_Gsf",
+          "HLT_Ele32_WPTight_Gsf_DoubleL1EG",
+          "HLT_Ele35_WPTight_Gsf",
           "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ",
           "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
+          "HLT_IsoMu24_v:25.0",
+          "HLT_IsoMu27_v:28.0",
           "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:13.0"]
   config["DiTauPairLepton2LowerPtCuts"] = [
+          "HLT_Ele27_WPTight_Gsf_v:28.0",
+          "HLT_Ele32_WPTight_Gsf_v:33.0",
+          "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:33.0",
+          "HLT_Ele35_WPTight_Gsf_v:36.0",
           "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0",
           "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:24.0"]
   config["CheckLepton1TriggerMatch"] = [
       "trg_singlemuon_24",
       "trg_singlemuon_27",
       "trg_singletau_leading",
-      "trg_singleelectron_27",
-      "trg_singleelectron_32",
-      "trg_singleelectron_32_fallback",
-      "trg_singleelectron_35",
 
       "trg_crossmuon_mu20tau27",
       "trg_crossele_ele24tau30",
@@ -94,6 +102,10 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu8ele23",
   ]
   config["CheckLepton2TriggerMatch"] = [
+      "trg_singleelectron_27",
+      "trg_singleelectron_32",
+      "trg_singleelectron_32_fallback",
+      "trg_singleelectron_35",
       "trg_singletau_trailing",
 
       "trg_crossmuon_mu20tau27",
@@ -127,6 +139,11 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
   ]
   config["ElectronTriggerFilterNames"] = [
+        "HLT_Ele27_WPTight_Gsf_v:hltEle27WPTightGsfTrackIsoFilter",
+        "HLT_Ele32_WPTight_Gsf_v:hltEle32WPTightGsfTrackIsoFilter",
+        "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:hltEle32L1DoubleEGWPTightGsfTrackIsoFilter",
+        "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:hltEGL1SingleEGOrFilter",
+        "HLT_Ele35_WPTight_Gsf_v:hltEle35noerWPTightGsfTrackIsoFilter",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLElectronlegTrackIsoFilter",
@@ -135,6 +152,8 @@ def build_config(nickname, **kwargs):
         "HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu23TrkIsoVVLEle12CaloIdLTrackIdLIsoVLDZFilter"
       ]
   config["MuonTriggerFilterNames"] = [
+        "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",
+        "HLT_IsoMu27_v:hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMuon8Ele23RelTrkIsoFiltered0p4MuonLeg,hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered8",
         "HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu8TrkIsoVVLEle23CaloIdLTrackIdLIsoVLDZFilter",
         "HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v:hltMu12TrkIsoVVLEle23CaloIdLTrackIdLIsoVLMuonlegL3IsoFiltered12",
@@ -165,6 +184,10 @@ def build_config(nickname, **kwargs):
   config["BranchGenMatchedElectrons"] = True
   config["BranchGenMatchedMuons"] = True
 
+  ### Met correction SF for embedding
+  if isEmbedded:
+    config["EmbedddingFakeMETCorrection"] = 0.957
+
   ### Efficiencies & weights configuration
   config["RooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
   if isEmbedded:
@@ -183,6 +206,15 @@ def build_config(nickname, **kwargs):
           "1:trigger_8_data_Weight",
           "1:trigger_8_embed_Weight",
 
+          "1:trigger_24_Weight",
+          "1:trigger_27_Weight",
+          "1:trigger_24_27_Weight",
+
+          "1:singleTriggerEmbeddedEfficiencyWeightKIT_24",
+          "1:singleTriggerDataEfficiencyWeightKIT_24",
+          "1:singleTriggerEmbeddedEfficiencyWeightKIT_24or27",
+          "1:singleTriggerDataEfficiencyWeightKIT_24or27",
+
           "0:isoWeight",
           "0:idWeight",
           "0:isoWeight_ic",
@@ -194,6 +226,19 @@ def build_config(nickname, **kwargs):
           "0:trigger_12_data_Weight",
           "0:trigger_12_embed_Weight",
 
+          "0:trigger_27_35_Weight",
+          "0:trigger_27_32_Weight",
+          "0:trigger_32_35_Weight",
+          "0:trigger_27_32_35_Weight",
+          "0:trigger_27_Weight",
+          "0:trigger_32_Weight",
+          "0:trigger_32fb_Weight",
+          "0:trigger_35_Weight",
+
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_32",
+          "0:singleTriggerDataEfficiencyWeightKIT_32",
+          "0:singleTriggerEmbeddedEfficiencyWeightKIT_32or35",
+          "0:singleTriggerDataEfficiencyWeightKIT_32or35",
           ]
     config["EmbeddedWeightWorkspaceObjectNames"]=[
           "0:m_sel_trg_ratio",
@@ -203,10 +248,20 @@ def build_config(nickname, **kwargs):
           "1:m_looseiso_binned_embed_ratio",
           "1:m_id_embed_kit_ratio",
           "1:m_trk_ratio",
+
           "1:m_trg_23_binned_ic_data",
           "1:m_trg_23_binned_ic_embed",
           "1:m_trg_8_binned_ic_data",
           "1:m_trg_8_binned_ic_embed",
+
+          "1:m_trg24_embed_kit_ratio",
+          "1:m_trg27_embed_kit_ratio",
+          "1:m_trg24_27_embed_kit_ratio",
+
+          "1:m_trg24_kit_embed",
+          "1:m_trg24_kit_data",
+          "1:m_trg24_27_kit_embed",
+          "1:m_trg24_27_kit_data",
 
           "0:e_iso_binned_embed_kit_ratio",
           "0:e_id90_embed_kit_ratio",
@@ -218,6 +273,20 @@ def build_config(nickname, **kwargs):
           "0:e_trg_23_binned_ic_embed",
           "0:e_trg_12_binned_ic_data",
           "0:e_trg_12_binned_ic_embed",
+
+          "0:e_trg27_trg35_embed_kit_ratio",
+          "0:e_trg27_trg32_embed_kit_ratio",
+          "0:e_trg32_trg35_embed_kit_ratio",
+          "0:e_trg27_trg32_trg35_embed_kit_ratio",
+          "0:e_trg27_embed_kit_ratio",
+          "0:e_trg32_embed_kit_ratio",
+          "0:e_trg32fb_embed_kit_ratio",
+          "0:e_trg35_embed_kit_ratio",
+
+          "0:e_trg32_kit_embed",
+          "0:e_trg32_kit_data",
+          "0:e_trg32_trg35_kit_embed",
+          "0:e_trg32_trg35_kit_data",
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
@@ -233,6 +302,15 @@ def build_config(nickname, **kwargs):
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
 
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+          "1:m_pt,m_eta",
+
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta",
           "0:e_pt,e_eta,e_iso",
@@ -243,6 +321,20 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
           "0:e_pt,e_eta,e_iso",
+
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta",
+          "0:e_pt,e_eta"
           ]
   elif not isData:
     config["RooWorkspaceWeightNames"]=[
@@ -256,6 +348,15 @@ def build_config(nickname, **kwargs):
         "1:trigger_8_data_Weight",
         "1:trigger_8_mc_Weight",
 
+        "1:trigger_24_Weight",
+        "1:trigger_27_Weight",
+        "1:trigger_24_27_Weight",
+
+        "1:singleTriggerMCEfficiencyWeightKIT_24",
+        "1:singleTriggerDataEfficiencyWeightKIT_24",
+        "1:singleTriggerMCEfficiencyWeightKIT_24or27",
+        "1:singleTriggerDataEfficiencyWeightKIT_24or27",
+
         "0:isoWeight",
         "0:idWeight",
         "0:isoWeight_ic",
@@ -266,16 +367,40 @@ def build_config(nickname, **kwargs):
         "0:trigger_23_mc_Weight",
         "0:trigger_12_data_Weight",
         "0:trigger_12_mc_Weight",
+        
+        "0:trigger_27_35_Weight",
+        "0:trigger_27_32_Weight",
+        "0:trigger_32_35_Weight",
+        "0:trigger_27_32_35_Weight",
+        "0:trigger_27_Weight",
+        "0:trigger_32_Weight",
+        "0:trigger_32fb_Weight",
+        "0:trigger_35_Weight",
+
+        "0:singleTriggerMCEfficiencyWeightKIT_32",
+        "0:singleTriggerDataEfficiencyWeightKIT_32",
+        "0:singleTriggerMCEfficiencyWeightKIT_32or35",
+        "0:singleTriggerDataEfficiencyWeightKIT_32or35",
     ]
     config["RooWorkspaceObjectNames"] = [
         "1:m_iso_binned_kit_ratio",
         "1:m_looseiso_binned_ratio",
         "1:m_id_kit_ratio",
         "1:m_trk_ratio",
+
         "1:m_trg_23_binned_ic_data",
         "1:m_trg_23_binned_ic_mc",
         "1:m_trg_8_binned_ic_data",
         "1:m_trg_8_binned_ic_mc",
+
+        "1:m_trg24_kit_ratio",
+        "1:m_trg27_kit_ratio",
+        "1:m_trg24_27_kit_ratio",
+
+        "1:m_trg24_kit_mc",
+        "1:m_trg24_kit_data",
+        "1:m_trg24_27_kit_mc",
+        "1:m_trg24_27_kit_data",
 
         "0:e_iso_binned_kit_ratio",
         "0:e_id90_kit_ratio",
@@ -287,6 +412,20 @@ def build_config(nickname, **kwargs):
         "0:e_trg_23_binned_ic_mc",
         "0:e_trg_12_binned_ic_data",
         "0:e_trg_12_binned_ic_mc",
+
+        "0:e_trg27_trg35_kit_ratio",
+        "0:e_trg27_trg32_kit_ratio",
+        "0:e_trg32_trg35_kit_ratio",
+        "0:e_trg27_trg32_trg35_kit_ratio",
+        "0:e_trg27_kit_ratio",
+        "0:e_trg32_kit_ratio",
+        "0:e_trg32fb_kit_ratio",
+        "0:e_trg35_kit_ratio",
+
+        "0:e_trg32_kit_mc",
+        "0:e_trg32_kit_data",
+        "0:e_trg32_trg35_kit_mc",
+        "0:e_trg32_trg35_kit_data",
     ]
     config["RooWorkspaceObjectArguments"] = [
         "1:m_pt,m_eta,m_iso",
@@ -299,6 +438,15 @@ def build_config(nickname, **kwargs):
         "1:m_pt,m_eta,m_iso",
         "1:m_pt,m_eta,m_iso",
 
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+        "1:m_pt,m_eta",
+
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta",
         "0:e_pt,e_eta,e_iso",
@@ -308,67 +456,114 @@ def build_config(nickname, **kwargs):
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta,e_iso",
         "0:e_pt,e_eta,e_iso",
+
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
+        "0:e_pt,e_eta",
   ]
-  config["QCDFactorWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_legacy_2018.root"
+
+  config["QCDFactorWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_qcd_legacy_2018.root"
   config["QCDFactorWorkspaceWeightNames"]=[
       "0:em_qcd_osss_binned_Weight",
       "0:em_qcd_extrap_up_Weight",
       "0:em_qcd_extrap_down_Weight",
+      "0:em_qcd_osss_0jet_Weight",
+      "0:em_qcd_osss_1jet_Weight",
+      "0:em_qcd_osss_2jet_Weight",
       "0:em_qcd_osss_0jet_rateup_Weight",
       "0:em_qcd_osss_0jet_ratedown_Weight",
       "0:em_qcd_osss_0jet_shapeup_Weight",
       "0:em_qcd_osss_0jet_shapedown_Weight",
+      "0:em_qcd_osss_0jet_shape2up_Weight",
+      "0:em_qcd_osss_0jet_shape2down_Weight",
       "0:em_qcd_osss_1jet_rateup_Weight",
       "0:em_qcd_osss_1jet_ratedown_Weight",
       "0:em_qcd_osss_1jet_shapeup_Weight",
       "0:em_qcd_osss_1jet_shapedown_Weight",
+      "0:em_qcd_osss_1jet_shape2up_Weight",
+      "0:em_qcd_osss_1jet_shape2down_Weight",
       "0:em_qcd_osss_2jet_rateup_Weight",
       "0:em_qcd_osss_2jet_ratedown_Weight",
       "0:em_qcd_osss_2jet_shapeup_Weight",
       "0:em_qcd_osss_2jet_shapedown_Weight",
+      "0:em_qcd_osss_2jet_shape2up_Weight",
+      "0:em_qcd_osss_2jet_shape2down_Weight",
       "0:em_qcd_osss_stat_0jet_rateup_Weight",
       "0:em_qcd_osss_stat_0jet_ratedown_Weight",
       "0:em_qcd_osss_stat_0jet_shapeup_Weight",
       "0:em_qcd_osss_stat_0jet_shapedown_Weight",
+      "0:em_qcd_osss_stat_0jet_shape2up_Weight",
+      "0:em_qcd_osss_stat_0jet_shape2down_Weight",
       "0:em_qcd_osss_stat_1jet_rateup_Weight",
       "0:em_qcd_osss_stat_1jet_ratedown_Weight",
       "0:em_qcd_osss_stat_1jet_shapeup_Weight",
       "0:em_qcd_osss_stat_1jet_shapedown_Weight",
+      "0:em_qcd_osss_stat_1jet_shape2up_Weight",
+      "0:em_qcd_osss_stat_1jet_shape2down_Weight",
       "0:em_qcd_osss_stat_2jet_rateup_Weight",
       "0:em_qcd_osss_stat_2jet_ratedown_Weight",
       "0:em_qcd_osss_stat_2jet_shapeup_Weight",
       "0:em_qcd_osss_stat_2jet_shapedown_Weight",
+      "0:em_qcd_osss_stat_2jet_shape2up_Weight",
+      "0:em_qcd_osss_stat_2jet_shape2down_Weight",
       "0:em_qcd_extrap_uncert_Weight",
+      "0:em_qcd_nonclosure_uncert_Weight",
   ]
   config["QCDFactorWorkspaceObjectNames"] = [
-      "0:em_qcd_osss",
-      "0:em_qcd_osss_extrap_up",
-      "0:em_qcd_osss_extrap_down",
-      "0:em_qcd_osss_0jet_unc1_up",
-      "0:em_qcd_osss_0jet_unc1_down",
-      "0:em_qcd_osss_0jet_unc2_up",
-      "0:em_qcd_osss_0jet_unc2_down",
-      "0:em_qcd_osss_1jet_unc1_up",
-      "0:em_qcd_osss_1jet_unc1_down",
-      "0:em_qcd_osss_1jet_unc2_up",
-      "0:em_qcd_osss_1jet_unc2_down",
-      "0:em_qcd_osss_2jet_unc1_up",
-      "0:em_qcd_osss_2jet_unc1_down",
-      "0:em_qcd_osss_2jet_unc2_up",
-      "0:em_qcd_osss_2jet_unc2_down",
-      "0:em_qcd_osss_stat_0jet_unc1_up",
-      "0:em_qcd_osss_stat_0jet_unc1_down",
-      "0:em_qcd_osss_stat_0jet_unc2_up",
-      "0:em_qcd_osss_stat_0jet_unc2_down",
-      "0:em_qcd_osss_stat_1jet_unc1_up",
-      "0:em_qcd_osss_stat_1jet_unc1_down",
-      "0:em_qcd_osss_stat_1jet_unc2_up",
-      "0:em_qcd_osss_stat_1jet_unc2_down",
-      "0:em_qcd_osss_stat_2jet_unc1_up",
-      "0:em_qcd_osss_stat_2jet_unc1_down",
-      "0:em_qcd_osss_stat_2jet_unc2_up",
-      "0:em_qcd_osss_stat_2jet_unc2_down",
-      "0:em_qcd_osss_os_corr",
+      "0:em_qcd_osss_desy",
+      "0:em_qcd_osss_extrap_up_desy",
+      "0:em_qcd_osss_extrap_down_desy",
+      "0:em_qcd_osss_0jet_desy",
+      "0:em_qcd_osss_1jet_desy",
+      "0:em_qcd_osss_2jet_desy",
+      "0:em_qcd_osss_0jet_rate_up_desy",
+      "0:em_qcd_osss_0jet_rate_down_desy",
+      "0:em_qcd_osss_0jet_shape_up_desy",
+      "0:em_qcd_osss_0jet_shape_down_desy",
+      "0:em_qcd_osss_0jet_shape2_up_desy",
+      "0:em_qcd_osss_0jet_shape2_down_desy",
+      "0:em_qcd_osss_1jet_rate_up_desy",
+      "0:em_qcd_osss_1jet_rate_down_desy",
+      "0:em_qcd_osss_1jet_shape_up_desy",
+      "0:em_qcd_osss_1jet_shape_down_desy",
+      "0:em_qcd_osss_1jet_shape2_up_desy",
+      "0:em_qcd_osss_1jet_shape2_down_desy",
+      "0:em_qcd_osss_2jet_rate_up_desy",
+      "0:em_qcd_osss_2jet_rate_down_desy",
+      "0:em_qcd_osss_2jet_shape_up_desy",
+      "0:em_qcd_osss_2jet_shape_down_desy",
+      "0:em_qcd_osss_2jet_shape2_up_desy",
+      "0:em_qcd_osss_2jet_shape2_down_desy",
+      "0:em_qcd_osss_stat_0jet_rate_up_desy",
+      "0:em_qcd_osss_stat_0jet_rate_down_desy",
+      "0:em_qcd_osss_stat_0jet_shape_up_desy",
+      "0:em_qcd_osss_stat_0jet_shape_down_desy",
+      "0:em_qcd_osss_stat_0jet_shape2_up_desy",
+      "0:em_qcd_osss_stat_0jet_shape2_down_desy",
+      "0:em_qcd_osss_stat_1jet_rate_up_desy",
+      "0:em_qcd_osss_stat_1jet_rate_down_desy",
+      "0:em_qcd_osss_stat_1jet_shape_up_desy",
+      "0:em_qcd_osss_stat_1jet_shape_down_desy",
+      "0:em_qcd_osss_stat_1jet_shape2_up_desy",
+      "0:em_qcd_osss_stat_1jet_shape2_down_desy",
+      "0:em_qcd_osss_stat_2jet_rate_up_desy",
+      "0:em_qcd_osss_stat_2jet_rate_down_desy",
+      "0:em_qcd_osss_stat_2jet_shape_up_desy",
+      "0:em_qcd_osss_stat_2jet_shape_down_desy",
+      "0:em_qcd_osss_stat_2jet_shape2_up_desy",
+      "0:em_qcd_osss_stat_2jet_shape2_down_desy",
+      "0:em_qcd_osss_os_corr_desy",
+      "0:em_qcd_osss_ss_corr_desy",
   ]
   config["QCDFactorWorkspaceObjectArguments"] = [
       "0:dR,njets,m_pt,e_pt",
@@ -386,6 +581,15 @@ def build_config(nickname, **kwargs):
       "0:dR,njets",
       "0:dR,njets",
       "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
+      "0:dR,njets",
       "0:dR,njets,m_pt,e_pt",
       "0:dR,njets,m_pt,e_pt",
       "0:dR,njets,m_pt,e_pt",
@@ -398,6 +602,13 @@ def build_config(nickname, **kwargs):
       "0:dR,njets,m_pt,e_pt",
       "0:dR,njets,m_pt,e_pt",
       "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:dR,njets,m_pt,e_pt",
+      "0:m_pt,e_pt",
       "0:m_pt,e_pt",
   ]
   config["EventWeight"] = "eventWeight"
@@ -431,18 +642,36 @@ def build_config(nickname, **kwargs):
       "dzeta",
       "isoWeight_ic_1",
       "idWeight_ic_1",
+      "trigger_27_35_Weight_1","trigger_27_32_32fb_Weight_1","trigger_27_32_Weight_1",
+      "trigger_27_35_Weight_1",
+      "trigger_27_32_Weight_1",
+      "trigger_32_35_Weight_1",
+      "trigger_27_32_35_Weight_1",
+      "trigger_27_Weight_1",
+      "trigger_32_Weight_1",
+      "trigger_32fb_Weight_1",
+      "crossTriggerMCWeight_1",
+      "trigger_35_Weight_1",
+      "singleTriggerDataEfficiencyWeightKIT_32_1",
+      "singleTriggerDataEfficiencyWeightKIT_32or35_1",
+      "trigger_24_Weight_2", "trigger_27_Weight_2", "trigger_24_27_Weight_2",
+      "singleTriggerDataEfficiencyWeightKIT_24_2", "singleTriggerDataEfficiencyWeightKIT_24or27_2",
   ])
   if isEmbedded:
     config["Quantities"].extend([
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2",
           "trigger_23_data_Weight_2","trigger_23_embed_Weight_2","trigger_8_embed_Weight_2" ,"trigger_8_data_Weight_2",
           "trigger_23_data_Weight_1","trigger_23_embed_Weight_1","trigger_12_embed_Weight_1" ,"trigger_12_data_Weight_1",
+          "singleTriggerEmbeddedEfficiencyWeightKIT_32_1", "singleTriggerEmbeddedEfficiencyWeightKIT_32or35_1",
+           "singleTriggerEmbeddedEfficiencyWeightKIT_24_2", "singleTriggerEmbeddedEfficiencyWeightKIT_24or27_2",
           "looseIsoWeight_2","idisoWeight_1","idisoWeight_2"
            ])
   elif not isData:
     config["Quantities"].extend([
           "trigger_23_data_Weight_2","trigger_23_mc_Weight_2","trigger_8_mc_Weight_2" ,"trigger_8_data_Weight_2",
-          "trigger_23_data_Weight_1","trigger_23_mc_Weight_1","trigger_12_mc_Weight_1" ,"trigger_12_data_Weight_1"
+          "trigger_23_data_Weight_1","trigger_23_mc_Weight_1","trigger_12_mc_Weight_1" ,"trigger_12_data_Weight_1",
+          "singleTriggerMCEfficiencyWeightKIT_32_1", "singleTriggerMCEfficiencyWeightKIT_32or35_1",
+           "singleTriggerMCEfficiencyWeightKIT_24_2", "singleTriggerMCEfficiencyWeightKIT_24or27_2",
            ])
     config["Quantities"].extend([
     "trigger_12_Weight_1","trigger_23_Weight_1","trigger_8_Weight_2","trigger_23_Weight_2"
@@ -451,31 +680,47 @@ def build_config(nickname, **kwargs):
       "em_qcd_osss_binned_Weight",
       "em_qcd_extrap_up_Weight",
       "em_qcd_extrap_down_Weight",
-      "em_qcd_osss_stat_0jet_rateup_Weight",
-      "em_qcd_osss_stat_0jet_ratedown_Weight",
-      "em_qcd_osss_stat_0jet_shapeup_Weight",
-      "em_qcd_osss_stat_0jet_shapedown_Weight",
-      "em_qcd_osss_stat_1jet_rateup_Weight",
-      "em_qcd_osss_stat_1jet_ratedown_Weight",
-      "em_qcd_osss_stat_1jet_shapeup_Weight",
-      "em_qcd_osss_stat_1jet_shapedown_Weight",
-      "em_qcd_osss_stat_2jet_rateup_Weight",
-      "em_qcd_osss_stat_2jet_ratedown_Weight",
-      "em_qcd_osss_stat_2jet_shapeup_Weight",
-      "em_qcd_osss_stat_2jet_shapedown_Weight",
+      "em_qcd_osss_0jet_Weight",
+      "em_qcd_osss_1jet_Weight",
+      "em_qcd_osss_2jet_Weight",
       "em_qcd_osss_0jet_rateup_Weight",
       "em_qcd_osss_0jet_ratedown_Weight",
       "em_qcd_osss_0jet_shapeup_Weight",
       "em_qcd_osss_0jet_shapedown_Weight",
+      "em_qcd_osss_0jet_shape2up_Weight",
+      "em_qcd_osss_0jet_shape2down_Weight",
       "em_qcd_osss_1jet_rateup_Weight",
       "em_qcd_osss_1jet_ratedown_Weight",
       "em_qcd_osss_1jet_shapeup_Weight",
       "em_qcd_osss_1jet_shapedown_Weight",
+      "em_qcd_osss_1jet_shape2up_Weight",
+      "em_qcd_osss_1jet_shape2down_Weight",
       "em_qcd_osss_2jet_rateup_Weight",
       "em_qcd_osss_2jet_ratedown_Weight",
       "em_qcd_osss_2jet_shapeup_Weight",
       "em_qcd_osss_2jet_shapedown_Weight",
-      "em_qcd_extrap_uncert_Weight"])
+      "em_qcd_osss_2jet_shape2up_Weight",
+      "em_qcd_osss_2jet_shape2down_Weight",
+      "em_qcd_osss_stat_0jet_rateup_Weight",
+      "em_qcd_osss_stat_0jet_ratedown_Weight",
+      "em_qcd_osss_stat_0jet_shapeup_Weight",
+      "em_qcd_osss_stat_0jet_shapedown_Weight",
+      "em_qcd_osss_stat_0jet_shape2up_Weight",
+      "em_qcd_osss_stat_0jet_shape2down_Weight",
+      "em_qcd_osss_stat_1jet_rateup_Weight",
+      "em_qcd_osss_stat_1jet_ratedown_Weight",
+      "em_qcd_osss_stat_1jet_shapeup_Weight",
+      "em_qcd_osss_stat_1jet_shapedown_Weight",
+      "em_qcd_osss_stat_1jet_shape2up_Weight",
+      "em_qcd_osss_stat_1jet_shape2down_Weight",
+      "em_qcd_osss_stat_2jet_rateup_Weight",
+      "em_qcd_osss_stat_2jet_ratedown_Weight",
+      "em_qcd_osss_stat_2jet_shapeup_Weight",
+      "em_qcd_osss_stat_2jet_shapedown_Weight",
+      "em_qcd_osss_stat_2jet_shape2up_Weight",
+      "em_qcd_osss_stat_2jet_shape2down_Weight",
+      "em_qcd_extrap_uncert_Weight",
+      "em_qcd_nonclosure_uncert_Weight"])
   if re.search("HToTauTau.*M125", nickname):
     config["Quantities"].extend([
       "htxs_stage0cat",
@@ -523,6 +768,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer",
                                                               ))
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")

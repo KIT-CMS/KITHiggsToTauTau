@@ -269,7 +269,7 @@ void QCDFactorProducer::Produce( event_type const& event, product_type & product
 				}
 				if(arg=="njets")
 				{
-					int njets = product.m_validJets.size();
+					int njets = KappaProduct::GetNJetsAbovePtThreshold(product.m_validJets, 30.0);
 					args.push_back(njets);
 				}
 			}
@@ -460,6 +460,61 @@ void TauTauTriggerWeightProducer::Produce( event_type const& event, product_type
 
 // ==========================================================================================
 
+HighPtTauWeightProducer::HighPtTauWeightProducer() :
+		RooWorkspaceWeightProducer(&setting_type::GetSaveHighPtTauWeightAsOptionalOnly,
+								   &setting_type::GetHighPtTauWeightWorkspace,
+								   &setting_type::GetHighPtTauWeightWorkspaceWeightNames,
+								   &setting_type::GetHighPtTauWeightWorkspaceObjectNames,
+								   &setting_type::GetHighPtTauWeightWorkspaceObjectArguments)
+{
+}
+
+void HighPtTauWeightProducer::Produce( event_type const& event, product_type & product,
+						   setting_type const& settings) const
+{
+	for(auto weightNames:m_weightNames)
+	{
+		KLepton* lepton = product.m_flavourOrderedLeptons[weightNames.first];
+		for(size_t index = 0; index < weightNames.second.size(); index++)
+		{
+			auto args = std::vector<double>{};
+			std::vector<std::string> arguments;
+			boost::split(arguments,  m_functorArgs.at(weightNames.first).at(index) , boost::is_any_of(","));
+			for(auto arg:arguments)
+			{
+				if(arg=="t_pt")
+				{
+					args.push_back(lepton->p4.Pt());
+				}
+				if(arg=="t_pt_2")
+				{
+                                        KLepton* lepton2 = product.m_flavourOrderedLeptons[1];
+					args.push_back(lepton2->p4.Pt());
+				}
+				if(arg=="t_dm")
+				{
+					KTau* tau = static_cast<KTau*>(lepton);
+					args.push_back(tau->decayMode);
+				}
+				if(arg=="t_dm_2")
+				{
+					KTau* tau2 = static_cast<KTau*>(product.m_flavourOrderedLeptons[1]);
+					args.push_back(tau2->decayMode);
+				}
+			}
+			if(weightNames.second.at(index).find("tautau_triggerweight_ic") != std::string::npos){
+				product.m_weights[weightNames.second.at(index)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+			}
+			else
+			{
+                                product.m_weights[weightNames.second.at(index)+"_"+std::to_string(weightNames.first+1)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+			}
+		}
+	}
+}
+
+// ==========================================================================================
+
 MuTauTriggerWeightProducer::MuTauTriggerWeightProducer() :
 		RooWorkspaceWeightProducer(&setting_type::GetSaveMuTauTriggerWeightAsOptionalOnly,
 								   &setting_type::GetMuTauTriggerWeightWorkspace,
@@ -559,5 +614,65 @@ void MuTauTriggerWeightProducer::Produce( event_type const& event, product_type 
 	}else{
 		product.m_weights["triggerWeight_1"] = product.m_optionalWeights["triggerWeight_muTauCross_1"];
 		product.m_weights["triggerWeight_2"] = product.m_optionalWeights["triggerWeight_muTauCross_2"];
+	}
+}
+
+
+LeptonTauTriggerWeightProducer::LeptonTauTriggerWeightProducer() :
+		RooWorkspaceWeightProducer(&setting_type::GetSaveLeptonTauTriggerWeightAsOptionalOnly,
+								   &setting_type::GetLeptonTauTriggerWeightWorkspace,
+								   &setting_type::GetLeptonTauTriggerWeightWorkspaceWeightNames,
+								   &setting_type::GetLeptonTauTriggerWeightWorkspaceObjectNames,
+								   &setting_type::GetLeptonTauTriggerWeightWorkspaceObjectArguments)
+{
+}
+
+
+void LeptonTauTriggerWeightProducer::Produce( event_type const& event, product_type & product,
+						   setting_type const& settings) const
+{
+        KLepton* lepton = product.m_flavourOrderedLeptons[0];
+        KLepton* tau = product.m_flavourOrderedLeptons[1];
+	for(auto weightNames:m_weightNames)
+	{
+		for(size_t index = 0; index < weightNames.second.size(); index++)
+		{
+			auto args = std::vector<double>{};
+			std::vector<std::string> arguments;
+			boost::split(arguments,  m_functorArgs.at(weightNames.first).at(index) , boost::is_any_of(","));
+			for(auto arg:arguments)
+			{
+				if(arg=="m_pt" || arg=="e_pt")
+				{
+					args.push_back(lepton->p4.Pt());
+				}
+				if(arg=="m_eta" || arg=="e_eta")
+				{
+					args.push_back(lepton->p4.Eta());
+				}
+				if(arg=="m_iso" || arg=="e_iso")
+				{
+					args.push_back(SafeMap::GetWithDefault(product.m_leptonIsolationOverPt, lepton, std::numeric_limits<double>::max()));
+				}
+				if(arg=="t_pt")
+				{
+					args.push_back(tau->p4.Pt());
+				}
+				if(arg=="t_eta")
+				{
+					args.push_back(tau->p4.Eta());
+				}
+				if(arg=="t_phi")
+				{
+					args.push_back(tau->p4.Phi());
+				}
+				if(arg=="t_dm")
+				{
+					KTau* tau_object = static_cast<KTau*>(tau);
+					args.push_back(tau_object->decayMode);
+				}
+			}
+                        product.m_weights[weightNames.second.at(index)] = m_functors.at(weightNames.first).at(index)->eval(args.data());
+		}
 	}
 }

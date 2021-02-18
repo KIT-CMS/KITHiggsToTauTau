@@ -126,3 +126,27 @@ public:
 	virtual void Produce(event_type const& event, product_type & product,
 						 setting_type const& settings) const override;
 };
+
+class HighPtTauWeightProducer: public RooWorkspaceWeightProducer {
+public:
+	HighPtTauWeightProducer();
+
+	virtual std::string GetProducerId() const override {
+		return "HighPtTauWeightProducer";
+	}
+
+	virtual void Produce(event_type const& event, product_type & product,
+						 setting_type const& settings) const override;
+};
+
+class LeptonTauTriggerWeightProducer: public RooWorkspaceWeightProducer {
+public:
+	LeptonTauTriggerWeightProducer();
+
+	virtual std::string GetProducerId() const override {
+		return "LeptonTauTriggerWeightProducer";
+	}
+
+	virtual void Produce(event_type const& event, product_type & product,
+						 setting_type const& settings) const override;
+};

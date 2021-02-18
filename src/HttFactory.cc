@@ -60,6 +60,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TaggedJetUncertaintyShiftProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/NLOreweightingWeightsProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauTriggerEfficiencyProducer.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauTriggerSFProviderProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SingleTauTriggerEfficiencyProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/TauIDScaleFactorProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/ImpactParameterCorrectionsProducer.h"
@@ -68,6 +69,7 @@
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SMggHNNLOProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/SMvbfNNLOProducer.h"
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/L1TauTriggerMatchingProducers.h"
+#include "HiggsAnalysis/KITHiggsToTauTau/interface/Producers/EmbeddingMETCorrector.h"
 
 // filters
 #include "HiggsAnalysis/KITHiggsToTauTau/interface/Filters/LooseObjectsCountFilters.h"
@@ -288,8 +290,12 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new MuMuTriggerWeightProducer();
 	else if(id == TauTauTriggerWeightProducer().GetProducerId())
 		return new TauTauTriggerWeightProducer();
+	else if(id == HighPtTauWeightProducer().GetProducerId())
+		return new HighPtTauWeightProducer();
 	else if(id == MuTauTriggerWeightProducer().GetProducerId())
 		return new MuTauTriggerWeightProducer();
+	else if(id == LeptonTauTriggerWeightProducer().GetProducerId())
+		return new LeptonTauTriggerWeightProducer();
 	else if(id == EmbeddingGlobalQuantitiesProducer().GetProducerId())
 		return new EmbeddingGlobalQuantitiesProducer();
 	else if(id == BoostRestFrameProducer().GetProducerId())
@@ -316,30 +322,34 @@ ProducerBaseUntemplated * HttFactory::createProducer(std::string const& id)
 		return new NLOreweightingWeightsProducer();
 	else if(id == TauTriggerEfficiencyProducer().GetProducerId())
 		return new TauTriggerEfficiencyProducer();
+	else if(id == TauTriggerSFProviderProducer().GetProducerId())
+		return new TauTriggerSFProviderProducer();
 	else if(id == SingleTauTriggerEfficiencyProducer().GetProducerId())
 		return new SingleTauTriggerEfficiencyProducer();
 	else if(id == TauIDScaleFactorProducer().GetProducerId())
 		return new TauIDScaleFactorProducer();
-        else if(id == ImpactParameterCorrectionsProducer().GetProducerId())
+	else if(id == ImpactParameterCorrectionsProducer().GetProducerId())
 		return new ImpactParameterCorrectionsProducer();
-        else if(id == MetFilterFlagProducer().GetProducerId())
-                return new MetFilterFlagProducer();
-        else if(id == TauDecayModeWeightProducer().GetProducerId())
-                return new TauDecayModeWeightProducer();
-        else if(id == SMggHNNLOProducer().GetProducerId())
-                return new SMggHNNLOProducer();
-        else if(id == SMvbfNNLOProducer().GetProducerId())
-                return new SMvbfNNLOProducer();
-        else if(id == MetFilterFlagProducer().GetProducerId())
-                return new MetFilterFlagProducer();
-        else if(id == TauDecayModeWeightProducer().GetProducerId())
-                return new TauDecayModeWeightProducer();
-        else if(id == TauL1TauTriggerMatchingProducer().GetProducerId())
-                return new TauL1TauTriggerMatchingProducer();
-        else if(id == MuonL1TauTriggerMatchingProducer().GetProducerId())
-                return new MuonL1TauTriggerMatchingProducer();
-        else if(id == ElectronL1TauTriggerMatchingProducer().GetProducerId())
-                return new ElectronL1TauTriggerMatchingProducer();
+	else if(id == MetFilterFlagProducer().GetProducerId())
+			return new MetFilterFlagProducer();
+	else if(id == TauDecayModeWeightProducer().GetProducerId())
+			return new TauDecayModeWeightProducer();
+	else if(id == SMggHNNLOProducer().GetProducerId())
+			return new SMggHNNLOProducer();
+	else if(id == SMvbfNNLOProducer().GetProducerId())
+			return new SMvbfNNLOProducer();
+	else if(id == MetFilterFlagProducer().GetProducerId())
+			return new MetFilterFlagProducer();
+	else if(id == TauDecayModeWeightProducer().GetProducerId())
+			return new TauDecayModeWeightProducer();
+	else if(id == TauL1TauTriggerMatchingProducer().GetProducerId())
+			return new TauL1TauTriggerMatchingProducer();
+	else if(id == MuonL1TauTriggerMatchingProducer().GetProducerId())
+			return new MuonL1TauTriggerMatchingProducer();
+	else if(id == ElectronL1TauTriggerMatchingProducer().GetProducerId())
+			return new ElectronL1TauTriggerMatchingProducer();
+	else if(id == EmbeddingMETCorrector().GetProducerId())
+                return new EmbeddingMETCorrector();
 	else
 		return KappaFactory::createProducer( id );
 }

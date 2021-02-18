@@ -1,0 +1,4 @@
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_MSSM/AnalysisCollections/2016_DATA.txt
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_MSSM/AnalysisCollections/2016_EMB.txt
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_MSSM/AnalysisCollections/2016_MC.txt
+$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/Samples/Run2Legacy_MSSM/AnalysisCollections/2016_MC_MSSM_Signals.txt
