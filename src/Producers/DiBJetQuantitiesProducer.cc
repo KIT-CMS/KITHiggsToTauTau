@@ -258,6 +258,108 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
                 }
                 else return DefaultValues::UndefinedFloat;
         });
+
+	// my stuff 
+
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet1Pt_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index]->bjetRegCorr).Pt();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet2Pt_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index]->bjetRegCorr).Pt();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet1Eta_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index]->bjetRegCorr).Eta();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet2Eta_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index]->bjetRegCorr).Eta();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet1Phi_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index]->bjetRegCorr).Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet2Phi_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index]->bjetRegCorr).Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet1mass_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index]->bjetRegCorr).mass();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet2mass_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_diBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index])->p4*product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index]->bjetRegCorr).mass();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemBJetPt_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex])->p4*product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex]->bjetRegCorr).Pt();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemJetPt_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex])->p4*product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex]->bjetRegCorr).Pt();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemBJetEta_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex])->p4*product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex]->bjetRegCorr).Eta();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+        LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemJetEta_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex])->p4*product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex]->bjetRegCorr).Eta();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemBJetPhi_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex])->p4*product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex]->bjetRegCorr).Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+         LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemJetPhi_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex])->p4*product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex]->bjetRegCorr).Phi();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });	
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemBJetmass_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex])->p4*product.m_bTaggedJets[product.m_HsmTune_JetPlusBJetSystemBJetIndex]->bjetRegCorr).mass();
+                }
+                else return DefaultValues::UndefinedFloat;
+        });
+         
+		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_JetPlusBJetSystemJetmass_bReg", [](event_type const& event, product_type const& product) {
+                if (product.m_JetPlusBJetSystem_HsmTuneAvailable) {
+                        return (static_cast<KJet*>(product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex])->p4*product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex]->bjetRegCorr).mass();
+                }
+                else return DefaultValues::UndefinedFloat;
+		});	
+
+	//my stuff
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetPlusBJetdiLepPhi", [](event_type const& event, product_type const& product) {
 			return product.m_JetPlusBJetSystemAvailable ? (product.m_highCSVJetPlusBJetSystem + product.m_diLeptonSystem).Phi() : DefaultValues::UndefinedFloat;
 	});	
@@ -398,34 +500,127 @@ void DiBJetQuantitiesProducer::Produce(event_type const& event, product_type& pr
 	                                  setting_type const& settings) const
 {
 	// If >=2 b jets are present, calculate everything from the two leading b jets
+
 	if (product.m_bTaggedJets.size() >= 2)
-	{
-		product.m_diBJetSystem = (product.m_bTaggedJets[0]->p4 + product.m_bTaggedJets[1]->p4);
+	{	
 		product.m_diBJetSystemAvailable = true;
 		product.m_JetPlusBJetSystemAvailable = false;
 
+		product.m_diBJetSystem_HsmTuneAvailable = true;			
+		product.m_JetPlusBJetSystem_HsmTuneAvailable = false;
+
+		product.m_diBJetSystem = (product.m_bTaggedJets[0]->p4 + product.m_bTaggedJets[1]->p4);
 		product.m_diBJetSystem_bReg = (product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr + product.m_bTaggedJets[1]->p4*product.m_bTaggedJets[1]->bjetRegCorr);
 
+		int nbTaggedJets = product.m_bTaggedJets.size();
+		float energy_tmp = 0;
+		float smhiggsmass = 125; 
+		float ediff = 100000000; 
+		int jetindex_1 = 0;
+		int jetindex_2 = 0;
+
+
+		for(int i = 0; i < nbTaggedJets; i++) {
+			for(int k = i + 1; k < nbTaggedJets; k++) {
+
+				energy_tmp = (product.m_bTaggedJets[i]->p4 + product.m_bTaggedJets[k]->p4).mass();
+				if(energy_tmp - smhiggsmass < ediff) {
+					jetindex_1 = i;
+					product.m_HsmTune_DiJetSystemBJet1Index = i;
+					jetindex_2 = k;
+					product.m_HsmTune_DiJetSystemBJet2Index = k;
+				}
+		
+			}
+		}
+
+
+
+		product.m_diBJetSystem_HsmTune = (product.m_bTaggedJets[jetindex_1]->p4 + product.m_bTaggedJets[jetindex_2]->p4); 
+		product.m_diBJetSystem_HsmTune_bReg = (product.m_bTaggedJets[jetindex_1]->p4*product.m_bTaggedJets[jetindex_1]->bjetRegCorr + product.m_bTaggedJets[jetindex_2]->p4*product.m_bTaggedJets[jetindex_2]->bjetRegCorr); 
+
+
+
 	}
+
 	// If only 1 b jet is present, calculate everything from b jet + jet leading in pT (or subleading if leading jet is b jet)
-	else if ((product.m_bTaggedJets.size() == 1)&&(product.m_validJets.size() >=2 ))
-	{
+	else if ((product.m_bTaggedJets.size() == 1)&&(product.m_validJets.size() >=2 )) {
+
+
 		product.m_JetPlusBJetSystemAvailable = true;
 		product.m_diBJetSystemAvailable = false;
+
+		product.m_JetPlusBJetSystem_HsmTuneAvailable = true;
+		product.m_diBJetSystem_HsmTuneAvailable = false;
+
+		int nvalidJets = product.m_validJets.size();
+		float energy_tmp = 0;
+		float smhiggsmass = 125; 
+		float ediff = smhiggsmass; 
+		int jetindex_1 = 0;
+
+
+
 		if (ROOT::Math::VectorUtil::DeltaR(product.m_bTaggedJets[0]->p4,product.m_validJets[0]->p4) < 0.001) {
 			product.m_leadJetIsBJet = true;
+
+
+			for (int i = 1; i < nvalidJets; i ++) {
+				energy_tmp = (product.m_bTaggedJets[0]->p4 + product.m_validJets[i]->p4).mass();
+
+				product.m_HsmTune_JetPlusBJetSystemBJetIndex = 0;
+
+				if(energy_tmp - smhiggsmass < ediff) {
+					jetindex_1 = i;
+					product.m_HsmTune_JetPlusBJetSystemJetIndex = i;
+
+				}
+
+			}
+
+		
+
 			product.m_JetPlusBJetSystem = (product.m_validJets[1]->p4 + product.m_bTaggedJets[0]->p4);
 			product.m_JetPlusBJetSystem_bReg = (product.m_validJets[1]->p4*product.m_validJets[1]->bjetRegCorr + product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr);
 
+			product.m_JetPlusBJetSystem_HsmTune = (product.m_validJets[jetindex_1]->p4 + product.m_bTaggedJets[0]->p4);
+			product.m_JetPlusBJetSystem_HsmTune_bReg = (product.m_validJets[jetindex_1]->p4*product.m_validJets[jetindex_1]->bjetRegCorr + product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr);
 		}
 		else {
+
+
+			for (int i = 0; i < nvalidJets; i ++) {
+
+				if (ROOT::Math::VectorUtil::DeltaR(product.m_bTaggedJets[0]->p4,product.m_validJets[i]->p4) < 0.001) {
+					continue;
+				}
+				energy_tmp = (product.m_bTaggedJets[0]->p4 + product.m_validJets[i]->p4).mass();
+
+				product.m_HsmTune_JetPlusBJetSystemBJetIndex = 0;
+
+				if(energy_tmp - smhiggsmass < ediff) {
+					jetindex_1 = i;
+					product.m_HsmTune_JetPlusBJetSystemJetIndex = i;
+				
+					
+				}
+
+			}
+	
+
 			product.m_JetPlusBJetSystem_bReg = (product.m_validJets[0]->p4*product.m_validJets[0]->bjetRegCorr + product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr);
-			product.m_JetPlusBJetSystem = (product.m_validJets[0]->p4 + product.m_bTaggedJets[0]->p4);			
+			product.m_JetPlusBJetSystem = (product.m_validJets[0]->p4 + product.m_bTaggedJets[0]->p4);		
+
+			product.m_JetPlusBJetSystem_HsmTune = (product.m_validJets[jetindex_1]->p4 + product.m_bTaggedJets[0]->p4);
+			product.m_JetPlusBJetSystem_HsmTune_bReg = (product.m_validJets[jetindex_1]->p4*product.m_validJets[jetindex_1]->bjetRegCorr + product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr); 	
 		}
 
 		float maxCSV = -10.;
 		std::string bTaggedJetCSVName = settings.GetBTaggedJetCombinedSecondaryVertexName();
 		for(uint i=0;i<product.m_validJets.size();i++) {
+
+		
+
 			if(ROOT::Math::VectorUtil::DeltaR(product.m_bTaggedJets[0]->p4,product.m_validJets[i]->p4) < 0.001) continue;
 			if(static_cast<KJet*>(product.m_validJets[i])->getTag(bTaggedJetCSVName, event.m_jetMetadata)>maxCSV) {
 				maxCSV = static_cast<KJet*>(product.m_validJets[i])->getTag(bTaggedJetCSVName, event.m_jetMetadata);
@@ -440,6 +635,10 @@ void DiBJetQuantitiesProducer::Produce(event_type const& event, product_type& pr
 	{
 		product.m_JetPlusBJetSystemAvailable = false;
 		product.m_diBJetSystemAvailable = false;
+
+		product.m_JetPlusBJetSystem_HsmTuneAvailable = false;
+		product.m_diBJetSystem_HsmTuneAvailable = false;
+
 	}
 
 }

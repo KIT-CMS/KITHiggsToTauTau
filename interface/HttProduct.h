@@ -189,6 +189,19 @@ public:
 	int m_nCentralJets20 = 0;
 	int m_nCentralJets30 = 0;
 
+	bool m_diBJetSystem_HsmTuneAvailable = false;
+	RMDLV m_diBJetSystem_HsmTune;
+	RMDLV m_diBJetSystem_HsmTune_bReg;
+	int m_HsmTune_DiJetSystemBJet1Index;
+	int m_HsmTune_DiJetSystemBJet2Index;
+
+	bool m_JetPlusBJetSystem_HsmTuneAvailable = false;
+	RMDLV m_JetPlusBJetSystem_HsmTune;
+	RMDLV m_JetPlusBJetSystem_HsmTune_bReg;
+	int m_HsmTune_JetPlusBJetSystemBJetIndex;
+	int m_HsmTune_JetPlusBJetSystemJetIndex;
+
+
 	// filled by the DiGenJetQuantitiesProducer
 	RMDLV m_diGenJetSystem;
 	bool m_diGenJetSystemAvailable = false;
