@@ -524,6 +524,7 @@ public:
         // settings for NLOreweightingWeightProducer
         IMPL_SETTING(std::string, HiggsBosonMass)
         IMPL_SETTING(std::string, NLOweightsRooWorkspace)
+        IMPL_SETTING_DEFAULT(bool, NLOweightsWriteUncertainties, false)
 
         // settings for quantile mapping
         IMPL_SETTING_DEFAULT(std::string, QuantileMappingRootfile, "none")
