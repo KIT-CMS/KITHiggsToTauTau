@@ -75,9 +75,7 @@ def build_list(**kwargs):
         "taujet_pt_1",
         "taujet_eta_1",
         "taujet_pt_2",
-        "taujet_eta_2",
-        "genMatchedLep1Pt",
-        "genMatchedLep2Pt"
+        "taujet_eta_2"
     ]
 
     quantities.extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.weightQuantities").build_list(minimal_setup=minimal_setup, isMC=kwargs["isMC"]))
@@ -238,7 +236,6 @@ def build_list(**kwargs):
             "njetingap20",
             "njetspt20",
             "njetspt20eta2p4",
-            "njetspt20eta2p5",
             "njetspt30",
             "npu",
             "npv",
@@ -282,8 +279,8 @@ def build_list(**kwargs):
         "HsmTune_JetPlusBJetSystemJetPhi_bReg",
         "HsmTune_JetPlusBJetSystemBJetmass_bReg",
         "HsmTune_JetPlusBJetSystemJetmass_bReg",
-        "pt_bb_bReg_HsmTune",
-        "mbb_bReg_HsmTune",
+	"HsmTune_DiJetSystemJet1CSV",
+	"HsmTune_DiJetSystemJet2CSV",
         "diBJetPt",
         "diBJetEta",
         "diBJetPhi",
@@ -372,5 +369,14 @@ def build_list(**kwargs):
         "bJet_bRegCorr",
         "bJet2_bRegRes",
         "bJet2_bRegCorr",
+        "pt_ttvisbb_HsmTune_bReg",
+        "pt_ttbb_HsmTune_bReg",
+        "pt_ttbb_puppi_HsmTune_bReg",
+        "m_ttvisbb_HsmTune_bReg",
+        "m_ttbb_HsmTune_bReg",
+        "m_ttbb_puppi_HsmTune_bReg",
+        "mbb_HsmTune_bReg",
+        "pt_bb_HsmTune_bReg",
+
         ])
     return list(set(quantities))

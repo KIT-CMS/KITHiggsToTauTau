@@ -259,6 +259,19 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
                 else return DefaultValues::UndefinedFloat;
         });
 
+	   LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet1CSV", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+            if (product.m_diBJetSystem_HsmTuneAvailable) {
+                    return static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet1Index])->getTag(bTaggedJetCSVName, event.m_jetMetadata);
+            }
+            else return DefaultValues::UndefinedFloat;
+   	 });
+   	 LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet2CSV", [bTaggedJetCSVName](event_type const& event, product_type const& product) {
+            if (product.m_diBJetSystem_HsmTuneAvailable) {
+                    return static_cast<KJet*>(product.m_bTaggedJets[product.m_HsmTune_DiJetSystemBJet2Index])->getTag(bTaggedJetCSVName, event.m_jetMetadata);
+            }
+            else return DefaultValues::UndefinedFloat;
+   	 });
+
 	// my stuff 
 
 		LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("HsmTune_DiJetSystemJet1Pt_bReg", [](event_type const& event, product_type const& product) {
