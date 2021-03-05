@@ -64,10 +64,10 @@ def build_config(nickname, **kwargs):
   # explicit configuration
   if isEmbedded:
     config["scale_metDown"] = {
-            "EmbedddingFakeMETCorrection" : fakeMetScale_uncertainties[year][channel]["up"]
+            "EmbedddingFakeMETCorrection" : fakeMetScale_uncertainties[year][channel]["down"]
     }
     config["scale_metUp"] = {
-            "EmbedddingFakeMETCorrection" : fakeMetScale_uncertainties[year][channel]["down"]
+            "EmbedddingFakeMETCorrection" : fakeMetScale_uncertainties[year][channel]["up"]
     }
 
   return config
