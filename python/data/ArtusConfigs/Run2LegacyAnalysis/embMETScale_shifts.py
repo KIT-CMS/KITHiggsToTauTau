@@ -32,27 +32,6 @@ def build_config(nickname, **kwargs):
   #isWjets = re.search("W.?JetsToLNu", nickname)
   year = datasetsHelper.base_dict[nickname]["year"]
 
-  fakeMetScale_uncertainties = {
-    2016 : {
-        "tt": {"down" : 0.949*0.949, "up" : 1.0},
-        "et": {"down" : 0.958*0.958, "up" : 1.0},
-        "mt": {"down" : 0.962*0.962, "up" : 1.0},
-        "em": {"down" : 0.992*0.992, "up" : 1.0},
-    },
-    2017 : {
-        "tt": {"down" : 0.918*0.918, "up" : 1.0},
-        "et": {"down" : 0.960*0.960, "up" : 1.0},
-        "mt": {"down" : 0.952*0.952, "up" : 1.0},
-        "em": {"down" : 0.955*0.955, "up" : 1.0},
-    },
-    2018 : {
-        "tt": {"down" : 0.900*0.900, "up" : 1.0},
-        "et": {"down" : 0.935*0.935, "up" : 1.0},
-        "mt": {"down" : 0.931*0.931, "up" : 1.0},
-        "em": {"down" : 0.957*0.957, "up" : 1.0},
-    },
-  }
-
   ## fill config:
   # includes
   includes = [
@@ -64,10 +43,10 @@ def build_config(nickname, **kwargs):
   # explicit configuration
   if isEmbedded:
     config["scale_metDown"] = {
-            "EmbedddingFakeMETCorrection" : fakeMetScale_uncertainties[year][channel]["down"]
+            "EmbeddingFakeMETCorrectionNumApplies": 2
     }
     config["scale_metUp"] = {
-            "EmbedddingFakeMETCorrection" : fakeMetScale_uncertainties[year][channel]["up"]
+             "EmbeddingFakeMETCorrectionNumApplies": 0
     }
 
   return config

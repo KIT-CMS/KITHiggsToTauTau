@@ -169,7 +169,8 @@ def build_config(nickname, **kwargs):
 
   ### Met correction SF for embedding
   if isEmbedded:
-    config["EmbedddingFakeMETCorrection"] = 0.949
+    config["EmbeddingFakeMETCorrectionNumApplies"] = 1
+    config["EmbeddingFakeMETCorrection"] = "(x-y)*0.929 + y*(1.+0.005)"
 
   ### Efficiencies & weights configuration
   config["TauTriggerInput"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2016KIT_deeptau.root"

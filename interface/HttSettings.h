@@ -259,7 +259,8 @@ public:
 	IMPL_SETTING(float, MetLowerPtCuts);
 	IMPL_SETTING(float, MetUpperPtCuts);
 
-	IMPL_SETTING_DEFAULT(float, EmbedddingFakeMETCorrection, 1.0);
+	IMPL_SETTING_DEFAULT(std::string, EmbeddingFakeMETCorrection, "1.0");
+	IMPL_SETTING_DEFAULT(int, EmbeddingFakeMETCorrectionNumApplies, 1);
 
 	IMPL_SETTING_DEFAULT(std::string, TauDiscriminatorIsolationName, "hpsPFTauDiscriminationByRawCombinedIsolationDBSumPtCorr3Hits");
 	IMPL_SETTING_DEFAULT(float, TauDiscriminatorIsolationCut, std::numeric_limits<float>::max());
