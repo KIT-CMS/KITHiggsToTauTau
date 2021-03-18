@@ -238,6 +238,7 @@ class HiggsToTauTauAnalysisWrapper():
 			choices=[
 				'nominal', 'tauESperDM_shifts',
 				'regionalJECunc_shifts',
+                                'embMETScale_shifts',
 				'regionalJECunc1_shifts', 'regionalJECunc2_shifts', 'regionalJECunc3_shifts', 'regionalJECunc4_shifts', 'regionalJECunc5_shifts', 'regionalJECunc6_shifts',
 				'tauEleFakeESperDM_shifts', 'METunc_shifts', 'METrecoil_shifts', 'eleES_shifts', 'muonES_shifts', 'btagging_shifts',
 				'tauMuFakeESperDM_shifts', 'JECunc_shifts',

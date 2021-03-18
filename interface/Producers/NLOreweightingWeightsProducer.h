@@ -20,4 +20,9 @@ public:
 
     virtual void Produce(event_type const& event, product_type& product,
                          setting_type const& settings) const override;
+
+private:
+    std::vector<std::string> m_higgs_bosons;
+    std::vector<std::string> m_uncertainties;
+    std::vector<std::string> m_contributions;
 };

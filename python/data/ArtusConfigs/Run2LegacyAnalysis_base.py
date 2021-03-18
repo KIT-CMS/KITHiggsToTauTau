@@ -56,7 +56,14 @@ def build_config(nickname, **kwargs):
 
   if isSUSYggH:
     config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
-    config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
+    if re.search("SUSYGluGluToHToTauTau.*powheg", nickname):
+        if year == 2016:
+            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_2016_v1.root"
+        else:
+            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v1.root"
+        config["NLOweightsWriteUncertainties"] = True
+    else:
+        config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
 
   BosonPdgIds = {
       "DY.?JetsToLL|EWKZ2Jets|Embedding" : [

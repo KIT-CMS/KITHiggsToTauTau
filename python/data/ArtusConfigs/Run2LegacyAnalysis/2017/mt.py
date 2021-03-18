@@ -36,7 +36,7 @@ def build_config(nickname, **kwargs):
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("(GluGluHToTauTau|ggZHHToTauTauZToQQ).*M125", nickname)
   isVBF = re.search("(VBFHToTauTau.*M125|^W(minus|plus)HToTauTau.*125.*|^ZHToTauTau.*125.*)", nickname)
-  isMSSMggH = re.search("SUSYGluGuToH", nickname)
+  isMSSMggH = re.search("SUSYGluGluToH", nickname)
 
   ## fill config:
   # includes
@@ -185,7 +185,8 @@ def build_config(nickname, **kwargs):
 
   ### Met correction SF for embedding
   if isEmbedded:
-    config["EmbedddingFakeMETCorrection"] = 0.952
+    config["EmbeddingFakeMETCorrectionNumApplies"] = 1
+    config["EmbeddingFakeMETCorrection"] = "(x-y)*0.979 + y*(1.+-0.000)"
 
   ### Efficiencies & weights configuration
   config["TauTriggerInput"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/tauTriggerEfficiencies2017KIT_deeptau.root"
@@ -674,6 +675,16 @@ def build_config(nickname, **kwargs):
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.qqHNNLOQuantities").build_list())
   if isNMSSM:
     config["Quantities"].extend(["genBosonMass_h1","genBosonMass_h2","genBosonMass_h3","genBosonPt_h1","genBosonPt_h2","genBosonPt_h3","genBosonEta_h1","genBosonEta_h2","genBosonEta_h3"])
+  if isMSSMggH and re.search("powheg", nickname):
+    config["Quantities"].extend(["ggh_b_weight_hdamp_up", "ggh_i_weight_hdamp_up", "ggh_t_weight_hdamp_up",
+                                 "ggh_b_weight_hdamp_down", "ggh_i_weight_hdamp_down", "ggh_t_weight_hdamp_down",
+                                 "ggh_b_weight_scale_up", "ggh_i_weight_scale_up", "ggh_t_weight_scale_up",
+                                 "ggh_b_weight_scale_down", "ggh_i_weight_scale_down", "ggh_t_weight_scale_down",
+                                 "ggA_b_weight_hdamp_up", "ggA_i_weight_hdamp_up", "ggA_t_weight_hdamp_up",
+                                 "ggA_b_weight_hdamp_down", "ggA_i_weight_hdamp_down", "ggA_t_weight_hdamp_down",
+                                 "ggA_b_weight_scale_up", "ggA_i_weight_scale_up", "ggA_t_weight_scale_up",
+                                 "ggA_b_weight_scale_down", "ggA_i_weight_scale_down", "ggA_t_weight_scale_down",
+    ])
   ### Processors & consumers configuration
   config["Processors"] =   []#                                  ["producer:MuonCorrectionsProducer"] if isEmbedded else []
   #if not (isEmbedded):           config["Processors"].append( "producer:ElectronCorrectionsProducer")
@@ -746,6 +757,8 @@ def build_config(nickname, **kwargs):
 
   # pipelines - systematic shifts
   needed_pipelines = ['nominal', 'tauESperDM_shifts', 'tauMuFakeESperDM_shifts', 'regionalJECunc_shifts', 'METunc_shifts', 'METrecoil_shifts', 'btagging_shifts']
+  if isEmbedded:
+      needed_pipelines.append('embMETScale_shifts')
   if pipelines is None:
       raise Exception("pipelines is None in %s" % (__file__))
   elif 'auto' in pipelines:
