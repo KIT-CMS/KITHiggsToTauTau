@@ -296,11 +296,11 @@ AccEfficiencyElMuFile = AccEfficiencyMuTauFile.clone(
 # TTbar files
 TTFileMuTauFile = pltcl.single_plotline(
 	name = "TTFileMuTauFile",
-	scale_factor = 831.76/77229341.*12891.,
-	num_file ="/portal/ekpbms1/home/jbechtel/plotting/2017-03-10_01-34_analysis/merged/TT_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_powheg-pythia8/TT_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_powheg-pythia8.root",	#'/storage/a/akhmet/htautau/artus/2017-02-09_00-10_analysis/merged/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1.root',	
-	num_folder = "mt_jecUncNom_tauEsNom",
-	den_folder = "mt_jecUncNom_tauEsNom",
+	num_file ="/storage/c/jbechtel/paper_data_complete/testMT2/TTTo2L2Nu_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_v1/TTTo2L2Nu_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_v1.root /storage/c/jbechtel/paper_data_complete/testMT2/TTToHadronic_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_v1/TTToHadronic_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_v1.root /storage/c/jbechtel/paper_data_complete/testMT2/TTToSemiLeptonic_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_v2/TTToSemiLeptonic_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_powheg-pythia8_v2.root",	#'/storage/a/akhmet/htautau/artus/2017-02-09_00-10_analysis/merged/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1.root',	
+	num_folder = "mt_nominal",
+	den_folder = "mt_nominal",
 	num_tree = "ntuple",
+	nick = "tt_noplot",
 	label = "t#bar{t} simulation",
 	color = "kMagenta-1",
 	marker = "PE")
@@ -312,12 +312,15 @@ TTFileTauTauFile = TTFileMuTauFile.clone(
 DYFileMuTauFile = pltcl.single_plotline(
 	name = "DYFileMuTauFile",
 	#scale_factor = 1./5.234,
-	num_file ="/home/jbechtel/plotting/dySmeared/dySmeared.root",	#'/storage/a/akhmet/htautau/artus/2017-02-09_00-10_analysis/merged/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1.root',
+	num_file = "/storage/c/jbechtel/paper_data_complete/testMT2/DY1JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_ext1-v1/DY1JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_ext1-v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_ext1-v1/DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_ext1-v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1/DY2JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DY3JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_ext1-v1/DY3JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_ext1-v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DY4JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1/DY4JetsToLLM50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DYJetsToLLM10to50_RunIIFall17MiniAOD_94X_13TeV_MINIAOD_madgraph-pythia8_v2/DYJetsToLLM10to50_RunIIFall17MiniAOD_94X_13TeV_MINIAOD_madgraph-pythia8_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/DYJetsToLLM50_RunIIFall17MiniAODv2_PU2017RECOSIMstep_13TeV_MINIAOD_madgraph-pythia8_ext1-v1/DYJetsToLLM50_RunIIFall17MiniAODv2_PU2017RECOSIMstep_13TeV_MINIAOD_madgraph-pythia8_ext1-v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DYJetsToLLM50_RunIIFall17MiniAODv2_PU2017RECOSIMstep_13TeV_MINIAOD_madgraph-pythia8_v1/DYJetsToLLM50_RunIIFall17MiniAODv2_PU2017RECOSIMstep_13TeV_MINIAOD_madgraph-pythia8_v1.root /storage/c/jbechtel/paper_data_complete/testMT2/DYJetsToLLM5to50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v2/DYJetsToLLM5to50_RunIIFall17MiniAODv2_PU2017_13TeV_MINIAOD_madgraph-pythia8_v2.root",
+
+	#~ num_file ="/home/jbechtel/plotting/dySmeared/dySmeared.root",	#'/storage/a/akhmet/htautau/artus/2017-02-09_00-10_analysis/merged/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1/DYJetsToLLM50_RunIISummer16MiniAODv2_PUMoriond17_13TeV_MINIAOD_madgraph-pythia8_ext1.root',
 	#~ num_folder = "mt_jecUncNom_tauEsNom",
 	#~ den_folder = "mt_jecUncNom_tauEsNom",	
 	num_folder = "mt_nominal",
 	den_folder = "mt_nominal",
 	num_tree = "ntuple",
+	nick = "dy_noplot",
 	label = "Z#rightarrow#tau#tau simulation",
 	color = "kRed",
 	marker = "PE")
@@ -455,10 +458,19 @@ HToTauTauElMuFile = HToTauTauMuTauFile.clone(
 
 EmbeddingMuTauFileNominal = DYFileMuTauFile.clone(
 	name = "EmbeddingMuTauFileNominal",
-	scale_factor = 1.04277308792,
-	num_file = '/portal/ekpbms1/home/jbechtel/plotting/EmbeddingMETtest/EmbeddingMuTau.root',
-	#num_file = "/home/jbechtel/plotting/0226/EmbeddingMCRunIISummer16DR80_MuTauFinalState_imputFlatPU28to62HcalNZSRAWAODSIM_13TeV_USER_pythia8/EmbeddingMCRunIISummer16DR80_MuTauFinalState_imputFlatPU28to62HcalNZSRAWAODSIM_13TeV_USER_pythia8.root",
+	#~ scale_factor = 1.04277308792,
+	#~ num_file = '/portal/ekpbms1/home/jbechtel/plotting/EmbeddingMETtest/EmbeddingMuTau.root',
+	num_file = '/storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017B_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017B_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017C_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017C_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017D_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017D_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017E_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017E_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017F_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017F_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root',	#num_file = "/home/jbechtel/plotting/0226/EmbeddingMCRunIISummer16DR80_MuTauFinalState_imputFlatPU28to62HcalNZSRAWAODSIM_13TeV_USER_pythia8/EmbeddingMCRunIISummer16DR80_MuTauFinalState_imputFlatPU28to62HcalNZSRAWAODSIM_13TeV_USER_pythia8.root",
 	label = "#mu#rightarrow#tau embedded",
+	nick = "emb",
+	color = "kBlue"
+)
+EmbeddingMuTauFileNominal2 = DYFileMuTauFile.clone(
+	name = "EmbeddingMuTauFileNominal2",
+	#~ scale_factor = 1.04277308792,
+	#~ num_file = '/portal/ekpbms1/home/jbechtel/plotting/EmbeddingMETtest/EmbeddingMuTau.root',
+	num_file = '/storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017B_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017B_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017C_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017C_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017D_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017D_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017E_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017E_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root /storage/c/jbechtel/paper_data_complete/testMT2/Embedding2017F_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2/Embedding2017F_MuTauFinalState_inputDoubleMu94XminiAODv2_13TeV_USER_v2.root',	#num_file = "/home/jbechtel/plotting/0226/EmbeddingMCRunIISummer16DR80_MuTauFinalState_imputFlatPU28to62HcalNZSRAWAODSIM_13TeV_USER_pythia8/EmbeddingMCRunIISummer16DR80_MuTauFinalState_imputFlatPU28to62HcalNZSRAWAODSIM_13TeV_USER_pythia8.root",
+	label = "",
 	color = "kBlue"
 )
 

@@ -95,6 +95,7 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["zj"]  = self.colors_dict["zll"]
 			self.colors_dict["ztt"] = self.colors_dict["kit_braun_1"]+" "+self.colors_dict["kit_braun_2"]
 			self.colors_dict["emb"] = self.colors_dict["ztt"]
+			self.colors_dict["elemb"] = self.colors_dict["zll"]
 			self.colors_dict["tt"] = self.colors_dict["kit_blau_1"]+" "+self.colors_dict["kit_blau_2"]
 			self.colors_dict["ttt"] = self.colors_dict["kit_blau_1"]+" "+self.colors_dict["kit_blau_2"]
 			self.colors_dict["ttjj"] = self.colors_dict["kit_blau_1"]+" "+self.colors_dict["kit_blau_2"]
@@ -117,6 +118,7 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["wjl"]  = self.colors_dict["kit_cyanblau_3"]
 			self.colors_dict["wjets"]  = self.colors_dict["wj"]
 			self.colors_dict["w"]  = self.colors_dict["wj"]
+			self.colors_dict["ewkn"] = "#E1F5A9"
 			self.colors_dict["qcdwj"] = self.colors_dict["qcd"]
 			self.colors_dict["htt"] = self.colors_dict["kit_rot_1"]+" "+self.colors_dict["kit_rot_2"]
 			self.colors_dict["ggh"] = self.colors_dict["kit_rot_1"]
@@ -155,6 +157,7 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["ztommfakes"] = self.colors_dict["zj"]
 			self.colors_dict["ztt"] = "#000000 #FFCC66"
 			self.colors_dict["emb"] = self.colors_dict["ztt"]
+			self.colors_dict["elemb"] = self.colors_dict["zll"]
 			self.colors_dict["ztotttomm"] = self.colors_dict["ztt"]
 			self.colors_dict["zttpospol"] = "#000000 #FFEEBB"
 			self.colors_dict["zttnegpol"] = "#000000 #FFCC66"
@@ -170,31 +173,35 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["ttjl"] = self.colors_dict["kit_blau_2"]
 			self.colors_dict["ttbar"] = self.colors_dict["tt"]
 			self.colors_dict["wj"]  = "#000000 #DE5A6A"
+                        self.colors_dict["hbb"]  = "#000000 #DE5A6A"
 			self.colors_dict["wjt"]  = self.colors_dict["kit_cyanblau_2"]
 			self.colors_dict["wjl"]  = self.colors_dict["kit_cyanblau_3"]
 			self.colors_dict["wjets"]  = self.colors_dict["wj"]
 			self.colors_dict["w"]  = self.colors_dict["wj"]
 			self.colors_dict["vv"]  = "#000000 #6F2D35"
+                        self.colors_dict["st"]  = "#000000 #d19f43"
 			self.colors_dict["vvt"]  = self.colors_dict["vv"]
 			self.colors_dict["vvl"]  = self.colors_dict["vv"]
 			self.colors_dict["vvj"]  = "#000000 #39171b"
 			self.colors_dict["dibosons"]  = self.colors_dict["vv"]
 			self.colors_dict["ewk"]  = "#000000 #E1F5A9"
+			self.colors_dict["ewkN"]  = "#6F2D35"
 			self.colors_dict["ewkz"] = self.colors_dict["ewk"]
 			self.colors_dict["ewkt"] = self.colors_dict["ewk"]
 			self.colors_dict["ewkl"] = self.colors_dict["ewk"]
 			self.colors_dict["ewkj"]  = "#000000 #9DAB76"
 			self.colors_dict["qcd"] = "#000000 #FFCCFF"
-			self.colors_dict["fakes"] = "#000000 #008763"
+			self.colors_dict["fakes"] = "#000000 #FFCCFF"
 			self.colors_dict["qcdwj"] = self.colors_dict["qcd"]
-			self.colors_dict["htt"] = "#0000FF #000000"
-			self.colors_dict["ggh"] = self.colors_dict["kit_rot_1"]
+			self.colors_dict["htt"] = "#000000 #8FBC8F"
+			self.colors_dict["ggh"] = "#000000 "+self.colors_dict["kit_rot_1"]
 			self.colors_dict["gghsm"] = self.colors_dict["kit_gelb_1"]
 			self.colors_dict["gghmm"] = self.colors_dict["kit_rot_1"]
 			self.colors_dict["gghps"] = self.colors_dict["kit_cyanblau_1"]
 			self.colors_dict["gghps_alt"] = self.colors_dict["kit_cyanblau_1"]
 			self.colors_dict["gghmm_alt"] = self.colors_dict["kit_rot_1"]
-			self.colors_dict["qqh"] = self.colors_dict["kit_gruen_1"]
+			self.colors_dict["qqh"] = "#000000 "+self.colors_dict["kit_gruen_1"]
+			self.colors_dict["tth"]	= "#000000 #BC8F8F"
 			self.colors_dict["bbh"] = self.colors_dict["kit_gruen_1"]
 			self.colors_dict["vh"]  = self.colors_dict["kit_lila_1"]
 			self.colors_dict["zh"]  = self.colors_dict["kit_lila_1"]
@@ -212,6 +219,7 @@ class ColorsDict(colors.ColorsDict):
 			self.colors_dict["hww_qq130"] = self.colors_dict["hww"]
 			self.colors_dict["totalbkg"] = "#000000 transgrey"
 			self.colors_dict["ff"] = self.colors_dict["kit_grau_2"]
+			self.colors_dict["h3"] = "#a1232b #FFFFFF"
 
 		for higgs_mass in xrange(90, 161, 5):
 			self.colors_dict["htt{mass:d}".format(mass=higgs_mass)] = self.colors_dict["htt"]
