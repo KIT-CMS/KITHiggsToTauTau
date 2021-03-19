@@ -376,6 +376,14 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetPlusBJetdiLepPhi", [](event_type const& event, product_type const& product) {
 			return product.m_JetPlusBJetSystemAvailable ? (product.m_highCSVJetPlusBJetSystem + product.m_diLeptonSystem).Phi() : DefaultValues::UndefinedFloat;
 	});	
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetPlusBJetdiLepDeltaR_bReg", [](event_type const& event, product_type const& product) {
+			return product.m_JetPlusBJetSystemAvailable ? ROOT::Math::VectorUtil::DeltaR(product.m_highCSVJetPlusBJetSystem_bReg, product.m_diLeptonSystem) : DefaultValues::UndefinedFloat;
+	});	
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diBJetdiLepDeltaR_bReg", [](event_type const& event, product_type const& product) {
+			return product.m_diBJetSystemAvailable ? ROOT::Math::VectorUtil::DeltaR(product.m_diBJetSystem_bReg, product.m_diLeptonSystem) : DefaultValues::UndefinedFloat;
+	});	
 	
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetUsedFordiBJetSystem_bRegCorr", [settings](event_type const& event, product_type const& product) {
 		if (product.m_JetPlusBJetSystemAvailable) {

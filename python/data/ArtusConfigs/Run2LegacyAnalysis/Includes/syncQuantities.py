@@ -377,6 +377,8 @@ def build_list(**kwargs):
         "m_ttbb_puppi_HsmTune_bReg",
         "mbb_HsmTune_bReg",
         "pt_bb_HsmTune_bReg",
-
+	"highCSVjetPlusBJetDeltaPhi_bReg",
+	"diBJetdiLepDeltaR_bReg",
+	"highCSVjetPlusBJetdiLepDeltaR_bReg",
         ])
     return list(set(quantities))
