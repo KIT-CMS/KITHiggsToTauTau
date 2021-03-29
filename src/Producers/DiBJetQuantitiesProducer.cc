@@ -370,7 +370,18 @@ void DiBJetQuantitiesProducer::Init(setting_type const& settings)
                         return (static_cast<KJet*>(product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex])->p4*product.m_validJets[product.m_HsmTune_JetPlusBJetSystemJetIndex]->bjetRegCorr).mass();
                 }
                 else return DefaultValues::UndefinedFloat;
-		});	
+	});	
+	
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("diBJetDeltaR_bReg", [](event_type const& event, product_type const& product) {
+		return product.m_diBJetSystemAvailable ? ROOT::Math::VectorUtil::DeltaR(product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr, product.m_bTaggedJets[1]->p4*product.m_bTaggedJets[1]->bjetRegCorr) :
+		                                        DefaultValues::UndefinedFloat;
+	});
+
+	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetPlusBJetDeltaR_bReg", [](event_type const& event, product_type const& product) {
+		return product.m_JetPlusBJetSystemAvailable ? ROOT::Math::VectorUtil::DeltaR(product.m_bTaggedJets[0]->p4*product.m_bTaggedJets[0]->bjetRegCorr, product.m_validJets[product.m_highCSVJetIndex]->p4*product.m_validJets[product.m_highCSVJetIndex]->bjetRegCorr) :
+		                                        DefaultValues::UndefinedFloat;
+	});
+	       
 
 	//my stuff
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("highCSVjetPlusBJetdiLepPhi", [](event_type const& event, product_type const& product) {
