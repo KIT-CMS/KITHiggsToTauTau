@@ -184,7 +184,7 @@ void HttTauCorrectionsProducer::AdditionalCorrections(KTau* tau, event_type cons
 				float tauElectronFakeEnergyCorrectionOneProngEndcap = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngEndcap();
 				float tauElectronFakeEnergyCorrectionOneProngPiZerosEndcap = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionOneProngPiZerosEndcap();
 				float tauElectronFakeEnergyCorrectionThreeProngEndcap = static_cast<HttSettings const&>(settings).GetTauElectronFakeEnergyCorrectionThreeProngEndcap();
-				if (tau->p4.Eta() <= 1.5)
+				if (fabs(tau->p4.Eta()) <= 1.5)
 				{
 					LOG(DEBUG) << "\t fes_eta_split: barrel ";
 					if (tau->decayMode == 0 && tauElectronFakeEnergyCorrectionOneProngBarrel != 1.0)
