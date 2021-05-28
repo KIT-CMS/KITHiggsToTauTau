@@ -60,10 +60,19 @@ def build_config(nickname, **kwargs):
         if year == 2016:
             config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_2016_v1.root"
         else:
-            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v1.root"
+            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2.root"
         config["NLOweightsWriteUncertainties"] = True
     else:
         config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
+
+  if re.search("GluGluHToTauTauM95", nickname):
+      config["HiggsBosonMass"] = re.search("GluGluHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
+      if year == 2016:
+          pass
+      else:
+          config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2.root"
+      config["NLOweightsWriteUncertainties"] = True
+
 
   BosonPdgIds = {
       "DY.?JetsToLL|EWKZ2Jets|Embedding" : [
@@ -133,7 +142,8 @@ def build_config(nickname, **kwargs):
     if isDY or isEmbedded:             config["Processors"].append( "producer:GenDiLeptonDecayModeProducer")
     config["Processors"].extend((                                   "producer:GenParticleProducer",
                                                                     "producer:GenPartonCounterProducer"))
-    if isSUSYggH:                      config["Processors"].append( "producer:NLOreweightingWeightsProducer")
+    if isSUSYggH or re.search("GluGluHToTauTauM95", nickname):
+        config["Processors"].append(                                "producer:NLOreweightingWeightsProducer")
     if isWjets or isDY or isEmbedded:  config["Processors"].extend(("producer:GenTauDecayProducer",
                                                                     "producer:GenBosonDiLeptonDecayModeProducer"))
     config["Processors"].append(                                    "producer:GeneratorWeightProducer")

@@ -36,7 +36,7 @@ def build_config(nickname, **kwargs):
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("(GluGluHToTauTau|ggZHHToTauTauZToQQ).*M125", nickname)
   isVBF = re.search("(VBFHToTauTau.*M125|^W(minus|plus)HToTauTau.*125.*|^ZHToTauTau.*125.*)", nickname)
-  isMSSMggH = re.search("SUSYGluGluToH", nickname)
+  isSUSYggH = re.search("SUSYGluGluToH", nickname) or re.search("GluGluHToTauTauM95", nickname)
 
   ## fill config:
   # includes
@@ -675,7 +675,7 @@ def build_config(nickname, **kwargs):
     config["Quantities"].extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.qqHNNLOQuantities").build_list())
   if isNMSSM:
     config["Quantities"].extend(["genBosonMass_h1","genBosonMass_h2","genBosonMass_h3","genBosonPt_h1","genBosonPt_h2","genBosonPt_h3","genBosonEta_h1","genBosonEta_h2","genBosonEta_h3"])
-  if isMSSMggH and re.search("powheg", nickname):
+  if isSUSYggH and re.search("powheg", nickname):
     config["Quantities"].extend(["ggh_b_weight_hdamp_up", "ggh_i_weight_hdamp_up", "ggh_t_weight_hdamp_up",
                                  "ggh_b_weight_hdamp_down", "ggh_i_weight_hdamp_down", "ggh_t_weight_hdamp_down",
                                  "ggh_b_weight_scale_up", "ggh_i_weight_scale_up", "ggh_t_weight_scale_up",
@@ -724,7 +724,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isGluonFusion:              config["Processors"].append( "producer:SMggHNNLOProducer")
   if isVBF:                      config["Processors"].append( "producer:SMvbfNNLOProducer")
-  if isMSSMggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
+  if isSUSYggH:                  config["Processors"].append( "producer:NLOreweightingWeightsProducer")
   if not isData and not isEmbedded:                 config["Processors"].append( "producer:RooWorkspaceWeightProducer")
   config["Processors"].append("producer:QCDFactorProducer")
   config["Processors"].append(
