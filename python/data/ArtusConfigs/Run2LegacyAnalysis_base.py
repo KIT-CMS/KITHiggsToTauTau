@@ -58,7 +58,7 @@ def build_config(nickname, **kwargs):
     config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
     if re.search("SUSYGluGluToHToTauTau.*powheg", nickname):
         if year == 2016:
-            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_2016_v1.root"
+            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_2016_v2.root"
         else:
             config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2.root"
         config["NLOweightsWriteUncertainties"] = True
@@ -68,7 +68,7 @@ def build_config(nickname, **kwargs):
   if re.search("GluGluHToTauTauM95", nickname):
       config["HiggsBosonMass"] = re.search("GluGluHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
       if year == 2016:
-          pass
+          config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_2016_v2.root"
       else:
           config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2.root"
       config["NLOweightsWriteUncertainties"] = True
