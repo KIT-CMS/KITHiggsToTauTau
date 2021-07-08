@@ -36,7 +36,7 @@ def build_config(nickname, **kwargs):
   isHWW = re.search("HToWW",nickname)
   isGluonFusion = re.search("(GluGluHToTauTau|ggZHHToTauTauZToQQ).*M125", nickname)
   isVBF = re.search("(VBFHToTauTau.*M125|^W(minus|plus)HToTauTau.*125.*|^ZHToTauTau.*125.*)", nickname)
-  isSUSYggH = re.search("SUSYGluGluToH", nickname) or re.search("GluGluHToTauM95", nickname)
+  isSUSYggH = re.search("SUSYGluGluToH", nickname) or re.search("GluGluHToTauTauM95", nickname)
 
   ## fill config:
   # includes
