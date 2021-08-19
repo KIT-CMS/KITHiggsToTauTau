@@ -236,7 +236,7 @@ class HiggsToTauTauAnalysisWrapper():
 		self._parser.add_argument("--addlheweights", default=False, action="store_true", help="Enable lheweights. Default: %(default)s]")
 		self._parser.add_argument("--pipelines", default=["nominal"], type=str, nargs='*', action='store',
 			choices=[
-				'nominal', 'tauESperDM_shifts',
+				'nominal', 'tauESperDM_shifts', 'tauESperDM1_shifts', 'tauESperDM2_shifts',
 				'regionalJECunc_shifts',
                                 'embMETScale_shifts',
 				'regionalJECunc1_shifts', 'regionalJECunc2_shifts', 'regionalJECunc3_shifts', 'regionalJECunc4_shifts', 'regionalJECunc5_shifts', 'regionalJECunc6_shifts',
