@@ -380,7 +380,7 @@ def build_list(**kwargs):
 	"highCSVjetPlusBJetDeltaPhi_bReg",
 	"diBJetdiLepDeltaR_bReg",
 	"highCSVjetPlusBJetdiLepDeltaR_bReg",
-	"diBJetDeltaR",
+	"diBJetDeltaR_bReg",
 	"highCSVjetPlusBJetDeltaR_bReg",
         ])
     return list(set(quantities))
