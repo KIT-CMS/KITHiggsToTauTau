@@ -66,7 +66,13 @@ def build_config(nickname, **kwargs):
   config["OutputPath"] = "output.root"
   if isSUSYggH:
     config["HiggsBosonMass"] = re.search("SUSYGluGluToHToTauTauM(\d+)_", nickname).groups()[0] #extracts generator mass from nickname
-    config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
+    if re.search("SUSYGluGluToHToTauTau.*powheg", nickname):
+        if year == 2016:
+            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_2016_v2.root"
+        else:
+            config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2.root"
+    else:
+        config["NLOweightsRooWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/NLOWeights/higgs_pt_v2_mssm_mode.root" #TODO could be year-dependent?
   
   config["Processors"] = []
   config["Processors"].append(                                    "producer:NicknameProducer")
