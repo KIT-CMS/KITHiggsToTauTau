@@ -42,11 +42,11 @@ def build_config(nickname, **kwargs):
 
   # explicit configuration
   if isEmbedded:
-    config["scale_metDown"] = {
+    config["emb_scale_metDown"] = {
             "EmbeddingFakeMETCorrectionNumApplies": 2
     }
-    config["scale_metUp"] = {
-             "EmbeddingFakeMETCorrectionNumApplies": 0
+    config["emb_scale_metUp"] = {
+            "EmbeddingFakeMETCorrectionNumApplies": 0
     }
 
   return config

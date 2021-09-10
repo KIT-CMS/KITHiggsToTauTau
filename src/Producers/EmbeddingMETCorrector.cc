@@ -72,6 +72,7 @@ void EmbeddingMETCorrector::Produce( event_type const& event, product_type & pro
 			// set the new MET 4-vector
 			// note Z component is eliminated by setting eta to 0., and mass component is eliminated by setting E = pT
 			RMFLV new_met_vec(new_pt_2,0., new_phi_2, new_pt_2);
+			product.m_puppimet.p4 = new_met_vec;
 			}
 
 		LOG(DEBUG) << "[INFO] new MET: " << product.m_puppimet.p4.Pt();
