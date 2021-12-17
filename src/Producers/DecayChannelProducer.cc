@@ -372,7 +372,8 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Eta", [](event_type const& event, product_type const& product)
 	{
-		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(0)->Eta() : DefaultValues::UndefinedFloat);
+		//return (product.m_flavourOrderedGenLeptonVisibleLVs.at(0) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(0)->Eta() : DefaultValues::UndefinedFloat);
+		return GeneratorInfo::GetGenMatchedParticleEtaUW(event, product.m_flavourOrderedLeptons.at(0));
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep1Phi", [](event_type const& event, product_type const& product)
 	{
@@ -543,7 +544,8 @@ void DecayChannelProducer::Init(setting_type const& settings)
 	// });
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Eta", [](event_type const& event, product_type const& product)
 	{
-		return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(1)->Eta() : DefaultValues::UndefinedFloat);
+		return GeneratorInfo::GetGenMatchedParticleEtaUW(event, product.m_flavourOrderedLeptons.at(1));
+		// return (product.m_flavourOrderedGenLeptonVisibleLVs.at(1) ? product.m_flavourOrderedGenLeptonVisibleLVs.at(1)->Eta() : DefaultValues::UndefinedFloat);
 	});
 	LambdaNtupleConsumer<HttTypes>::AddFloatQuantity("genMatchedLep2Phi", [](event_type const& event, product_type const& product)
 	{

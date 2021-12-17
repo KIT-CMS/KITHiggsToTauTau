@@ -77,7 +77,9 @@ def build_list(**kwargs):
         "taujet_pt_2",
         "taujet_eta_2",
         "genMatchedLep1Pt",
-        "genMatchedLep2Pt"
+        "genMatchedLep2Pt",
+        "genMatchedLep1Eta",
+        "genMatchedLep2Eta"
     ]
 
     quantities.extend(importlib.import_module("HiggsAnalysis.KITHiggsToTauTau.data.ArtusConfigs.Run2LegacyAnalysis.Includes.weightQuantities").build_list(minimal_setup=minimal_setup, isMC=kwargs["isMC"]))
