@@ -527,6 +527,10 @@ public:
         IMPL_SETTING(std::string, NLOweightsRooWorkspace)
         IMPL_SETTING_DEFAULT(bool, NLOweightsWriteUncertainties, false)
 
+        // settings for EmbeddedZpTMassCorrectionsProducer
+        IMPL_SETTING(std::string, EmbeddedZpTMassCorrectionFile)
+        IMPL_SETTING(std::string, EmbeddedZpTMassCorrectionHistogram)
+
         // settings for quantile mapping
         IMPL_SETTING_DEFAULT(std::string, QuantileMappingRootfile, "none")
         IMPL_SETTING_DEFAULT(std::string, Prompt_e_d0_source, "none")

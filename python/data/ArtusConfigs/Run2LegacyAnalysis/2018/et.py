@@ -494,6 +494,8 @@ def build_config(nickname, **kwargs):
             "0:e_pt,e_eta,e_iso,t_pt,t_eta,t_dm,t_phi",
             "0:e_pt,e_eta,e_iso,t_pt,t_eta,t_dm,t_phi",
     ]
+    config["EmbeddedZpTMassCorrectionFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/embed_zmm_shifts_v2.root"
+    config["EmbeddedZpTMassCorrectionHistogram"] = "shifts_2018"
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
           "0:crossTriggerMCEfficiencyWeight",
@@ -696,6 +698,7 @@ def build_config(nickname, **kwargs):
     config["Quantities"].extend([
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2", "crossTriggerEmbeddedWeight_1", "crossTriggerEmbeddedWeight_2", "muon_crossTriggerEmbeddedWeight_2",
           "singleTriggerEmbeddedEfficiencyWeightKIT_32_1", "singleTriggerEmbeddedEfficiencyWeightKIT_32or35_1",
+          "embedZpTMassWeight",
     ])
   else:
     config["Quantities"].extend([
@@ -768,6 +771,7 @@ def build_config(nickname, **kwargs):
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddedZpTMassCorrectionsProducer")
   if not isData:                 config["Processors"].append( "producer:HighPtTauWeightProducer")
   if not isData:                 config["Processors"].append( "producer:LeptonTauTriggerWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")

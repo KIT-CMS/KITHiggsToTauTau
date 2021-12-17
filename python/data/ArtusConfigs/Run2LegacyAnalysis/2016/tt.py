@@ -449,6 +449,8 @@ def build_config(nickname, **kwargs):
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             "0:t_pt,t_dm,t_pt_2,t_dm_2",
             ]
+    config["EmbeddedZpTMassCorrectionFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/embed_zmm_shifts_v2.root"
+    config["EmbeddedZpTMassCorrectionHistogram"] = "shifts_2016"
   elif not isData:
     config["HighPtTauWeightWorkspace"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/htt_scalefactors_highpttau_legacy_2016.root"
     config["HighPtTauWeightWorkspaceWeightNames"] = [
@@ -626,6 +628,7 @@ def build_config(nickname, **kwargs):
           "TriggerDataEfficiencyWeight_2",
           "muonEffIDWeight_1",
           "muonEffIDWeight_2",
+          "embedZpTMassWeight",
           "doubleTauTrgWeight", #"trg_doubletau"
 ])
   if re.search("HToTauTau.*M125", nickname):
@@ -690,6 +693,7 @@ def build_config(nickname, **kwargs):
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddedWeightProducer")
   if isEmbedded:                 config["Processors"].append( "producer:TauDecayModeWeightProducer")
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddedZpTMassCorrectionsProducer")
   if not isData:                 config["Processors"].append( "producer:HighPtTauWeightProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerEfficiencyProducer")
   if not isData:                 config["Processors"].append( "producer:TauTriggerSFProviderProducer")

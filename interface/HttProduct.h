@@ -420,6 +420,9 @@ public:
         double m_ggA_i_weight = 1.0;
         std::map<std::string, double> m_nlo_gg_uncertainty_weights;
 
+        //filled by EmbeddedZpTMassCorrectionsProducer
+        double m_embed_zpt_mass_weight;
+
         //filled by ImpactParameterCorrectionsProducer
 	double m_DCAcalib[2][2][2]; //[d0/dZ][abs/rel][0/1]
 

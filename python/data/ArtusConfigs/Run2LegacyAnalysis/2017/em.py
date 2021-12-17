@@ -367,6 +367,8 @@ def build_config(nickname, **kwargs):
           "0:e_pt,e_eta",
           "0:e_pt,e_eta"
     ]
+    config["EmbeddedZpTMassCorrectionFile"] = "$CMSSW_BASE/src/HiggsAnalysis/KITHiggsToTauTau/data/root/scaleFactorWeights/embed_zmm_shifts_v2.root"
+    config["EmbeddedZpTMassCorrectionHistogram"] = "shifts_2017"
   elif not isData:
     config["RooWorkspaceWeightNames"] = [
         "1:isoWeight",
@@ -669,6 +671,7 @@ def build_config(nickname, **kwargs):
   if isEmbedded:
     config["Quantities"].extend([
           "muonEffTrgWeight", "muonEffIDWeight_1","muonEffIDWeight_2",
+          "embedZpTMassWeight",
           "trigger_23_data_Weight_2","trigger_23_embed_Weight_2","trigger_8_embed_Weight_2" ,"trigger_8_data_Weight_2",
           "trigger_23_data_Weight_1","trigger_23_embed_Weight_1","trigger_12_embed_Weight_1" ,"trigger_12_data_Weight_1",
           "looseIsoWeight_2","idisoWeight_1","idisoWeight_2",
@@ -810,6 +813,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:DiLeptonQuantitiesProducer"
                                                               ))
   if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddedZpTMassCorrectionsProducer")
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")
   if isDY:                       config["Processors"].append( "producer:ZPtReweightProducer")
   if isNMSSM:                    config["Processors"].append( "producer:NMSSMVariationProducer")
