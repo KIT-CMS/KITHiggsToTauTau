@@ -197,6 +197,11 @@ def build_config(nickname, **kwargs):
           "0:muonEffTrgWeight",
           "0:muonEffIDWeight",
           "1:muonEffIDWeight",
+
+          "0:muonEffTrgWeightIC",
+          "0:muonEffIDWeightIC",
+          "1:muonEffIDWeightIC",
+
           "1:isoWeight",
           "1:looseIsoWeight",
           "1:idWeight",
@@ -245,6 +250,11 @@ def build_config(nickname, **kwargs):
           "0:m_sel_trg_ratio",
           "0:m_sel_idEmb_ratio",
           "1:m_sel_idEmb_ratio",
+
+          "0:m_sel_trg_ic_ratio",
+          "0:m_sel_id_ic_ratio",
+          "1:m_sel_id_ic_ratio",
+
           "1:m_iso_binned_embed_kit_ratio",
           "1:m_looseiso_binned_embed_ratio",
           "1:m_id_embed_kit_ratio",
@@ -293,6 +303,11 @@ def build_config(nickname, **kwargs):
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
           "0:gt_pt,gt_eta",
           "1:gt_pt,gt_eta",
+
+          "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
+          "0:gt_pt,gt_eta",
+          "1:gt_pt,gt_eta",
+
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta,m_iso",
           "1:m_pt,m_eta",

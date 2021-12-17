@@ -303,6 +303,10 @@ def build_config(nickname, **kwargs):
           "0:muonEffIDWeight",
           "1:muonEffIDWeight",
 
+          "0:muonEffTrgWeightIC",
+          "0:muonEffIDWeightIC",
+          "1:muonEffIDWeightIC",
+
           "0:crossTriggerMCEfficiencyWeight",
           "0:crossTriggerDataEfficiencyWeight",
 
@@ -336,6 +340,10 @@ def build_config(nickname, **kwargs):
           "0:m_sel_idEmb_ratio",
           "1:m_sel_idEmb_ratio",
 
+          "0:m_sel_trg_ic_ratio",
+          "0:m_sel_id_ic_ratio",
+          "1:m_sel_id_ic_ratio",
+
           "0:e_trg_EleTau_Ele24Leg_desy_mc",
           "0:e_trg_EleTau_Ele24Leg_desy_data",
 
@@ -368,6 +376,10 @@ def build_config(nickname, **kwargs):
           "0:e_trg35_embed_kit_ratio"
           ]
     config["EmbeddedWeightWorkspaceObjectArguments"] = [
+          "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
+          "0:gt_pt,gt_eta",
+          "1:gt_pt,gt_eta",
+
           "0:gt1_pt,gt1_eta,gt2_pt,gt2_eta",
           "0:gt_pt,gt_eta",
           "1:gt_pt,gt_eta",

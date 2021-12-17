@@ -39,6 +39,9 @@ def build_list(**kwargs):
         "muonEffTrgWeight",
         "muonEffIDWeight_1",
         "muonEffIDWeight_2",
+        "muonEffTrgWeightIC",
+        "muonEffIDWeightIC_1",
+        "muonEffIDWeightIC_2",
     ]
 
     if kwargs["isMC"]:
