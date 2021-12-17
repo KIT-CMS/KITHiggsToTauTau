@@ -68,17 +68,21 @@ def build_config(nickname, **kwargs):
       "HLT_Ele25_eta2p1_WPTight_Gsf",
       "HLT_VLooseIsoPFTau120_Trk50_eta2p1",
       "HLT_VLooseIsoPFTau140_Trk50_eta2p1",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1"
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1",
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
       "HLT_Ele25_eta2p1_WPTight_Gsf_v:26.0",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:25.0"
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:25.0",
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:25.0",
   ]
   config["DiTauPairLepton2LowerPtCuts"] = [
-          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:25.0"
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:25.0",
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:25.0",
   ]
   config["DiTauPairLepton2UpperEtaCuts"] = [
           "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:2.1",
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:2.1",
           "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:2.1",
           "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:2.1",
   ]
@@ -91,6 +95,7 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
       "trg_eletaucross",
+      "trg_crossele_ele24tau30",
       "trg_singletau140_leading",
   ]
   config["CheckLepton2TriggerMatch"] = [
@@ -99,6 +104,7 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu23ele12",
       "trg_muonelectron_mu8ele23",
       "trg_eletaucross",
+      "trg_crossele_ele24tau30",
       "trg_singletau120_trailing",
       "trg_singletau140_trailing",
   ]
@@ -117,6 +123,7 @@ def build_config(nickname, **kwargs):
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
       "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
       "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v",
+      "trg_crossele_ele24tau30:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v",
       "trg_singletau120_leading:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
       "trg_singletau120_trailing:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
       "trg_singletau140_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",
@@ -125,39 +132,36 @@ def build_config(nickname, **kwargs):
 
   config["ElectronTriggerFilterNames"] = [
       "HLT_Ele25_eta2p1_WPTight_Gsf_v:hltEle25erWPTightGsfTrackIsoFilter",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltEle24WPLooseL1SingleIsoEG22erGsfTrackIsoFilter"
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltEle24WPLooseL1SingleIsoEG22erGsfTrackIsoFilter",
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltOverlapFilterSingleIsoEle24WPLooseGsfLooseIsoPFTau20",
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltEle24WPLooseL1IsoEG22erIsoTau26erGsfTrackIsoFilter",
   ]
   config["TauTriggerFilterNames"] = [
           "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltPFTau20TrackLooseIso",
           "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v:hltOverlapFilterSingleIsoEle24WPLooseGsfLooseIsoPFTau20",
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltPFTau30TrackLooseIso",
+          "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltOverlapFilterIsoEle24WPLooseGsfLooseIsoPFTau30",
           "HLT_VLooseIsoPFTau120_Trk50_eta2p1_v:hltPFTau120TrackPt50LooseAbsOrRelVLooseIso",
           "HLT_VLooseIsoPFTau140_Trk50_eta2p1_v:hltPFTau140TrackPt50LooseAbsOrRelVLooseIso",
   ]
   if isData:
     # these two trigger should be used data only
     config["ElectronTriggerFilterNames"].extend(
-      ["HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltEle24WPLooseL1IsoEG22erTau20erGsfTrackIsoFilter",
-       "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltEle24WPLooseL1IsoEG22erIsoTau26erGsfTrackIsoFilter"])
+      ["HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltEle24WPLooseL1IsoEG22erTau20erGsfTrackIsoFilter"])
     config["HLTBranchNames"].extend(
        ["trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v",
         "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v"])
     config["TauTriggerFilterNames"].extend(
        ["HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltPFTau20TrackLooseIso",
-        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltOverlapFilterIsoEle24WPLooseGsfLooseIsoPFTau20",
-        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltPFTau30TrackLooseIso",
-        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:hltOverlapFilterIsoEle24WPLooseGsfLooseIsoPFTau30"])
+        "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:hltOverlapFilterIsoEle24WPLooseGsfLooseIsoPFTau20"])
     config["HltPaths"].extend([
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30"])
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20"])
     config["DiTauPairLepton1LowerPtCuts"].extend([
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:25.0",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:25.0"])
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:25.0"])
     config["DiTauPairLepton2LowerPtCuts"].extend([
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:25.0",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:35.0"])
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:25.0"])
     config["DiTauPairLepton2UpperEtaCuts"].extend([
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:2.1",
-      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v:2.1"])
+      "HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v:2.1"])
 
   ### Signal pair selection configuration
   config["TauID"] = "TauIDRecommendation13TeV"

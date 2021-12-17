@@ -72,8 +72,8 @@ def build_config(nickname, **kwargs):
           "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
-          "HLT_IsoMu24_v:25.0",
-          "HLT_IsoMu27_v:28.0",
+          # "HLT_IsoMu24_v:25.0",
+          # "HLT_IsoMu27_v:28.0",
           "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v:21.0",
           "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v:21.0"
   ]
@@ -89,16 +89,20 @@ def build_config(nickname, **kwargs):
   config["CheckLepton1TriggerMatch"] = [
       "trg_singlemuon_24",
       "trg_singlemuon_27",
+      "trg_singlemuon",
       "trg_singletau_leading",
       "trg_singleelectron_27",
       "trg_singleelectron_32",
       "trg_singleelectron_32_fallback",
       "trg_singleelectron_35",
+      "trg_singleelectron",
 
       "trg_crossmuon_mu20tau27",
       "trg_crossmuon_mu20tau27_hps",
+      "trg_mutaucross",
       "trg_crossele_ele24tau30",
       "trg_crossele_ele24tau30_hps",
+      "trg_etaucross",
       "trg_doubletau_35_tightiso_tightid",
       "trg_doubletau_40_mediso_tightid",
       "trg_doubletau_40_tightiso",
@@ -112,8 +116,10 @@ def build_config(nickname, **kwargs):
 
       "trg_crossmuon_mu20tau27",
       "trg_crossmuon_mu20tau27_hps",
+      "trg_mutaucross",
       "trg_crossele_ele24tau30",
       "trg_crossele_ele24tau30_hps",
+      "trg_etaucross",
       "trg_doubletau_35_tightiso_tightid",
       "trg_doubletau_40_mediso_tightid",
       "trg_doubletau_40_tightiso",
@@ -125,14 +131,23 @@ def build_config(nickname, **kwargs):
   config["HLTBranchNames"] = [
       "trg_singlemuon_24:HLT_IsoMu24_v",
       "trg_singlemuon_27:HLT_IsoMu27_v",
+      "trg_singlemuon:HLT_IsoMu24_v",
+      "trg_singlemuon:HLT_IsoMu27_v",
       "trg_crossmuon_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
       "trg_crossmuon_mu20tau27_hps:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v",
+      "trg_mutaucross:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
+      "trg_mutaucross:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v",
       "trg_singleelectron_27:HLT_Ele27_WPTight_Gsf_v",
       "trg_singleelectron_32:HLT_Ele32_WPTight_Gsf_v",
       "trg_singleelectron_32_fallback:HLT_Ele32_WPTight_Gsf_DoubleL1EG_v",
       "trg_singleelectron_35:HLT_Ele35_WPTight_Gsf_v",
+      "trg_singleelectron:HLT_Ele27_WPTight_Gsf_v",
+      "trg_singleelectron:HLT_Ele32_WPTight_Gsf_v",
+      "trg_singleelectron:HLT_Ele35_WPTight_Gsf_v",
       "trg_crossele_ele24tau30:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
-      "trg_crossele_ele24tau30_hps:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
+      "trg_crossele_ele24tau30_hps:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v",
+      "trg_etaucross:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
+      "trg_etaucross:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v",
       "trg_doubletau_35_tightiso_tightid:HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v",
       "trg_doubletau_40_mediso_tightid:HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v",
       "trg_doubletau_40_tightiso:HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v",
@@ -160,6 +175,7 @@ def build_config(nickname, **kwargs):
             "HLT_IsoMu24_v:hltL3crIsoL1sSingleMu22L1f0L2f10QL3f24QL3trkIsoFiltered0p07",
             "HLT_IsoMu27_v:hltL3crIsoL1sMu22Or25L1f0L2f10QL3f27QL3trkIsoFiltered0p07",
             "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v:hltL3crIsoBigORMu18erTauXXer2p1L1f0L2f10QL3f20QL3trkIsoFiltered0p07",
+            # "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v:hltL3crIsoL1sMu18erTau24erIorMu20erTau24erL1f0L2f10QL3f20QL3trkIsoFiltered0p07",
             "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v:hltOverlapFilterIsoMu20LooseChargedIsoPFTau27L1Seeded",
             "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v:hltL3crIsoBigORMu18erTauXXer2p1L1f0L2f10QL3f20QL3trkIsoFiltered0p07",
             "HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v:hltHpsOverlapFilterIsoMu20LooseChargedIsoPFTau27L1Seeded"
@@ -744,7 +760,7 @@ def build_config(nickname, **kwargs):
                                                               "producer:TauTauRestFrameSelector",
                                                               "producer:DiLeptonQuantitiesProducer"
                                                               ))
-  if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")                                                            
+  if isEmbedded:                 config["Processors"].append( "producer:EmbeddingMETCorrector")
   if not isEmbedded:             config["Processors"].extend(("producer:SimpleEleTauFakeRateWeightProducer",
                                                               "producer:SimpleMuTauFakeRateWeightProducer"))
   if isTTbar:                    config["Processors"].append( "producer:TopPtReweightingProducer")

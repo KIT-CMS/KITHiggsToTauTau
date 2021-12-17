@@ -76,6 +76,7 @@ def build_config(nickname, **kwargs):
     "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v",
     "trg_muonelectron_mu8ele23:HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v",
     "trg_eletaucross:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v",
+    "trg_crossele_ele24tau30:HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v",
     "trg_singletau120_leading:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
     "trg_singletau120_trailing:HLT_VLooseIsoPFTau120_Trk50_eta2p1_v",
     "trg_singletau140_leading:HLT_VLooseIsoPFTau140_Trk50_eta2p1_v",

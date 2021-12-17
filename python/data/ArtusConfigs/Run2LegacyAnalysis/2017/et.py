@@ -73,11 +73,11 @@ def build_config(nickname, **kwargs):
           "HLT_MediumChargedIsoPFTau180HighPtRelaxedIso_Trk50_eta2p1",
   ]
   config["DiTauPairLepton1LowerPtCuts"] = [
-          "HLT_Ele27_WPTight_Gsf_v:28.0",
-          "HLT_Ele32_WPTight_Gsf_v:33.0",
-          "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:33.0",
+          # "HLT_Ele27_WPTight_Gsf_v:28.0",
+          # "HLT_Ele32_WPTight_Gsf_v:33.0",
+          # "HLT_Ele32_WPTight_Gsf_DoubleL1EG_v:33.0",
           "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v:25.0",
-          "HLT_Ele35_WPTight_Gsf_v:36.0",
+          # "HLT_Ele35_WPTight_Gsf_v:36.0",
   ]
   config["DiTauPairLepton2LowerPtCuts"] = [
           "HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v:35.0",
@@ -89,14 +89,18 @@ def build_config(nickname, **kwargs):
   config["CheckLepton1TriggerMatch"] = [
       "trg_singlemuon_24",
       "trg_singlemuon_27",
+      "trg_singlemuon",
       "trg_singletau_leading",
       "trg_singleelectron_27",
       "trg_singleelectron_32",
       "trg_singleelectron_32_fallback",
       "trg_singleelectron_35",
+      "trg_singleelectron",
 
       "trg_crossmuon_mu20tau27",
       "trg_crossele_ele24tau30",
+      "trg_mutaucross",
+      "trg_etaucross",
       "trg_doubletau_35_tightiso_tightid",
       "trg_doubletau_40_mediso_tightid",
       "trg_doubletau_40_tightiso",
@@ -109,6 +113,8 @@ def build_config(nickname, **kwargs):
 
       "trg_crossmuon_mu20tau27",
       "trg_crossele_ele24tau30",
+      "trg_mutaucross",
+      "trg_etaucross",
       "trg_doubletau_35_tightiso_tightid",
       "trg_doubletau_40_mediso_tightid",
       "trg_doubletau_40_tightiso",
@@ -119,12 +125,19 @@ def build_config(nickname, **kwargs):
   config["HLTBranchNames"] = [
       "trg_singlemuon_24:HLT_IsoMu24_v",
       "trg_singlemuon_27:HLT_IsoMu27_v",
+      "trg_singlemuon:HLT_IsoMu24_v",
+      "trg_singlemuon:HLT_IsoMu27_v",
       "trg_crossmuon_mu20tau27:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
+      "trg_mutaucross:HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v",
       "trg_singleelectron_27:HLT_Ele27_WPTight_Gsf_v",
       "trg_singleelectron_32:HLT_Ele32_WPTight_Gsf_v",
       "trg_singleelectron_32_fallback:HLT_Ele32_WPTight_Gsf_DoubleL1EG_v",
       "trg_singleelectron_35:HLT_Ele35_WPTight_Gsf_v",
+      "trg_singleelectron:HLT_Ele27_WPTight_Gsf_v",
+      "trg_singleelectron:HLT_Ele32_WPTight_Gsf_v",
+      "trg_singleelectron:HLT_Ele35_WPTight_Gsf_v",
       "trg_crossele_ele24tau30:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
+      "trg_etaucross:HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v",
       "trg_doubletau_35_tightiso_tightid:HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v",
       "trg_doubletau_40_mediso_tightid:HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v",
       "trg_doubletau_40_tightiso:HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v",
